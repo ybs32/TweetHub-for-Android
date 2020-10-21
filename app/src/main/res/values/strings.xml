@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TweetHub</string>
+    <string name="app_version">1.0.0</string>
+
+    <!-- Entity -->
+    <string name="pref_key_entity">pref_key_entity</string>
+    <string name="pref_key_app_data">pref_key_app_data</string>
 </resources>

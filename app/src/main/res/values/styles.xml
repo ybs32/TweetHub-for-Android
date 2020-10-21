@@ -1,10 +1,27 @@
 <resources>
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="LightTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowBackground">#FAFAFA</item>
+        <item name="android:colorBackground">#FAFAFA</item>
+        <item name="android:textColor">#111111</item>
+        <item name="colorPrimary">#7777BB</item>
+        <item name="colorPrimaryDark">#7777BB</item>
+        <item name="colorAccent">#555599</item>
+        <item name="colorControlHighlight">#D7D7D7</item>
+        <item name="colorBorder">#BBBBBB</item>
+        <item name="colorDivider">#DDDDDD</item>
+        <item name="colorDisabledText">#BBBBBB</item>
     </style>
 
+    <style name="DarkTheme" parent="Theme.AppCompat">
+        <item name="android:windowBackground">#373737</item>
+        <item name="android:colorBackground">#373737</item>
+        <item name="android:textColor">#EAEAEA</item>
+        <item name="colorPrimary">#666699</item>
+        <item name="colorPrimaryDark">#666699</item>
+        <item name="colorAccent">#CCCCFF</item>
+        <item name="colorControlHighlight">#444444</item>
+        <item name="colorBorder">#666666</item>
+        <item name="colorDivider">#444444</item>
+        <item name="colorDisabledText">#666666</item>
+    </style>
 </resources>
