@@ -27,6 +27,7 @@ android {
     lintOptions{
         disable 'IconLocation'
         disable 'UnusedResources'
+        disable 'AnnotationProcessorOnCompilePath'
     }
 }
 
