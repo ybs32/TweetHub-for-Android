@@ -2,6 +2,10 @@
     <string name="app_name">TweetHub</string>
     <string name="app_version">1.0.0</string>
 
+    <string name="callback_url">ybsystem://</string>
+    <string name="hello_java">QU1Nk2LVy8D2ThSKoyBKUtmD6</string>
+    <string name="hello_android">3YweWiVK4suS5YsenPYfWK3beiS0ICbzXemVtDDkLUfuueiV16</string>
+
     <!-- Entity -->
     <string name="pref_key_entity">pref_key_entity</string>
     <string name="pref_key_app_data">pref_key_app_data</string>
