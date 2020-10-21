@@ -1,5 +1,6 @@
 package com.ybsystem.tweethub.application;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 
@@ -19,6 +20,7 @@ import twitter4j.auth.AccessToken;
  */
 public class TweetHubApp extends Application {
 
+    @SuppressLint("StaticFieldLeak")
     private static TweetHubApp sTweetHubApp;
     private Activity mActivity;
     private AppData mAppData;
