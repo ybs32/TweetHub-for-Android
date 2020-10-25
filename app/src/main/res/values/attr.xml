@@ -3,4 +3,5 @@
     <attr name="colorBorder" />
     <attr name="colorDivider" />
     <attr name="colorDisabledText" />
+    <attr name="colorIcon" />
 </resources>
