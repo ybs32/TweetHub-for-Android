@@ -1,5 +1,8 @@
 package com.ybsystem.tweethub.utils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import twitter4j.TwitterException;
 
 /**
@@ -31,130 +34,76 @@ public class ExceptionUtils {
                     + e.getRateLimitStatus().getSecondsUntilReset() % 60 + "秒後に解除されます。";
         }
 
-        switch (e.getErrorCode()) {
-            case 3:
-                return "無効なパラメータです。";
-            case 13:
-                return "場所を検索できません。";
-            case 17:
-                return "プロファイルが見つかりません。";
-            case 32:
-                return "認証できませんでした。";
-            case 34:
-                return "対象が存在しません。";
-            case 36:
-                return "自分はスパム対象外です。";
-            case 38:
-                return "パラメータが存在しません。";
-            case 44:
-                return "URLパラメータが無効です。";
-            case 50:
-                return "ユーザーが見つかりません。";
-            case 63:
-                return "制限されているアカウントです。";
-            case 64:
-                return "凍結されているアカウントです。";
-            case 68:
-                return "古いAPIが使用されました。";
-            case 87:
-                return "許可されない操作です。";
-            case 89:
-                return "アクセストークンエラー";
-            case 92:
-                return "SSL通信が必要です。";
-            case 93:
-                return "許可されない操作です。";
-            case 99:
-                return "アクセストークンエラー";
-            case 120:
-                return "長すぎる値が入力されました。";
-            case 130:
-            case 131:
-                return "Twitterのサーバーで\n"
-                        + "エラーが発生しています。";
-            case 135:
-                return "端末の時刻が不正です。";
-            case 139:
-                return "既に実行済みの操作です。";
-            case 144:
-                return "対象が存在しません。";
-            case 150:
-                return "フォロー外のユーザです。";
-            case 151:
-                return "メッセージ送信エラー。";
-            case 160:
-                return "既にフォローを要求済みです。";
-            case 161:
-                return "フォロー制限に到達しました。\n"
-                        + "しばらく経ってから試して下さい。";
-            case 179:
-                return "鍵アカウントの可能性があります。";
-            case 185:
-                return "ツイート回数制限に到達しました。\n"
-                        + "しばらく経ってから試して下さい。";
-            case 186:
-                return "ツイートが長すぎます。";
-            case 187:
-                return "同じ文章は連投できません。";
-            case 195:
-                return "無効なURLパラメータです。";
-            case 205:
-                return "これ以上スパム報告できません。";
-            case 214:
-                return "DM許可の設定が必要です。";
-            case 215:
-                return "認証情報に誤りがあります。";
-            case 220:
-                return "トークンが制限されています。";
-            case 226:
-                return "スパム行為と判断されました。";
-            case 231:
-                return "アカウントログインエラー";
-            case 251:
-                return "既に存在しないリソースです。";
-            case 261:
-                return "アプリの権限がありません。";
-            case 271:
-                return "自分はミュートできません。";
-            case 272:
-                return "ミュートしていないユーザーです。";
-            case 323:
-                return "複数画像にGIFを含められません。";
-            case 324:
-                return "メディアIDに問題があります。";
-            case 325:
-                return "メディアIDが見つかりません。";
-            case 326:
-                return "アカウントがロックされています。";
-            case 327:
-                return "既にリツイート済みです。";
-            case 349:
-                return "メッセージを送信できません。";
-            case 354:
-                return "メッセージが長すぎます。";
-            case 355:
-                return "既に購読済みです。";
-            case 385:
-                return "対象が存在しません。";
-            case 386:
-                return "ツイートに添付し過ぎです。";
-            case 407:
-                return "ツイート内のURLが無効です。";
-            case 415:
-                return "コールバックURLエラー。";
-            case 416:
-                return "アプリが制限されました。";
-            case 417:
-                return "認証コールバックエラー。";
-            case 421:
-                return "ツイートを取得できません。";
-            case 422:
-                return "制限されたツイートです。";
-            case 423:
-                return "返信ユーザが限定されています。";
-            default:
-                return "読み込みエラー";
+        String errorMessage = sErrorMessageMap.get(e.getErrorCode());
+        if (errorMessage == null) {
+            return "読み込みエラー";
+        } else {
+            return errorMessage;
         }
     }
+
+    private static Map<Integer, String> sErrorMessageMap = new HashMap<Integer, String>() {
+        {
+            put(3, "無効なパラメータです。");
+            put(13, "場所を検索できません。");
+            put(17, "プロファイルが見つかりません。");
+            put(32, "認証できませんでした。");
+            put(34, "対象が存在しません。");
+            put(36, "自分はスパム対象外です。");
+            put(38, "パラメータが存在しません。");
+            put(44, "URLパラメータが無効です。");
+            put(50, "ユーザーが見つかりません。");
+            put(63, "制限されているアカウントです。");
+            put(64, "凍結されているアカウントです。");
+            put(68, "古いAPIが使用されました。");
+            put(87, "許可されない操作です。");
+            put(89, "アクセストークンエラー");
+            put(92, "SSL通信が必要です。");
+            put(93, "許可されない操作です。");
+            put(99, "アクセストークンエラー");
+            put(120, "長すぎる値が入力されました。");
+            put(130, "Twitterのサーバーで\nエラーが発生しています。");
+            put(131, "Twitterのサーバーで\nエラーが発生しています。");
+            put(135, "端末の時刻が不正です。");
+            put(139, "既に実行済みの操作です。");
+            put(144, "対象が存在しません。");
+            put(150, "フォロー外のユーザです。");
+            put(151, "メッセージ送信エラー。");
+            put(160, "既にフォローを要求済みです。");
+            put(161, "フォロー制限に到達しました。\nしばらく経ってから試して下さい。");
+            put(179, "鍵アカウントの可能性があります。");
+            put(185, "ツイート回数制限に到達しました。\nしばらく経ってから試して下さい。");
+            put(186, "ツイートが長すぎます。");
+            put(187, "同じ文章は連投できません。");
+            put(195, "無効なURLパラメータです。");
+            put(205, "これ以上スパム報告できません。");
+            put(214, "DM許可の設定が必要です。");
+            put(215, "認証情報に誤りがあります。");
+            put(220, "トークンが制限されています。");
+            put(226, "スパム行為と判断されました。");
+            put(231, "アカウントログインエラー");
+            put(251, "既に存在しないリソースです。");
+            put(261, "アプリの権限がありません。");
+            put(271, "自分はミュートできません。");
+            put(272, "ミュートしていないユーザーです。");
+            put(323, "複数画像にGIFを含められません。");
+            put(324, "メディアIDに問題があります。");
+            put(325, "メディアIDが見つかりません。");
+            put(326, "アカウントがロックされています。");
+            put(327, "既にリツイート済みです。");
+            put(349, "メッセージを送信できません。");
+            put(354, "メッセージが長すぎます。");
+            put(355, "既に購読済みです。");
+            put(385, "対象が存在しません。");
+            put(386, "ツイートに添付し過ぎです。");
+            put(407, "ツイート内のURLが無効です。");
+            put(415, "コールバックURLエラー。");
+            put(416, "アプリが制限されました。");
+            put(417, "認証コールバックエラー。");
+            put(421, "ツイートを取得できません。");
+            put(422, "制限されたツイートです。");
+            put(423, "返信ユーザが限定されています。");
+        }
+    };
 
 }
