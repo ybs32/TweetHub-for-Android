@@ -46,12 +46,10 @@ public class OAuthActivity extends ActivityBase {
 
                     // Enable flag after 3 sec with timer
                     final Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            mClickEnable = true;
-                        }
-                    }, 3000);
+                    handler.postDelayed(() ->
+                            mClickEnable = true,
+                            3000
+                    );
 
                     // Prepare auth
                     mTwitter = new TwitterFactory().getInstance();
