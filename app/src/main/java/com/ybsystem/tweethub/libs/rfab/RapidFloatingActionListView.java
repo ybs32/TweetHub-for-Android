@@ -124,10 +124,8 @@ public class RapidFloatingActionListView extends RapidFloatingActionContentViewB
         if (onRfaViewListener == null || position == null) {
             return;
         }
-        switch (v.getId()) {
-            case R.id.linear_item:
-                onRfaViewListener.onItemClick(position);
-                break;
+        if (v.getId() == R.id.linear_item) {
+            onRfaViewListener.onItemClick(position);
         }
     }
 

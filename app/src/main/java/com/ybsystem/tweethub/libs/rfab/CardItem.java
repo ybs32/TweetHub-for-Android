@@ -10,9 +10,6 @@ public class CardItem implements Serializable{
     private String name;
     private int resId;
 
-    public CardItem() {
-    }
-
     public CardItem setName(String name) {
         this.name = name;
         return this;
