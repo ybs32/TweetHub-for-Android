@@ -61,6 +61,7 @@ public class WallpaperActivity extends ActivityBase {
         String[] columns = {MediaStore.Images.Media.DATA};
         Cursor c = getContentResolver().query(uri, columns, null, null, null);
         c.moveToFirst();
+        c.close();
 
         // Save image path
         PrefWallpaper.saveWallpaperPath(c.getString(0));
