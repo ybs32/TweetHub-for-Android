@@ -5,6 +5,7 @@ import android.util.TypedValue;
 
 import androidx.appcompat.content.res.AppCompatResources;
 
+import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
 
 /**
@@ -45,6 +46,46 @@ public class ResourceUtils {
         TweetHubApp.getActivity().getTheme()
                 .resolveAttribute(resId, typedValue, true);
         return typedValue.data;
+    }
+
+    public static int getBackgroundColor() {
+        return getColor(android.R.attr.colorBackground);
+    }
+
+    public static int getTextColor() {
+        return getColor(android.R.attr.textColor);
+    }
+
+    public static int getPrimaryColor() {
+        return getColor(android.R.attr.colorPrimary);
+    }
+
+    public static int getAccentColor() {
+        return getColor(android.R.attr.colorAccent);
+    }
+
+    public static int getHighlightControl() {
+        return getColor(android.R.attr.colorControlHighlight);
+    }
+
+    public static int getBorderColor() {
+        return getColor(R.attr.colorBorder);
+    }
+
+    public static int getDividerColor() {
+        return getColor(R.attr.colorDivider);
+    }
+
+    public static int getDisabledTextColor() {
+        return getColor(R.attr.colorDisabledText);
+    }
+
+    public static int getIconColor() {
+        return getColor(R.attr.colorIcon);
+    }
+
+    public static int getLinkColor() {
+        return getColor(R.attr.colorLink);
     }
 
 }

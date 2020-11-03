@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="click_action_entries">
+        <item>メニューを表示</item>
+        <item>返信する</item>
+        <item>リツイート</item>
+        <item>引用ツイート</item>
+        <item>いいね</item>
+        <item>会話を表示</item>
+        <item>削除する</item>
+        <item>URLを開く</item>
+        <item>ハッシュタグで検索</item>
+        <item>ハッシュタグでツイート</item>
+        <item>ユーザーを表示</item>
+        <item>ツイート詳細</item>
+        <item>コピーする</item>
+        <item>共有する</item>
+        <item>Twitterで開く</item>
+        <item>何もしない</item>
+    </string-array>
+
+    <string-array name="click_action_values">
+        <item>MENU</item>
+        <item>REPLY</item>
+        <item>RETWEET</item>
+        <item>QUOTE</item>
+        <item>LIKE</item>
+        <item>TALK</item>
+        <item>DELETE</item>
+        <item>URL</item>
+        <item>HASH_SEARCH</item>
+        <item>HASH_TWEET</item>
+        <item>USER</item>
+        <item>DETAIL</item>
+        <item>COPY</item>
+        <item>SHARE</item>
+        <item>TWITTER</item>
+        <item>NONE</item>
+    </string-array>
+</resources>

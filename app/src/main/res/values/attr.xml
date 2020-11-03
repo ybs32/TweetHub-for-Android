@@ -4,4 +4,5 @@
     <attr name="colorDivider" />
     <attr name="colorDisabledText" />
     <attr name="colorIcon" />
+    <attr name="colorLink" />
 </resources>

@@ -11,6 +11,7 @@
         <item name="colorDivider">#DDDDDD</item>
         <item name="colorDisabledText">#BBBBBB</item>
         <item name="colorIcon">#555555</item>
+        <item name="colorLink">#3355EE</item>
     </style>
 
     <style name="DarkTheme" parent="Theme.AppCompat">
@@ -25,5 +26,6 @@
         <item name="colorDivider">#444444</item>
         <item name="colorDisabledText">#666666</item>
         <item name="colorIcon">#DDDDDD</item>
+        <item name="colorLink">#AACCFF</item>
     </style>
 </resources>

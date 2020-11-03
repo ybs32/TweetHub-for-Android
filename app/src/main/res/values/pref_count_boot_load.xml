@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="count_boot_load_entries">
+        <item>10件</item>
+        <item>20件</item>
+        <item>30件</item>
+        <item>40件</item>
+        <item>50件</item>
+    </string-array>
+
+    <string-array name="count_boot_load_values">
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+    </string-array>
+</resources>

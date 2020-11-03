@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="click_retweet_entries">
+        <item>通常</item>
+        <item>反転</item>
+    </string-array>
+
+    <string-array name="click_retweet_values">
+        <item>NORMAL</item>
+        <item>REVERSE</item>
+    </string-array>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="quality_video_entries">
+        <item>低 （データ量節約）</item>
+        <item>普通</item>
+        <item>高</item>
+    </string-array>
+
+    <string-array name="quality_video_values">
+        <item>LOW</item>
+        <item>MIDDLE</item>
+        <item>HIGH</item>
+    </string-array>
+</resources>
