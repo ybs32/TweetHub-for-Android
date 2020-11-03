@@ -4,6 +4,7 @@ import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterMediaEntity;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweethub.models.enums.ConfirmAction;
+import com.ybsystem.tweethub.models.enums.MediaQuality;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,21 +34,25 @@ public class PrefSystem extends PrefBase {
     // https://developer.twitter.com/en/docs/accounts-and-users/user-profile-images-and-banners
     // https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/entities-object#media
 
-    public static String getImageQuality() {
-        return getDefaultSharedPreferences().getString(KEY_QUALITY_IMAGE, "MIDDLE");
+    public static MediaQuality getImageQuality() {
+        return MediaQuality.toEnum(
+                getDefaultSharedPreferences().getString(KEY_QUALITY_IMAGE, MediaQuality.MIDDLE.getVal())
+        );
     }
 
-    public static String getVideoQuality() {
-        return getDefaultSharedPreferences().getString(KEY_QUALITY_VIDEO, "MIDDLE");
+    public static MediaQuality getVideoQuality() {
+        return MediaQuality.toEnum(
+                getDefaultSharedPreferences().getString(KEY_QUALITY_VIDEO, MediaQuality.MIDDLE.getVal())
+        );
     }
 
     public static String getBannerByQuality(TwitterUser user) {
         switch (getImageQuality()) {
-            case "LOW":
+            case LOW:
                 return user.getProfileBannerMobileURL(); // mobile (320x160)
-            case "MIDDLE":
+            case MIDDLE:
                 return user.getProfileBannerMobileRetinaURL(); // mobile_retina (640x320)
-            case "HIGH":
+            case HIGH:
                 return user.getProfileBannerRetinaURL(); // web_retina (1040x520)
             default:
                 return null;
@@ -56,11 +61,11 @@ public class PrefSystem extends PrefBase {
 
     public static String getProfileByQuality(TwitterUser user) {
         switch (getImageQuality()) {
-            case "LOW":
+            case LOW:
                 return user.getBiggerProfileImageURL(); // bigger (73x73)
-            case "MIDDLE":
+            case MIDDLE:
                 return user.getProfileImageURL400x400(); // 400x400 (400x400)
-            case "HIGH":
+            case HIGH:
                 return user.getOriginalProfileImageURL(); // original (512x512)
             default:
                 return null;
@@ -69,10 +74,10 @@ public class PrefSystem extends PrefBase {
 
     public static String getProfileThumbByQuality(TwitterUser user) {
         switch (getImageQuality()) {
-            case "LOW":
+            case LOW:
                 return user.getProfileImageUrl(); // normal (48x48)
-            case "MIDDLE":
-            case "HIGH":
+            case MIDDLE:
+            case HIGH:
                 return user.getBiggerProfileImageURL(); // bigger (73x73)
             default:
                 return null;
@@ -81,11 +86,11 @@ public class PrefSystem extends PrefBase {
 
     public static String getMediaByQuality(String imageURL) {
         switch (getImageQuality()) {
-            case "LOW":
+            case LOW:
                 return imageURL + ":small"; // small (680x454)
-            case "MIDDLE":
+            case MIDDLE:
                 return imageURL + ":medium"; // medium (1200x800)
-            case "HIGH":
+            case HIGH:
                 return imageURL + ":large"; // large (2048x1366)
             default:
                 return null;
@@ -94,10 +99,10 @@ public class PrefSystem extends PrefBase {
 
     public static String getMediaThumbByQuality(String imageURL) {
         switch (getImageQuality()) {
-            case "LOW":
+            case LOW:
                 return imageURL + ":thumb"; // thumb (150x150)
-            case "MIDDLE":
-            case "HIGH":
+            case MIDDLE:
+            case HIGH:
                 return imageURL + ":small"; // small (680x454)
             default:
                 return null;
@@ -120,15 +125,15 @@ public class PrefSystem extends PrefBase {
             }
         });
         switch (PrefSystem.getVideoQuality()) {
-            case "LOW":
+            case LOW:
                 return mp4List.get(0).getUrl();
-            case "MIDDLE":
+            case MIDDLE:
                 if (mp4List.size() == 1) {
                     return mp4List.get(0).getUrl();
                 } else {
                     return mp4List.get(1).getUrl();
                 }
-            case "HIGH":
+            case HIGH:
                 return mp4List.get(mp4List.size() - 1).getUrl();
             default:
                 return null;
