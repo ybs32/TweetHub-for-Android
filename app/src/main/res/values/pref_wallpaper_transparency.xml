@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="wallpaper_transparency_entries">
+        <item>10\uff05</item>
+        <item>20\uff05</item>
+        <item>30\uff05</item>
+        <item>40\uff05</item>
+        <item>50\uff05</item>
+    </string-array>
+
+    <string-array name="wallpaper_transparency_values">
+        <item>#E6</item>
+        <item>#CC</item>
+        <item>#B3</item>
+        <item>#99</item>
+        <item>#80</item>
+    </string-array>
+</resources>

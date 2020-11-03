@@ -4,12 +4,15 @@
 
     <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".application.TweetHubApp"
         android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/LightTheme">
@@ -33,6 +36,29 @@
                 <data android:scheme="ybsystem"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activities.preference.SettingActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="設定" />
+        <activity
+            android:name=".activities.preference.ThemeActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="テーマ設定" />
+        <activity
+            android:name=".activities.preference.AppearanceActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="タイムライン表示" />
+        <activity
+            android:name=".activities.preference.ClickActionActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="タップ動作" />
+        <activity
+            android:name=".activities.preference.SystemActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="システム動作" />
+        <activity
+            android:name=".activities.preference.WallpaperActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="壁紙設定" />
     </application>
-
 </manifest>
