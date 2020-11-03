@@ -78,6 +78,9 @@ public class ThemeFragment extends PreferenceFragmentBase {
                 break;
             case "DARK":
                 getActivity().setTheme(R.style.DarkTheme);
+                break;
+            default:
+                break;
         }
         // Init custom colors
         mCustom.setChecked(false);

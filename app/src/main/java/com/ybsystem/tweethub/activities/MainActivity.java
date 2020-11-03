@@ -53,6 +53,8 @@ public class MainActivity extends ActivityBase
                 startActivityForResult(intent, 0);
                 overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
                 break;
+            default:
+                break;
         }
         mRfaHelper.toggleContent();
     }
@@ -73,6 +75,8 @@ public class MainActivity extends ActivityBase
                     ToastUtils.showShortToast("設定を適用しました。");
                     ActivityUtils.rebootActivity(MainActivity.this, 0, 0);
                 }, 1500);
+                break;
+            default:
                 break;
         }
     }

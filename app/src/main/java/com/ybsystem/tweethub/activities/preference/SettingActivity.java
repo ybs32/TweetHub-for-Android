@@ -33,6 +33,8 @@ public class SettingActivity extends ActivityBase {
             case REBOOT_PREPARATION:
                 setResult(REBOOT_PREPARATION);
                 break;
+            default:
+                break;
         }
     }
 

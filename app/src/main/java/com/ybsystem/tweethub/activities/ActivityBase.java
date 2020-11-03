@@ -39,6 +39,8 @@ public abstract class ActivityBase extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 break;
+            default:
+                break;
         }
         return true;
     }
@@ -57,6 +59,8 @@ public abstract class ActivityBase extends AppCompatActivity {
             case "activities.preference.WallpaperActivity":
                 overridePendingTransition(R.anim.zoom_in, R.anim.slide_out_to_right);
                 break;
+            default:
+                break;
         }
     }
 
@@ -67,6 +71,9 @@ public abstract class ActivityBase extends AppCompatActivity {
                 break;
             case "DARK":
                 setTheme(R.style.DarkTheme);
+                break;
+            default:
+                break;
         }
     }
 
@@ -81,6 +88,8 @@ public abstract class ActivityBase extends AppCompatActivity {
             case "activities.preference.SystemActivity":
             case "activities.preference.WallpaperActivity":
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                break;
+            default:
                 break;
         }
     }
