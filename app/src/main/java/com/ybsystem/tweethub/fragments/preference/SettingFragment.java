@@ -72,6 +72,7 @@ public class SettingFragment extends PreferenceFragmentBase {
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+        // Do nothing because no changes to SharedPreferences occur on this fragment.
     }
 
     private void intentTo(Class activityClass) {
