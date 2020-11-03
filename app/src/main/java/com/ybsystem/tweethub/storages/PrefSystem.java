@@ -7,8 +7,6 @@ import com.ybsystem.tweethub.models.enums.ConfirmAction;
 import com.ybsystem.tweethub.models.enums.MediaQuality;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
