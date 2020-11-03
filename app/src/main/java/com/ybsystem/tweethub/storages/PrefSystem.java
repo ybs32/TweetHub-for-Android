@@ -118,12 +118,9 @@ public class PrefSystem extends PrefBase {
             }
         }
         // Sort by bitrate
-        Collections.sort(mp4List, new Comparator<Variant>() {
-            @Override
-            public int compare(Variant v1, Variant v2) {
-                return v1.getBitrate() - v2.getBitrate();
-            }
-        });
+        mp4List.sort((v1, v2) ->
+                v1.getBitrate() - v2.getBitrate()
+        );
         switch (PrefSystem.getVideoQuality()) {
             case LOW:
                 return mp4List.get(0).getUrl();

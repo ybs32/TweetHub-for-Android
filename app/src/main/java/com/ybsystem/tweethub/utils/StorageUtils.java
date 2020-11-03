@@ -62,14 +62,10 @@ public class StorageUtils {
 
     public static void requestPermission(Activity activity) {
         ToastUtils.showShortToast("アクセス許可が必要です。");
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ActivityCompat.requestPermissions(activity, new String[] {
+        new Handler().postDelayed(() ->
+                ActivityCompat.requestPermissions(activity, new String[]{
                         Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
-            }
-        }, 1500);
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0), 1500);
     }
 
 }

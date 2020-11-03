@@ -68,13 +68,10 @@ public class WallpaperActivity extends ActivityBase {
 
         // Finish activity
         DialogUtils.showProgressDialog("設定を適用中...", this);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                DialogUtils.dismissProgressDialog();
-                setResult(REBOOT_IMMEDIATE);
-                finish();
-            }
+        new Handler().postDelayed(() -> {
+            DialogUtils.dismissProgressDialog();
+            setResult(REBOOT_IMMEDIATE);
+            finish();
         }, 1500);
     }
 

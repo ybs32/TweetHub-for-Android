@@ -88,13 +88,10 @@ public class ThemeFragment extends PreferenceFragmentBase {
 
         // Finish activity
         DialogUtils.showProgressDialog("設定を適用中...", getActivity());
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                DialogUtils.dismissProgressDialog();
-                getActivity().setResult(1);
-                getActivity().finish();
-            }
+        new Handler().postDelayed(() -> {
+            DialogUtils.dismissProgressDialog();
+            getActivity().setResult(1);
+            getActivity().finish();
         }, 1500);
     }
 
