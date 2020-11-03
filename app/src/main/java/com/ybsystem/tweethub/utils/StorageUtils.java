@@ -7,10 +7,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -24,6 +26,10 @@ public class StorageUtils {
     private StorageUtils() {
     }
 
+    /**
+     * Create media uri for Android 10 (API 29) or above version
+     */
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     public static Uri createMediaUri(String rootDir, ContentResolver resolver) {
         String fileName = "TweetHub_" + System.currentTimeMillis() + ".jpg";
         ContentValues values = new ContentValues();
@@ -33,6 +39,9 @@ public class StorageUtils {
         return resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
     }
 
+    /**
+     * Create media file for Android 9 (API 28) or below version
+     */
     public static File createMediaFile(String rootDir) {
         String fileName = "TweetHub_" + System.currentTimeMillis() + ".jpg";
         File dir = new File(
