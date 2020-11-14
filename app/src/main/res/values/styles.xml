@@ -1,8 +1,8 @@
 <resources>
     <style name="LightTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:windowBackground">#FAFAFA</item>
-        <item name="android:colorBackground">#FAFAFA</item>
-        <item name="android:textColor">#111111</item>
+        <item name="android:windowBackground">@color/lightBackground</item>
+        <item name="android:colorBackground">@color/lightBackground</item>
+        <item name="android:textColor">@color/lightText</item>
         <item name="colorPrimary">#7777BB</item>
         <item name="colorPrimaryDark">#7777BB</item>
         <item name="colorAccent">#555599</item>
@@ -15,9 +15,9 @@
     </style>
 
     <style name="DarkTheme" parent="Theme.AppCompat">
-        <item name="android:windowBackground">#373737</item>
-        <item name="android:colorBackground">#373737</item>
-        <item name="android:textColor">#EAEAEA</item>
+        <item name="android:windowBackground">@color/darkBackground</item>
+        <item name="android:colorBackground">@color/darkBackground</item>
+        <item name="android:textColor">@color/darkText</item>
         <item name="colorPrimary">#666699</item>
         <item name="colorPrimaryDark">#666699</item>
         <item name="colorAccent">#CCCCFF</item>
