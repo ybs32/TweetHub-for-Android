@@ -30,6 +30,7 @@ android {
 
     lintOptions{
         disable 'SpUsage'
+        disable 'SetTextI18n'
         disable 'IconLocation'
         disable 'HardcodedText'
         disable 'UnusedResources'
