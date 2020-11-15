@@ -13,6 +13,7 @@ import com.ybsystem.tweethub.utils.ResourceUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -234,7 +235,7 @@ public class TwitterStatus extends Entity {
     private static String createAbsoluteTime(Status status) {
         // Convert
         Date date = status.getCreatedAt();
-        return new SimpleDateFormat("y/M/d HH:mm").format(date);
+        return new SimpleDateFormat("y/M/d HH:mm", Locale.getDefault()).format(date);
     }
 
     private static String createVia(Status status) {
