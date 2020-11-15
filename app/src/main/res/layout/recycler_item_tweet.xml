@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- タップ領域とツイートを重ねる-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants">
+
+        <!-- タップ領域 -->
+        <LinearLayout
+            android:id="@+id/linear_click"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <!-- 「左タップ」 -->
+            <View
+                android:id="@+id/view_left_click"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_colorless" />
+
+            <!-- 「中央タップ」 -->
+            <View
+                android:id="@+id/view_middle_click"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_colorless" />
+
+            <!-- 「右タップ」 -->
+            <View
+                android:id="@+id/view_right_click"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_colorless" />
+        </LinearLayout>
+
+        <!-- ツイート -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <!-- 「ユーザーアイコン」 -->
+            <ImageView
+                android:id="@+id/image_user_icon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="2dp" />
+
+            <!-- 「RTユーザーアイコン」 -->
+            <ImageView
+                android:id="@+id/image_rt_user_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_below="@+id/image_user_icon"
+                android:layout_alignLeft="@+id/image_user_icon"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="4dp" />
+
+            <!-- 「RT矢印アイコン」 -->
+            <ImageView
+                android:id="@+id/image_rt_arrow"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_below="@+id/image_user_icon"
+                android:layout_alignRight="@+id/image_user_icon"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="2dp"
+                android:src="@drawable/ic_retweet"
+                app:tint="?attr/colorIcon" />
+
+            <!-- 上部 -->
+            <LinearLayout
+                android:id="@+id/linear_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/image_user_icon"
+                android:orientation="horizontal">
+
+                <!-- 左側 -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!-- 「認証済マーク」 -->
+                    <ImageView
+                        android:id="@+id/image_verify_mark"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginRight="2dp"
+                        android:src="@drawable/ic_verify" />
+
+                    <!-- 「鍵マーク」 -->
+                    <ImageView
+                        android:id="@+id/image_lock_mark"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginRight="2dp"
+                        android:src="@drawable/ic_lock"
+                        app:tint="?android:attr/textColor" />
+
+                    <!-- 「ユーザー名」 -->
+                    <TextView
+                        android:id="@+id/text_user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="ユーザー名"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                    <!-- 「＠ScreenName」 -->
+                    <TextView
+                        android:id="@+id/text_screen_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="\@ScreenName"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <!-- 右側 -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!--「RTマーク」-->
+                    <ImageView
+                        android:id="@+id/image_rt_mark"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginLeft="2dp"
+                        android:src="@drawable/ic_retweet"
+                        app:tint="?attr/colorRetweet" />
+
+                    <!-- 「Favマーク」 -->
+                    <ImageView
+                        android:id="@+id/image_favorite_mark"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginLeft="2dp"
+                        android:src="@drawable/ic_like"
+                        app:tint="?attr/colorFavorite" />
+
+                    <!-- 「相対時間」 -->
+                    <TextView
+                        android:id="@+id/text_relative_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:singleLine="true"
+                        android:textSize="14dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 中部 -->
+            <LinearLayout
+                android:id="@+id/linear_middle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linear_top"
+                android:layout_alignLeft="@+id/linear_top"
+                android:orientation="vertical">
+
+                <!-- 「ツイート本文」 -->
+                <TextView
+                    android:id="@+id/text_tweet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:lineSpacingMultiplier="1.1"
+                    android:text="今日も１日、がんばるぞい！"
+                    android:textSize="14dp" />
+
+                <!-- サムネイル画像４枚 -->
+                <RelativeLayout
+                    android:id="@+id/relative_thumbnail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="20dp">
+
+                    <!-- 真ん中に空のビュー -->
+                    <View
+                        android:id="@+id/dummy"
+                        android:layout_width="6dp"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true" />
+
+                    <!-- 「サムネイル画像１」 -->
+                    <RelativeLayout
+                        android:id="@+id/relative_thumbnail_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/dummy">
+
+                        <ImageView
+                            android:id="@+id/image_thumbnail_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="4dp"
+                            android:scaleType="centerCrop" />
+
+                        <ImageView
+                            android:id="@+id/image_play"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_play" />
+                    </RelativeLayout>
+
+                    <!-- 「サムネイル画像２」 -->
+                    <ImageView
+                        android:id="@+id/image_thumbnail_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_toRightOf="@id/dummy"
+                        android:scaleType="centerCrop" />
+
+                    <!-- 「サムネイル画像３」 -->
+                    <ImageView
+                        android:id="@+id/image_thumbnail_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_below="@id/relative_thumbnail_1"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_toLeftOf="@id/dummy"
+                        android:scaleType="centerCrop" />
+
+                    <!-- 「サムネイル画像４」 -->
+                    <ImageView
+                        android:id="@+id/image_thumbnail_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_below="@id/relative_thumbnail_1"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_toRightOf="@id/dummy"
+                        android:scaleType="centerCrop" />
+                </RelativeLayout>
+
+                <!-- （引用） -->
+                <RelativeLayout
+                    android:id="@+id/relative_quote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/bg_border_gray"
+                    android:padding="8dp">
+
+                    <!-- （引用）上部 -->
+                    <LinearLayout
+                        android:id="@+id/linear_top_quote"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:orientation="horizontal">
+
+                        <!-- （引用）左側 -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <!-- （引用）「ユーザー名」 -->
+                            <TextView
+                                android:id="@+id/text_user_name_quote"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:singleLine="true"
+                                android:text="ユーザー名"
+                                android:textSize="14dp"
+                                android:textStyle="bold" />
+
+                            <!-- （引用）「＠ScreenName」 -->
+                            <TextView
+                                android:id="@+id/text_screen_name_quote"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="2dp"
+                                android:ellipsize="end"
+                                android:singleLine="true"
+                                android:text="\@ScreenName"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+                        <!-- （引用）右側 -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="4dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <!-- （引用）「相対時間」 -->
+                            <TextView
+                                android:id="@+id/text_relative_time_quote"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true"
+                                android:text=""
+                                android:textSize="14dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- （引用）「ツイート本文」 -->
+                    <TextView
+                        android:id="@+id/text_tweet_quote"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/linear_top_quote"
+                        android:layout_alignLeft="@+id/linear_top_quote"
+                        android:layout_marginTop="4dp"
+                        android:lineSpacingMultiplier="1.1"
+                        android:text="今日も１日、がんばるぞい！"
+                        android:textSize="14dp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!-- 下部  -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linear_middle"
+                android:layout_alignLeft="@+id/linear_middle"
+                android:orientation="vertical">
+
+                <!-- ２つ横に並べる -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- 左側 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <!-- 「絶対時間」 -->
+                        <TextView
+                            android:id="@+id/text_absolute_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="6dp"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:text="2020/10/29 00:00"
+                            android:textSize="13dp" />
+
+                        <!-- 「via」 -->
+                        <TextView
+                            android:id="@+id/text_via"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="10dp"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:text="via"
+                            android:textSize="13dp" />
+                    </LinearLayout>
+
+                    <!-- 右側 -->
+                    <LinearLayout
+                        android:id="@+id/linear_rt_fav_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <!-- 「RT数アイコン」 -->
+                        <ImageView
+                            android:id="@+id/image_rt_count"
+                            android:layout_width="14dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="2dp"
+                            android:src="@drawable/ic_retweet"
+                            app:tint="?attr/colorIcon" />
+
+                        <!-- 「RT数」 -->
+                        <TextView
+                            android:id="@+id/text_rt_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="6dp"
+                            android:singleLine="true"
+                            android:text="0"
+                            android:textSize="13dp" />
+
+                        <!-- 「Fav数アイコン」 -->
+                        <ImageView
+                            android:id="@+id/image_fav_count"
+                            android:layout_width="14dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="2dp"
+                            android:src="@drawable/ic_like"
+                            app:tint="?attr/colorIcon" />
+
+                        <!-- 「Fav数」 -->
+                        <TextView
+                            android:id="@+id/text_fav_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:singleLine="true"
+                            android:text="0"
+                            android:textSize="13dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--「Retweeted by」-->
+                <TextView
+                    android:id="@+id/text_retweeted_by"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="○○ さんがリツイート"
+                    android:textSize="13dp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
+
+    <!-- (詳細) -->
+    <LinearLayout
+        android:id="@+id/linear_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- （詳細）区切り線 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/colorDivider" />
+
+        <!-- （詳細）横に並べる -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- （詳細）「リツイート数」 -->
+            <TextView
+                android:id="@+id/text_rt_count_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="64dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:singleLine="true"
+                android:text="0 リツイート"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+            <!-- （詳細）「いいね数」 -->
+            <TextView
+                android:id="@+id/text_fav_count_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:singleLine="true"
+                android:text="0 いいね"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- （詳細）区切り線 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/colorDivider" />
+    </LinearLayout>
+</LinearLayout>

@@ -12,6 +12,9 @@
         <item name="colorDisabledText">#BBBBBB</item>
         <item name="colorIcon">#555555</item>
         <item name="colorLink">#3355EE</item>
+        <item name="colorReply">#000000</item>
+        <item name="colorRetweet">#44BB66</item>
+        <item name="colorFavorite">#DD2266</item>
     </style>
 
     <style name="DarkTheme" parent="Theme.AppCompat">
@@ -27,5 +30,13 @@
         <item name="colorDisabledText">#666666</item>
         <item name="colorIcon">#DDDDDD</item>
         <item name="colorLink">#AACCFF</item>
+        <item name="colorReply">#000000</item>
+        <item name="colorRetweet">#88FFAA</item>
+        <item name="colorFavorite">#FF66AA</item>
+    </style>
+
+    <style name="TabTheme16dpText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>
