@@ -23,11 +23,11 @@ public class TweetRecyclerAdapter extends RecyclerAdapterBase<TwitterStatus> {
         // Check view type
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         if (viewType == TYPE_FOOTER) {
-            mFooterView = inflater.inflate(R.layout.recycler_item_footer, null);
+            mFooterView = inflater.inflate(R.layout.recycler_item_footer, parent, false);
             EventBus.getDefault().post(new FooterEvent());
             return new FooterRow(mFooterView);
         } else {
-            View view = inflater.inflate(R.layout.recycler_item_tweet, null);
+            View view = inflater.inflate(R.layout.recycler_item_tweet, parent, false);
             return new TweetRow(view);
         }
     }

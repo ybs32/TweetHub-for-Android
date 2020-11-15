@@ -37,7 +37,7 @@ public class MainListTimeline extends TimelineBase {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate
-        View view = inflater.inflate(R.layout.fragment_timeline_list, null);
+        View view = inflater.inflate(R.layout.fragment_timeline_list, container, false);
 
         // Set contents
         setRecyclerView(view);

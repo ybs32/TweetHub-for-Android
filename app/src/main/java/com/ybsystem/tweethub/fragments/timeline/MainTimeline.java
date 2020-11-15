@@ -40,7 +40,7 @@ public class MainTimeline extends TimelineBase {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate
-        View view = inflater.inflate(R.layout.fragment_timeline, null);
+        View view = inflater.inflate(R.layout.fragment_timeline, container, false);
 
         // Init
         mColumn = (Column) getArguments().getSerializable("COLUMN");
