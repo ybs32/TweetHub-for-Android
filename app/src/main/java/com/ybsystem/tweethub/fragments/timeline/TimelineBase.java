@@ -97,11 +97,6 @@ public abstract class TimelineBase extends Fragment {
                     loadTweet(false, false);
                 }
             }
-
-            @Override
-            public void onScrollStateChanged(RecyclerView view, int scrollState) {
-                super.onScrollStateChanged(view, scrollState);
-            }
         });
     }
 
