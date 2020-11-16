@@ -78,9 +78,9 @@ public class MainListTimeline extends TimelineBase {
         DisposableObserver<List<Status>> disposable = new DisposableObserver<List<Status>>() {
             @Override
             public void onNext(List<Status> statusList) {
-                if (statusList.size() == 0) {
+                if (statusList.isEmpty()) {
                     // No tweet...
-                    if (adapter.getObjCount() == 0) {
+                    if (adapter.isEmpty()) {
                         mFooterText.setText("ツイートなし");
                         mFooterProgress.setVisibility(View.GONE);
                     } else

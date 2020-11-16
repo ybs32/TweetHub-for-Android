@@ -68,4 +68,8 @@ public abstract class RecyclerAdapterBase<T> extends RecyclerView.Adapter<Recycl
         }
     }
 
+    public boolean isEmpty() {
+        return getObjCount() == 0;
+    }
+
 }
