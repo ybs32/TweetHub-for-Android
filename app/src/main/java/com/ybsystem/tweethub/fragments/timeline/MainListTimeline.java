@@ -171,10 +171,10 @@ public class MainListTimeline extends TimelineBase {
             public void onError(Throwable t) {
                 // Failed... Use cached data
                 ArrayList<UserList> listArray = TweetHubApp.getMyAccount().getLists();
-                if (listArray.size() != 0) {
-                    setDropDownMenu(view);
-                } else {
+                if (listArray.isEmpty()) {
                     processError(view);
+                } else {
+                    setDropDownMenu(view);
                 }
             }
 
