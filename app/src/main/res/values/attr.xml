@@ -5,4 +5,7 @@
     <attr name="colorDisabledText" />
     <attr name="colorIcon" />
     <attr name="colorLink" />
+    <attr name="colorReply" />
+    <attr name="colorRetweet" />
+    <attr name="colorFavorite" />
 </resources>

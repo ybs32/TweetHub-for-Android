@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
@@ -37,27 +36,24 @@ public class OAuthActivity extends ActivityBase {
         setContentView(R.layout.activity_oauth);
 
         // When user clicked auth button
-        findViewById(R.id.button_oauth).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mClickEnable) {
-                    // Disable flag to not tap continuously
-                    mClickEnable = false;
+        findViewById(R.id.button_oauth).setOnClickListener(v -> {
+            if (mClickEnable) {
+                // Disable flag to not tap continuously
+                mClickEnable = false;
 
-                    // Enable flag after 3 sec with timer
-                    final Handler handler = new Handler();
-                    handler.postDelayed(() ->
-                            mClickEnable = true,
-                            3000
-                    );
+                // Enable flag after 3 sec with timer
+                final Handler handler = new Handler();
+                handler.postDelayed(() ->
+                        mClickEnable = true,
+                        3000
+                );
 
-                    // Prepare auth
-                    mTwitter = new TwitterFactory().getInstance();
-                    mTwitter.setOAuthConsumer(getString(R.string.hello_java), getString(R.string.hello_android));
+                // Prepare auth
+                mTwitter = new TwitterFactory().getInstance();
+                mTwitter.setOAuthConsumer(getString(R.string.hello_java), getString(R.string.hello_android));
 
-                    // Start auth
-                    startAuthentication();
-                }
+                // Start auth
+                startAuthentication();
             }
         });
     }

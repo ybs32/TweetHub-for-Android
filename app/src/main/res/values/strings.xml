@@ -6,6 +6,13 @@
     <string name="hello_java">QU1Nk2LVy8D2ThSKoyBKUtmD6</string>
     <string name="hello_android">3YweWiVK4suS5YsenPYfWK3beiS0ICbzXemVtDDkLUfuueiV16</string>
 
+    <!-- UltraPullToRefresh -->
+    <string name="cube_ptr_pull_down">引っ張って…</string>
+    <string name="cube_ptr_pull_down_to_refresh">引っ張って…</string>
+    <string name="cube_ptr_release_to_refresh">指を離して更新</string>
+    <string name="cube_ptr_refreshing">読み込み中…</string>
+    <string name="cube_ptr_refresh_complete">読み込み中…</string>
+
     <!-- Entities -->
     <string name="pref_key_entity">pref_key_entity</string>
     <string name="pref_key_app_data">pref_key_app_data</string>

@@ -1,8 +1,19 @@
 package com.ybsystem.tweethub.models.entities.twitter;
 
-import com.ybsystem.tweethub.models.entities.Entity;
+import android.text.Html;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 
+import com.ybsystem.tweethub.application.TweetHubApp;
+import com.ybsystem.tweethub.models.entities.Entity;
+import com.ybsystem.tweethub.storages.PrefAppearance;
+import com.ybsystem.tweethub.storages.PrefTheme;
+import com.ybsystem.tweethub.utils.ResourceUtils;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,6 +23,7 @@ import twitter4j.Status;
 import twitter4j.URLEntity;
 import twitter4j.User;
 import twitter4j.UserMentionEntity;
+import twitter4j.util.TimeSpanConverter;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -50,6 +62,17 @@ public class TwitterStatus extends Entity {
     private boolean isRetweeted;
     private boolean isRetweet;
     private boolean isRetweetedByMe;
+
+    // Custom
+    private String convertedText;
+    private String convertedRelativeTime;
+    private String convertedAbsoluteTime;
+    private String convertedVia;
+    private boolean isMyTweet;
+    private boolean isPublic;
+    private boolean isTalk;
+    private boolean isDetail;
+    private boolean isMediaTweet;
 
     // Not use
     // private Place place;
@@ -115,6 +138,114 @@ public class TwitterStatus extends Entity {
         this.isRetweeted = status.isRetweeted();
         this.isRetweet = rtStatus != null;
         this.isRetweetedByMe = currentUserRetweetId != -1L;
+
+        // Custom
+        this.convertedText = createTweetText(status);
+        this.convertedRelativeTime = createRelativeTime(status);
+        this.convertedAbsoluteTime = createAbsoluteTime(status);
+        this.convertedVia = createVia(status);
+        this.isMyTweet = status.getUser().getId() == TweetHubApp.getMyUser().getId();
+        this.isPublic = isMyTweet || !status.getUser().isProtected();
+        this.isTalk = status.getInReplyToStatusId() != -1;
+        this.isDetail = false;
+        this.isMediaTweet = !status.isRetweet() && status.getMediaEntities().length != 0;
+    }
+
+    private static String createTweetText(Status status) {
+        // Prepare ssb
+        SpannableStringBuilder ssb = new SpannableStringBuilder(status.getText());
+
+        int color = PrefTheme.isCustomThemeEnabled()
+                ? PrefTheme.getLinkColor() : ResourceUtils.getLinkColor();
+
+        // @Mentions
+        UserMentionEntity[] mentions = status.getUserMentionEntities();
+        if (mentions != null && mentions.length != 0) {
+            for (UserMentionEntity mention : mentions) {
+                ssb.setSpan(new ForegroundColorSpan(color), mention.getStart(), mention.getEnd(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+
+        // #Hashtag
+        HashtagEntity[] hashtags = status.getHashtagEntities();
+        if (hashtags != null && hashtags.length != 0) {
+            for (HashtagEntity hashtag : hashtags) {
+                ssb.setSpan(new ForegroundColorSpan(color), hashtag.getStart(), hashtag.getEnd(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+
+        // URL
+        int offset = 0;
+        URLEntity[] urls = status.getURLEntities();
+        if (urls != null && urls.length != 0) {
+            for (URLEntity url : urls) {
+                int start = url.getStart();
+                int end = url.getEnd();
+                start += offset;
+                end += offset;
+                if (start < ssb.length()) {
+                    String displayURL = url.getDisplayURL();
+                    ssb.replace(start, end, displayURL);
+                    ssb.setSpan(new ForegroundColorSpan(color), start, start + displayURL.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    offset += displayURL.length() - url.getURL().length();
+                }
+            }
+        }
+
+        // Media
+        MediaEntity[] medias = status.getMediaEntities();
+        if (medias != null && medias.length != 0) {
+            int start = medias[0].getStart();
+            int end = medias[0].getEnd();
+            if (end == status.getText().length()) {
+                start += offset;
+                end += offset;
+            }
+            if (PrefAppearance.isShowThumbnail()) {
+                ssb.replace(start, end, "");
+            } else {
+                String displayURL = medias[0].getDisplayURL();
+                ssb.replace(start, end, displayURL);
+                ssb.setSpan(new ForegroundColorSpan(color), start, start + displayURL.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+
+        // Convert to string
+        String htmlText = Html.toHtml(ssb);
+        htmlText = htmlText.replaceAll("\n", "");
+        htmlText = htmlText.replaceFirst("(?s)" + "<p dir=\"ltr\">" + "(?!.*?" + "<p dir=\"ltr\">" + ")", "");
+        htmlText = htmlText.replaceFirst("(?s)" + "</p>" + "(?!.*?" + "</p>" + ")", "");
+
+        return htmlText;
+    }
+
+    private static String createRelativeTime(Status status) {
+        // Convert
+        Date date = status.getCreatedAt();
+        String text = new TimeSpanConverter().toTimeSpanString(date);
+
+        // Change text
+        text = text.replace("前", ""); //「〜分前」→「〜分」
+        text = text.replace("月", "/"); //「10月29日」→「10/29」
+        text = text.replace("日", "");
+
+        return text;
+    }
+
+    private static String createAbsoluteTime(Status status) {
+        // Convert
+        Date date = status.getCreatedAt();
+        return new SimpleDateFormat("y/M/d HH:mm", Locale.getDefault()).format(date);
+    }
+
+    private static String createVia(Status status) {
+        // Convert
+        String[] texts = status.getSource().split("[<>]");
+        if (texts.length > 2) {
+            return "via " + texts[2];
+        } else {
+            return "via Unknown Client";
+        }
     }
 
 }

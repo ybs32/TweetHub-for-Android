@@ -4,12 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionButton;
 import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionHelper;
 import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout;
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.activities.preference.SettingActivity;
 import com.ybsystem.tweethub.application.TweetHubApp;
+import com.ybsystem.tweethub.fragments.MainFragment;
 import com.ybsystem.tweethub.libs.rfab.CardItem;
 import com.ybsystem.tweethub.libs.rfab.RapidFloatingActionListView;
 import com.ybsystem.tweethub.utils.ActivityUtils;
@@ -40,7 +44,10 @@ public class MainActivity extends ActivityBase
             return;
         }
 
+        // Main process
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+        setMainFragment(savedInstanceState);
         setMoreActionButton();
     }
 
@@ -78,6 +85,15 @@ public class MainActivity extends ActivityBase
                 break;
             default:
                 break;
+        }
+    }
+
+    private void setMainFragment(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            Fragment fragment = new MainFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_main, fragment);
+            transaction.commit();
         }
     }
 
