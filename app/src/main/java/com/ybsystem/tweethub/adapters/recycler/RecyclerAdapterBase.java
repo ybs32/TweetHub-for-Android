@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public abstract class RecyclerAdapterBase<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    protected final int TYPE_FOOTER = 0;
-    protected final int TYPE_ITEM = 1;
+    protected static final int TYPE_FOOTER = 0;
+    protected static final int TYPE_ITEM = 1;
 
     protected View mFooterView;
     protected ArrayList<T> mObjList;

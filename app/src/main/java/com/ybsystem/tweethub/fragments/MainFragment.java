@@ -35,10 +35,10 @@ public class MainFragment extends Fragment {
     private ViewPager mMainTlPager;
     private MainPagerAdapter mMainPagerAdapter;
 
-    private final int FRIEND = 0;
-    private final int FOLLOWER = 1;
-    private final int MUTE = 2;
-    private final int BLOCK = 3;
+    private static final int FRIEND = 0;
+    private static final int FOLLOWER = 1;
+    private static final int MUTE = 2;
+    private static final int BLOCK = 3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
