@@ -23,7 +23,7 @@ public enum ClickAction {
     @Getter
     private final String val;
 
-    private ClickAction(final String val) {
+    ClickAction(final String val) {
         this.val = val;
     }
 

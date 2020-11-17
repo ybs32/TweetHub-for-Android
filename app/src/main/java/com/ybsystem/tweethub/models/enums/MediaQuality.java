@@ -10,7 +10,7 @@ public enum MediaQuality {
     @Getter
     private final String val;
 
-    private MediaQuality(final String val) {
+    MediaQuality(final String val) {
         this.val = val;
     }
 

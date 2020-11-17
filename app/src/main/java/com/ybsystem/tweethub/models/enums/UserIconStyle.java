@@ -9,7 +9,7 @@ public enum UserIconStyle {
     @Getter
     private final String val;
 
-    private UserIconStyle(final String val) {
+    UserIconStyle(final String val) {
         this.val = val;
     }
 

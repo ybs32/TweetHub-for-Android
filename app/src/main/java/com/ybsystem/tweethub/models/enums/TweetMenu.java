@@ -19,7 +19,7 @@ public enum TweetMenu {
     @Getter
     private final String val;
 
-    private TweetMenu(final String val) {
+    TweetMenu(final String val) {
         this.val = val;
     }
 

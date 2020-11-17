@@ -16,7 +16,7 @@ public enum ConfirmAction {
     @Getter
     private final String val;
 
-    private ConfirmAction(final String val) {
+    ConfirmAction(final String val) {
         this.val = val;
     }
 

@@ -9,7 +9,7 @@ public enum LikeStyle {
     @Getter
     private final String val;
 
-    private LikeStyle(final String val) {
+    LikeStyle(final String val) {
         this.val = val;
     }
 

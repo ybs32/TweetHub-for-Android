@@ -32,7 +32,7 @@ public enum ColumnType {
     @Getter
     private final String val;
 
-    private ColumnType(final String val) {
+    ColumnType(final String val) {
         this.val = val;
     }
 

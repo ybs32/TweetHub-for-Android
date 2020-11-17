@@ -9,7 +9,7 @@ public enum Theme {
     @Getter
     private final String val;
 
-    private Theme(final String val) {
+    Theme(final String val) {
         this.val = val;
     }
 
