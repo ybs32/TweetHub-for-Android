@@ -32,9 +32,23 @@
             app:tabTextAppearance="@style/TabTheme16dpText" />
     </LinearLayout>
 
-    <!-- ViewPager -->
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/pager_main"
+    <!-- ドロワー領域はViewPagerの左側から -->
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <!-- ViewPager -->
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/pager_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- ドロワー -->
+        <FrameLayout
+            android:id="@+id/frame_drawer"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left" />
+    </androidx.drawerlayout.widget.DrawerLayout>
 </LinearLayout>
