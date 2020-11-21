@@ -1,5 +1,6 @@
 package com.ybsystem.tweethub.adapters.array;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,13 +22,15 @@ public class DrawerArrayAdapter extends ArrayAdapter<Integer> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Inflate
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        convertView = inflater.inflate(R.layout.list_item_common, parent, false);
-
+        View cv = convertView;
+        if (cv == null) {
+            cv = LayoutInflater.from(getContext())
+                    .inflate(R.layout.list_item_common, parent, false);
+        }
         // Set contents
-        setItemByPosition(convertView, position);
+        setItemByPosition(cv, position);
 
-        return convertView;
+        return cv;
     }
 
     private void setItemByPosition(View cv, int position) {
