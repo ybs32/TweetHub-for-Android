@@ -13,6 +13,7 @@ import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout;
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.activities.preference.SettingActivity;
 import com.ybsystem.tweethub.application.TweetHubApp;
+import com.ybsystem.tweethub.fragments.DrawerFragment;
 import com.ybsystem.tweethub.fragments.MainFragment;
 import com.ybsystem.tweethub.libs.rfab.CardItem;
 import com.ybsystem.tweethub.libs.rfab.RapidFloatingActionListView;
@@ -48,6 +49,7 @@ public class MainActivity extends ActivityBase
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         setMainFragment(savedInstanceState);
+        setDrawerFragment(savedInstanceState);
         setMoreActionButton();
     }
 
@@ -93,6 +95,15 @@ public class MainActivity extends ActivityBase
             Fragment fragment = new MainFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.frame_main, fragment);
+            transaction.commit();
+        }
+    }
+
+    private void setDrawerFragment(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            Fragment fragment = new DrawerFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_drawer, fragment);
             transaction.commit();
         }
     }
