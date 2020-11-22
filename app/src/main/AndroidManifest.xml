@@ -66,5 +66,13 @@
             android:name=".activities.preference.ColumnActivity"
             android:configChanges="orientation|screenSize"
             android:label="カラム管理" />
+        <activity
+            android:name=".activities.preference.AccountActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="アカウント管理" />
+        <activity
+            android:name=".activities.preference.BrowserAuthActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Twitter認証" />
     </application>
 </manifest>
