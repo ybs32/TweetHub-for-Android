@@ -58,6 +58,8 @@ public abstract class ActivityBase extends AppCompatActivity {
             case "activities.preference.SystemActivity":
             case "activities.preference.WallpaperActivity":
             case "activities.preference.ColumnActivity":
+            case "activities.preference.AccountActivity":
+            case "activities.preference.BrowserAuthActivity":
                 overridePendingTransition(R.anim.zoom_in, R.anim.slide_out_to_right);
                 break;
             default:
@@ -89,6 +91,8 @@ public abstract class ActivityBase extends AppCompatActivity {
             case "activities.preference.SystemActivity":
             case "activities.preference.WallpaperActivity":
             case "activities.preference.ColumnActivity":
+            case "activities.preference.AccountActivity":
+            case "activities.preference.BrowserAuthActivity":
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 break;
             default:

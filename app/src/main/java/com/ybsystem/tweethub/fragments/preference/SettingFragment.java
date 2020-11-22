@@ -22,6 +22,7 @@ public class SettingFragment extends PreferenceFragmentBase {
 
     // 管理
     private static final String COLUMN = res.getString(R.string.pref_key_column);
+    private static final String ACCOUNT = res.getString(R.string.pref_key_account);
 
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
@@ -72,6 +73,14 @@ public class SettingFragment extends PreferenceFragmentBase {
         findPreference(COLUMN).setOnPreferenceClickListener(
                 preference -> {
                     intentTo(ColumnActivity.class);
+                    return true;
+                }
+        );
+
+        // アカウント管理
+        findPreference(ACCOUNT).setOnPreferenceClickListener(
+                preference -> {
+                    intentTo(AccountActivity.class);
                     return true;
                 }
         );

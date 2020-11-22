@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionButton;
@@ -15,8 +16,12 @@ import com.ybsystem.tweethub.activities.preference.SettingActivity;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.fragments.DrawerFragment;
 import com.ybsystem.tweethub.fragments.MainFragment;
+import com.ybsystem.tweethub.fragments.dialog.ChoiceDialog;
 import com.ybsystem.tweethub.libs.rfab.CardItem;
 import com.ybsystem.tweethub.libs.rfab.RapidFloatingActionListView;
+import com.ybsystem.tweethub.models.entities.Account;
+import com.ybsystem.tweethub.models.entities.AccountArray;
+import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweethub.utils.ActivityUtils;
 import com.ybsystem.tweethub.utils.DialogUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
@@ -57,7 +62,10 @@ public class MainActivity extends ActivityBase
     public void onItemClick(int position) {
         Intent intent;
         switch (position) {
-            case 0: // 設定
+            case 0: // アカウント
+                showAccountDialog();
+                break;
+            case 1: // 設定
                 intent = new Intent(this, SettingActivity.class);
                 startActivityForResult(intent, 0);
                 overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
@@ -118,6 +126,7 @@ public class MainActivity extends ActivityBase
         rfaListView.setOnRfaListViewListener(this);
 
         List<CardItem> cardItems = new ArrayList<>();
+        cardItems.add(new CardItem().setName("アカウント").setResId(R.drawable.ic_user));
         cardItems.add(new CardItem().setName("設定").setResId(R.drawable.ic_setting));
         rfaListView.setList(cardItems);
 
@@ -128,6 +137,29 @@ public class MainActivity extends ActivityBase
                 rfaButton,
                 rfaListView
         ).build();
+    }
+
+    private void showAccountDialog() {
+        // Create
+        AccountArray<Account> accounts = TweetHubApp.getAppData().getAccounts();
+        String[] items = new String[accounts.size()];
+        for (int i = 0; i < accounts.size(); i++) {
+            TwitterUser user = accounts.get(i).getUser();
+            items[i] = user.getName() + " (@" + user.getScreenName() + ")";
+        }
+        ChoiceDialog dialog = new ChoiceDialog().newInstance(items, accounts.getCurrentAccountNum());
+        dialog.setOnItemClickListener((dialog1, position) -> {
+            // Change account and reboot
+            accounts.setCurrentAccount(position);
+            TweetHubApp.getInstance().init();
+            ToastUtils.showShortToast("アカウントを切り替えました。");
+            ActivityUtils.rebootActivity(MainActivity.this, 0, 0);
+        });
+        // Show
+        FragmentManager manager = getSupportFragmentManager();
+        if (manager.findFragmentByTag("AccountDialog") == null) {
+            dialog.show(manager, "AccountDialog");
+        }
     }
 
 }
