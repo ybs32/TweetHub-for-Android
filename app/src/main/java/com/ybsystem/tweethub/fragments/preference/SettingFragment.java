@@ -6,23 +6,22 @@ import android.content.res.Resources;
 import android.os.Bundle;
 
 import com.ybsystem.tweethub.R;
-import com.ybsystem.tweethub.activities.preference.AppearanceActivity;
-import com.ybsystem.tweethub.activities.preference.ClickActionActivity;
-import com.ybsystem.tweethub.activities.preference.SystemActivity;
-import com.ybsystem.tweethub.activities.preference.ThemeActivity;
-import com.ybsystem.tweethub.activities.preference.WallpaperActivity;
+import com.ybsystem.tweethub.activities.preference.*;
 import com.ybsystem.tweethub.application.TweetHubApp;
 
 public class SettingFragment extends PreferenceFragmentBase {
 
     private static final Resources res = TweetHubApp.getInstance().getResources();
 
-    // 各種設定
+    // 設定
     private static final String THEME = res.getString(R.string.pref_key_theme);
     private static final String APPEARANCE = res.getString(R.string.pref_key_appearance);
     private static final String CLICK_ACTION = res.getString(R.string.pref_key_click_action);
     private static final String SYSTEM = res.getString(R.string.pref_key_system);
     private static final String WALLPAPER = res.getString(R.string.pref_key_wallpaper);
+
+    // 管理
+    private static final String COLUMN = res.getString(R.string.pref_key_column);
 
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
@@ -65,6 +64,14 @@ public class SettingFragment extends PreferenceFragmentBase {
         findPreference(WALLPAPER).setOnPreferenceClickListener(
                 preference -> {
                     intentTo(WallpaperActivity.class);
+                    return true;
+                }
+        );
+
+        // カラム管理
+        findPreference(COLUMN).setOnPreferenceClickListener(
+                preference -> {
+                    intentTo(ColumnActivity.class);
                     return true;
                 }
         );

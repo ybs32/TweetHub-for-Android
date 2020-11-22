@@ -62,5 +62,9 @@
             android:name=".activities.preference.WallpaperActivity"
             android:configChanges="orientation|screenSize"
             android:label="壁紙設定" />
+        <activity
+            android:name=".activities.preference.ColumnActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="カラム管理" />
     </application>
 </manifest>
