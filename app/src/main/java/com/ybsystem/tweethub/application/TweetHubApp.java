@@ -1,8 +1,9 @@
 package com.ybsystem.tweethub.application;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Application;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.ybsystem.tweethub.models.entities.Account;
 import com.ybsystem.tweethub.models.entities.AppData;
@@ -22,7 +23,7 @@ public class TweetHubApp extends Application {
 
     @SuppressLint("StaticFieldLeak")
     private static TweetHubApp sTweetHubApp;
-    private Activity mActivity;
+    private AppCompatActivity mActivity;
     private AppData mAppData;
     private Twitter mTwitter;
 
@@ -68,7 +69,7 @@ public class TweetHubApp extends Application {
      * Get current activity instance
      * @return Instance of current activity
      */
-    public static Activity getActivity() {
+    public static AppCompatActivity getActivity() {
         return getInstance().mActivity;
     }
 
@@ -76,7 +77,7 @@ public class TweetHubApp extends Application {
      * Set current activity instance
      * @param activity Activity
      */
-    public static void setActivity(Activity activity) {
+    public static void setActivity(AppCompatActivity activity) {
         getInstance().mActivity = activity;
     }
 

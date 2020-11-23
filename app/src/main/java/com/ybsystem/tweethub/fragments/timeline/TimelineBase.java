@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.adapters.recycler.RecyclerAdapterBase;
 import com.ybsystem.tweethub.libs.eventbus.FooterEvent;
+import com.ybsystem.tweethub.libs.eventbus.StatusEvent;
+import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.storages.PrefSystem;
 
 import org.greenrobot.eventbus.EventBus;
@@ -63,6 +65,15 @@ public abstract class TimelineBase extends Fragment {
         if (mRecyclerAdapter.getFooterView() != null) {
             setFooterView();
         }
+    }
+
+    @Subscribe
+    public void onEvent(StatusEvent event) {
+        TwitterStatus status = event.getStatus();
+        if (status != null) {
+            mRecyclerAdapter.remove(status);
+        }
+        mRecyclerAdapter.notifyDataSetChanged();
     }
 
     @Override
