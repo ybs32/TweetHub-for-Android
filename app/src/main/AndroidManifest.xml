@@ -39,6 +39,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activities.TimelineActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="" />
+        <activity
             android:name=".activities.preference.SettingActivity"
             android:configChanges="orientation|screenSize"
             android:label="設定" />

@@ -51,6 +51,7 @@ public abstract class ActivityBase extends AppCompatActivity {
         switch (getLocalClassName()) {
             case "activities.MainActivity":
                 break;
+            case "activities.TimelineActivity":
             case "activities.preference.SettingActivity":
             case "activities.preference.ThemeActivity":
             case "activities.preference.AppearanceActivity":
@@ -84,6 +85,7 @@ public abstract class ActivityBase extends AppCompatActivity {
         switch (getLocalClassName()) {
             case "activities.MainActivity":
                 break;
+            case "activities.TimelineActivity":
             case "activities.preference.SettingActivity":
             case "activities.preference.ThemeActivity":
             case "activities.preference.AppearanceActivity":

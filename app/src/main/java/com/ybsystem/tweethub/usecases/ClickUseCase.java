@@ -9,10 +9,14 @@ import android.net.Uri;
 
 import androidx.fragment.app.FragmentManager;
 
+import com.ybsystem.tweethub.R;
+import com.ybsystem.tweethub.activities.TimelineActivity;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.fragments.dialog.TweetDialog;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.utils.ToastUtils;
+
+import static com.ybsystem.tweethub.models.enums.ColumnType.*;
 
 public class ClickUseCase {
 
@@ -40,7 +44,12 @@ public class ClickUseCase {
 
     public static void showTalk(TwitterStatus status) {
         // Intent to TimelineActivity
-        ToastUtils.showShortToast("showTalk");
+        Activity activity = TweetHubApp.getActivity();
+        Intent intent = new Intent(TweetHubApp.getActivity(), TimelineActivity.class);
+        intent.putExtra("STATUS", status);
+        intent.putExtra("COLUMN_TYPE", TALK);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
     }
 
     public static void openURL(String url) {
