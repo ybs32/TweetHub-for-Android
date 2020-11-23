@@ -20,8 +20,10 @@ public class TweetRecyclerAdapter extends RecyclerAdapterBase<TwitterStatus> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // Check view type
+        // Inflater
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+
+        // Check type
         if (viewType == TYPE_FOOTER) {
             mFooterView = inflater.inflate(R.layout.recycler_item_footer, parent, false);
             EventBus.getDefault().post(new FooterEvent());
@@ -65,6 +67,7 @@ public class TweetRecyclerAdapter extends RecyclerAdapterBase<TwitterStatus> {
         tweetRow.setQuoteTweet();
         tweetRow.setDetailTweet();
         tweetRow.setMarks();
+        tweetRow.setTweetClickListener();
 
         if (status.isDetail()) {
             tweetRow.setAbsoluteTime();

@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
+import com.ybsystem.tweethub.listeners.TweetClickListener;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterMediaEntity;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUserMentionEntity;
 import com.ybsystem.tweethub.models.enums.ImageOption;
 import com.ybsystem.tweethub.storages.PrefAppearance;
+import com.ybsystem.tweethub.storages.PrefClickAction;
 import com.ybsystem.tweethub.storages.PrefSystem;
 import com.ybsystem.tweethub.storages.PrefTheme;
 import com.ybsystem.tweethub.utils.CalcUtils;
@@ -80,6 +82,9 @@ public class TweetRow extends RecyclerView.ViewHolder {
     @BindView(R.id.image_favorite_mark) ImageView mFavMark;
 
     // Click
+    @BindView(R.id.view_left_click) View mLeftClick;
+    @BindView(R.id.view_middle_click) View mMiddleClick;
+    @BindView(R.id.view_right_click) View mRightClick;
     @BindView(R.id.linear_click) LinearLayout mClickContainer;
 
     public TweetRow(View itemView) {
@@ -293,6 +298,18 @@ public class TweetRow extends RecyclerView.ViewHolder {
         } else {
             this.mLockMark.setVisibility(View.GONE);
         }
+    }
+
+    public void setTweetClickListener() {
+        // Set click listener
+        this.mLeftClick.setOnClickListener(new TweetClickListener(mStatus, PrefClickAction.getLeftClick()));
+        this.mMiddleClick.setOnClickListener(new TweetClickListener(mStatus, PrefClickAction.getMiddleClick()));
+        this.mRightClick.setOnClickListener(new TweetClickListener(mStatus, PrefClickAction.getRightClick()));
+
+        // Set long click listener
+        this.mLeftClick.setOnLongClickListener(new TweetClickListener(mStatus, PrefClickAction.getLeftLongClick()));
+        this.mMiddleClick.setOnLongClickListener(new TweetClickListener(mStatus, PrefClickAction.getMiddleLongClick()));
+        this.mRightClick.setOnLongClickListener(new TweetClickListener(mStatus, PrefClickAction.getRightLongClick()));
     }
 
     public void hideOptionalFields() {
