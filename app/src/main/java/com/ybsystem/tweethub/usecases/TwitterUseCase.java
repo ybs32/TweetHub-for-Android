@@ -1,6 +1,6 @@
 package com.ybsystem.tweethub.usecases;
 
-import com.ybsystem.tweethub.application.TweetHubApp;;
+import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.libs.eventbus.StatusEvent;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.storages.PrefAppearance;
