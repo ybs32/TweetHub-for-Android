@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.ybsystem.tweethub.fragments.timeline.DetailTimeline;
 import com.ybsystem.tweethub.fragments.timeline.TalkTimeline;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.models.enums.ColumnType;
@@ -45,6 +46,10 @@ public class TimelineActivity extends ActivityBase {
             case TALK:
                 getSupportActionBar().setTitle("会話");
                 fragment = new TalkTimeline().newInstance(mStatus);
+                break;
+            case DETAIL:
+                getSupportActionBar().setTitle("詳細");
+                fragment = new DetailTimeline().newInstance(mStatus);
                 break;
             default:
                 break;
