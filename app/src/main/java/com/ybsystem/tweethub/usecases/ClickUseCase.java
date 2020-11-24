@@ -75,7 +75,12 @@ public class ClickUseCase {
 
     public static void showDetail(TwitterStatus status) {
         // Intent to TimelineActivity
-        ToastUtils.showShortToast("showDetail");
+        Activity activity = TweetHubApp.getActivity();
+        Intent intent = new Intent(activity, TimelineActivity.class);
+        intent.putExtra("STATUS", status);
+        intent.putExtra("COLUMN_TYPE", DETAIL);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
     }
 
     public static void copyText(TwitterStatus status) {
