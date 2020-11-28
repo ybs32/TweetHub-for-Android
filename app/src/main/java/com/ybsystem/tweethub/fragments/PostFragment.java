@@ -182,7 +182,7 @@ public class PostFragment extends Fragment {
         view.findViewById(R.id.button_post).setOnClickListener(v -> {
             // Check text count
             int count = Integer.parseInt(mTextCount.getText().toString());
-            if (count == 140 && mImageUris.size() == 0) {
+            if (count == 140 && mImageUris.isEmpty()) {
                 return;
             }
             // Post tweet
@@ -213,7 +213,7 @@ public class PostFragment extends Fragment {
         view.findViewById(R.id.button_draft).setOnClickListener(v -> {
             // Check drafts
             EntityArray<String> drafts = TweetHubApp.getMyAccount().getDrafts();
-            if (drafts.size() == 0) {
+            if (drafts.isEmpty()) {
                 ToastUtils.showShortToast("下書きはありません。");
                 return;
             }
@@ -254,7 +254,7 @@ public class PostFragment extends Fragment {
         view.findViewById(R.id.button_hashtag).setOnClickListener(v -> {
             // Check hashtag
             EntityArray<String> hashtags = TweetHubApp.getMyAccount().getHashtags();
-            if (hashtags.size() == 0) {
+            if (hashtags.isEmpty()) {
                 ToastUtils.showShortToast("ハッシュタグ履歴はありません。");
                 return;
             }
