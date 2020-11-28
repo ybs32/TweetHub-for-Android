@@ -26,7 +26,7 @@ import static com.ybsystem.tweethub.models.enums.ImageOption.NONE;
 
 public class PostActivity extends ActivityBase {
 
-    public static ArrayList<Uri> mImageUris;
+    public ArrayList<Uri> mImageUris;
     public static final int REQUEST_GALLERY = 0;
 
     @Override

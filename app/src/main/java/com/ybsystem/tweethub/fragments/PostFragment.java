@@ -2,6 +2,7 @@ package com.ybsystem.tweethub.fragments;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.ybsystem.tweethub.R;
+import com.ybsystem.tweethub.activities.PostActivity;
 import com.ybsystem.tweethub.adapters.holder.TweetRow;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.fragments.dialog.ListDialog;
@@ -30,6 +32,7 @@ import com.ybsystem.tweethub.utils.ResourceUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 import com.ybsystem.tweethub.utils.StorageUtils;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -47,6 +50,9 @@ public class PostFragment extends Fragment {
     private TwitterStatus mReplyStatus;
     private TwitterStatus mQuoteStatus;
 
+    // Uri
+    private ArrayList<Uri> mImageUris;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate
@@ -57,6 +63,7 @@ public class PostFragment extends Fragment {
         mTweetWord = intent.getStringExtra("TWEET_WORD");
         mReplyStatus = (TwitterStatus) intent.getSerializableExtra("REPLY_STATUS");
         mQuoteStatus = (TwitterStatus) intent.getSerializableExtra("QUOTE_STATUS");
+        mImageUris = ((PostActivity) getActivity()).mImageUris;
 
         // Set contents
         setTweet(view);
