@@ -10,6 +10,7 @@ import android.net.Uri;
 import androidx.fragment.app.FragmentManager;
 
 import com.ybsystem.tweethub.R;
+import com.ybsystem.tweethub.activities.PostActivity;
 import com.ybsystem.tweethub.activities.TimelineActivity;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.fragments.dialog.TweetDialog;
@@ -34,12 +35,20 @@ public class ClickUseCase {
 
     public static void reply(TwitterStatus status) {
         // Intent to PostActivity
-        ToastUtils.showShortToast("reply");
+        Activity activity = TweetHubApp.getActivity();
+        Intent intent = new Intent(activity, PostActivity.class);
+        intent.putExtra("REPLY_STATUS", status);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
     }
 
     public static void quote(TwitterStatus status) {
         // Intent to PostActivity
-        ToastUtils.showShortToast("quote");
+        Activity activity = TweetHubApp.getActivity();
+        Intent intent = new Intent(activity, PostActivity.class);
+        intent.putExtra("QUOTE_STATUS", status);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
     }
 
     public static void showTalk(TwitterStatus status) {
