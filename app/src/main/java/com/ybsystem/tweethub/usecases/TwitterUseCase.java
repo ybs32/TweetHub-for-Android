@@ -1,9 +1,7 @@
 package com.ybsystem.tweethub.usecases;
 
 import android.app.Activity;
-import android.database.Cursor;
 import android.net.Uri;
-import android.provider.MediaStore;
 
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.libs.eventbus.StatusEvent;
@@ -12,6 +10,7 @@ import com.ybsystem.tweethub.storages.PrefAppearance;
 import com.ybsystem.tweethub.storages.PrefSystem;
 import com.ybsystem.tweethub.utils.DialogUtils;
 import com.ybsystem.tweethub.utils.ExceptionUtils;
+import com.ybsystem.tweethub.utils.StorageUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -227,26 +226,18 @@ public class TwitterUseCase {
                 Twitter twitter = TweetHubApp.getTwitter();
                 Activity activity = TweetHubApp.getActivity();
 
-                // TODO: 分かりづら過ぎる
-                // Upload image
+                // Check media
                 if (!imageUris.isEmpty()) {
                     long[] mediaIds = new long[imageUris.size()];
                     for (int i = 0; i < imageUris.size(); i++) {
-                        String[] projection = {MediaStore.Images.Media.DATA};
-                        Cursor cursor = activity.getContentResolver()
-                                .query(imageUris.get(i), projection, null, null, null);
-                        if (cursor != null) {
-                            if (cursor.moveToFirst()) {
-                                File file = new File(cursor.getString(0));
-                                mediaIds[i] = twitter.uploadMedia(file).getMediaId();
-                            }
-                            cursor.close();
-                        }
+                        Uri uri = imageUris.get(i);
+                        File file = StorageUtils.fileFromUri(activity, uri);
+                        mediaIds[i] = twitter.uploadMedia(file).getMediaId();
                     }
                     update.setMediaIds(mediaIds);
                 }
 
-                // Post
+                // Post tweet
                 twitter.updateStatus(update);
                 e.onComplete();
             } catch (TwitterException ex) {
@@ -262,9 +253,11 @@ public class TwitterUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                TwitterException e = (TwitterException) t;
-                ToastUtils.showShortToast("ツイートに失敗しました...");
-                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                if (t instanceof  TwitterException) {
+                    TwitterException e = (TwitterException) t;
+                    ToastUtils.showShortToast("ツイートに失敗しました...");
+                    ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                }
             }
 
             @Override

@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -50,8 +49,9 @@ public class PostFragment extends Fragment {
     private TwitterStatus mReplyStatus;
     private TwitterStatus mQuoteStatus;
 
-    // Uri
+    // Others
     private List<Uri> mImageUris;
+    private ActionBar mActionBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,6 +64,7 @@ public class PostFragment extends Fragment {
         mReplyStatus = (TwitterStatus) intent.getSerializableExtra("REPLY_STATUS");
         mQuoteStatus = (TwitterStatus) intent.getSerializableExtra("QUOTE_STATUS");
         mImageUris = ((PostActivity) getActivity()).mImageUris;
+        mActionBar = ((PostActivity) getActivity()).getSupportActionBar();
 
         // Set contents
         setTweet(view);
@@ -142,8 +143,6 @@ public class PostFragment extends Fragment {
     }
 
     private void setIntentData() {
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-
         // Check word
         if (mTweetWord != null) {
             mTweetWord += " ";
@@ -153,27 +152,31 @@ public class PostFragment extends Fragment {
 
         // Check reply
         if (mReplyStatus != null) {
-            actionBar.setTitle("返信");
-            // TODO: ロジックがカオス
-            String str = "@" + mReplyStatus.getUser().getScreenName() + " ";
-            TwitterUserMentionEntity[] entities = mReplyStatus.getUserMentionEntities();
-            if (entities != null) {
-                for (TwitterUserMentionEntity entity : entities) {
-                    String my = TweetHubApp.getMyUser().getScreenName();
-                    if (!entity.getScreenName().equals(my)) {
-                        String mention = "@" + entity.getScreenName() + " ";
-                        str = str.contains(mention) ? str : (str + mention);
-                    }
+            // Append reply user
+            String replyScreen = mReplyStatus.getUser().getScreenName();
+            String str = "@" + replyScreen + " ";
+
+            // Append mention user
+            for (TwitterUserMentionEntity mention : mReplyStatus.getUserMentionEntities()) {
+                if (mention.getScreenName().equals(replyScreen)) {
+                    continue;
                 }
+                String myScreen = TweetHubApp.getMyUser().getScreenName();
+                if (mention.getScreenName().equals(myScreen)) {
+                    continue;
+                }
+                str = str.concat("@" + mention.getScreenName() + " ");
             }
+            // Set text
             mPostEdit.setText(str);
             mPostEdit.setSelection(str.length());
+            mActionBar.setTitle("返信");
         }
 
         // Check quote
         if (mQuoteStatus != null) {
-            actionBar.setTitle("引用ツイート");
             mPostEdit.setHint("コメントを追加");
+            mActionBar.setTitle("引用ツイート");
         }
     }
 
@@ -185,20 +188,23 @@ public class PostFragment extends Fragment {
             if (count == 140 && mImageUris.isEmpty()) {
                 return;
             }
-            // Post tweet
+            // Prepare data
+            long replyId = mReplyStatus != null ? mReplyStatus.getId() : -1;
             String quoteURL = mQuoteStatus != null
                     ? " https://twitter.com/" + mQuoteStatus.getUser().getScreenName() + "/status/" + mQuoteStatus.getId()
                     : "";
+
+            // Create tweet, then post
             StatusUpdate update = new StatusUpdate(
                     mPostEdit.getText().toString() + quoteURL
             );
-            update.setInReplyToStatusId(mReplyStatus != null ? mReplyStatus.getId() : -1);
+            update.setInReplyToStatusId(replyId);
             TwitterUseCase.post(update, mImageUris);
+
             // Save hashtag
             EntityArray<String> hashtags = TweetHubApp.getMyAccount().getHashtags();
             String regex = "[#＃](w*[一-龠_ぁ-ん_ァ-ヴーａ-ｚＡ-Ｚa-zA-Z0-9]+|[a-zA-Z0-9_]+|[a-zA-Z0-9_]w*)";
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(mPostEdit.getText());
+            Matcher matcher = Pattern.compile(regex).matcher(mPostEdit.getText());
             while (matcher.find()) {
                 if (hashtags.size() >= 5) {
                     hashtags.remove(0);
