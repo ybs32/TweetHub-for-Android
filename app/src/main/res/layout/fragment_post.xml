@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/relative_bottom"
+        android:background="@drawable/bg_border_purple"
+        android:orientation="vertical">
+
+        <!-- スクロール可能にする -->
+        <ScrollView
+            android:id="@+id/scroll_tweet"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+
+            <!-- ツイート表示 -->
+            <include layout="@layout/recycler_item_tweet" />
+        </ScrollView>
+
+        <!-- 画像４枚 -->
+        <LinearLayout
+            android:id="@+id/linear_photo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="3"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <!-- 「画像１」 -->
+            <ImageView
+                android:id="@+id/image_photo_1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:visibility="gone" />
+
+            <!-- 「画像２」 -->
+            <ImageView
+                android:id="@+id/image_photo_2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:visibility="gone" />
+
+            <!-- 「画像３」 -->
+            <ImageView
+                android:id="@+id/image_photo_3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:visibility="gone" />
+
+            <!-- 「画像４」-->
+            <ImageView
+                android:id="@+id/image_photo_4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- 「ツイート欄」 -->
+        <EditText
+            android:id="@+id/edit_post"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:background="#00000000"
+            android:ems="10"
+            android:gravity="left|top"
+            android:hint="いまなにしてる？"
+            android:inputType="textMultiLine"
+            android:padding="12dp">
+
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="8dp">
+
+        <!-- 左側 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true">
+
+            <!-- 「カメラボタン」 -->
+            <ImageButton
+                android:id="@+id/button_camera"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_rounded_purple"
+                android:padding="10dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_camera"
+                android:tint="#FFFFFF" />
+
+            <!-- 「ギャラリーボタン」 -->
+            <ImageButton
+                android:id="@+id/button_gallery"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="6dp"
+                android:background="@drawable/bg_rounded_purple"
+                android:padding="10dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_picture"
+                android:tint="#FFFFFF" />
+
+            <!-- 「下書きボタン」 -->
+            <ImageButton
+                android:id="@+id/button_draft"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="6dp"
+                android:background="@drawable/bg_rounded_purple"
+                android:padding="10dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_draft"
+                android:tint="#FFFFFF" />
+
+            <!-- 「ハッシュタグボタン」 -->
+            <ImageButton
+                android:id="@+id/button_hashtag"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="6dp"
+                android:background="@drawable/bg_rounded_purple"
+                android:padding="10dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_hashtag"
+                android:tint="#FFFFFF" />
+        </LinearLayout>
+
+        <!-- 右側 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+
+            <!-- 「文字数カウンター」 -->
+            <TextView
+                android:id="@+id/text_count"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:text="140"
+                android:textSize="20dp" />
+
+            <!-- 「投稿ボタン」 -->
+            <ImageButton
+                android:id="@+id/button_post"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_rounded_purple"
+                android:padding="10dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_tweet"
+                android:tint="#FFFFFF" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

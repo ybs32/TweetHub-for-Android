@@ -1,5 +1,10 @@
 package com.ybsystem.tweethub.usecases;
 
+import android.app.Activity;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.MediaStore;
+
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.libs.eventbus.StatusEvent;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
@@ -11,10 +16,15 @@ import com.ybsystem.tweethub.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.observers.DisposableObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import twitter4j.StatusUpdate;
+import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
 import static com.ybsystem.tweethub.models.enums.ConfirmAction.*;
@@ -207,6 +217,83 @@ public class TwitterUseCase {
             observable
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(disposable);
+        }
+    }
+
+    public static void post(StatusUpdate update, ArrayList<Uri> imageUris) {
+        Observable<Object> observable = Observable.create(e -> {
+            try {
+                Twitter twitter = TweetHubApp.getTwitter();
+                Activity activity = TweetHubApp.getActivity();
+
+                // TODO: 分かりづら過ぎる
+                // Upload image
+                if (!imageUris.isEmpty()) {
+                    long[] mediaIds = new long[imageUris.size()];
+                    for (int i = 0; i < imageUris.size(); i++) {
+                        String[] projection = {MediaStore.Images.Media.DATA};
+                        Cursor cursor = activity.getContentResolver()
+                                .query(imageUris.get(i), projection, null, null, null);
+                        if (cursor != null) {
+                            if (cursor.moveToFirst()) {
+                                File file = new File(cursor.getString(0));
+                                mediaIds[i] = twitter.uploadMedia(file).getMediaId();
+                            }
+                            cursor.close();
+                        }
+                    }
+                    update.setMediaIds(mediaIds);
+                }
+
+                // Post
+                twitter.updateStatus(update);
+                e.onComplete();
+            } catch (TwitterException ex) {
+                e.onError(ex);
+            }
+        });
+
+        DisposableObserver<Object> disposable = new DisposableObserver<Object>() {
+            @Override
+            public void onNext(Object obj) {
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                // Failed...
+                TwitterException e = (TwitterException) t;
+                ToastUtils.showShortToast("ツイートに失敗しました...");
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+            }
+
+            @Override
+            public void onComplete() {
+                // Success
+                ToastUtils.showShortToast("ツイートしました。");
+                TweetHubApp.getActivity().finish();
+            }
+        };
+
+        // Show confirm dialog
+        if (PrefSystem.getConfirmSettings().contains(TWEET)) {
+            DialogUtils.showConfirmDialog(
+                    "ツイートしますか？",
+                    (dialog, which) -> {
+                        DialogUtils.showProgressDialog("送信中...", TweetHubApp.getActivity());
+                        observable
+                                .subscribeOn(Schedulers.newThread())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .doFinally(DialogUtils::dismissProgressDialog)
+                                .subscribe(disposable);
+                    }
+            );
+        } else {
+            DialogUtils.showProgressDialog("送信中...", TweetHubApp.getActivity());
+            observable
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doFinally(DialogUtils::dismissProgressDialog)
                     .subscribe(disposable);
         }
     }

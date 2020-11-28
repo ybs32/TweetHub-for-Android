@@ -51,6 +51,9 @@ public abstract class ActivityBase extends AppCompatActivity {
         switch (getLocalClassName()) {
             case "activities.MainActivity":
                 break;
+            case "activities.PostActivity":
+                overridePendingTransition(R.anim.none, R.anim.fade_out_to_bottom);
+                break;
             case "activities.TimelineActivity":
             case "activities.preference.SettingActivity":
             case "activities.preference.ThemeActivity":
@@ -84,6 +87,7 @@ public abstract class ActivityBase extends AppCompatActivity {
     private void setBackButton() {
         switch (getLocalClassName()) {
             case "activities.MainActivity":
+            case "activities.PostActivity":
                 break;
             case "activities.TimelineActivity":
             case "activities.preference.SettingActivity":

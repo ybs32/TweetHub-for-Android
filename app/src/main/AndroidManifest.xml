@@ -43,6 +43,11 @@
             android:configChanges="orientation|screenSize"
             android:label="" />
         <activity
+            android:name=".activities.PostActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="ツイート"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".activities.preference.SettingActivity"
             android:configChanges="orientation|screenSize"
             android:label="設定" />
