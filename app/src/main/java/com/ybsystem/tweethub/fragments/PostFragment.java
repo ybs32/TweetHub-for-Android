@@ -32,7 +32,7 @@ import com.ybsystem.tweethub.utils.ResourceUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 import com.ybsystem.tweethub.utils.StorageUtils;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,7 +51,7 @@ public class PostFragment extends Fragment {
     private TwitterStatus mQuoteStatus;
 
     // Uri
-    private ArrayList<Uri> mImageUris;
+    private List<Uri> mImageUris;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

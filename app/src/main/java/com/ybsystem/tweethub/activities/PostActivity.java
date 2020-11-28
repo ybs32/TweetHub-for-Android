@@ -21,12 +21,13 @@ import com.ybsystem.tweethub.utils.GlideUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.ybsystem.tweethub.models.enums.ImageOption.NONE;
 
 public class PostActivity extends ActivityBase {
 
-    public ArrayList<Uri> mImageUris;
+    public List<Uri> mImageUris;
     public static final int REQUEST_GALLERY = 0;
 
     @Override

@@ -17,7 +17,7 @@ import com.ybsystem.tweethub.utils.ToastUtils;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -221,7 +221,7 @@ public class TwitterUseCase {
         }
     }
 
-    public static void post(StatusUpdate update, ArrayList<Uri> imageUris) {
+    public static void post(StatusUpdate update, List<Uri> imageUris) {
         Observable<Object> observable = Observable.create(e -> {
             try {
                 Twitter twitter = TweetHubApp.getTwitter();
