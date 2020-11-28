@@ -6,6 +6,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -66,6 +67,23 @@ public class StorageUtils {
                 ActivityCompat.requestPermissions(activity, new String[]{
                         Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0), 1500);
+    }
+
+    public static File fileFromUri(Activity activity, Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = activity.getContentResolver()
+                .query(uri, projection, null, null, null);
+        // Check
+        if (activity.isDestroyed()) {
+            return new File("");
+        }
+        if (cursor == null || !cursor.moveToFirst()) {
+            return new File("");
+        }
+        // Create file
+        File file = new File(cursor.getString(0));
+        cursor.close();
+        return file;
     }
 
 }

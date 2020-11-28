@@ -55,6 +55,7 @@ public class MainActivity extends ActivityBase
         setContentView(R.layout.activity_main);
         setMainFragment(savedInstanceState);
         setDrawerFragment(savedInstanceState);
+        setTweetActionButton();
         setMoreActionButton();
     }
 
@@ -116,8 +117,16 @@ public class MainActivity extends ActivityBase
         }
     }
 
+    private void setTweetActionButton() {
+        findViewById(R.id.fab).setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), PostActivity.class);
+            startActivityForResult(intent, 0);
+            overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
+        });
+    }
+
     private void setMoreActionButton() {
-        // Find view
+        // Init
         RapidFloatingActionLayout rfaLayout = findViewById(R.id.rfal);
         RapidFloatingActionButton rfaButton = findViewById(R.id.rfab);
 
@@ -140,14 +149,16 @@ public class MainActivity extends ActivityBase
     }
 
     private void showAccountDialog() {
-        // Create
+        // Create dialog
         AccountArray<Account> accounts = TweetHubApp.getAppData().getAccounts();
         String[] items = new String[accounts.size()];
         for (int i = 0; i < accounts.size(); i++) {
             TwitterUser user = accounts.get(i).getUser();
             items[i] = user.getName() + " (@" + user.getScreenName() + ")";
         }
-        ChoiceDialog dialog = new ChoiceDialog().newInstance(items, accounts.getCurrentAccountNum());
+        ChoiceDialog dialog = new ChoiceDialog()
+                .newInstance(items, accounts.getCurrentAccountNum());
+
         dialog.setOnItemClickListener((dialog1, position) -> {
             // Change account and reboot
             accounts.setCurrentAccount(position);
@@ -155,7 +166,8 @@ public class MainActivity extends ActivityBase
             ToastUtils.showShortToast("アカウントを切り替えました。");
             ActivityUtils.rebootActivity(MainActivity.this, 0, 0);
         });
-        // Show
+
+        // Show dialog
         FragmentManager manager = getSupportFragmentManager();
         if (manager.findFragmentByTag("AccountDialog") == null) {
             dialog.show(manager, "AccountDialog");
