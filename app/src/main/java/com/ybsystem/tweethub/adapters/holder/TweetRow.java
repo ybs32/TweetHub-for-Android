@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
+import com.ybsystem.tweethub.listeners.ThumbnailClickListener;
 import com.ybsystem.tweethub.listeners.TweetClickListener;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterMediaEntity;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
@@ -193,29 +194,30 @@ public class TweetRow extends RecyclerView.ViewHolder {
     }
 
     public void setThumbnail() {
-        TwitterMediaEntity[] mediaEntities = mSource.getMediaEntities();
+        TwitterMediaEntity[] medias = mSource.getMediaEntities();
 
         // When media not exist, hide and exit
-        if (mediaEntities == null || mediaEntities.length == 0) {
+        if (medias == null || medias.length == 0) {
             this.mThumbnailContainer.setVisibility(View.GONE);
             return;
         }
-
         // Init visibility because recycling convertView
         this.mPlayIcon.setVisibility(View.GONE);
         for (ImageView thumbnail : this.mThumbnails) {
             thumbnail.setVisibility(View.GONE);
         }
+
         // When video exist, show play icon
-        if (mediaEntities[0].getVideoVariants().length > 0) {
+        if (medias[0].getVideoVariants().length > 0) {
             this.mPlayIcon.setVisibility(View.VISIBLE);
         }
         // Set thumbnails
-        for (int i = 0; i < mediaEntities.length; i++) {
-            String imageURL = PrefSystem.getMediaThumbByQuality(mediaEntities[i].getMediaURL());
+        for (int i = 0; i < medias.length; i++) {
+            String imageURL = PrefSystem.getMediaThumbByQuality(medias[i].getMediaURL());
             ImageView thumbnail = this.mThumbnails.get(i);
             GlideUtils.load(imageURL, thumbnail, NONE);
             thumbnail.setVisibility(View.VISIBLE);
+            thumbnail.setOnClickListener(new ThumbnailClickListener(i, medias));
         }
         this.mThumbnailContainer.setVisibility(View.VISIBLE);
     }
