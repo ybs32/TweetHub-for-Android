@@ -28,7 +28,7 @@ public class StorageUtils {
     }
 
     /**
-     * Create media uri for Android 10 (API 29) or above version
+     * Create media uri over Android 10 (API 29)
      */
     @RequiresApi(api = Build.VERSION_CODES.Q)
     public static Uri createMediaUri(String rootDir, ContentResolver resolver) {
@@ -41,7 +41,7 @@ public class StorageUtils {
     }
 
     /**
-     * Create media file for Android 9 (API 28) or below version
+     * Create media file under Android 9 (API 28)
      */
     public static File createMediaFile(String rootDir) {
         String fileName = "TweetHub_" + System.currentTimeMillis() + ".jpg";
@@ -51,6 +51,43 @@ public class StorageUtils {
             dir.mkdir();
         }
         return new File(dir, fileName);
+    }
+
+    /**
+     * Get file path from Uri
+     */
+    public static String pathFromUri(Activity activity, Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = activity.getContentResolver()
+                .query(uri, projection, null, null, null);
+        // Chech
+        if (cursor == null || !cursor.moveToFirst()) {
+            return "";
+        }
+        // Get path
+        String path = cursor.getString(0);
+        cursor.close();
+        return path;
+    }
+
+    /**
+     * Get file from Uri
+     */
+    public static File fileFromUri(Activity activity, Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = activity.getContentResolver()
+                .query(uri, projection, null, null, null);
+        // Check
+        if (activity.isDestroyed()) {
+            return new File("");
+        }
+        if (cursor == null || !cursor.moveToFirst()) {
+            return new File("");
+        }
+        // Create file
+        File file = new File(cursor.getString(0));
+        cursor.close();
+        return file;
     }
 
     public static boolean isPermitted(Context context) {
@@ -67,23 +104,6 @@ public class StorageUtils {
                 ActivityCompat.requestPermissions(activity, new String[]{
                         Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0), 1500);
-    }
-
-    public static File fileFromUri(Activity activity, Uri uri) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = activity.getContentResolver()
-                .query(uri, projection, null, null, null);
-        // Check
-        if (activity.isDestroyed()) {
-            return new File("");
-        }
-        if (cursor == null || !cursor.moveToFirst()) {
-            return new File("");
-        }
-        // Create file
-        File file = new File(cursor.getString(0));
-        cursor.close();
-        return file;
     }
 
 }

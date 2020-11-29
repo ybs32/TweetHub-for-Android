@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_save"
+        android:title="保存する" />
+    <item
+        android:id="@+id/item_resize"
+        android:title="他サイズで表示" />
+</menu>
