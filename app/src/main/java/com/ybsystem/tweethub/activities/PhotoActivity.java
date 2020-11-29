@@ -202,9 +202,8 @@ public class PhotoActivity extends ActivityBase {
 
         @Override
         protected Exception doInBackground(String... URL) {
+            FileOutputStream out = null;
             try {
-                FileOutputStream out;
-
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     // Over Android 10
                     ContentResolver resolver = TweetHubApp.getActivity().getContentResolver();
@@ -222,11 +221,15 @@ public class PhotoActivity extends ActivityBase {
                 BitmapFactory.decodeStream(input)
                         .compress(Bitmap.CompressFormat.JPEG, 100, out);
                 out.flush();
-                out.close();
 
                 return null;
             } catch (Exception e) {
                 return e;
+            } finally {
+                // Close
+                try {
+                    if (out != null) out.close();
+                } catch (Exception ignored) {}
             }
         }
 
