@@ -201,7 +201,7 @@ public class PhotoActivity extends ActivityBase {
         }
 
         @Override
-        protected Exception doInBackground(String... URL) {
+        protected Exception doInBackground(String... url) {
             FileOutputStream out = null;
             try {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -217,7 +217,7 @@ public class PhotoActivity extends ActivityBase {
                     path = file.getAbsolutePath();
                 }
                 // Write
-                InputStream input = new java.net.URL(URL[0]).openStream();
+                InputStream input = new java.net.URL(url[0]).openStream();
                 BitmapFactory.decodeStream(input)
                         .compress(Bitmap.CompressFormat.JPEG, 100, out);
                 out.flush();
@@ -247,8 +247,8 @@ public class PhotoActivity extends ActivityBase {
     }
 
     private String getProfileBySize(String url, int size) {
-        String extension = url.substring(url.lastIndexOf("."));
-        url = url.substring(0, url.lastIndexOf("_"));
+        String extension = url.substring(url.lastIndexOf('.'));
+        url = url.substring(0, url.lastIndexOf('_'));
         switch (size) {
             case 0:
                 return url + "_mini" + extension;
@@ -264,7 +264,7 @@ public class PhotoActivity extends ActivityBase {
     }
 
     private String getBannerBySize(String url, int size) {
-        url = url.substring(0, url.lastIndexOf("/"));
+        url = url.substring(0, url.lastIndexOf('/'));
         switch (size) {
             case 0:
                 return url + "/mobile";
@@ -280,7 +280,7 @@ public class PhotoActivity extends ActivityBase {
     }
 
     private String getMediaBySize(String url, int size) {
-        url = url.substring(0, url.lastIndexOf(":"));
+        url = url.substring(0, url.lastIndexOf(':'));
         switch (size) {
             case 0:
                 return url + ":small";
