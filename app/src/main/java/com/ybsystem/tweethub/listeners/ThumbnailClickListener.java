@@ -44,7 +44,7 @@ public class ThumbnailClickListener implements View.OnClickListener {
         } else {
             // Video
             intent = new Intent(activity, VideoActivity.class);
-            intent.putExtra("MEDIA_ENTITY", mMediaEntities[0]);;
+            intent.putExtra("MEDIA_ENTITY", mMediaEntities[0]);
         }
 
         // Start activity
