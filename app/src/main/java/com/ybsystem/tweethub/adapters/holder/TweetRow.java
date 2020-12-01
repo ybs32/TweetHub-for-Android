@@ -101,7 +101,7 @@ public class TweetRow extends RecyclerView.ViewHolder {
         this.mThumbnails.add(mThumbnail3);
         this.mThumbnails.add(mThumbnail4);
 
-        // Apply application settings
+        // Apply app settings
         applyAppearanceSetting();
         if (PrefTheme.isCustomThemeEnabled()) {
             applyCustomThemeSetting();

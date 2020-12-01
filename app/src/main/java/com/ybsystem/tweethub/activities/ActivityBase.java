@@ -56,6 +56,7 @@ public abstract class ActivityBase extends AppCompatActivity {
             case "activities.VideoActivity":
                 overridePendingTransition(R.anim.none, R.anim.fade_out_to_bottom);
                 break;
+            case "activities.ProfileActivity":
             case "activities.TimelineActivity":
             case "activities.preference.SettingActivity":
             case "activities.preference.ThemeActivity":
@@ -93,6 +94,7 @@ public abstract class ActivityBase extends AppCompatActivity {
             case "activities.PhotoActivity":
             case "activities.VideoActivity":
                 break;
+            case "activities.ProfileActivity":
             case "activities.TimelineActivity":
             case "activities.preference.SettingActivity":
             case "activities.preference.ThemeActivity":

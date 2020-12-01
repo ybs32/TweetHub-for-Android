@@ -104,9 +104,8 @@ public class MainFragment extends Fragment {
     private void fetchMyTwitterUser() {
         Observable<User> observable = Observable.create(e -> {
             // Fetch
-            User user4j;
             Twitter twitter = TweetHubApp.getTwitter();
-            user4j = twitter.showUser(twitter.getId());
+            User user4j = twitter.showUser(twitter.getId());
 
             // Check
             if (user4j != null) {
@@ -147,8 +146,8 @@ public class MainFragment extends Fragment {
     private void fetchUserIDs(int type, ArrayList<Long> list, long cursor) {
         Observable<IDs> observable = Observable.create(e -> {
             // Fetch
-            IDs ids = null;
             Twitter twitter = TweetHubApp.getTwitter();
+            IDs ids = null;
             switch (type) {
                 case FRIEND:
                     ids = twitter.getFriendsIDs(cursor);

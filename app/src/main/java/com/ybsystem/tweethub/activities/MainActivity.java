@@ -66,7 +66,13 @@ public class MainActivity extends ActivityBase
             case 0: // アカウント
                 showAccountDialog();
                 break;
-            case 1: // 設定
+            case 1: // プロフィール
+                intent = new Intent(this, ProfileActivity.class);
+                intent.putExtra("USER_ID", TweetHubApp.getMyUser().getId());
+                startActivityForResult(intent, 0);
+                overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
+                break;
+            case 2: // 設定
                 intent = new Intent(this, SettingActivity.class);
                 startActivityForResult(intent, 0);
                 overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
@@ -136,6 +142,7 @@ public class MainActivity extends ActivityBase
 
         List<CardItem> cardItems = new ArrayList<>();
         cardItems.add(new CardItem().setName("アカウント").setResId(R.drawable.ic_user));
+        cardItems.add(new CardItem().setName("プロフィール").setResId(R.drawable.ic_doc));
         cardItems.add(new CardItem().setName("設定").setResId(R.drawable.ic_setting));
         rfaListView.setList(cardItems);
 

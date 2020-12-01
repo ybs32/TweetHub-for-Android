@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Profile can open/close with scroll -->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null">
+
+            <!-- ProfileFragment -->
+            <FrameLayout
+                android:id="@+id/frame_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed" />
+
+            <!-- Tab -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_profile"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                app:tabIndicatorColor="?android:attr/colorAccent"
+                app:tabSelectedTextColor="?android:attr/colorAccent"
+                app:tabTextAppearance="@style/TabTheme14dpText" />
+
+            <!-- Divider -->
+            <View
+                android:id="@+id/view_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="?attr/colorDivider" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- Timeline Pager -->
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/pager_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <!-- Cover -->
+    <View
+        android:id="@+id/view_cover"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:attr/colorBackground" />
+</RelativeLayout>
