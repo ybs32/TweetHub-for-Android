@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- バナー背景 -->
+    <ImageView
+        android:id="@+id/image_banner"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop" />
+
+    <!-- プロフィール画像 -->
+    <ImageView
+        android:id="@+id/image_user_icon"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="120dp" />
+
+    <LinearLayout
+        android:id="@+id/linear_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image_banner"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toRightOf="@+id/image_user_icon"
+        android:orientation="horizontal">
+
+        <!-- ユーザ名など -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!-- 認証済マーク -->
+                <ImageView
+                    android:id="@+id/image_verify_mark"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="2dp"
+                    android:src="@drawable/ic_verify" />
+
+                <!-- 鍵マーク -->
+                <ImageView
+                    android:id="@+id/image_lock_mark"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="2dp"
+                    android:src="@drawable/ic_lock"
+                    app:tint="?android:attr/textColor" />
+
+                <!-- ユーザー名 -->
+                <TextView
+                    android:id="@+id/text_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ユーザー名"
+                    android:textColor="?android:attr/textColor"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_screen_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="＠ScreenName"
+                android:textColor="?android:attr/textColor"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <!-- フォローボタン -->
+        <Button
+            android:id="@+id/button_follow"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:text="フォロー"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- 縦に並べる -->
+    <LinearLayout
+        android:id="@+id/linear_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_user"
+        android:orientation="vertical">
+
+        <!-- プロフィール文 -->
+        <TextView
+            android:id="@+id/text_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:autoLink="all"
+            android:text="説明文"
+            android:textColor="?android:attr/textColor"
+            android:textSize="14dp" />
+
+        <!-- 場所 -->
+        <TextView
+            android:id="@+id/text_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:autoLink="all"
+            android:text="場所"
+            android:textColor="?android:attr/textColor"
+            android:textSize="14dp" />
+
+        <!-- URL -->
+        <TextView
+            android:id="@+id/text_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:autoLink="all"
+            android:text="URL"
+            android:textColor="?android:attr/textColor"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <!-- 横に並べる -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_below="@+id/linear_description"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <!-- フォロー -->
+        <TextView
+            android:id="@+id/text_follow"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_normal"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="フォロー\n100"
+            android:textColor="?android:attr/textColor"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <!-- フォロワー -->
+        <TextView
+            android:id="@+id/text_follower"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_normal"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="フォロワー\n100"
+            android:textColor="?android:attr/textColor"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <!-- リスト -->
+        <TextView
+            android:id="@+id/text_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_normal"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="リスト\n100"
+            android:textColor="?android:attr/textColor"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</RelativeLayout>

@@ -13,6 +13,7 @@ import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.adapters.recycler.RecyclerAdapterBase;
 import com.ybsystem.tweethub.libs.eventbus.FooterEvent;
 import com.ybsystem.tweethub.libs.eventbus.StatusEvent;
+import com.ybsystem.tweethub.libs.eventbus.UserEvent;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.storages.PrefSystem;
 
@@ -73,6 +74,11 @@ public abstract class TimelineBase extends Fragment {
         if (status != null) {
             mRecyclerAdapter.remove(status);
         }
+        mRecyclerAdapter.notifyDataSetChanged();
+    }
+
+    @Subscribe
+    public void onEvent(UserEvent event) {
         mRecyclerAdapter.notifyDataSetChanged();
     }
 
