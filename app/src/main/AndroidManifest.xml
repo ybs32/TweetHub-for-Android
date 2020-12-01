@@ -47,6 +47,10 @@
             android:configChanges="orientation|screenSize"
             android:label="" />
         <activity
+            android:name=".activities.UserListActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="" />
+        <activity
             android:name=".activities.PostActivity"
             android:configChanges="orientation|screenSize"
             android:label="ツイート"
