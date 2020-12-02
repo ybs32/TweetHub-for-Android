@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.activities.PhotoActivity;
 import com.ybsystem.tweethub.activities.TimelineActivity;
+import com.ybsystem.tweethub.activities.UserListActivity;
 import com.ybsystem.tweethub.libs.eventbus.UserEvent;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterURLEntity;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
@@ -24,7 +25,6 @@ import com.ybsystem.tweethub.storages.PrefSystem;
 import com.ybsystem.tweethub.usecases.UserUseCase;
 import com.ybsystem.tweethub.utils.GlideUtils;
 import com.ybsystem.tweethub.utils.ResourceUtils;
-import com.ybsystem.tweethub.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -255,8 +255,11 @@ public class ProfileFragment extends Fragment {
             if (mUser.isPrivate()) {
                 return;
             }
-            // TODO: リスト実装
-            ToastUtils.showShortToast("リストを開く");
+            Activity activity = getActivity();
+            Intent intent = new Intent(activity, UserListActivity.class);
+            intent.putExtra("USER", mUser);
+            activity.startActivity(intent);
+            activity.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
         });
     }
 

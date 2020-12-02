@@ -58,6 +58,7 @@ public abstract class ActivityBase extends AppCompatActivity {
                 break;
             case "activities.ProfileActivity":
             case "activities.TimelineActivity":
+            case "activities.UserListActivity":
             case "activities.preference.SettingActivity":
             case "activities.preference.ThemeActivity":
             case "activities.preference.AppearanceActivity":
@@ -96,6 +97,7 @@ public abstract class ActivityBase extends AppCompatActivity {
                 break;
             case "activities.ProfileActivity":
             case "activities.TimelineActivity":
+            case "activities.UserListActivity":
             case "activities.preference.SettingActivity":
             case "activities.preference.ThemeActivity":
             case "activities.preference.AppearanceActivity":

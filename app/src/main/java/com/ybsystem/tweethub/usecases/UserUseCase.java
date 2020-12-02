@@ -2,7 +2,9 @@ package com.ybsystem.tweethub.usecases;
 
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.libs.eventbus.UserEvent;
+import com.ybsystem.tweethub.libs.eventbus.UserListEvent;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
+import com.ybsystem.tweethub.models.entities.twitter.TwitterUserList;
 import com.ybsystem.tweethub.storages.PrefSystem;
 import com.ybsystem.tweethub.utils.DialogUtils;
 import com.ybsystem.tweethub.utils.ExceptionUtils;
@@ -208,6 +210,70 @@ public class UserUseCase {
 
         // Show confirm dialog
         if (PrefSystem.getConfirmSettings().contains(BLOCK)) {
+            DialogUtils.showConfirmDialog(
+                    confirm,
+                    (dialog, which) -> observable
+                            .subscribeOn(Schedulers.newThread())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(disposable)
+            );
+        } else {
+            observable
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(disposable);
+        }
+    }
+
+    public static void subscribeList(TwitterUserList usetList) {
+        // Create text
+        boolean isSubscribing = usetList.isFollowing();
+        String confirm = isSubscribing ? "購読を解除しますか？" : "リストを購読しますか？";
+        String success = isSubscribing ? "購読を解除しました。" : "リストを購読しました。";
+        String fail = isSubscribing ? "購読解除に失敗しました..." : "購読に失敗しました...";
+
+        Observable<Object> observable = Observable.create(e -> {
+            try {
+                if (isSubscribing) {
+                    TweetHubApp.getTwitter().destroyUserListSubscription(usetList.getId());
+                } else {
+                    TweetHubApp.getTwitter().createUserListSubscription(usetList.getId());
+                }
+                e.onComplete();
+            } catch (TwitterException ex) {
+                e.onError(ex);
+            }
+        });
+
+        DisposableObserver<Object> disposable = new DisposableObserver<Object>() {
+            @Override
+            public void onNext(Object obj) {
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                // Failed...
+                TwitterException e = (TwitterException) t;
+                ToastUtils.showShortToast(fail);
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+            }
+
+            @Override
+            public void onComplete() {
+                // Success
+                if (isSubscribing) {
+                    usetList.setFollowing(false);
+                } else {
+                    usetList.setFollowing(true);
+                }
+                // Notify event
+                EventBus.getDefault().post(new UserListEvent());
+                ToastUtils.showShortToast(success);
+            }
+        };
+
+        // Show confirm dialog
+        if (PrefSystem.getConfirmSettings().contains(SUBSCRIBE)) {
             DialogUtils.showConfirmDialog(
                     confirm,
                     (dialog, which) -> observable
