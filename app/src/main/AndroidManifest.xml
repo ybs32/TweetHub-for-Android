@@ -35,7 +35,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="ybsystem"/>
+                <data android:scheme="ybsystem" />
             </intent-filter>
         </activity>
         <activity
@@ -50,6 +50,11 @@
             android:name=".activities.UserListActivity"
             android:configChanges="orientation|screenSize"
             android:label="" />
+        <activity
+            android:name=".activities.SearchActivity"
+            android:configChanges="orientation|screenSize"
+            android:label=""
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".activities.PostActivity"
             android:configChanges="orientation|screenSize"
