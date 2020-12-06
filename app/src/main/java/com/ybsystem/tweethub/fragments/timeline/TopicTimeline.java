@@ -5,37 +5,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
-
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.adapters.recycler.TweetRecyclerAdapter;
 import com.ybsystem.tweethub.application.TweetHubApp;
-import com.ybsystem.tweethub.models.entities.Column;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.utils.ExceptionUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
-
-import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.observers.DisposableObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import twitter4j.Paging;
-import twitter4j.Status;
-import twitter4j.Twitter;
+import twitter4j.Query;
+import twitter4j.QueryResult;
 import twitter4j.TwitterException;
 
-public class MainTimeline extends TimelineBase {
+public class TopicTimeline extends TimelineBase {
 
-    private Column mColumn;
-
-    public Fragment newInstance(Column column) {
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("COLUMN", column);
-        setArguments(bundle);
-        return this;
-    }
+    private Query mQuery;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,7 +30,6 @@ public class MainTimeline extends TimelineBase {
         View view = inflater.inflate(R.layout.fragment_timeline, container, false);
 
         // Init
-        mColumn = (Column) getArguments().getSerializable("COLUMN");
         mScrollLoad = true;
 
         // Set contents
@@ -61,45 +47,24 @@ public class MainTimeline extends TimelineBase {
         mFooterProgress.setVisibility(View.VISIBLE);
         mFooterView.setVisibility(View.VISIBLE);
 
-        // Connect async
         TweetRecyclerAdapter adapter = (TweetRecyclerAdapter) mRecyclerAdapter;
-        Observable<List<Status>> observable = Observable.create(e -> {
+        Observable<QueryResult> observable = Observable.create(e -> {
             try {
-                Paging paging;
                 if (isPullLoad || adapter.isEmpty()) {
-                    paging = mFirstPaging;
-                } else {
-                    paging = mNextPaging;
-                    paging.setMaxId(adapter.getLastObj().getId() - 1);
+                    mQuery = new Query("lang:ja min_retweets:1000");
                 }
-                Twitter twitter = TweetHubApp.getTwitter();
-                switch (mColumn.getType()) {
-                    case HOME:
-                        e.onNext(twitter.getHomeTimeline(paging));
-                        break;
-                    case MENTIONS:
-                        e.onNext(twitter.getMentionsTimeline(paging));
-                        break;
-                    case FAVORITE:
-                        e.onNext(twitter.getFavorites(paging));
-                        break;
-                    case LIST_SINGLE:
-                        e.onNext(twitter.getUserListStatuses(mColumn.getId(), paging));
-                        break;
-                    case RETWEETED:
-                        e.onNext(twitter.getRetweetsOfMe(paging));
-                        break;
-                }
+                mQuery.setCount(200);
+                e.onNext(TweetHubApp.getTwitter().search(mQuery));
                 e.onComplete();
             } catch (TwitterException ex) {
                 e.onError(ex);
             }
         });
 
-        DisposableObserver<List<Status>> disposable = new DisposableObserver<List<Status>>() {
+        DisposableObserver<QueryResult> disposable = new DisposableObserver<QueryResult>() {
             @Override
-            public void onNext(List<Status> statusList) {
-                if (statusList.isEmpty()) {
+            public void onNext(QueryResult result) {
+                if (result.getTweets().isEmpty()) {
                     // No tweet...
                     if (adapter.isEmpty()) {
                         mFooterText.setText("ツイートなし");
@@ -111,11 +76,17 @@ public class MainTimeline extends TimelineBase {
                     if (isPullLoad) {
                         adapter.clear();
                     }
-                    for (twitter4j.Status status : statusList) {
+                    for (twitter4j.Status status : result.getTweets()) {
                         adapter.add(new TwitterStatus(status));
                     }
                     adapter.notifyDataSetChanged();
-                    mScrollLoad = true;
+
+                    // Check next
+                    if (result.hasNext()) {
+                        mQuery = result.nextQuery();
+                        mScrollLoad = true;
+                    } else
+                        mFooterView.setVisibility(View.GONE);
                 }
             }
 

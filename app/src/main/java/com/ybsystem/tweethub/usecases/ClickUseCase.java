@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.activities.PostActivity;
 import com.ybsystem.tweethub.activities.ProfileActivity;
+import com.ybsystem.tweethub.activities.SearchActivity;
 import com.ybsystem.tweethub.activities.TimelineActivity;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.fragments.dialog.TweetDialog;
@@ -70,8 +71,12 @@ public class ClickUseCase {
     }
 
     public static void searchWord(String searchWord) {
-        // Intent to TimelineActivity
-        ToastUtils.showShortToast("searchWord");
+        // Intent to SearchActivity
+        Activity activity = TweetHubApp.getActivity();
+        Intent intent = new Intent(activity, SearchActivity.class);
+        intent.putExtra("SEARCH_WORD", searchWord);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
     }
 
     public static void tweetWithWord(String word) {

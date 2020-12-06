@@ -63,16 +63,21 @@ public class MainActivity extends ActivityBase
     public void onItemClick(int position) {
         Intent intent;
         switch (position) {
-            case 0: // アカウント
+            case 0: // 検索
+                intent = new Intent(this, SearchActivity.class);
+                startActivityForResult(intent, 0);
+                overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
+                break;
+            case 1: // アカウント
                 showAccountDialog();
                 break;
-            case 1: // プロフィール
+            case 2: // プロフィール
                 intent = new Intent(this, ProfileActivity.class);
                 intent.putExtra("USER_ID", TweetHubApp.getMyUser().getId());
                 startActivityForResult(intent, 0);
                 overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
                 break;
-            case 2: // 設定
+            case 3: // 設定
                 intent = new Intent(this, SettingActivity.class);
                 startActivityForResult(intent, 0);
                 overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
@@ -141,6 +146,7 @@ public class MainActivity extends ActivityBase
         rfaListView.setOnRfaListViewListener(this);
 
         List<CardItem> cardItems = new ArrayList<>();
+        cardItems.add(new CardItem().setName("検索").setResId(R.drawable.ic_search));
         cardItems.add(new CardItem().setName("アカウント").setResId(R.drawable.ic_user));
         cardItems.add(new CardItem().setName("プロフィール").setResId(R.drawable.ic_doc));
         cardItems.add(new CardItem().setName("設定").setResId(R.drawable.ic_setting));

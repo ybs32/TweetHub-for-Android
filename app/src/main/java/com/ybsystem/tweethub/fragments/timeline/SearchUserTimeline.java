@@ -8,31 +8,28 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.ybsystem.tweethub.R;
-import com.ybsystem.tweethub.adapters.recycler.TweetRecyclerAdapter;
+import com.ybsystem.tweethub.adapters.recycler.UserRecyclerAdapter;
 import com.ybsystem.tweethub.application.TweetHubApp;
-import com.ybsystem.tweethub.models.entities.Column;
-import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
+import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweethub.utils.ExceptionUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
-
-import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.observers.DisposableObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import twitter4j.Paging;
-import twitter4j.Status;
-import twitter4j.Twitter;
+import twitter4j.ResponseList;
 import twitter4j.TwitterException;
+import twitter4j.User;
 
-public class MainTimeline extends TimelineBase {
+public class SearchUserTimeline extends TimelineBase {
 
-    private Column mColumn;
+    private int mPage;
+    private String mSearchWord;
 
-    public Fragment newInstance(Column column) {
+    public Fragment newInstance(String searchWord) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable("COLUMN", column);
+        bundle.putString("SEARCH_WORD", searchWord);
         setArguments(bundle);
         return this;
     }
@@ -43,66 +40,43 @@ public class MainTimeline extends TimelineBase {
         View view = inflater.inflate(R.layout.fragment_timeline, container, false);
 
         // Init
-        mColumn = (Column) getArguments().getSerializable("COLUMN");
+        mSearchWord = getArguments().getString("SEARCH_WORD");
         mScrollLoad = true;
 
         // Set contents
         setRecyclerView(view);
-        setRecyclerAdapter(new TweetRecyclerAdapter());
+        setRecyclerAdapter(new UserRecyclerAdapter());
         setUltraPullToRefresh(view);
 
         return view;
     }
 
-    @Override
-    protected void loadTweet(boolean isPullLoad, boolean isClickLoad) {
+    protected void loadTweet(final boolean isPullLoad, final boolean isClickLoad) {
         // Change footer
         mFooterText.setText("読み込み中...");
         mFooterProgress.setVisibility(View.VISIBLE);
         mFooterView.setVisibility(View.VISIBLE);
 
-        // Connect async
-        TweetRecyclerAdapter adapter = (TweetRecyclerAdapter) mRecyclerAdapter;
-        Observable<List<Status>> observable = Observable.create(e -> {
+        UserRecyclerAdapter adapter = (UserRecyclerAdapter) mRecyclerAdapter;
+        Observable<ResponseList<User>> observable = Observable.create(e -> {
             try {
-                Paging paging;
                 if (isPullLoad || adapter.isEmpty()) {
-                    paging = mFirstPaging;
-                } else {
-                    paging = mNextPaging;
-                    paging.setMaxId(adapter.getLastObj().getId() - 1);
+                    mPage = 1;
                 }
-                Twitter twitter = TweetHubApp.getTwitter();
-                switch (mColumn.getType()) {
-                    case HOME:
-                        e.onNext(twitter.getHomeTimeline(paging));
-                        break;
-                    case MENTIONS:
-                        e.onNext(twitter.getMentionsTimeline(paging));
-                        break;
-                    case FAVORITE:
-                        e.onNext(twitter.getFavorites(paging));
-                        break;
-                    case LIST_SINGLE:
-                        e.onNext(twitter.getUserListStatuses(mColumn.getId(), paging));
-                        break;
-                    case RETWEETED:
-                        e.onNext(twitter.getRetweetsOfMe(paging));
-                        break;
-                }
+                e.onNext(TweetHubApp.getTwitter().searchUsers(mSearchWord, mPage));
                 e.onComplete();
             } catch (TwitterException ex) {
                 e.onError(ex);
             }
         });
 
-        DisposableObserver<List<Status>> disposable = new DisposableObserver<List<Status>>() {
+        DisposableObserver<ResponseList<User>> disposable = new DisposableObserver<ResponseList<User>>() {
             @Override
-            public void onNext(List<Status> statusList) {
-                if (statusList.isEmpty()) {
+            public void onNext(ResponseList<User> userList) {
+                if (userList.isEmpty()) {
                     // No tweet...
                     if (adapter.isEmpty()) {
-                        mFooterText.setText("ツイートなし");
+                        mFooterText.setText("ユーザーなし");
                         mFooterProgress.setVisibility(View.GONE);
                     } else
                         mFooterView.setVisibility(View.GONE);
@@ -111,11 +85,22 @@ public class MainTimeline extends TimelineBase {
                     if (isPullLoad) {
                         adapter.clear();
                     }
-                    for (twitter4j.Status status : statusList) {
-                        adapter.add(new TwitterStatus(status));
+                    for (twitter4j.User user4j : userList) {
+                        if (isDuplicated(user4j)) {
+                            continue;
+                        }
+                        TwitterUser user = new TwitterUser(user4j);
+                        setRelation(user);
+                        adapter.add(user);
                     }
                     adapter.notifyDataSetChanged();
-                    mScrollLoad = true;
+
+                    // Check next
+                    if (userList.size() == 20) {
+                        mPage++;
+                        mScrollLoad = true;
+                    } else
+                        mFooterView.setVisibility(View.GONE);
                 }
             }
 
@@ -135,6 +120,39 @@ public class MainTimeline extends TimelineBase {
 
             @Override
             public void onComplete() {
+            }
+
+            private boolean isDuplicated(User user) {
+                for (int i = 0; i < adapter.getObjCount(); i++) {
+                    if (adapter.getObj(i).getId() == user.getId()) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            private void setRelation(TwitterUser user) {
+                TwitterUser myUser = TweetHubApp.getMyUser();
+                for (long id : myUser.getFriendIds()) {
+                    if (user.getId() == id) {
+                        user.setFriend(true);
+                    }
+                }
+                for (long id : myUser.getFollowerIds()) {
+                    if (user.getId() == id) {
+                        user.setFollower(true);
+                    }
+                }
+                for (long id : myUser.getMuteIds()) {
+                    if (user.getId() == id) {
+                        user.setMuting(true);
+                    }
+                }
+                for (long id : myUser.getBlockIds()) {
+                    if (user.getId() == id) {
+                        user.setBlocking(true);
+                    }
+                }
             }
         };
 
