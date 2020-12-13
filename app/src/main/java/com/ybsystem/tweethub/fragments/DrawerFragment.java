@@ -1,7 +1,9 @@
 package com.ybsystem.tweethub.fragments;
 
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +18,8 @@ import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweethub.models.enums.ImageOption;
 import com.ybsystem.tweethub.storages.PrefAppearance;
 import com.ybsystem.tweethub.storages.PrefSystem;
+import com.ybsystem.tweethub.usecases.ClickUseCase;
 import com.ybsystem.tweethub.utils.GlideUtils;
-import com.ybsystem.tweethub.utils.ToastUtils;
 
 import static com.ybsystem.tweethub.models.enums.ImageOption.*;
 
@@ -35,10 +37,12 @@ public class DrawerFragment extends Fragment {
     }
 
     private void setDrawerProfile(View view) {
-        // Set user info
+        // Set user profile
         TwitterUser user = TweetHubApp.getMyUser();
-        ((TextView) view.findViewById(R.id.text_user_name)).setText(user.getName());
-        ((TextView) view.findViewById(R.id.text_screen_name)).setText("@" + user.getScreenName());
+        TextView userName = view.findViewById(R.id.text_user_name);
+        TextView screenName = view.findViewById(R.id.text_screen_name);
+        userName.setText(user.getName());
+        screenName.setText("@" + user.getScreenName());
 
         // Load user images
         ImageView userIcon = view.findViewById(R.id.image_user_icon);
@@ -48,25 +52,24 @@ public class DrawerFragment extends Fragment {
         GlideUtils.load(PrefSystem.getProfileThumbByQuality(user), userIcon, option);
 
         // When clicked banner, show user profile
-        bannerImage.setOnClickListener(v -> {
-            // TODO: Show user profile
-            ToastUtils.showShortToast("ユーザを表示");
-        });
+        bannerImage.setOnClickListener(v ->
+                ClickUseCase.showUser(user.getId())
+        );
 
         // Set verify mark
-        ImageView verifyMark = view.findViewById(R.id.image_verify_mark);
+        ImageView verify = view.findViewById(R.id.image_verify_mark);
         if (user.isVerified()) {
-            verifyMark.setVisibility(View.VISIBLE);
+            verify.setVisibility(View.VISIBLE);
         } else {
-            verifyMark.setVisibility(View.GONE);
+            verify.setVisibility(View.GONE);
         }
 
         // Set lock mark
-        ImageView lockMark = view.findViewById(R.id.image_lock_mark);
+        ImageView lock = view.findViewById(R.id.image_lock_mark);
         if (user.isProtected()) {
-            lockMark.setVisibility(View.VISIBLE);
+            lock.setVisibility(View.VISIBLE);
         } else {
-            lockMark.setVisibility(View.GONE);
+            lock.setVisibility(View.GONE);
         }
     }
 
@@ -80,7 +83,7 @@ public class DrawerFragment extends Fragment {
         listView.setDivider(null);
 
         // Add dummy variables
-        for(int i = 0; i < 9; i++) {
+        for (int i = 0; i < 9; i++) {
             arrayAdapter.add(i);
         }
     }
