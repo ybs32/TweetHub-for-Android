@@ -1,8 +1,11 @@
 package com.ybsystem.tweethub.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -17,15 +20,20 @@ import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.fragments.DrawerFragment;
 import com.ybsystem.tweethub.fragments.MainFragment;
 import com.ybsystem.tweethub.fragments.dialog.ChoiceDialog;
+import com.ybsystem.tweethub.fragments.dialog.ConfirmDialog;
+import com.ybsystem.tweethub.libs.glide.GlideApp;
 import com.ybsystem.tweethub.libs.rfab.CardItem;
 import com.ybsystem.tweethub.libs.rfab.RapidFloatingActionListView;
 import com.ybsystem.tweethub.models.entities.Account;
 import com.ybsystem.tweethub.models.entities.AccountArray;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
+import com.ybsystem.tweethub.storages.PrefWallpaper;
 import com.ybsystem.tweethub.utils.ActivityUtils;
 import com.ybsystem.tweethub.utils.DialogUtils;
+import com.ybsystem.tweethub.utils.ResourceUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +65,7 @@ public class MainActivity extends ActivityBase
         setDrawerFragment(savedInstanceState);
         setTweetActionButton();
         setMoreActionButton();
+        setWallpaper();
     }
 
     @Override
@@ -94,6 +103,7 @@ public class MainActivity extends ActivityBase
 
         switch (resultCode) {
             case REBOOT_IMMEDIATE:
+                ToastUtils.showShortToast("設定を適用しました。");
                 ActivityUtils.rebootActivity(this, 0, 0);
                 break;
             case REBOOT_PREPARATION:
@@ -159,6 +169,39 @@ public class MainActivity extends ActivityBase
                 rfaButton,
                 rfaListView
         ).build();
+    }
+
+    private void setWallpaper() {
+        // Check setting
+        String path = PrefWallpaper.getWallpaperPath();
+        if (path.equals("未設定")) {
+            return;
+        }
+        // Get color
+        int color = ResourceUtils.getBackgroundColor();
+        color = PrefWallpaper.applyTransparency(color);
+
+        // Visible wallpaper
+        ImageView wallpaper = findViewById(R.id.image_wallpaper);
+        wallpaper.setColorFilter(color);
+        wallpaper.setVisibility(View.VISIBLE);
+
+        // Load image
+        Uri uri = Uri.fromFile(new File(path));
+        GlideApp.with(this).load(uri).into(wallpaper);
+    }
+
+    private void showConfirmDialog() {
+        // Create
+        ConfirmDialog dialog = new ConfirmDialog().newInstance("アプリを終了しますか？");
+        dialog.setOnPositiveClickListener(
+                (dialog1, which) -> finish()
+        );
+        // Show
+        FragmentManager manager = getSupportFragmentManager();
+        if (manager.findFragmentByTag("ConfirmDialog") == null) {
+            dialog.show(manager, "ConfirmDialog");
+        }
     }
 
     private void showAccountDialog() {

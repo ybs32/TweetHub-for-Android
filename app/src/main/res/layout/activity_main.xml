@@ -6,6 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Wallpaper -->
+    <ImageView
+        android:id="@+id/image_wallpaper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
+
     <!-- MainFragment -->
     <FrameLayout
         android:id="@+id/frame_main"
