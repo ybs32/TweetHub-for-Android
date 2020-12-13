@@ -27,6 +27,7 @@ import com.ybsystem.tweethub.libs.rfab.RapidFloatingActionListView;
 import com.ybsystem.tweethub.models.entities.Account;
 import com.ybsystem.tweethub.models.entities.AccountArray;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
+import com.ybsystem.tweethub.storages.PrefSystem;
 import com.ybsystem.tweethub.storages.PrefWallpaper;
 import com.ybsystem.tweethub.utils.ActivityUtils;
 import com.ybsystem.tweethub.utils.DialogUtils;
@@ -38,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.ybsystem.tweethub.activities.preference.SettingActivity.*;
+import static com.ybsystem.tweethub.models.enums.ConfirmAction.*;
 
 public class MainActivity extends ActivityBase
         implements RapidFloatingActionListView.OnRfaListViewListener {
@@ -66,6 +68,15 @@ public class MainActivity extends ActivityBase
         setTweetActionButton();
         setMoreActionButton();
         setWallpaper();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (PrefSystem.getConfirmSettings().contains(FINISH)) {
+            showConfirmDialog();
+        } else {
+            finish();
+        }
     }
 
     @Override
