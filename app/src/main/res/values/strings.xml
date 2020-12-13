@@ -43,6 +43,7 @@
     <string name="pref_key_via_color">pref_key_via_color</string>
     <string name="pref_key_rtfav_color">pref_key_rtfav_color</string>
     <string name="pref_key_retweetedby_color">pref_key_retweetedby_color</string>
+    <string name="pref_key_theme_preview">pref_key_theme_preview</string>
 
     <!-- Appearance settings -->
     <string name="pref_key_size_font">pref_key_size_font</string>
