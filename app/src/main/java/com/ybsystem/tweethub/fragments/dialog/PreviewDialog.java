@@ -94,26 +94,26 @@ public class PreviewDialog extends DialogFragment {
             public void onComplete() {
                 // Tweet
                 List<twitter4j.Status> tweets = mTweetResult.getTweets();
-                if (tweets.size() != 0) {
+                if (!tweets.isEmpty()) {
                     View v = view.findViewById(R.id.include_tweet);
                     renderTweet(v, new TwitterStatus(tweets.get(0)));
                     v.setVisibility(View.VISIBLE);
                 }
                 // Retweet
                 List<twitter4j.Status> retweets = mRetweetResult.getTweets();
-                if (retweets.size() != 0) {
+                if (!retweets.isEmpty()) {
                     View v = view.findViewById(R.id.include_retweet);
                     renderTweet(v, new TwitterStatus(retweets.get(0)));
                     v.setVisibility(View.VISIBLE);
                 }
                 // Reply
-                if (mReplyStatuses.size() != 0) {
+                if (!mReplyStatuses.isEmpty()) {
                     View v = view.findViewById(R.id.include_reply);
                     renderTweet(v, new TwitterStatus(mReplyStatuses.get(0)));
                     v.setVisibility(View.VISIBLE);
                 }
                 // My Tweet
-                if (mMyTweetStatuses.size() != 0) {
+                if (!mMyTweetStatuses.isEmpty()) {
                     View v = view.findViewById(R.id.include_mytweet);
                     renderTweet(v, new TwitterStatus(mMyTweetStatuses.get(0)));
                     v.setVisibility(View.VISIBLE);
