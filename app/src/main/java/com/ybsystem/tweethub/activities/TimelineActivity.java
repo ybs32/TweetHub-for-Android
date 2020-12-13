@@ -6,12 +6,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ybsystem.tweethub.fragments.timeline.DetailTimeline;
+import com.ybsystem.tweethub.fragments.timeline.MainTimeline;
 import com.ybsystem.tweethub.fragments.timeline.TalkTimeline;
 import com.ybsystem.tweethub.fragments.timeline.UserTimeline;
 import com.ybsystem.tweethub.models.entities.Column;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweethub.models.enums.ColumnType;
+import com.ybsystem.tweethub.storages.PrefAppearance;
 
 import static com.ybsystem.tweethub.models.enums.ColumnType.*;
 
@@ -52,6 +54,30 @@ public class TimelineActivity extends ActivityBase {
         Fragment fragment = null;
 
         switch (mColumnType) {
+            case HOME:
+                getSupportActionBar().setTitle("ホーム");
+                fragment = new MainTimeline().newInstance(
+                        new Column(-1, "", HOME, false)
+                );
+                break;
+            case MENTIONS:
+                getSupportActionBar().setTitle("@Mentions");
+                fragment = new MainTimeline().newInstance(
+                        new Column(-1, "", MENTIONS, false)
+                );
+                break;
+            case FAVORITE:
+                getSupportActionBar().setTitle(PrefAppearance.getLikeFavText());
+                fragment = new MainTimeline().newInstance(
+                        new Column(-1, "", FAVORITE, false)
+                );
+                break;
+            case RETWEETED:
+                getSupportActionBar().setTitle("リツイートされたツイート");
+                fragment = new MainTimeline().newInstance(
+                        new Column(-1, "", RETWEETED, false)
+                );
+                break;
             case TALK:
                 getSupportActionBar().setTitle("会話");
                 fragment = new TalkTimeline().newInstance(mStatus);
@@ -76,9 +102,9 @@ public class TimelineActivity extends ActivityBase {
                 break;
         }
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(android.R.id.content, fragment);
-        transaction.commit();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(android.R.id.content, fragment);
+        ft.commit();
     }
 
 }

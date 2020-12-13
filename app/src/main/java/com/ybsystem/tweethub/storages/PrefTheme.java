@@ -24,6 +24,8 @@ public class PrefTheme extends PrefBase {
     public static final String KEY_RTFAV_COLOR = RES.getString(R.string.pref_key_rtfav_color);
     public static final String KEY_RETWEETEDBY_COLOR = RES.getString(R.string.pref_key_retweetedby_color);
 
+    public static final String KEY_THEME_PREVIEW = RES.getString(R.string.pref_key_theme_preview);
+
     private PrefTheme() {
     }
 

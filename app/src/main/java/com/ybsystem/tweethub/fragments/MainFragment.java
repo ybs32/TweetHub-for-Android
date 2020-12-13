@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -57,6 +59,17 @@ public class MainFragment extends Fragment {
     private void setAppIcon(View view) {
         // Find view
         ImageView icon = view.findViewById(R.id.image_app_icon);
+
+        // Set click listener
+        icon.setOnClickListener(v -> {
+            DrawerLayout drawer = view.findViewById(R.id.drawer_layout);
+            int g = GravityCompat.START;
+            if (drawer.isDrawerOpen(g)) {
+                drawer.closeDrawer(g);
+            } else {
+                drawer.openDrawer(g);
+            }
+        });
         // Set drawable resource
         switch (PrefTheme.getTheme()) {
             case "LIGHT":

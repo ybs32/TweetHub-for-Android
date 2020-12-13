@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.ybsystem.tweethub.R;
+import com.ybsystem.tweethub.fragments.dialog.PreviewDialog;
 import com.ybsystem.tweethub.storages.PrefTheme;
 import com.ybsystem.tweethub.utils.DialogUtils;
 import com.ybsystem.tweethub.utils.ResourceUtils;
@@ -24,6 +27,7 @@ public class ThemeFragment extends PreferenceFragmentBase {
     // Preferences
     private ListPreference mTheme;
     private SwitchPreference mCustom;
+    private PreferenceScreen mPreview;
 
     // Custom setting dependencies
     private ArrayList<Preference> mDependencyList;
@@ -40,6 +44,17 @@ public class ThemeFragment extends PreferenceFragmentBase {
         // Custom
         mCustom = findPreference(KEY_THEME_CUSTOM);
 
+        mPreview = findPreference(KEY_THEME_PREVIEW);
+        mPreview.setOnPreferenceClickListener(
+                preference -> {
+                    FragmentManager fm = getFragmentManager();
+                    if (fm.findFragmentByTag("PreviewDialog") == null) {
+                        new PreviewDialog().show(fm, "PreviewDialog");
+                    }
+                    return true;
+                }
+        );
+
         // Change dependency item's text color programmatically
         mDependencyList = new ArrayList<>();
         mDependencyList.add(findPreference(KEY_RETWEET_COLOR));
@@ -53,6 +68,7 @@ public class ThemeFragment extends PreferenceFragmentBase {
         mDependencyList.add(findPreference(KEY_VIA_COLOR));
         mDependencyList.add(findPreference(KEY_RTFAV_COLOR));
         mDependencyList.add(findPreference(KEY_RETWEETEDBY_COLOR));
+        mDependencyList.add(findPreference(KEY_THEME_PREVIEW));
         changeDependencyTextColor();
     }
 

@@ -17,6 +17,7 @@ import com.ybsystem.tweethub.models.entities.twitter.TwitterMediaEntity;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUserMentionEntity;
+import com.ybsystem.tweethub.models.enums.ClickAction;
 import com.ybsystem.tweethub.models.enums.ImageOption;
 import com.ybsystem.tweethub.storages.PrefAppearance;
 import com.ybsystem.tweethub.storages.PrefClickAction;
@@ -261,6 +262,7 @@ public class TweetRow extends RecyclerView.ViewHolder {
         this.mQuoteTweetText.setText(Html.fromHtml(qtStatus.getConvertedText()));
         this.mQuoteRelativeTime.setText(qtStatus.getConvertedRelativeTime());
         this.mQuoteContainer.setVisibility(View.VISIBLE);
+        this.mQuoteContainer.setOnClickListener(new TweetClickListener(qtStatus, ClickAction.DETAIL));
     }
 
     public void setDetailTweet() {

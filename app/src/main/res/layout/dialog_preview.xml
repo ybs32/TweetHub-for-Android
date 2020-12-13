@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linear_loading"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <!-- プログレスバー -->
+        <ProgressBar
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="20dp" />
+
+        <!-- 読み込み中... -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="読み込み中..."
+            android:textSize="16dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linear_preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- Tweet -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:text="ツイート"
+                android:textSize="18dp" />
+
+            <include
+                android:id="@+id/include_tweet"
+                layout="@layout/recycler_item_tweet"
+                android:visibility="gone" />
+
+            <!-- Retweet -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:text="リツイート"
+                android:textSize="18dp" />
+
+            <include
+                android:id="@+id/include_retweet"
+                layout="@layout/recycler_item_tweet"
+                android:visibility="gone" />
+
+            <!-- Reply -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:text="自分宛の返信"
+                android:textSize="18dp" />
+
+            <include
+                android:id="@+id/include_reply"
+                layout="@layout/recycler_item_tweet"
+                android:visibility="gone" />
+
+            <!-- My Tweet -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:text="自分のツイート"
+                android:textSize="18dp" />
+
+            <include
+                android:id="@+id/include_mytweet"
+                layout="@layout/recycler_item_tweet"
+                android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
