@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="colorBorder" />
-    <attr name="colorDivider" />
-    <attr name="colorDisabledText" />
-    <attr name="colorIcon" />
-    <attr name="colorLink" />
-    <attr name="colorReply" />
+    <attr name="colorWeak" />
+    <attr name="colorStrong" />
     <attr name="colorRetweet" />
     <attr name="colorFavorite" />
+    <attr name="colorLike" />
+    <attr name="colorTalk" />
+    <attr name="colorDelete" />
+    <attr name="colorLink" />
+    <attr name="colorBgRt" />
 </resources>

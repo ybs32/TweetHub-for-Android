@@ -7,14 +7,15 @@
         <item name="colorPrimaryDark">#7777BB</item>
         <item name="colorAccent">#555599</item>
         <item name="colorControlHighlight">#D7D7D7</item>
-        <item name="colorBorder">#BBBBBB</item>
-        <item name="colorDivider">#DDDDDD</item>
-        <item name="colorDisabledText">#BBBBBB</item>
-        <item name="colorIcon">#555555</item>
+        <item name="colorWeak">#BBBFC4</item>
+        <item name="colorStrong">#444B50</item>
+        <item name="colorRetweet">#44BB55</item>
+        <item name="colorFavorite">#EEAA22</item>
+        <item name="colorLike">#EE4477</item>
+        <item name="colorTalk">#8888CC</item>
+        <item name="colorDelete">#FF4444</item>
         <item name="colorLink">#3355EE</item>
-        <item name="colorReply">#000000</item>
-        <item name="colorRetweet">#44BB66</item>
-        <item name="colorFavorite">#DD2266</item>
+        <item name="colorBgRt">#F5E5FF</item>
     </style>
 
     <style name="DarkTheme" parent="Theme.AppCompat">
@@ -25,14 +26,15 @@
         <item name="colorPrimaryDark">#666699</item>
         <item name="colorAccent">#CCCCFF</item>
         <item name="colorControlHighlight">#444444</item>
-        <item name="colorBorder">#666666</item>
-        <item name="colorDivider">#444444</item>
-        <item name="colorDisabledText">#666666</item>
-        <item name="colorIcon">#DDDDDD</item>
+        <item name="colorWeak">#666B70</item>
+        <item name="colorStrong">#CCCBD0</item>
+        <item name="colorRetweet">#66DD88</item>
+        <item name="colorFavorite">#FFBB33</item>
+        <item name="colorLike">#EE6699</item>
+        <item name="colorTalk">#AAAAEE</item>
+        <item name="colorDelete">#FF4444</item>
         <item name="colorLink">#AACCFF</item>
-        <item name="colorReply">#000000</item>
-        <item name="colorRetweet">#88FFAA</item>
-        <item name="colorFavorite">#FF66AA</item>
+        <item name="colorBgRt">#403044</item>
     </style>
 
     <style name="TabTheme16dpText" parent="TextAppearance.Design.Tab">

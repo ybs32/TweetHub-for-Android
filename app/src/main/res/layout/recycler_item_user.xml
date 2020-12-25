@@ -66,6 +66,7 @@
         android:ellipsize="end"
         android:singleLine="true"
         android:text="\@ScreenName"
+        android:textColor="?attr/colorStrong"
         android:textSize="14dp" />
 
     <!-- 「フォローボタン」 -->

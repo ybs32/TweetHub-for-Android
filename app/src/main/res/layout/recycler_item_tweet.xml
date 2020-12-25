@@ -78,7 +78,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="2dp"
                 android:src="@drawable/ic_retweet"
-                app:tint="?attr/colorIcon" />
+                app:tint="?attr/colorStrong" />
 
             <!-- 上部 -->
             <LinearLayout
@@ -136,6 +136,7 @@
                         android:ellipsize="end"
                         android:singleLine="true"
                         android:text="\@ScreenName"
+                        android:textColor="?attr/colorStrong"
                         android:textSize="14dp" />
                 </LinearLayout>
 
@@ -162,7 +163,7 @@
                         android:layout_height="16dp"
                         android:layout_marginLeft="2dp"
                         android:src="@drawable/ic_like"
-                        app:tint="?attr/colorFavorite" />
+                        app:tint="?attr/colorLike" />
 
                     <!-- 「相対時間」 -->
                     <TextView
@@ -270,7 +271,7 @@
                     android:id="@+id/relative_quote"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="4dp"
                     android:background="@drawable/bg_border_gray"
@@ -314,6 +315,7 @@
                                 android:ellipsize="end"
                                 android:singleLine="true"
                                 android:text="\@ScreenName"
+                                android:textColor="?attr/colorStrong"
                                 android:textSize="14dp" />
                         </LinearLayout>
 
@@ -383,6 +385,7 @@
                             android:ellipsize="end"
                             android:singleLine="true"
                             android:text="2020/10/29 00:00"
+                            android:textColor="?attr/colorStrong"
                             android:textSize="13dp" />
 
                         <!-- 「via」 -->
@@ -395,6 +398,7 @@
                             android:ellipsize="end"
                             android:singleLine="true"
                             android:text="via"
+                            android:textColor="?attr/colorStrong"
                             android:textSize="13dp" />
                     </LinearLayout>
 
@@ -414,7 +418,7 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginRight="2dp"
                             android:src="@drawable/ic_retweet"
-                            app:tint="?attr/colorIcon" />
+                            app:tint="?attr/colorStrong" />
 
                         <!-- 「RT数」 -->
                         <TextView
@@ -425,6 +429,7 @@
                             android:layout_marginRight="6dp"
                             android:singleLine="true"
                             android:text="0"
+                            android:textColor="?attr/colorStrong"
                             android:textSize="13dp" />
 
                         <!-- 「Fav数アイコン」 -->
@@ -435,7 +440,7 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginRight="2dp"
                             android:src="@drawable/ic_like"
-                            app:tint="?attr/colorIcon" />
+                            app:tint="?attr/colorStrong" />
 
                         <!-- 「Fav数」 -->
                         <TextView
@@ -445,6 +450,7 @@
                             android:layout_marginTop="4dp"
                             android:singleLine="true"
                             android:text="0"
+                            android:textColor="?attr/colorStrong"
                             android:textSize="13dp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -458,6 +464,7 @@
                     android:ellipsize="end"
                     android:singleLine="true"
                     android:text="○○ さんがリツイート"
+                    android:textColor="?attr/colorStrong"
                     android:textSize="13dp" />
             </LinearLayout>
         </RelativeLayout>
@@ -473,8 +480,8 @@
         <!-- （詳細）区切り線 -->
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?attr/colorDivider" />
+            android:layout_height="0.5dp"
+            android:background="?attr/colorWeak" />
 
         <!-- （詳細）横に並べる -->
         <LinearLayout
@@ -510,7 +517,7 @@
         <!-- （詳細）区切り線 -->
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?attr/colorDivider" />
+            android:layout_height="0.5dp"
+            android:background="?attr/colorWeak" />
     </LinearLayout>
 </LinearLayout>

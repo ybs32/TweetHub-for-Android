@@ -16,8 +16,8 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.wangjie.rapidfloatingactionbutton.contentimpl.viewbase.RapidFloatingActionContentViewBase;
 import com.ybsystem.tweethub.R;
-import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.utils.AnimationUtils;
+import com.ybsystem.tweethub.utils.CalcUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,20 +95,23 @@ public class RapidFloatingActionListView extends RapidFloatingActionContentViewB
             rootView.setTag(com.wangjie.rapidfloatingactionbutton.R.id.rfab__id_content_label_list_item_position, i);
             rootView.setOnClickListener(this);
 
-            ImageView logoIv = rootView.findViewById(R.id.image_item);
-            TextView titleTv = rootView.findViewById(R.id.text_item);
-            CardItem cardItem = mCardList.get(i);
-            logoIv.setImageResource(cardItem.getResId());
-            titleTv.setText(cardItem.getName());
+            // Get layout params
+            ImageView iv = rootView.findViewById(R.id.image_item);
+            TextView tv = rootView.findViewById(R.id.text_item);
+            MarginLayoutParams logoMargin = (MarginLayoutParams) iv.getLayoutParams();
+            MarginLayoutParams titleMargin = (MarginLayoutParams) tv.getLayoutParams();
 
-            // Change layout margin
-            MarginLayoutParams logoIvMargin = (MarginLayoutParams) logoIv.getLayoutParams();
-            MarginLayoutParams titleTvMargin = (MarginLayoutParams) titleTv.getLayoutParams();
-            float scale = TweetHubApp.getInstance().getResources().getDisplayMetrics().density;
-            logoIvMargin.setMargins((int) (20 * scale), 0, 0, 0);
-            titleTvMargin.setMargins((int) (20 * scale), 0, (int) (30 * scale), 0);
-            logoIv.setLayoutParams(logoIvMargin);
-            titleTv.setLayoutParams(titleTvMargin);
+            // Adjust layout margin
+            int dp20 = CalcUtils.convertDp2Px(20);
+            int dp30 = CalcUtils.convertDp2Px(30);
+            logoMargin.setMargins(dp20, 0, 0, 0);
+            titleMargin.setMargins(dp20, 0, dp30, 0);
+            iv.setLayoutParams(logoMargin);
+            tv.setLayoutParams(titleMargin);
+
+            // Set contents
+            iv.setImageResource(mCardList.get(i).getResId());
+            tv.setText(mCardList.get(i).getName());
 
             mContentView.addView(item);
         }

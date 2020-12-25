@@ -31,7 +31,7 @@
         app:iconSpaceReserved="false">
 
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-            android:defaultValue="?android:attr/colorBackground"
+            android:defaultValue="?attr/colorBgRt"
             android:key="@string/pref_key_retweet_color"
             android:title="リツイート"
             app:cpv_allowPresets="false"
@@ -113,7 +113,7 @@
         app:iconSpaceReserved="false">
 
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-            android:defaultValue="?android:attr/textColor"
+            android:defaultValue="?attr/colorStrong"
             android:key="@string/pref_key_absolutetime_color"
             android:title="絶対時刻"
             app:cpv_allowPresets="false"
@@ -123,7 +123,7 @@
             app:iconSpaceReserved="false" />
 
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-            android:defaultValue="?android:attr/textColor"
+            android:defaultValue="?attr/colorStrong"
             android:key="@string/pref_key_via_color"
             android:title="クライアント名"
             app:cpv_allowPresets="false"
@@ -133,7 +133,7 @@
             app:iconSpaceReserved="false" />
 
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-            android:defaultValue="?android:attr/textColor"
+            android:defaultValue="?attr/colorStrong"
             android:key="@string/pref_key_rtfav_color"
             android:title="リツイート数・いいね数"
             app:cpv_allowPresets="false"
@@ -143,7 +143,7 @@
             app:iconSpaceReserved="false" />
 
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-            android:defaultValue="?android:attr/textColor"
+            android:defaultValue="?attr/colorStrong"
             android:key="@string/pref_key_retweetedby_color"
             android:title="Retweeted by"
             app:cpv_allowPresets="false"

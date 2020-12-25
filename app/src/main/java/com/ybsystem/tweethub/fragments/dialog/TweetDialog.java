@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,7 +25,6 @@ import com.ybsystem.tweethub.models.enums.TweetMenu;
 import com.ybsystem.tweethub.adapters.holder.TweetRow;
 import com.ybsystem.tweethub.storages.PrefAppearance;
 import com.ybsystem.tweethub.storages.PrefClickAction;
-import com.ybsystem.tweethub.storages.PrefTheme;
 import com.ybsystem.tweethub.usecases.ClickUseCase;
 import com.ybsystem.tweethub.usecases.TwitterUseCase;
 import com.ybsystem.tweethub.utils.CalcUtils;
@@ -99,11 +97,7 @@ public class TweetDialog extends DialogFragment {
         tweetRow.setRetweetedBy();
         tweetRow.setQuoteTweet();
         tweetRow.setMarks();
-
-        // Check theme setting
-        if (PrefTheme.isCustomThemeEnabled()) {
-            tweetRow.setCustomBackgroundColor();
-        }
+        tweetRow.setBackgroundColor();
     }
 
     @Data
@@ -140,18 +134,23 @@ public class TweetDialog extends DialogFragment {
             Menu menu = getItem(position);
 
             // Set image
-            ImageView image = cv.findViewById(R.id.image_item);
-            image.setImageResource(menu.getDrawable());
-            image.setColorFilter(menu.getColor());
-
-            // Adjust image margin
-            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) image.getLayoutParams();
-            lp.setMargins(CalcUtils.convertDp2Px(46), 0, 0, 0);
-            image.setLayoutParams(lp);
+            ImageView iv = cv.findViewById(R.id.image_item);
+            iv.setImageResource(menu.getDrawable());
+            iv.setColorFilter(menu.getColor());
 
             // Set text
-            TextView text = cv.findViewById(R.id.text_item);
-            text.setText(menu.getLabel());
+            TextView tv = cv.findViewById(R.id.text_item);
+            tv.setText(menu.getLabel());
+
+            // Adjust layout margin
+            ViewGroup.MarginLayoutParams logoMargin = (ViewGroup.MarginLayoutParams) iv.getLayoutParams();
+            ViewGroup.MarginLayoutParams titleMargin = (ViewGroup.MarginLayoutParams) tv.getLayoutParams();
+            int dp30 = CalcUtils.convertDp2Px(30);
+            int dp54 = CalcUtils.convertDp2Px(54);
+            logoMargin.setMargins(dp54, 0, 0, 0);
+            titleMargin.setMargins(dp30, 0, dp30, 0);
+            iv.setLayoutParams(logoMargin);
+            tv.setLayoutParams(titleMargin);
 
             return cv;
         }
@@ -170,24 +169,24 @@ public class TweetDialog extends DialogFragment {
         int urlIcon = R.drawable.ic_link;
         int hashIcon = R.drawable.ic_hashtag;
         int userIcon = R.drawable.ic_user;
-        int detailIcon = R.drawable.ic_detail;
         int copyIcon = R.drawable.ic_copy;
+        int detailIcon = R.drawable.ic_doc;
         int shareIcon = R.drawable.ic_share;
         int twitterIcon = R.drawable.ic_twitter;
 
         // Menu color
-        int replyColor = ResourceUtils.getIconColor();
-        int retweetColor = ResourceUtils.getIconColor();
-        int favoriteColor = ResourceUtils.getIconColor();
-        int talkColor = ResourceUtils.getIconColor();
-        int deleteColor = ResourceUtils.getIconColor();
-        int urlColor = ResourceUtils.getIconColor();
-        int hashColor = ResourceUtils.getIconColor();
-        int userColor = ResourceUtils.getIconColor();
-        int detailColor = ResourceUtils.getIconColor();
-        int copyColor = ResourceUtils.getIconColor();
-        int shareColor = ResourceUtils.getIconColor();
-        int twitterColor = ResourceUtils.getIconColor();
+        int replyColor = ResourceUtils.getStrongColor();
+        int retweetColor = ResourceUtils.getRetweetColor();
+        int favoriteColor = PrefAppearance.getLikeFavColor();
+        int talkColor = ResourceUtils.getTalkColor();
+        int deleteColor = ResourceUtils.getDeleteColor();
+        int urlColor = ResourceUtils.getLinkColor();
+        int hashColor = ResourceUtils.getLinkColor();
+        int userColor = ResourceUtils.getStrongColor();
+        int copyColor = ResourceUtils.getStrongColor();
+        int detailColor = ResourceUtils.getStrongColor();
+        int shareColor = ResourceUtils.getStrongColor();
+        int twitterColor = ResourceUtils.getStrongColor();
 
         // Reply
         if (menuSetting.contains(REPLY)) {
@@ -279,18 +278,18 @@ public class TweetDialog extends DialogFragment {
                 );
             }
         }
+        // Copy
+        if (menuSetting.contains(COPY)) {
+            adapter.add(
+                    new Menu(copyIcon, copyColor, "本文をコピー",
+                            () -> ClickUseCase.copyText(mSource))
+            );
+        }
         // Detail
         if (menuSetting.contains(DETAIL)) {
             adapter.add(
                     new Menu(detailIcon, detailColor, "ツイート詳細",
                             () -> ClickUseCase.showDetail(mSource))
-            );
-        }
-        // Copy
-        if (menuSetting.contains(COPY)) {
-            adapter.add(
-                    new Menu(copyIcon, copyColor, "コピーする",
-                            () -> ClickUseCase.copyText(mSource))
             );
         }
         // Share

@@ -83,7 +83,7 @@ public class DrawerFragment extends Fragment {
         listView.setDivider(null);
 
         // Add dummy variables
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 10; i++) {
             arrayAdapter.add(i);
         }
     }

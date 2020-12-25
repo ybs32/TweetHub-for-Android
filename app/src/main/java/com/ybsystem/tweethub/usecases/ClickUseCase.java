@@ -97,6 +97,17 @@ public class ClickUseCase {
         activity.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
     }
 
+    public static void copyText(TwitterStatus status) {
+        // Get clipboard
+        ClipboardManager clipboardManager = (ClipboardManager)
+                TweetHubApp.getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        // Check null
+        if (clipboardManager != null) {
+            clipboardManager.setPrimaryClip(ClipData.newPlainText("", status.getText()));
+            ToastUtils.showShortToast("ツイートをコピーしました。");
+        }
+    }
+
     public static void showDetail(TwitterStatus status) {
         // Intent to TimelineActivity
         Activity activity = TweetHubApp.getActivity();
@@ -105,17 +116,6 @@ public class ClickUseCase {
         intent.putExtra("COLUMN_TYPE", DETAIL);
         activity.startActivity(intent);
         activity.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
-    }
-
-    public static void copyText(TwitterStatus status) {
-        // Get clipboard
-        ClipboardManager clipboardManager = (ClipboardManager)
-                TweetHubApp.getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-        // Check null
-        if (clipboardManager != null) {
-            clipboardManager.setPrimaryClip(ClipData.newPlainText("", status.getText()));
-            ToastUtils.showShortToast("テキストをコピーしました。");
-        }
     }
 
     public static void share(TwitterStatus status) {

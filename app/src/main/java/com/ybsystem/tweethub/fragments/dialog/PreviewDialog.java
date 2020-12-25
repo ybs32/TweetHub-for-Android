@@ -60,8 +60,8 @@ public class PreviewDialog extends DialogFragment {
             try {
                 // Prepare
                 Twitter twitter = TweetHubApp.getTwitter();
-                Query tweetQuery = new Query("from:TwitterJP exclude:retweets exclude:nativeretweets");
-                Query retweetQuery = new Query("from:TwitterJP filter:nativeretweets");
+                Query tweetQuery = new Query("from:MomentsJapan exclude:retweets exclude:nativeretweets");
+                Query retweetQuery = new Query("from:MomentsJapan filter:nativeretweets");
 
                 // Fetch data
                 mTweetResult = twitter.search(tweetQuery);
@@ -144,7 +144,7 @@ public class PreviewDialog extends DialogFragment {
         tweetRow.setRtFavCount();
         tweetRow.setRetweetedBy();
         tweetRow.setMarks();
-        tweetRow.setCustomBackgroundColor();
+        tweetRow.setBackgroundColor();
     }
 
 }
