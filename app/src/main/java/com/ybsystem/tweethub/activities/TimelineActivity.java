@@ -98,6 +98,18 @@ public class TimelineActivity extends ActivityBase {
                         new Column(mUser.getId(), "", FOLLOWER, false)
                 );
                 break;
+            case MUTE:
+                getSupportActionBar().setTitle("ミュートユーザー");
+                fragment = new UserTimeline().newInstance(
+                        new Column(-1, "", MUTE, false)
+                );
+                break;
+            case BLOCK:
+                getSupportActionBar().setTitle("ブロックユーザー");
+                fragment = new UserTimeline().newInstance(
+                        new Column(-1, "", BLOCK, false)
+                );
+                break;
             default:
                 break;
         }
