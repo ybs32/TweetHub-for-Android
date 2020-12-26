@@ -7,8 +7,8 @@
     android:background="@drawable/bg_normal"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingTop="14dp"
-    android:paddingBottom="14dp">
+    android:paddingTop="13dp"
+    android:paddingBottom="13dp">
 
     <!-- Icon -->
     <ImageView
@@ -17,7 +17,7 @@
         android:layout_height="23dp"
         android:layout_marginStart="30dp"
         android:src="@drawable/ic_launcher"
-        app:tint="?attr/colorIcon" />
+        app:tint="?attr/colorStrong" />
 
     <!-- Label -->
     <TextView

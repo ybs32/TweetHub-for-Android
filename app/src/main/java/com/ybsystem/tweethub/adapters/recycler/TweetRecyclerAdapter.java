@@ -12,7 +12,6 @@ import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.adapters.holder.FooterRow;
 import com.ybsystem.tweethub.adapters.holder.TweetRow;
 import com.ybsystem.tweethub.storages.PrefAppearance;
-import com.ybsystem.tweethub.storages.PrefTheme;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -67,6 +66,7 @@ public class TweetRecyclerAdapter extends RecyclerAdapterBase<TwitterStatus> {
         tweetRow.setQuoteTweet();
         tweetRow.setDetailTweet();
         tweetRow.setMarks();
+        tweetRow.setBackgroundColor();
         tweetRow.setTweetClickListener();
 
         if (status.isDetail()) {
@@ -91,11 +91,6 @@ public class TweetRecyclerAdapter extends RecyclerAdapterBase<TwitterStatus> {
             if (PrefAppearance.isShowRetweetedBy()) {
                 tweetRow.setRetweetedBy();
             }
-        }
-
-        // Check theme setting
-        if (PrefTheme.isCustomThemeEnabled()) {
-            tweetRow.setCustomBackgroundColor();
         }
     }
 

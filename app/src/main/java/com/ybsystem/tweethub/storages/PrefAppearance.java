@@ -1,6 +1,7 @@
 package com.ybsystem.tweethub.storages;
 
 import com.ybsystem.tweethub.R;
+import com.ybsystem.tweethub.utils.ResourceUtils;
 
 public class PrefAppearance extends PrefBase {
 
@@ -50,6 +51,15 @@ public class PrefAppearance extends PrefBase {
             return R.drawable.ic_like;
         } else {
             return R.drawable.ic_favorite;
+        }
+    }
+
+    public static int getLikeFavColor() {
+        String style = getDefaultSharedPreferences().getString(KEY_STYLE_LIKE_FAV, "LIKE");
+        if (style.equals("LIKE")) {
+            return ResourceUtils.getLikeColor();
+        } else {
+            return ResourceUtils.getFavoriteColor();
         }
     }
 

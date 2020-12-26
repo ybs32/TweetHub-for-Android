@@ -3,6 +3,7 @@ package com.ybsystem.tweethub.usecases;
 import android.app.Activity;
 import android.net.Uri;
 
+import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.libs.eventbus.StatusEvent;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
@@ -264,7 +265,9 @@ public class TwitterUseCase {
             public void onComplete() {
                 // Success
                 ToastUtils.showShortToast("ツイートしました。");
-                TweetHubApp.getActivity().finish();
+                Activity act = TweetHubApp.getActivity();
+                act.finish();
+                act.overridePendingTransition(R.anim.none, R.anim.fade_out_to_bottom);
             }
         };
 

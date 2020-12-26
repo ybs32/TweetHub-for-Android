@@ -18,6 +18,7 @@ public class ResourceUtils {
 
     /**
      * Get resource text
+     *
      * @param resId Resource id
      * @return Text
      */
@@ -27,6 +28,7 @@ public class ResourceUtils {
 
     /**
      * Get resource drawable
+     *
      * @param resId Resource id
      * @return Drawable
      */
@@ -38,6 +40,7 @@ public class ResourceUtils {
 
     /**
      * Get resource color
+     *
      * @param resId Resource id
      * @return Color
      */
@@ -68,24 +71,40 @@ public class ResourceUtils {
         return getColor(android.R.attr.colorControlHighlight);
     }
 
-    public static int getBorderColor() {
-        return getColor(R.attr.colorBorder);
+    public static int getWeakColor() {
+        return getColor(R.attr.colorWeak);
     }
 
-    public static int getDividerColor() {
-        return getColor(R.attr.colorDivider);
+    public static int getStrongColor() {
+        return getColor(R.attr.colorStrong);
     }
 
-    public static int getDisabledTextColor() {
-        return getColor(R.attr.colorDisabledText);
+    public static int getRetweetColor() {
+        return getColor(R.attr.colorRetweet);
     }
 
-    public static int getIconColor() {
-        return getColor(R.attr.colorIcon);
+    public static int getFavoriteColor() {
+        return getColor(R.attr.colorFavorite);
+    }
+
+    public static int getLikeColor() {
+        return getColor(R.attr.colorLike);
+    }
+
+    public static int getTalkColor() {
+        return getColor(R.attr.colorTalk);
+    }
+
+    public static int getDeleteColor() {
+        return getColor(R.attr.colorDelete);
     }
 
     public static int getLinkColor() {
         return getColor(R.attr.colorLink);
+    }
+
+    public static int getBgRtColor() {
+        return getColor(R.attr.colorBgRt);
     }
 
 }

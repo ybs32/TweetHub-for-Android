@@ -15,7 +15,6 @@ import com.ybsystem.tweethub.listeners.ThumbnailClickListener;
 import com.ybsystem.tweethub.listeners.TweetClickListener;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterMediaEntity;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
-import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUserMentionEntity;
 import com.ybsystem.tweethub.models.enums.ClickAction;
 import com.ybsystem.tweethub.models.enums.ImageOption;
@@ -223,30 +222,35 @@ public class TweetRow extends RecyclerView.ViewHolder {
         this.mThumbnailContainer.setVisibility(View.VISIBLE);
     }
 
-    public void setCustomBackgroundColor() {
-        // Get my user
-        TwitterUser myUser = TweetHubApp.getMyUser();
-
-        // Check if reply tweet
-        boolean isReplyTweet = false;
-        for (TwitterUserMentionEntity mentionEntity : mSource.getUserMentionEntities()) {
-            if (mentionEntity.getId() == myUser.getId()) {
-                isReplyTweet = true;
+    public void setBackgroundColor() {
+        // Check if basic theme
+        if (!PrefTheme.isCustomThemeEnabled()) {
+            if (mStatus.isRetweet())
+                mClickContainer.setBackgroundColor(PrefTheme.getRetweetColor());
+            else
+                mClickContainer.setBackgroundColor(0);
+            return;
+        }
+        // Check if reply
+        boolean isReply = false;
+        for (TwitterUserMentionEntity mention : mSource.getUserMentionEntities()) {
+            if (mention.getId() == TweetHubApp.getMyUser().getId()) {
+                isReply = true;
             }
         }
-        if (mSource.getUser().getId() == myUser.getId()) {
+        // Set custom theme
+        if (mSource.getUser().getId() == TweetHubApp.getMyUser().getId())
             // My tweet
             mClickContainer.setBackgroundColor(PrefTheme.getMyTweetColor());
-        } else if (isReplyTweet) {
-            // Reply tweet
+        else if (isReply)
+            // Reply
             mClickContainer.setBackgroundColor(PrefTheme.getReplyColor());
-        } else if (mStatus.isRetweet()) {
+        else if (mStatus.isRetweet())
             // Retweet
             mClickContainer.setBackgroundColor(PrefTheme.getRetweetColor());
-        } else {
+        else
             // Tweet
             mClickContainer.setBackgroundColor(0);
-        }
     }
 
     public void setQuoteTweet() {
@@ -279,29 +283,28 @@ public class TweetRow extends RecyclerView.ViewHolder {
 
     public void setMarks() {
         // Check retweeted tweet by myself
-        if (mStatus.isRetweeted()) {
+        if (mStatus.isRetweeted())
             this.mRtMark.setVisibility(View.VISIBLE);
-        } else {
+        else
             this.mRtMark.setVisibility(View.GONE);
-        }
+
         // Check favorited tweet by myself
-        if (mStatus.isFavorited()) {
+        if (mStatus.isFavorited())
             this.mFavMark.setVisibility(View.VISIBLE);
-        } else {
+        else
             this.mFavMark.setVisibility(View.GONE);
-        }
+
         // Check verified user
-        if (mSource.getUser().isVerified()) {
+        if (mSource.getUser().isVerified())
             this.mVerifyMark.setVisibility(View.VISIBLE);
-        } else {
+        else
             this.mVerifyMark.setVisibility(View.GONE);
-        }
+
         // Check protected user
-        if (mSource.getUser().isProtected()) {
+        if (mSource.getUser().isProtected())
             this.mLockMark.setVisibility(View.VISIBLE);
-        } else {
+        else
             this.mLockMark.setVisibility(View.GONE);
-        }
     }
 
     public void setTweetClickListener() {
@@ -352,6 +355,7 @@ public class TweetRow extends RecyclerView.ViewHolder {
         mUserIcon.getLayoutParams().height = CalcUtils.convertDp2Px(dpSize);
 
         // Set like fav style
+        mFavMark.setColorFilter(PrefAppearance.getLikeFavColor());
         mFavMark.setImageResource(PrefAppearance.getLikeFavDrawable());
         mFavCountIcon.setImageResource(PrefAppearance.getLikeFavDrawable());
     }

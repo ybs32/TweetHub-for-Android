@@ -115,7 +115,7 @@ public class ThemeFragment extends PreferenceFragmentBase {
         // Get dependency color
         String color = mCustom.isChecked()
                 ? String.valueOf(ResourceUtils.getTextColor())
-                : String.valueOf(ResourceUtils.getDisabledTextColor());
+                : String.valueOf(ResourceUtils.getWeakColor());
 
         // Change dependency item's text color
         for (Preference pref : mDependencyList) {

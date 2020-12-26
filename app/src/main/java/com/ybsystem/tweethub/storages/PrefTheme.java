@@ -107,17 +107,17 @@ public class PrefTheme extends PrefBase {
     // 初期化用
     public static void initCustomColors() {
         SharedPreferences.Editor editor = getDefaultSharedPreferences().edit();
-        editor.putInt(KEY_RETWEET_COLOR, ResourceUtils.getBackgroundColor());
+        editor.putInt(KEY_RETWEET_COLOR, ResourceUtils.getBgRtColor());
         editor.putInt(KEY_REPLY_COLOR, ResourceUtils.getBackgroundColor());
         editor.putInt(KEY_MYTWEET_COLOR, ResourceUtils.getBackgroundColor());
         editor.putInt(KEY_USERNAME_COLOR, ResourceUtils.getTextColor());
         editor.putInt(KEY_RELATIVETIME_COLOR, ResourceUtils.getTextColor());
         editor.putInt(KEY_TWEETTEXT_COLOR, ResourceUtils.getTextColor());
         editor.putInt(KEY_LINK_COLOR, ResourceUtils.getLinkColor());
-        editor.putInt(KEY_ABSOLUTETIME_COLOR, ResourceUtils.getTextColor());
-        editor.putInt(KEY_VIA_COLOR, ResourceUtils.getTextColor());
-        editor.putInt(KEY_RTFAV_COLOR, ResourceUtils.getTextColor());
-        editor.putInt(KEY_RETWEETEDBY_COLOR, ResourceUtils.getTextColor());
+        editor.putInt(KEY_ABSOLUTETIME_COLOR, ResourceUtils.getStrongColor());
+        editor.putInt(KEY_VIA_COLOR, ResourceUtils.getStrongColor());
+        editor.putInt(KEY_RTFAV_COLOR, ResourceUtils.getStrongColor());
+        editor.putInt(KEY_RETWEETEDBY_COLOR, ResourceUtils.getStrongColor());
         editor.apply();
     }
 

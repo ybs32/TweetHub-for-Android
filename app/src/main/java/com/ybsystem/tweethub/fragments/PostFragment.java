@@ -24,7 +24,6 @@ import com.ybsystem.tweethub.fragments.dialog.ListDialog;
 import com.ybsystem.tweethub.models.entities.EntityArray;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUserMentionEntity;
-import com.ybsystem.tweethub.storages.PrefTheme;
 import com.ybsystem.tweethub.usecases.TwitterUseCase;
 import com.ybsystem.tweethub.utils.DialogUtils;
 import com.ybsystem.tweethub.utils.ResourceUtils;
@@ -108,11 +107,7 @@ public class PostFragment extends Fragment {
         tweetRow.setRetweetedBy();
         tweetRow.setQuoteTweet();
         tweetRow.setMarks();
-
-        // Check theme setting
-        if (PrefTheme.isCustomThemeEnabled()) {
-            tweetRow.setCustomBackgroundColor();
-        }
+        tweetRow.setBackgroundColor();
     }
 
     private void setPostEdit(View view) {
