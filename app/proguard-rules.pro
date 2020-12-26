@@ -19,3 +19,14 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# ClassNotFoundException
+-keep class twitter4j.** { *; }
+
+# NoSuchFieldException
+-keep class com.ybsystem.tweethub.** { <fields>; }
+
+# EventBus
+-keepattributes *Annotation*
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
+-keepclassmembers class ** { @org.greenrobot.eventbus.Subscribe <methods>; }
