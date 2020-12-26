@@ -11,28 +11,20 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionButton;
-import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionHelper;
-import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout;
+import com.wangjie.rapidfloatingactionbutton.*;
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.activities.preference.SettingActivity;
 import com.ybsystem.tweethub.application.TweetHubApp;
-import com.ybsystem.tweethub.fragments.DrawerFragment;
-import com.ybsystem.tweethub.fragments.MainFragment;
-import com.ybsystem.tweethub.fragments.dialog.ChoiceDialog;
-import com.ybsystem.tweethub.fragments.dialog.ConfirmDialog;
+import com.ybsystem.tweethub.fragments.*;
+import com.ybsystem.tweethub.fragments.dialog.*;
 import com.ybsystem.tweethub.libs.glide.GlideApp;
 import com.ybsystem.tweethub.libs.rfab.CardItem;
 import com.ybsystem.tweethub.libs.rfab.RapidFloatingActionListView;
 import com.ybsystem.tweethub.models.entities.Account;
 import com.ybsystem.tweethub.models.entities.AccountArray;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
-import com.ybsystem.tweethub.storages.PrefSystem;
-import com.ybsystem.tweethub.storages.PrefWallpaper;
-import com.ybsystem.tweethub.utils.ActivityUtils;
-import com.ybsystem.tweethub.utils.DialogUtils;
-import com.ybsystem.tweethub.utils.ResourceUtils;
-import com.ybsystem.tweethub.utils.ToastUtils;
+import com.ybsystem.tweethub.storages.*;
+import com.ybsystem.tweethub.utils.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -68,6 +60,7 @@ public class MainActivity extends ActivityBase
         setTweetActionButton();
         setMoreActionButton();
         setWallpaper();
+        showUpdateInfo();
     }
 
     @Override
@@ -202,13 +195,31 @@ public class MainActivity extends ActivityBase
         GlideApp.with(this).load(uri).into(wallpaper);
     }
 
+    private void showUpdateInfo() {
+        String version = TweetHubApp.getAppData().getVersion();
+        String appVersion = getString(R.string.app_version);
+        String appVersionInfo = getString(R.string.app_update_info);
+        // Check version
+        if (version.equals(appVersion)) {
+            return;
+        }
+        // Create and show
+        NoticeDialog dialog = new NoticeDialog().newInstance("アップデート情報", appVersionInfo);
+        FragmentManager fm = getSupportFragmentManager();
+        if (fm.findFragmentByTag("NoticeDialog") == null) {
+            dialog.show(fm, "NoticeDialog");
+        }
+        // Save new version
+        TweetHubApp.getAppData().setVersion(appVersion);
+    }
+
     private void showConfirmDialog() {
-        // Create
+        // Create dialog
         ConfirmDialog dialog = new ConfirmDialog().newInstance("アプリを終了しますか？");
         dialog.setOnPositiveClickListener(
                 (dialog1, which) -> finish()
         );
-        // Show
+        // Show dialog
         FragmentManager manager = getSupportFragmentManager();
         if (manager.findFragmentByTag("ConfirmDialog") == null) {
             dialog.show(manager, "ConfirmDialog");

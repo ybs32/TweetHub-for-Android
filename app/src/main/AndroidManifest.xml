@@ -104,5 +104,13 @@
             android:name=".activities.preference.BrowserAuthActivity"
             android:configChanges="orientation|screenSize"
             android:label="Twitter認証" />
+        <activity
+            android:name=".activities.preference.VersionActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="バージョン" />
+        <activity
+            android:name=".activities.preference.AboutActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="About" />
     </application>
 </manifest>

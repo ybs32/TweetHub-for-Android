@@ -48,4 +48,21 @@
             android:title="アカウント管理"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="その他"
+        app:iconSpaceReserved="false">
+
+        <PreferenceScreen
+            android:key="@string/pref_key_version"
+            android:summary="@string/app_version"
+            android:title="バージョン"
+            app:iconSpaceReserved="false" />
+
+        <PreferenceScreen
+            android:key="@string/pref_key_about"
+            android:summary="このアプリについて"
+            android:title="About"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
 </PreferenceScreen>

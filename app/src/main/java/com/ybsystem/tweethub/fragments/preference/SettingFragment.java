@@ -24,6 +24,11 @@ public class SettingFragment extends PreferenceFragmentBase {
     private static final String COLUMN = res.getString(R.string.pref_key_column);
     private static final String ACCOUNT = res.getString(R.string.pref_key_account);
 
+    // その他
+    private static final String VERSION = res.getString(R.string.pref_key_version);
+    private static final String FEEDBACK = res.getString(R.string.pref_key_feedback);
+    private static final String ABOUT = res.getString(R.string.pref_key_about);
+
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
 
@@ -81,6 +86,22 @@ public class SettingFragment extends PreferenceFragmentBase {
         findPreference(ACCOUNT).setOnPreferenceClickListener(
                 preference -> {
                     intentTo(AccountActivity.class);
+                    return true;
+                }
+        );
+
+        // バージョン
+        findPreference(VERSION).setOnPreferenceClickListener(
+                preference -> {
+                    intentTo(VersionActivity.class);
+                    return true;
+                }
+        );
+
+        // About
+        findPreference(ABOUT).setOnPreferenceClickListener(
+                preference -> {
+                    intentTo(AboutActivity.class);
                     return true;
                 }
         );
