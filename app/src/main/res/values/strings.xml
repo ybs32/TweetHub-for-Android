@@ -1,7 +1,16 @@
 <resources>
     <string name="app_name">TweetHub</string>
-    <string name="app_version">1.0.0</string>
+    <string name="app_version">2.0.0</string>
+    <string name="app_update_info">
+        Ver.2.0.0\n
+        ・検索結果の表示項目を拡張\n
+        ・一部アイコンのカラーリング\n
+        ・ツイートメニューのレイアウト調整\n
+        ・非同期処理ライブラリの変更\n
+        ・ソースコードのリファクタリング\n
+    </string>
 
+    <!-- Authorization -->
     <string name="callback_url">ybsystem://</string>
     <string name="hello_java">QU1Nk2LVy8D2ThSKoyBKUtmD6</string>
     <string name="hello_android">3YweWiVK4suS5YsenPYfWK3beiS0ICbzXemVtDDkLUfuueiV16</string>
