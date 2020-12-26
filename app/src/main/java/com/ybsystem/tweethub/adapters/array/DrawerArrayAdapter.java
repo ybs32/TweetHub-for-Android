@@ -105,18 +105,12 @@ public class DrawerArrayAdapter extends ArrayAdapter<Integer> {
             case 7:
                 tv.setText("ミュートユーザー");
                 iv.setImageResource(R.drawable.ic_mute);
-                cv.setOnClickListener(v -> {
-                    // TODO: Implement click action
-                    ToastUtils.showShortToast(tv.getText().toString());
-                });
+                cv.setOnClickListener(v -> intentToTimeline(MUTE));
                 break;
             case 8:
                 tv.setText("ブロックユーザー");
                 iv.setImageResource(R.drawable.ic_block);
-                cv.setOnClickListener(v -> {
-                    // TODO: Implement click action
-                    ToastUtils.showShortToast(tv.getText().toString());
-                });
+                cv.setOnClickListener(v -> intentToTimeline(BLOCK));
                 break;
             case 9:
                 tv.setText("フォローリクエスト");
