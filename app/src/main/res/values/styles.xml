@@ -15,7 +15,7 @@
         <item name="colorTalk">#8888CC</item>
         <item name="colorDelete">#FF4444</item>
         <item name="colorLink">#3355EE</item>
-        <item name="colorBgRt">#F5E5FF</item>
+        <item name="colorBgRt">#F5EBFF</item>
     </style>
 
     <style name="DarkTheme" parent="Theme.AppCompat">
@@ -34,7 +34,7 @@
         <item name="colorTalk">#AAAAEE</item>
         <item name="colorDelete">#FF4444</item>
         <item name="colorLink">#AACCFF</item>
-        <item name="colorBgRt">#403044</item>
+        <item name="colorBgRt">#48384B</item>
     </style>
 
     <style name="TabTheme16dpText" parent="TextAppearance.Design.Tab">

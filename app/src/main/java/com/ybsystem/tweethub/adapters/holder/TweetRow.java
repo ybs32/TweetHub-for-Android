@@ -24,6 +24,7 @@ import com.ybsystem.tweethub.storages.PrefSystem;
 import com.ybsystem.tweethub.storages.PrefTheme;
 import com.ybsystem.tweethub.utils.CalcUtils;
 import com.ybsystem.tweethub.utils.GlideUtils;
+import com.ybsystem.tweethub.utils.ResourceUtils;
 
 import java.util.ArrayList;
 
@@ -226,7 +227,7 @@ public class TweetRow extends RecyclerView.ViewHolder {
         // Check if basic theme
         if (!PrefTheme.isCustomThemeEnabled()) {
             if (mStatus.isRetweet())
-                mClickContainer.setBackgroundColor(PrefTheme.getRetweetColor());
+                mClickContainer.setBackgroundColor(ResourceUtils.getBgRtColor());
             else
                 mClickContainer.setBackgroundColor(0);
             return;
