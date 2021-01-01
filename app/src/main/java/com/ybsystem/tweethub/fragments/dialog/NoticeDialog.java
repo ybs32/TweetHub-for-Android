@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -11,15 +12,23 @@ import android.widget.TextView;
 import androidx.fragment.app.DialogFragment;
 
 import com.ybsystem.tweethub.R;
+import com.ybsystem.tweethub.utils.CalcUtils;
 
 public class NoticeDialog extends DialogFragment {
 
     private DialogInterface.OnClickListener mPositiveClickListener;
 
-    public NoticeDialog newInstance(String title, String notice) {
+    public NoticeDialog newInstance(String title, String description) {
         Bundle bundle = new Bundle();
         bundle.putString("TITLE", title);
-        bundle.putString("NOTICE", notice);
+        bundle.putString("DESCRIPTION", description);
+        setArguments(bundle);
+        return this;
+    }
+
+    public NoticeDialog newInstance(String description) {
+        Bundle bundle = new Bundle();
+        bundle.putString("DESCRIPTION", description);
         setArguments(bundle);
         return this;
     }
@@ -32,10 +41,20 @@ public class NoticeDialog extends DialogFragment {
 
         // Create
         Bundle bundle = getArguments();
+        String title = bundle.getString("TITLE");
+        String description = bundle.getString("DESCRIPTION");
         TextView titleText = view.findViewById(R.id.text_title);
-        TextView noticeText = view.findViewById(R.id.text_notice);
-        titleText.setText(bundle.getString("TITLE"));
-        noticeText.setText(bundle.getString("NOTICE"));
+        TextView descText = view.findViewById(R.id.text_description);
+
+        if (title == null) {
+            titleText.setVisibility(View.GONE);
+            descText.setText(description);
+            descText.setTextSize(CalcUtils.convertDp2Sp(18));
+            descText.setGravity(Gravity.CENTER);
+        } else {
+            titleText.setText(title);
+            descText.setText(description);
+        }
 
         // Build dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

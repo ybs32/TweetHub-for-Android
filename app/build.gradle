@@ -8,8 +8,8 @@ android {
         applicationId "com.ybsystem.tweethub"
         minSdkVersion 26
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0.0"
+        versionCode 7
+        versionName "1.2.0"
     }
 
     buildTypes {

@@ -81,7 +81,7 @@ public class AboutFragment extends Fragment {
                         "\n" +
                         "This application includes the work that is distributed in the following Licenses.\n" +
                         "\n" +
-                        "lombok\n" +
+                        "Lombok\n" +
                         "The MIT License\n" +
                         "Copyright (C) 2009-2020 The Project Lombok Authors.\n" +
                         "\n" +

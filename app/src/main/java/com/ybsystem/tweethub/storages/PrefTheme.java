@@ -41,7 +41,7 @@ public class PrefTheme extends PrefBase {
 
     // ----- タイムライン背景色 -----
 
-    public static int getRetweetColor() {
+    public static int getBgRetweetColor() {
         int color = getDefaultSharedPreferences().getInt(KEY_RETWEET_COLOR, -1);
         if (PrefWallpaper.getWallpaperPath().equals("未設定")) {
             return color;
@@ -50,7 +50,7 @@ public class PrefTheme extends PrefBase {
         }
     }
 
-    public static int getReplyColor() {
+    public static int getBgReplyColor() {
         int color = getDefaultSharedPreferences().getInt(KEY_REPLY_COLOR, -1);
         if (PrefWallpaper.getWallpaperPath().equals("未設定")) {
             return color;
@@ -59,7 +59,7 @@ public class PrefTheme extends PrefBase {
         }
     }
 
-    public static int getMyTweetColor() {
+    public static int getBgMyTweetColor() {
         int color = getDefaultSharedPreferences().getInt(KEY_MYTWEET_COLOR, -1);
         if (PrefWallpaper.getWallpaperPath().equals("未設定")) {
             return color;
@@ -107,9 +107,9 @@ public class PrefTheme extends PrefBase {
     // 初期化用
     public static void initCustomColors() {
         SharedPreferences.Editor editor = getDefaultSharedPreferences().edit();
-        editor.putInt(KEY_RETWEET_COLOR, ResourceUtils.getBgRtColor());
-        editor.putInt(KEY_REPLY_COLOR, ResourceUtils.getBackgroundColor());
-        editor.putInt(KEY_MYTWEET_COLOR, ResourceUtils.getBackgroundColor());
+        editor.putInt(KEY_RETWEET_COLOR, ResourceUtils.getBgRetweetColor());
+        editor.putInt(KEY_REPLY_COLOR, ResourceUtils.getBgReplyColor());
+        editor.putInt(KEY_MYTWEET_COLOR, ResourceUtils.getBgMyTweetColor());
         editor.putInt(KEY_USERNAME_COLOR, ResourceUtils.getTextColor());
         editor.putInt(KEY_RELATIVETIME_COLOR, ResourceUtils.getTextColor());
         editor.putInt(KEY_TWEETTEXT_COLOR, ResourceUtils.getTextColor());

@@ -8,5 +8,7 @@
     <attr name="colorTalk" />
     <attr name="colorDelete" />
     <attr name="colorLink" />
-    <attr name="colorBgRt" />
+    <attr name="colorBgRetweet" />
+    <attr name="colorBgReply" />
+    <attr name="colorBgMyTweet" />
 </resources>

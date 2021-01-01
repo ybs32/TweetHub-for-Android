@@ -24,4 +24,10 @@ public class CalcUtils {
         return (int) (dp * metrics.density);
     }
 
+    public static int convertDp2Sp(int dp) {
+        Resources res = TweetHubApp.getInstance().getResources();
+        DisplayMetrics metrics = res.getDisplayMetrics();
+        return (int) (convertDp2Px(dp) / metrics.scaledDensity);
+    }
+
 }

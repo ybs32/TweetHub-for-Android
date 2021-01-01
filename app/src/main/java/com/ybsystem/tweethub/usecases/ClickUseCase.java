@@ -29,10 +29,10 @@ public class ClickUseCase {
 
     public static void showTweetMenu(TwitterStatus status) {
         // Show tweet dialog
-        TweetDialog dialog = new TweetDialog(status);
-        FragmentManager fmanager = TweetHubApp.getActivity().getSupportFragmentManager();
-        if (fmanager.findFragmentByTag("TweetDialog") == null) {
-            dialog.show(fmanager, "TweetDialog");
+        TweetDialog dialog = new TweetDialog().newInstance(status);
+        FragmentManager fm = TweetHubApp.getActivity().getSupportFragmentManager();
+        if (fm.findFragmentByTag("TweetDialog") == null) {
+            dialog.show(fm, "TweetDialog");
         }
     }
 
@@ -75,7 +75,7 @@ public class ClickUseCase {
         Activity activity = TweetHubApp.getActivity();
         Intent intent = new Intent(activity, SearchActivity.class);
         intent.putExtra("SEARCH_WORD", searchWord);
-        activity.startActivity(intent);
+        activity.startActivityForResult(intent, 0);
         activity.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
     }
 

@@ -2,9 +2,13 @@ package com.ybsystem.tweethub.usecases;
 
 import android.app.Activity;
 import android.net.Uri;
+import android.os.Handler;
+
+import androidx.fragment.app.FragmentManager;
 
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
+import com.ybsystem.tweethub.fragments.dialog.NoticeDialog;
 import com.ybsystem.tweethub.libs.eventbus.StatusEvent;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.storages.PrefAppearance;
@@ -254,10 +258,21 @@ public class TwitterUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                if (t instanceof  TwitterException) {
+                if (t instanceof TwitterException) {
                     TwitterException e = (TwitterException) t;
                     ToastUtils.showShortToast("ツイートに失敗しました...");
                     ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                }
+                // Show notice
+                if (!imageUris.isEmpty()) {
+                    new Handler().postDelayed(() -> {
+                        NoticeDialog dialog = new NoticeDialog().newInstance
+                                ("写真付きツイートに失敗しました。\n画像の圧縮やリサイズをお試し下さい。");
+                        FragmentManager fm = TweetHubApp.getActivity().getSupportFragmentManager();
+                        if (fm.findFragmentByTag("NoticeDialog") == null) {
+                            dialog.show(fm, "NoticeDialog");
+                        }
+                    }, 4000);
                 }
             }
 

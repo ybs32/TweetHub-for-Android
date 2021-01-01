@@ -14,7 +14,7 @@ import static com.ybsystem.tweethub.models.enums.ColumnType.*;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class AppData {
+public class AppData extends Entity {
 
     private String version;
     private AccountArray<Account> accounts;

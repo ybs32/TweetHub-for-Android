@@ -38,12 +38,14 @@ import static com.ybsystem.tweethub.models.enums.TweetMenu.*;
 
 public class TweetDialog extends DialogFragment {
     // Status
-    private final TwitterStatus mStatus;
-    private final TwitterStatus mSource;
+    private TwitterStatus mStatus;
+    private TwitterStatus mSource;
 
-    public TweetDialog(TwitterStatus status) {
-        this.mStatus = status;
-        this.mSource = mStatus.isRetweet() ? mStatus.getRtStatus() : mStatus;
+    public TweetDialog newInstance(TwitterStatus status) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("STATUS", status);
+        setArguments(bundle);
+        return this;
     }
 
     @Override
@@ -51,6 +53,10 @@ public class TweetDialog extends DialogFragment {
         // Inflate
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View view = inflater.inflate(R.layout.dialog_tweet, null);
+
+        // Init
+        mStatus = (TwitterStatus) getArguments().getSerializable("STATUS");
+        mSource = mStatus.isRetweet() ? mStatus.getRtStatus() : mStatus;
 
         // Set tweet
         TweetRow tweetRow = new TweetRow(view);

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
@@ -16,12 +17,12 @@ import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.adapters.pager.ProfilePagerAdapter;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.fragments.ProfileFragment;
+import com.ybsystem.tweethub.fragments.dialog.UserListDialog;
 import com.ybsystem.tweethub.fragments.timeline.TimelineBase;
 import com.ybsystem.tweethub.libs.eventbus.UserEvent;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweethub.usecases.ClickUseCase;
 import com.ybsystem.tweethub.usecases.UserUseCase;
-import com.ybsystem.tweethub.utils.DialogUtils;
 import com.ybsystem.tweethub.utils.ExceptionUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 
@@ -82,12 +83,12 @@ public class ProfileActivity extends ActivityBase {
                 ClickUseCase.tweetWithWord("@" + mUser.getScreenName());
                 return true;
             // リストに追加
-            case R.id.item_list:
-                DialogUtils.showProgressDialog("読み込み中...", this);
-                new Handler().postDelayed(() -> {
-                    DialogUtils.dismissProgressDialog();
-                    ToastUtils.showShortToast("リストの読み込みに失敗...");
-                }, 1500);
+            case R.id.item_add_list:
+                UserListDialog dialog = new UserListDialog().newInstance(mUser);
+                FragmentManager fm = TweetHubApp.getActivity().getSupportFragmentManager();
+                if (fm.findFragmentByTag("UserListDialog") == null) {
+                    dialog.show(fm, "UserListDialog");
+                }
                 return true;
             // ブラウザで開く
             case R.id.item_browser:
@@ -174,12 +175,14 @@ public class ProfileActivity extends ActivityBase {
         MenuItem mute = mMenu.findItem(R.id.item_mute);
         MenuItem block = mMenu.findItem(R.id.item_block);
         MenuItem reply = mMenu.findItem(R.id.item_reply);
+        MenuItem addList = mMenu.findItem(R.id.item_add_list);
 
         // Check myself
         if (mUser.isMyself()) {
             mute.setVisible(false);
             block.setVisible(false);
             reply.setVisible(false);
+            addList.setVisible(false);
             return;
         }
         // Check muting

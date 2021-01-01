@@ -7,6 +7,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
+import com.ybsystem.tweethub.storages.PrefWallpaper;
 
 /**
  * Utils class for resource processing
@@ -103,8 +104,31 @@ public class ResourceUtils {
         return getColor(R.attr.colorLink);
     }
 
-    public static int getBgRtColor() {
-        return getColor(R.attr.colorBgRt);
+    public static int getBgRetweetColor() {
+        int color = getColor(R.attr.colorBgRetweet);
+        if (PrefWallpaper.getWallpaperPath().equals("未設定")) {
+            return color;
+        } else {
+            return PrefWallpaper.applyTransparency(color);
+        }
+    }
+
+    public static int getBgReplyColor() {
+        int color = getColor(R.attr.colorBgReply);
+        if (PrefWallpaper.getWallpaperPath().equals("未設定")) {
+            return color;
+        } else {
+            return PrefWallpaper.applyTransparency(color);
+        }
+    }
+
+    public static int getBgMyTweetColor() {
+        int color = getColor(R.attr.colorBgMyTweet);
+        if (PrefWallpaper.getWallpaperPath().equals("未設定")) {
+            return color;
+        } else {
+            return PrefWallpaper.applyTransparency(color);
+        }
     }
 
 }

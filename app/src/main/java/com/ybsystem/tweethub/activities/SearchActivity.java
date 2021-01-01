@@ -1,10 +1,11 @@
 package com.ybsystem.tweethub.activities;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -16,6 +17,17 @@ import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.adapters.pager.SearchPagerAdapter;
 import com.ybsystem.tweethub.adapters.pager.TrendTopicPagerAdapter;
 import com.ybsystem.tweethub.application.TweetHubApp;
+import com.ybsystem.tweethub.libs.eventbus.ColumnEvent;
+import com.ybsystem.tweethub.models.entities.Column;
+import com.ybsystem.tweethub.models.entities.ColumnArray;
+import com.ybsystem.tweethub.usecases.ClickUseCase;
+import com.ybsystem.tweethub.utils.DialogUtils;
+import com.ybsystem.tweethub.utils.ToastUtils;
+
+import org.greenrobot.eventbus.EventBus;
+
+import static com.ybsystem.tweethub.activities.preference.SettingActivity.*;
+import static com.ybsystem.tweethub.models.enums.ColumnType.SEARCH;
 
 public class SearchActivity extends ActivityBase {
 
@@ -52,6 +64,40 @@ public class SearchActivity extends ActivityBase {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (mSearchWord != null) {
+            getMenuInflater().inflate(R.menu.search, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            // カラム追加
+            case R.id.item_add_column:
+                showAddDialog();
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (resultCode) {
+            case REBOOT_PREPARATION:
+                setResult(REBOOT_PREPARATION);
+                break;
+            default:
+                break;
+        }
+    }
+
     private void setTrendTopicPager() {
         // Set trend/topic pager
         mTrendTopicPager = findViewById(R.id.pager_common);
@@ -79,24 +125,42 @@ public class SearchActivity extends ActivityBase {
         EditText edit = view.findViewById(R.id.edit_search);
         edit.setOnKeyListener((v, keyCode, event) -> {
             // When pressed enter
-            if (event.getAction() == KeyEvent.ACTION_DOWN
-                    && keyCode == KeyEvent.KEYCODE_ENTER) {
+            if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                 if (edit.length() != 0) {
                     // Close keyboard
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
                     // Intent to SearchActivity
-                    Activity act = TweetHubApp.getActivity();
-                    Intent intent = new Intent(act, SearchActivity.class);
-                    intent.putExtra("SEARCH_WORD", edit.getText().toString());
-                    act.startActivity(intent);
-                    act.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
+                    ClickUseCase.searchWord(edit.getText().toString());
                 }
                 return true;
             }
             return false;
         });
+    }
+
+    private void showAddDialog() {
+        if (TweetHubApp.getMyAccount().getColumns().size() >= 10) {
+            ToastUtils.showShortToast("これ以上追加できません。");
+            return;
+        }
+        DialogUtils.showConfirmDialog(
+                "検索結果をカラムに追加しますか？",
+                (dialog, which) -> {
+                    // Add column
+                    ColumnArray<Column> columns = TweetHubApp.getMyAccount().getColumns();
+                    boolean isSucceeded = columns.add(
+                            new Column(mSearchWord.hashCode(), mSearchWord, SEARCH, false));
+                    // Check
+                    if (!isSucceeded) {
+                        return;
+                    }
+                    // Success
+                    ToastUtils.showShortToast("「" + mSearchWord + "」をカラムに追加しました。");
+                    EventBus.getDefault().postSticky(new ColumnEvent());
+                    setResult(REBOOT_PREPARATION);
+                });
     }
 
 }

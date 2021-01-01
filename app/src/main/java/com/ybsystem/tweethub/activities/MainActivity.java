@@ -107,7 +107,6 @@ public class MainActivity extends ActivityBase
 
         switch (resultCode) {
             case REBOOT_IMMEDIATE:
-                ToastUtils.showShortToast("設定を適用しました。");
                 ActivityUtils.rebootActivity(this, 0, 0);
                 break;
             case REBOOT_PREPARATION:

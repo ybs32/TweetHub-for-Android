@@ -26,6 +26,8 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 import twitter4j.Paging;
 
+import static com.ybsystem.tweethub.adapters.recycler.RecyclerAdapterBase.*;
+
 public abstract class TimelineBase extends Fragment {
     // RecyclerView
     protected RecyclerView mRecyclerView;
@@ -101,8 +103,8 @@ public abstract class TimelineBase extends Fragment {
     protected void setRecyclerView(View view) {
         mRecyclerView = view.findViewById(R.id.recycle_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.getRecycledViewPool().setMaxRecycledViews(0, 128);
-        mRecyclerView.getRecycledViewPool().setMaxRecycledViews(1, 128);
+        mRecyclerView.getRecycledViewPool().setMaxRecycledViews(TYPE_FOOTER, 128);
+        mRecyclerView.getRecycledViewPool().setMaxRecycledViews(TYPE_ITEM, 128);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

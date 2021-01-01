@@ -160,7 +160,7 @@ public class MainListTimeline extends TimelineBase {
                 // Save list
                 for (twitter4j.UserList list : lists) {
                     listArray.add(
-                            new UserList(list.getId(), list.getName())
+                            new UserList(list.getId(), list.getName(), false)
                     );
                 }
                 // Set pull down

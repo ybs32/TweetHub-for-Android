@@ -19,8 +19,12 @@ import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.adapters.pager.MainPagerAdapter;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.fragments.timeline.TimelineBase;
+import com.ybsystem.tweethub.libs.eventbus.ColumnEvent;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweethub.storages.PrefTheme;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -54,6 +58,24 @@ public class MainFragment extends Fragment {
         fetchMyTwitterUser();
 
         return view;
+    }
+
+    @Subscribe(sticky = true)
+    public void onEvent(ColumnEvent event) {
+        mMainPagerAdapter.notifyDataSetChanged();
+        EventBus.getDefault().removeStickyEvent(event);
+    }
+    
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
     private void setAppIcon(View view) {

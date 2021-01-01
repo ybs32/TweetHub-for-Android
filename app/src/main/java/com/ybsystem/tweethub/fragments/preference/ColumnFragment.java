@@ -13,12 +13,15 @@ import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.adapters.array.ColumnArrayAdapter;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.fragments.dialog.ListDialog;
+import com.ybsystem.tweethub.libs.eventbus.ColumnEvent;
 import com.ybsystem.tweethub.models.entities.Column;
 import com.ybsystem.tweethub.models.entities.ColumnArray;
 import com.ybsystem.tweethub.storages.PrefAppearance;
 import com.ybsystem.tweethub.utils.ExceptionUtils;
 import com.ybsystem.tweethub.utils.DialogUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -103,7 +106,7 @@ public class ColumnFragment extends Fragment {
 
         view.findViewById(R.id.button_add).setOnClickListener(v -> {
             //　Unavailable over 8 column
-            if (TweetHubApp.getMyAccount().getColumns().size() >= 8) {
+            if (TweetHubApp.getMyAccount().getColumns().size() >= 10) {
                 ToastUtils.showShortToast("これ以上追加できません。");
                 return;
             }
@@ -113,28 +116,28 @@ public class ColumnFragment extends Fragment {
 
             // Set click listener
             dialog.setOnItemClickListener((parent, view1, which, id) -> {
-                ColumnArray<Column> columnList = TweetHubApp.getMyAccount().getColumns();
+                ColumnArray<Column> columns = TweetHubApp.getMyAccount().getColumns();
                 switch (which) {
                     case 0:
-                        columnList.add(
+                        columns.add(
                                 new Column(-1, "@Mentions", MENTIONS, false)
                         );
                         break;
                     case 1:
-                        columnList.add(
+                        columns.add(
                                 new Column(-2, "ホーム", HOME, false)
                         );
                         break;
                     case 2:
-                        columnList.add(
+                        columns.add(
                                 new Column(-3, "リスト", LIST, false)
                         );
                         break;
                     case 3:
-                        showMyListDialog();
+                        fetchUserList();
                         break;
                     case 4:
-                        columnList.add(
+                        columns.add(
                                 new Column(-4, PrefAppearance.getLikeFavText(), FAVORITE, false)
                         );
                         break;
@@ -150,8 +153,8 @@ public class ColumnFragment extends Fragment {
         });
     }
 
-    private void showMyListDialog() {
-        DialogUtils.showProgressDialog("読み込み中...", getActivity());
+    private void fetchUserList() {
+        DialogUtils.showProgressDialog("読み込み中...", getContext());
 
         Observable<ResponseList<UserList>> observable = Observable.create(e -> {
             // Fetch
@@ -229,6 +232,9 @@ public class ColumnFragment extends Fragment {
         for (Column column : columns) {
             mArrayAdapter.add(column);
         }
+
+        // Notify event
+        EventBus.getDefault().postSticky(new ColumnEvent());
     }
 
 }

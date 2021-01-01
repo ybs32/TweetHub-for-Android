@@ -10,7 +10,7 @@
         android:id="@+id/item_reply"
         android:title="返信する" />
     <item
-        android:id="@+id/item_list"
+        android:id="@+id/item_add_list"
         android:title="リストに追加" />
     <item
         android:id="@+id/item_browser"

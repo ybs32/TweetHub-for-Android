@@ -31,7 +31,7 @@
         app:iconSpaceReserved="false">
 
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-            android:defaultValue="?attr/colorBgRt"
+            android:defaultValue="?attr/colorBgRetweet"
             android:key="@string/pref_key_retweet_color"
             android:title="リツイート"
             app:cpv_allowPresets="false"
@@ -41,7 +41,7 @@
             app:iconSpaceReserved="false" />
 
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-            android:defaultValue="?android:attr/colorBackground"
+            android:defaultValue="?attr/colorBgReply"
             android:key="@string/pref_key_reply_color"
             android:title="自分宛の返信"
             app:cpv_allowPresets="false"
@@ -51,7 +51,7 @@
             app:iconSpaceReserved="false" />
 
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-            android:defaultValue="?android:attr/colorBackground"
+            android:defaultValue="?attr/colorBgMyTweet"
             android:key="@string/pref_key_mytweet_color"
             android:title="自分のツイート"
             app:cpv_allowPresets="false"

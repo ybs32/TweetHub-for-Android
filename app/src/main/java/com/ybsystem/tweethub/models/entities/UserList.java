@@ -11,4 +11,5 @@ public class UserList extends Entity {
 
     private long id;
     private String name;
+    private boolean isRegistered;
 }

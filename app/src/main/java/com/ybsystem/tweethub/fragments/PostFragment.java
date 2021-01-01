@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import com.ybsystem.tweethub.activities.PostActivity;
 import com.ybsystem.tweethub.adapters.holder.TweetRow;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.fragments.dialog.ListDialog;
+import com.ybsystem.tweethub.fragments.dialog.NoticeDialog;
 import com.ybsystem.tweethub.models.entities.EntityArray;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUserMentionEntity;
@@ -215,7 +217,11 @@ public class PostFragment extends Fragment {
             // Check drafts
             EntityArray<String> drafts = TweetHubApp.getMyAccount().getDrafts();
             if (drafts.isEmpty()) {
-                ToastUtils.showShortToast("下書きはありません。");
+                NoticeDialog dialog = new NoticeDialog().newInstance("下書きはありません。");
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                if (fm.findFragmentByTag("NoticeDialog") == null) {
+                    dialog.show(fm, "NoticeDialog");
+                }
                 return;
             }
             // Create dialog
@@ -256,7 +262,11 @@ public class PostFragment extends Fragment {
             // Check hashtag
             EntityArray<String> hashtags = TweetHubApp.getMyAccount().getHashtags();
             if (hashtags.isEmpty()) {
-                ToastUtils.showShortToast("ハッシュタグ履歴はありません。");
+                NoticeDialog dialog = new NoticeDialog().newInstance("ハッシュタグ履歴はありません。");
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                if (fm.findFragmentByTag("NoticeDialog") == null) {
+                    dialog.show(fm, "NoticeDialog");
+                }
                 return;
             }
             // Create dialog
@@ -298,7 +308,11 @@ public class PostFragment extends Fragment {
                 return;
             }
             // Coming soon...
-            ToastUtils.showShortToast("カメラを起動できません。");
+            DialogUtils.showProgressDialog("読み込み中...", getContext());
+            new Handler().postDelayed(() -> {
+                DialogUtils.dismissProgressDialog();
+                ToastUtils.showShortToast("カメラを起動できません。");
+            }, 1500);
         });
 
         // Gallery button

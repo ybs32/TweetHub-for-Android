@@ -22,24 +22,24 @@ public class VersionFragment extends Fragment {
     private void setVersionText(View view) {
         String newVersion = getString(R.string.app_update_info);
         String oldVersion =
-                "Ver.1.1.4 (2020/11/19)\n" +
+                "Ver.1.1.4\n" +
                         "・メンション形式を修正\n" +
                         "\n" +
-                        "Ver.1.1.3 (2020/9/12)\n" +
+                        "Ver.1.1.3\n" +
                         "・処理効率を改善\n" +
                         "・軽微な不具合修正\n" +
                         "        \n" +
-                        "Ver.1.1.2 (2020/8/2)\n" +
+                        "Ver.1.1.2\n" +
                         "・レイアウトを修正\n" +
                         "・軽微な不具合修正\n" +
                         "\n" +
-                        "Ver.1.1.1 (2020/7/27)\n" +
+                        "Ver.1.1.1\n" +
                         "・レイアウトを修正\n" +
                         "\n" +
-                        "Ver.1.1.0 (2020/7/21)\n" +
+                        "Ver.1.1.0\n" +
                         "・アプリを最適化\n" +
                         "\n" +
-                        "Ver.1.0.0 (2020/6/24)\n" +
+                        "Ver.1.0.0\n" +
                         "・GooglePlayストアへ移転\n";
 
         TextView tv = view.findViewById(R.id.text_description);

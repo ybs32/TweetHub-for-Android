@@ -224,14 +224,6 @@ public class TweetRow extends RecyclerView.ViewHolder {
     }
 
     public void setBackgroundColor() {
-        // Check if basic theme
-        if (!PrefTheme.isCustomThemeEnabled()) {
-            if (mStatus.isRetweet())
-                mClickContainer.setBackgroundColor(ResourceUtils.getBgRtColor());
-            else
-                mClickContainer.setBackgroundColor(0);
-            return;
-        }
         // Check if reply
         boolean isReply = false;
         for (TwitterUserMentionEntity mention : mSource.getUserMentionEntities()) {
@@ -240,18 +232,25 @@ public class TweetRow extends RecyclerView.ViewHolder {
             }
         }
         // Set custom theme
-        if (mSource.getUser().getId() == TweetHubApp.getMyUser().getId())
+        if (mSource.getUser().getId() == TweetHubApp.getMyUser().getId()) {
             // My tweet
-            mClickContainer.setBackgroundColor(PrefTheme.getMyTweetColor());
-        else if (isReply)
+            mClickContainer.setBackgroundColor(
+                PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgMyTweetColor() : ResourceUtils.getBgMyTweetColor()
+            );
+        } else if (isReply) {
             // Reply
-            mClickContainer.setBackgroundColor(PrefTheme.getReplyColor());
-        else if (mStatus.isRetweet())
+            mClickContainer.setBackgroundColor(
+                PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgReplyColor() : ResourceUtils.getBgReplyColor()
+            );
+        } else if (mStatus.isRetweet()) {
             // Retweet
-            mClickContainer.setBackgroundColor(PrefTheme.getRetweetColor());
-        else
+            mClickContainer.setBackgroundColor(
+                PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgRetweetColor() : ResourceUtils.getBgRetweetColor()
+            );
+        } else {
             // Tweet
             mClickContainer.setBackgroundColor(0);
+        }
     }
 
     public void setQuoteTweet() {
