@@ -77,7 +77,7 @@ public class TweetClickListener implements View.OnClickListener, View.OnLongClic
             case HASH_TWEET:
                 TwitterHashtagEntity[] hashTweet = mSource.getHashtagEntities();
                 if (hashTweet != null && hashTweet.length != 0) {
-                    ClickUseCase.tweetWithWord("#" + hashTweet[0].getText());
+                    ClickUseCase.tweetWithSuffix("#" + hashTweet[0].getText());
                 }
                 break;
             case USER:

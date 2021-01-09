@@ -42,8 +42,7 @@ public class OAuthActivity extends ActivityBase {
                 mClickEnable = false;
 
                 // Enable flag after 3 sec with timer
-                final Handler handler = new Handler();
-                handler.postDelayed(() ->
+                new Handler().postDelayed(() ->
                         mClickEnable = true,
                         3000
                 );

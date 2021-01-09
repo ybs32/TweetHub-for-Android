@@ -15,10 +15,14 @@ import androidx.fragment.app.FragmentTransaction;
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.fragments.PostFragment;
+import com.ybsystem.tweethub.libs.eventbus.PostEvent;
 import com.ybsystem.tweethub.models.entities.EntityArray;
 import com.ybsystem.tweethub.utils.DialogUtils;
 import com.ybsystem.tweethub.utils.GlideUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +43,24 @@ public class PostActivity extends ActivityBase {
 
         // Set contents
         setPostFragment(savedInstanceState);
+    }
+
+    @Subscribe
+    public void onEvent(PostEvent event) {
+        finish();
+        overridePendingTransition(R.anim.none, R.anim.fade_out_to_bottom);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override

@@ -28,16 +28,28 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="ダイアログ"
+        android:title="システム"
         app:iconSpaceReserved="false">
 
         <MultiSelectListPreference
             android:defaultValue="@array/confirm_setting_defaults"
-            android:dialogTitle="確認する動作"
+            android:dialogTitle="確認する動作を選択"
             android:entries="@array/confirm_setting_entries"
             android:entryValues="@array/confirm_setting_values"
             android:key="@string/pref_key_confirm_setting"
             android:title="ダイアログ確認"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="ツイート"
+        app:iconSpaceReserved="false">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key_easy_tweet"
+            android:title="簡易ツイート"
+            android:summary="タイムライン下部にツイート欄を表示"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 

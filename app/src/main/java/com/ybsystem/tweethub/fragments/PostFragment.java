@@ -46,7 +46,8 @@ public class PostFragment extends Fragment {
     private TextView mTextCount;
 
     // Intent data
-    private String mTweetWord;
+    private String mTweetPrefix;
+    private String mTweetSuffix;
     private TwitterStatus mReplyStatus;
     private TwitterStatus mQuoteStatus;
 
@@ -61,7 +62,8 @@ public class PostFragment extends Fragment {
 
         // Init
         Intent intent = getActivity().getIntent();
-        mTweetWord = intent.getStringExtra("TWEET_WORD");
+        mTweetPrefix = intent.getStringExtra("TWEET_PREFIX");
+        mTweetSuffix = intent.getStringExtra("TWEET_SUFFIX");
         mReplyStatus = (TwitterStatus) intent.getSerializableExtra("REPLY_STATUS");
         mQuoteStatus = (TwitterStatus) intent.getSerializableExtra("QUOTE_STATUS");
         mImageUris = ((PostActivity) getActivity()).mImageUris;
@@ -140,11 +142,16 @@ public class PostFragment extends Fragment {
     }
 
     private void setIntentData() {
-        // Check word
-        if (mTweetWord != null) {
-            mTweetWord += " ";
-            mPostEdit.setText(mTweetWord);
-            mPostEdit.setSelection(mTweetWord.length());
+        // Check prefix
+        if (mTweetPrefix != null) {
+            mTweetPrefix += " ";
+            mPostEdit.setText(mTweetPrefix);
+            mPostEdit.setSelection(mTweetPrefix.length());
+        }
+
+        // Check suffix
+        if (mTweetSuffix != null) {
+            mPostEdit.setText("\n" + mTweetSuffix);
         }
 
         // Check reply
@@ -180,9 +187,9 @@ public class PostFragment extends Fragment {
     private void setPostButton(View view) {
         // Post button
         view.findViewById(R.id.button_post).setOnClickListener(v -> {
-            // Check text count
-            int count = Integer.parseInt(mTextCount.getText().toString());
-            if (count == 140 && mImageUris.isEmpty()) {
+            // Check text length
+            int length = mPostEdit.getText().length();
+            if (length == 0 && mImageUris.isEmpty()) {
                 return;
             }
             // Prepare data
@@ -203,7 +210,7 @@ public class PostFragment extends Fragment {
             String regex = "[#＃](w*[一-龠_ぁ-ん_ァ-ヴーａ-ｚＡ-Ｚa-zA-Z0-9]+|[a-zA-Z0-9_]+|[a-zA-Z0-9_]w*)";
             Matcher matcher = Pattern.compile(regex).matcher(mPostEdit.getText());
             while (matcher.find()) {
-                if (hashtags.size() >= 5) {
+                if (hashtags.size() >= 8) {
                     hashtags.remove(0);
                 }
                 hashtags.add(matcher.group());
@@ -240,7 +247,7 @@ public class PostFragment extends Fragment {
             dialog.setOnItemLongClickListener((parent, v1, position, id) -> {
                 DialogUtils.showConfirmDialog(
                         "下書きを削除しますか？",
-                        (dialog1, which) -> {
+                        (d, which) -> {
                             drafts.remove(position);
                             ToastUtils.showShortToast("下書きを削除しました。");
                         }
@@ -285,7 +292,7 @@ public class PostFragment extends Fragment {
             dialog.setOnItemLongClickListener((parent, v1, position, id) -> {
                 DialogUtils.showConfirmDialog(
                         "ハッシュタグを削除しますか？",
-                        (dialog1, which) -> {
+                        (d, which) -> {
                             hashtags.remove(position);
                             ToastUtils.showShortToast("ハッシュタグを削除しました。");
                         }

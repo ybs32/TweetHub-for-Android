@@ -76,6 +76,10 @@ public class ResourceUtils {
         return getColor(R.attr.colorWeak);
     }
 
+    public static int getMiddleColor() {
+        return getColor(R.attr.colorMiddle);
+    }
+
     public static int getStrongColor() {
         return getColor(R.attr.colorStrong);
     }
@@ -102,6 +106,10 @@ public class ResourceUtils {
 
     public static int getLinkColor() {
         return getColor(R.attr.colorLink);
+    }
+
+    public static int getLinkWeakColor() {
+        return getColor(R.attr.colorLinkWeak);
     }
 
     public static int getBgRetweetColor() {

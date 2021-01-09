@@ -1,13 +1,12 @@
 <resources>
     <string name="app_name">TweetHub</string>
-    <string name="app_version">1.2.0</string>
+    <string name="app_version">1.3.0</string>
     <string name="app_update_info">
-        Ver.1.2.0\n
-        ・リストを読み込めない不具合を修正\n
-        ・検索結果のインターフェースを変更\n
-        ・デフォルトの背景色を追加\n
-        ・一部のアイコンをカラーリング\n
-        ・非同期処理ライブラリを変更\n
+        Ver.1.3.0\n
+        ・タイムライン上でツイート機能を追加\n
+        ・検索画面でツイート可能に更新\n
+        ・デフォルトの背景色を一部修正\n
+        ・ドロワーの項目を一部修正\n
     </string>
 
     <!-- Authorization -->
@@ -77,9 +76,10 @@
     <string name="pref_key_click_hashtag">pref_key_click_hashtag</string>
 
     <!-- System settings -->
-    <string name="pref_key_confirm_setting">pref_key_confirm_setting</string>
     <string name="pref_key_quality_image">pref_key_quality_image</string>
     <string name="pref_key_quality_video">pref_key_quality_video</string>
+    <string name="pref_key_confirm_setting">pref_key_confirm_setting</string>
+    <string name="pref_key_easy_tweet">pref_key_easy_tweet</string>
     <string name="pref_key_count_boot_load">pref_key_count_boot_load</string>
     <string name="pref_key_count_scroll_load">pref_key_count_scroll_load</string>
 

@@ -6,18 +6,20 @@
         <item name="colorPrimary">#7777BB</item>
         <item name="colorPrimaryDark">#7777BB</item>
         <item name="colorAccent">#555599</item>
-        <item name="colorControlHighlight">#D7D7D7</item>
-        <item name="colorWeak">#BBBFC4</item>
-        <item name="colorStrong">#444B50</item>
+        <item name="colorControlHighlight">#D7D9DB</item>
+        <item name="colorWeak">#BBBDBF</item>
+        <item name="colorMiddle">#888A8C</item>
+        <item name="colorStrong">#555759</item>
         <item name="colorRetweet">#44BB55</item>
         <item name="colorFavorite">#EEAA22</item>
         <item name="colorLike">#EE4477</item>
         <item name="colorTalk">#8888CC</item>
         <item name="colorDelete">#FF4444</item>
         <item name="colorLink">#3355EE</item>
-        <item name="colorBgRetweet">#FFE8EB</item>
-        <item name="colorBgReply">#E8EBFF</item>
-        <item name="colorBgMyTweet">#E8FFEB</item>
+        <item name="colorLinkWeak">#5577FF</item>
+        <item name="colorBgRetweet">#EBEFFF</item>
+        <item name="colorBgReply">#FFEBEF</item>
+        <item name="colorBgMyTweet">#EBFFEF</item>
     </style>
 
     <style name="DarkTheme" parent="Theme.AppCompat">
@@ -27,18 +29,20 @@
         <item name="colorPrimary">#666699</item>
         <item name="colorPrimaryDark">#666699</item>
         <item name="colorAccent">#CCCCFF</item>
-        <item name="colorControlHighlight">#444444</item>
-        <item name="colorWeak">#666B70</item>
-        <item name="colorStrong">#CCCBD0</item>
+        <item name="colorControlHighlight">#444648</item>
+        <item name="colorWeak">#66686A</item>
+        <item name="colorMiddle">#999B9D</item>
+        <item name="colorStrong">#CCCED0</item>
         <item name="colorRetweet">#66DD88</item>
         <item name="colorFavorite">#FFBB33</item>
         <item name="colorLike">#EE6699</item>
         <item name="colorTalk">#AAAAEE</item>
-        <item name="colorDelete">#FF4444</item>
+        <item name="colorDelete">#FF5555</item>
         <item name="colorLink">#AACCFF</item>
-        <item name="colorBgRetweet">#5F4448</item>
-        <item name="colorBgReply">#44485F</item>
-        <item name="colorBgMyTweet">#445F48</item>
+        <item name="colorLinkWeak">#AACCFF</item>
+        <item name="colorBgRetweet">#383848</item>
+        <item name="colorBgReply">#483838</item>
+        <item name="colorBgMyTweet">#384838</item>
     </style>
 
     <style name="TabTheme16dpText" parent="TextAppearance.Design.Tab">

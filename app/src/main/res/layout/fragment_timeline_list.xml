@@ -25,9 +25,9 @@
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="52dp"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="60dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp" />
 </RelativeLayout>
