@@ -38,30 +38,30 @@ public class ClickUseCase {
 
     public static void reply(TwitterStatus status) {
         // Intent to PostActivity
-        Activity activity = TweetHubApp.getActivity();
-        Intent intent = new Intent(activity, PostActivity.class);
+        Activity act = TweetHubApp.getActivity();
+        Intent intent = new Intent(act, PostActivity.class);
         intent.putExtra("REPLY_STATUS", status);
-        activity.startActivity(intent);
-        activity.overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
+        act.startActivity(intent);
+        act.overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
     }
 
     public static void quote(TwitterStatus status) {
         // Intent to PostActivity
-        Activity activity = TweetHubApp.getActivity();
-        Intent intent = new Intent(activity, PostActivity.class);
+        Activity act = TweetHubApp.getActivity();
+        Intent intent = new Intent(act, PostActivity.class);
         intent.putExtra("QUOTE_STATUS", status);
-        activity.startActivity(intent);
-        activity.overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
+        act.startActivity(intent);
+        act.overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
     }
 
     public static void showTalk(TwitterStatus status) {
         // Intent to TimelineActivity
-        Activity activity = TweetHubApp.getActivity();
-        Intent intent = new Intent(TweetHubApp.getActivity(), TimelineActivity.class);
+        Activity act = TweetHubApp.getActivity();
+        Intent intent = new Intent(act, TimelineActivity.class);
         intent.putExtra("STATUS", status);
         intent.putExtra("COLUMN_TYPE", TALK);
-        activity.startActivity(intent);
-        activity.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
+        act.startActivity(intent);
+        act.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
     }
 
     public static void openURL(String url) {
@@ -72,29 +72,38 @@ public class ClickUseCase {
 
     public static void searchWord(String searchWord) {
         // Intent to SearchActivity
-        Activity activity = TweetHubApp.getActivity();
-        Intent intent = new Intent(activity, SearchActivity.class);
+        Activity act = TweetHubApp.getActivity();
+        Intent intent = new Intent(act, SearchActivity.class);
         intent.putExtra("SEARCH_WORD", searchWord);
-        activity.startActivityForResult(intent, 0);
-        activity.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
+        act.startActivityForResult(intent, 0);
+        act.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
     }
 
-    public static void tweetWithWord(String word) {
+    public static void tweetWithPrefix(String word) {
         // Intent to PostActivity
-        Activity activity = TweetHubApp.getActivity();
-        Intent intent = new Intent(activity, PostActivity.class);
-        intent.putExtra("TWEET_WORD", word);
-        activity.startActivity(intent);
-        activity.overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
+        Activity act = TweetHubApp.getActivity();
+        Intent intent = new Intent(act, PostActivity.class);
+        intent.putExtra("TWEET_PREFIX", word);
+        act.startActivity(intent);
+        act.overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
+    }
+
+    public static void tweetWithSuffix(String word) {
+        // Intent to PostActivity
+        Activity act = TweetHubApp.getActivity();
+        Intent intent = new Intent(act, PostActivity.class);
+        intent.putExtra("TWEET_SUFFIX", word);
+        act.startActivity(intent);
+        act.overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
     }
 
     public static void showUser(long userId) {
         // Intent to ProfileActivity
-        Activity activity = TweetHubApp.getActivity();
-        Intent intent = new Intent(activity, ProfileActivity.class);
+        Activity act = TweetHubApp.getActivity();
+        Intent intent = new Intent(act, ProfileActivity.class);
         intent.putExtra("USER_ID", userId);
-        activity.startActivity(intent);
-        activity.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
+        act.startActivity(intent);
+        act.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
     }
 
     public static void copyText(TwitterStatus status) {
@@ -110,12 +119,12 @@ public class ClickUseCase {
 
     public static void showDetail(TwitterStatus status) {
         // Intent to TimelineActivity
-        Activity activity = TweetHubApp.getActivity();
-        Intent intent = new Intent(activity, TimelineActivity.class);
+        Activity act = TweetHubApp.getActivity();
+        Intent intent = new Intent(act, TimelineActivity.class);
         intent.putExtra("STATUS", status);
         intent.putExtra("COLUMN_TYPE", DETAIL);
-        activity.startActivity(intent);
-        activity.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
+        act.startActivity(intent);
+        act.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
     }
 
     public static void share(TwitterStatus status) {
@@ -125,12 +134,11 @@ public class ClickUseCase {
         Uri uri = Uri.parse("https://twitter.com/" + screenName + "/status/" + statusId);
 
         // Intent to external
-        Activity activity = TweetHubApp.getActivity();
         Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_TEXT, uri);
         intent.setAction(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        activity.startActivity(intent);
+        TweetHubApp.getActivity().startActivity(intent);
     }
 
     public static void openStatus(TwitterStatus status) {

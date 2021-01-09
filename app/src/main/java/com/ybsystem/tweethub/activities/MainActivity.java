@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -57,15 +59,24 @@ public class MainActivity extends ActivityBase
         setContentView(R.layout.activity_main);
         setMainFragment(savedInstanceState);
         setDrawerFragment(savedInstanceState);
-        setTweetActionButton();
+        setTweetAction(savedInstanceState);
         setMoreActionButton();
         setWallpaper();
         showUpdateInfo();
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        findViewById(R.id.root).requestFocus();
+    }
+
+    @Override
     public void onBackPressed() {
-        if (PrefSystem.getConfirmSettings().contains(FINISH)) {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else if (PrefSystem.getConfirmSettings().contains(FINISH)) {
             showConfirmDialog();
         } else {
             finish();
@@ -141,15 +152,34 @@ public class MainActivity extends ActivityBase
         }
     }
 
-    private void setTweetActionButton() {
-        findViewById(R.id.fab).setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), PostActivity.class);
-            startActivityForResult(intent, 0);
-            overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
-        });
+    private void setTweetAction(Bundle savedInstanceState) {
+        // Check setting
+        if (PrefSystem.isEasyTweetEnabled()) {
+            // EasyTweet
+            if (savedInstanceState == null) {
+                Fragment fragment = new EasyTweetFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_easy_tweet, fragment);
+                transaction.commit();
+            }
+            // Hide floating button
+            findViewById(R.id.fab).setVisibility(View.GONE);
+            findViewById(R.id.rfab).setVisibility(View.GONE);
+        } else {
+            // TweetButton
+            findViewById(R.id.fab).setOnClickListener(v -> {
+                Intent intent = new Intent(v.getContext(), PostActivity.class);
+                startActivityForResult(intent, 0);
+                overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
+            });
+        }
     }
 
     private void setMoreActionButton() {
+        // Check setting
+        if (PrefSystem.isEasyTweetEnabled()) {
+            return;
+        }
         // Init
         RapidFloatingActionLayout rfaLayout = findViewById(R.id.rfal);
         RapidFloatingActionButton rfaButton = findViewById(R.id.rfab);
@@ -216,7 +246,7 @@ public class MainActivity extends ActivityBase
         // Create dialog
         ConfirmDialog dialog = new ConfirmDialog().newInstance("アプリを終了しますか？");
         dialog.setOnPositiveClickListener(
-                (dialog1, which) -> finish()
+                (d, which) -> finish()
         );
         // Show dialog
         FragmentManager manager = getSupportFragmentManager();
@@ -236,7 +266,7 @@ public class MainActivity extends ActivityBase
         ChoiceDialog dialog = new ChoiceDialog()
                 .newInstance(items, accounts.getCurrentAccountNum());
 
-        dialog.setOnItemClickListener((dialog1, position) -> {
+        dialog.setOnItemClickListener((d, position) -> {
             // Change account and reboot
             accounts.setCurrentAccount(position);
             TweetHubApp.getInstance().init();

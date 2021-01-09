@@ -11,15 +11,19 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.adapters.pager.SearchPagerAdapter;
 import com.ybsystem.tweethub.adapters.pager.TrendTopicPagerAdapter;
 import com.ybsystem.tweethub.application.TweetHubApp;
+import com.ybsystem.tweethub.fragments.EasyTweetFragment;
 import com.ybsystem.tweethub.libs.eventbus.ColumnEvent;
 import com.ybsystem.tweethub.models.entities.Column;
 import com.ybsystem.tweethub.models.entities.ColumnArray;
+import com.ybsystem.tweethub.storages.PrefSystem;
 import com.ybsystem.tweethub.usecases.ClickUseCase;
 import com.ybsystem.tweethub.utils.DialogUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
@@ -50,7 +54,8 @@ public class SearchActivity extends ActivityBase {
         mSearchWord = getIntent().getStringExtra("SEARCH_WORD");
 
         // Set contents
-        setContentView(R.layout.activity_pager);
+        setContentView(R.layout.activity_search);
+        setTweetAction(savedInstanceState);
 
         // Check if search word exists
         if (mSearchWord == null) {
@@ -95,6 +100,28 @@ public class SearchActivity extends ActivityBase {
                 break;
             default:
                 break;
+        }
+    }
+
+    private void setTweetAction(Bundle savedInstanceState) {
+        if (PrefSystem.isEasyTweetEnabled()) {
+            // EasyTweet
+            if (savedInstanceState == null) {
+                Fragment fragment = new EasyTweetFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_easy_tweet, fragment);
+                transaction.commit();
+            }
+            // Hide tweet button
+            findViewById(R.id.fab).setVisibility(View.GONE);
+        } else {
+            // TweetButton
+            findViewById(R.id.fab).setOnClickListener(v -> {
+                Intent intent = new Intent(v.getContext(), PostActivity.class);
+                if (hasHashTag()) intent.putExtra("TWEET_SUFFIX", mSearchWord);
+                startActivityForResult(intent, 0);
+                overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
+            });
         }
     }
 
@@ -160,7 +187,19 @@ public class SearchActivity extends ActivityBase {
                     ToastUtils.showShortToast("「" + mSearchWord + "」をカラムに追加しました。");
                     EventBus.getDefault().postSticky(new ColumnEvent());
                     setResult(REBOOT_PREPARATION);
-                });
+                }
+        );
+    }
+
+    private boolean hasHashTag() {
+        // Check word
+        if (mSearchWord == null) {
+            return false;
+        }
+        if (!mSearchWord.startsWith("#") && !mSearchWord.startsWith("＃")) {
+            return false;
+        }
+        return true;
     }
 
 }

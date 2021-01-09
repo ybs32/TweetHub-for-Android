@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- ViewPager -->
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager_common"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/frame_easy_tweet">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_common"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            app:tabIndicatorColor="?android:attr/colorAccent"
+            app:tabSelectedTextColor="?android:attr/colorAccent"
+            app:tabTextAppearance="@style/TabTheme14dpText" />
+    </androidx.viewpager.widget.ViewPager>
+
+    <!-- Tweet button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:backgroundTint="?attr/colorPrimary"
+        android:src="@drawable/ic_tweet"
+        android:tint="#FFFFFF"
+        app:borderWidth="0dp" />
+
+    <!-- 簡易ツイート -->
+    <FrameLayout
+        android:id="@+id/frame_easy_tweet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

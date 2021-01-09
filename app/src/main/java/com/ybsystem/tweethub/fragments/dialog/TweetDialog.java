@@ -186,8 +186,8 @@ public class TweetDialog extends DialogFragment {
         int favoriteColor = PrefAppearance.getLikeFavColor();
         int talkColor = ResourceUtils.getTalkColor();
         int deleteColor = ResourceUtils.getDeleteColor();
-        int urlColor = ResourceUtils.getLinkColor();
-        int hashColor = ResourceUtils.getLinkColor();
+        int urlColor = ResourceUtils.getLinkWeakColor();
+        int hashColor = ResourceUtils.getLinkWeakColor();
         int userColor = ResourceUtils.getStrongColor();
         int copyColor = ResourceUtils.getStrongColor();
         int detailColor = ResourceUtils.getStrongColor();
@@ -356,7 +356,7 @@ public class TweetDialog extends DialogFragment {
         } else if (label.startsWith("#")) {
             runnable = PrefClickAction.getClickHashtag().equals(action)
                     ? () -> ClickUseCase.searchWord(label)
-                    : () -> ClickUseCase.tweetWithWord(label);
+                    : () -> ClickUseCase.tweetWithSuffix(label);
         } else {
             runnable = menu.getRunnable();
         }

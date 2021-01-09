@@ -6,9 +6,9 @@ import android.os.Handler;
 
 import androidx.fragment.app.FragmentManager;
 
-import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.fragments.dialog.NoticeDialog;
+import com.ybsystem.tweethub.libs.eventbus.PostEvent;
 import com.ybsystem.tweethub.libs.eventbus.StatusEvent;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.storages.PrefAppearance;
@@ -279,10 +279,8 @@ public class TwitterUseCase {
             @Override
             public void onComplete() {
                 // Success
+                EventBus.getDefault().post(new PostEvent());
                 ToastUtils.showShortToast("ツイートしました。");
-                Activity act = TweetHubApp.getActivity();
-                act.finish();
-                act.overridePendingTransition(R.anim.none, R.anim.fade_out_to_bottom);
             }
         };
 

@@ -14,6 +14,8 @@ import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.models.entities.EntityArray;
 import com.ybsystem.tweethub.models.entities.UserList;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
+import com.ybsystem.tweethub.storages.PrefSystem;
+import com.ybsystem.tweethub.utils.CalcUtils;
 import com.ybsystem.tweethub.utils.ExceptionUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 
@@ -205,6 +207,14 @@ public class MainListTimeline extends TimelineBase {
                 getActivity(), android.R.layout.simple_spinner_dropdown_item, items
         );
         dropDown.setAdapter(adapter);
+
+        // Adjust layout
+        if (PrefSystem.isEasyTweetEnabled()) {
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) dropDown.getLayoutParams();
+            params.setMargins(0, 0, 0, 0);
+            params.height = CalcUtils.convertDp2Px(40);
+            dropDown.setLayoutParams(params);
+        }
 
         // Set listener
         dropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

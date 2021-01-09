@@ -80,7 +80,7 @@ public class ProfileActivity extends ActivityBase {
                 return true;
             // 返信する
             case R.id.item_reply:
-                ClickUseCase.tweetWithWord("@" + mUser.getScreenName());
+                ClickUseCase.tweetWithPrefix("@" + mUser.getScreenName());
                 return true;
             // リストに追加
             case R.id.item_add_list:
