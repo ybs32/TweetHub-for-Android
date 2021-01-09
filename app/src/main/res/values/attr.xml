@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorWeak" />
+    <attr name="colorMiddle" />
+    <attr name="colorStrong" />
+    <attr name="colorRetweet" />
+    <attr name="colorFavorite" />
+    <attr name="colorLike" />
+    <attr name="colorTalk" />
+    <attr name="colorDelete" />
+    <attr name="colorLink" />
+    <attr name="colorLinkWeak" />
+    <attr name="colorBgRetweet" />
+    <attr name="colorBgReply" />
+    <attr name="colorBgMyTweet" />
+</resources>

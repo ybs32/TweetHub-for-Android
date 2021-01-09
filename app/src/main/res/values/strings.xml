@@ -1,3 +1,91 @@
 <resources>
     <string name="app_name">TweetHub</string>
+    <string name="app_version">1.3.0</string>
+    <string name="app_update_info">
+        Ver.1.3.0\n
+        ・タイムライン上でツイート機能を追加\n
+        ・検索画面でツイート可能に更新\n
+        ・デフォルトの背景色を一部修正\n
+        ・ドロワーの項目を一部修正\n
+    </string>
+
+    <!-- Authorization -->
+    <string name="callback_url">ybsystem://</string>
+    <string name="hello_java">QU1Nk2LVy8D2ThSKoyBKUtmD6</string>
+    <string name="hello_android">3YweWiVK4suS5YsenPYfWK3beiS0ICbzXemVtDDkLUfuueiV16</string>
+
+    <!-- UltraPullToRefresh -->
+    <string name="cube_ptr_pull_down">引っ張って…</string>
+    <string name="cube_ptr_pull_down_to_refresh">引っ張って…</string>
+    <string name="cube_ptr_release_to_refresh">指を離して更新</string>
+    <string name="cube_ptr_refreshing">読み込み中…</string>
+    <string name="cube_ptr_refresh_complete">読み込み中…</string>
+
+    <!-- Entities -->
+    <string name="pref_key_entity">pref_key_entity</string>
+    <string name="pref_key_app_data">pref_key_app_data</string>
+
+    <!-- Settings -->
+    <string name="pref_key_theme">pref_key_theme</string>
+    <string name="pref_key_appearance">pref_key_appearance</string>
+    <string name="pref_key_click_action">pref_key_click_action</string>
+    <string name="pref_key_system">pref_key_system</string>
+    <string name="pref_key_wallpaper">pref_key_wallpaper</string>
+    <string name="pref_key_column">pref_key_column</string>
+    <string name="pref_key_account">pref_key_account</string>
+    <string name="pref_key_version">pref_key_version</string>
+    <string name="pref_key_feedback">pref_key_feedback</string>
+    <string name="pref_key_about">pref_key_about</string>
+
+    <!-- Theme settings -->
+    <string name="pref_key_theme_setting">pref_key_theme_setting</string>
+    <string name="pref_key_theme_custom">pref_key_theme_custom</string>
+    <string name="pref_key_retweet_color">pref_key_retweet_color</string>
+    <string name="pref_key_reply_color">pref_key_reply_color</string>
+    <string name="pref_key_mytweet_color">pref_key_mytweet_color</string>
+    <string name="pref_key_username_color">pref_key_username_color</string>
+    <string name="pref_key_relativetime_color">pref_key_relativetime_color</string>
+    <string name="pref_key_tweettext_color">pref_key_tweettext_color</string>
+    <string name="pref_key_link_color">pref_key_link_color</string>
+    <string name="pref_key_absolutetime_color">pref_key_absolutetime_color</string>
+    <string name="pref_key_via_color">pref_key_via_color</string>
+    <string name="pref_key_rtfav_color">pref_key_rtfav_color</string>
+    <string name="pref_key_retweetedby_color">pref_key_retweetedby_color</string>
+    <string name="pref_key_theme_preview">pref_key_theme_preview</string>
+
+    <!-- Appearance settings -->
+    <string name="pref_key_size_font">pref_key_size_font</string>
+    <string name="pref_key_size_user_icon">pref_key_size_user_icon</string>
+    <string name="pref_key_style_like_fav">pref_key_style_like_fav</string>
+    <string name="pref_key_style_user_icon">pref_key_style_user_icon</string>
+    <string name="pref_key_show_absolute_time">pref_key_show_absolute_time</string>
+    <string name="pref_key_show_via">pref_key_show_via</string>
+    <string name="pref_key_show_rt_fav_count">pref_key_show_rt_fav_count</string>
+    <string name="pref_key_show_retweeted_by">pref_key_show_retweeted_by</string>
+    <string name="pref_key_show_thumbnail">pref_key_show_thumbnail</string>
+
+    <!-- ClickAction settings -->
+    <string name="pref_key_left_click">pref_key_left_click</string>
+    <string name="pref_key_middle_click">pref_key_middle_click</string>
+    <string name="pref_key_right_click">pref_key_right_click</string>
+    <string name="pref_key_left_long_click">pref_key_left_long_click</string>
+    <string name="pref_key_middle_long_click">pref_key_middle_long_click</string>
+    <string name="pref_key_right_long_click">pref_key_right_long_click</string>
+    <string name="pref_key_tweet_menu">pref_key_tweet_menu</string>
+    <string name="pref_key_click_retweet">pref_key_click_retweet</string>
+    <string name="pref_key_click_hashtag">pref_key_click_hashtag</string>
+
+    <!-- System settings -->
+    <string name="pref_key_quality_image">pref_key_quality_image</string>
+    <string name="pref_key_quality_video">pref_key_quality_video</string>
+    <string name="pref_key_confirm_setting">pref_key_confirm_setting</string>
+    <string name="pref_key_easy_tweet">pref_key_easy_tweet</string>
+    <string name="pref_key_count_boot_load">pref_key_count_boot_load</string>
+    <string name="pref_key_count_scroll_load">pref_key_count_scroll_load</string>
+
+    <!-- Wallpaper settings -->
+    <string name="pref_key_add_wallpaper">pref_key_add_wallpaper</string>
+    <string name="pref_key_delete_wallpaper">pref_key_delete_wallpaper</string>
+    <string name="pref_key_wallpaper_path">pref_key_wallpaper_path</string>
+    <string name="pref_key_wallpaper_transparency">pref_key_wallpaper_transparency</string>
 </resources>

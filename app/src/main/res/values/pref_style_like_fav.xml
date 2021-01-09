@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="style_like_fav_entries">
+        <item>いいね</item>
+        <item>お気に入り</item>
+    </string-array>
+
+    <string-array name="style_like_fav_values">
+        <item>LIKE</item>
+        <item>FAVORITE</item>
+    </string-array>
+</resources>

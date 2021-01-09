@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <PreferenceCategory
+        android:title="メディア"
+        app:iconSpaceReserved="false">
+
+        <ListPreference
+            android:defaultValue="MIDDLE"
+            android:dialogTitle="品質の選択"
+            android:entries="@array/quality_image_entries"
+            android:entryValues="@array/quality_image_values"
+            android:key="@string/pref_key_quality_image"
+            android:title="画像の品質"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:defaultValue="MIDDLE"
+            android:dialogTitle="品質の選択"
+            android:entries="@array/quality_video_entries"
+            android:entryValues="@array/quality_video_values"
+            android:key="@string/pref_key_quality_video"
+            android:title="ビデオの品質"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="システム"
+        app:iconSpaceReserved="false">
+
+        <MultiSelectListPreference
+            android:defaultValue="@array/confirm_setting_defaults"
+            android:dialogTitle="確認する動作を選択"
+            android:entries="@array/confirm_setting_entries"
+            android:entryValues="@array/confirm_setting_values"
+            android:key="@string/pref_key_confirm_setting"
+            android:title="ダイアログ確認"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="ツイート"
+        app:iconSpaceReserved="false">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key_easy_tweet"
+            android:title="簡易ツイート"
+            android:summary="タイムライン下部にツイート欄を表示"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="タイムライン"
+        app:iconSpaceReserved="false">
+
+        <ListPreference
+            android:defaultValue="20"
+            android:dialogTitle="件数の選択"
+            android:entries="@array/count_boot_load_entries"
+            android:entryValues="@array/count_boot_load_values"
+            android:key="@string/pref_key_count_boot_load"
+            android:title="起動時の取得件数"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:defaultValue="100"
+            android:dialogTitle="件数の選択"
+            android:entries="@array/count_scroll_load_entries"
+            android:entryValues="@array/count_scroll_load_values"
+            android:key="@string/pref_key_count_scroll_load"
+            android:title="スクロール時の取得件数"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>
