@@ -150,7 +150,7 @@ public class OAuthActivity extends ActivityBase {
                     TweetHubApp.getInstance().init();
 
                     // Intent to MainActivity
-                    ToastUtils.showLongToast("認証に成功しました！");
+                    ToastUtils.showLongToast("TweetHubへようこそ！");
                     Intent intent = new Intent(OAuthActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
