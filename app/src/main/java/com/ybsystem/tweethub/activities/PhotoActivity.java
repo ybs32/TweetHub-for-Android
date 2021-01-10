@@ -236,7 +236,7 @@ public class PhotoActivity extends ActivityBase {
         @Override
         protected void onPostExecute(Exception e) {
             if (e == null) {
-                ToastUtils.showShortToast("写真を保存しました。");
+                ToastUtils.showShortToast("画像を保存しました。");
                 ToastUtils.showLongToast("保存場所：" + path);
             } else {
                 ToastUtils.showShortToast("エラーが発生しました...");
