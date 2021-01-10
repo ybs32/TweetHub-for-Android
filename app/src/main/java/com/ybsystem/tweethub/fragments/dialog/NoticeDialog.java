@@ -18,16 +18,16 @@ public class NoticeDialog extends DialogFragment {
 
     private DialogInterface.OnClickListener mPositiveClickListener;
 
-    public NoticeDialog newInstance(String title, String description) {
+    public NoticeDialog newInstance(String description) {
         Bundle bundle = new Bundle();
-        bundle.putString("TITLE", title);
         bundle.putString("DESCRIPTION", description);
         setArguments(bundle);
         return this;
     }
 
-    public NoticeDialog newInstance(String description) {
+    public NoticeDialog newInstance(String title, String description) {
         Bundle bundle = new Bundle();
+        bundle.putString("TITLE", title);
         bundle.putString("DESCRIPTION", description);
         setArguments(bundle);
         return this;

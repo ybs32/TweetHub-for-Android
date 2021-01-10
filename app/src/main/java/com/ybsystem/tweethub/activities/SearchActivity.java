@@ -80,6 +80,7 @@ public class SearchActivity extends ActivityBase {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
+
         switch (item.getItemId()) {
             // カラム追加
             case R.id.item_add_column:

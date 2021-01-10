@@ -35,7 +35,7 @@ public class ViaArray<T extends Via> extends EntityArray<T> {
     @Override
     public boolean add(T e){
         for (Via via: this) {
-            if (via.getConsumerKey() == e.getConsumerKey()) {
+            if (via.getConsumerKey().equals(e.getConsumerKey())) {
                 ToastUtils.showShortToast("既に追加されています。");
                 return false;
             }

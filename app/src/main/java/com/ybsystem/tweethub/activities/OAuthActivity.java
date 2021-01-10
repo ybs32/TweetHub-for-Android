@@ -11,6 +11,7 @@ import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.utils.DialogUtils;
 import com.ybsystem.tweethub.utils.ExceptionUtils;
+import com.ybsystem.tweethub.utils.ResourceUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 
 import twitter4j.Twitter;
@@ -41,7 +42,7 @@ public class OAuthActivity extends ActivityBase {
                 // Disable flag to not tap continuously
                 mClickEnable = false;
 
-                // Enable flag after 3 sec with timer
+                // Enable flag after 3 seconds
                 new Handler().postDelayed(() ->
                         mClickEnable = true,
                         3000
@@ -49,7 +50,7 @@ public class OAuthActivity extends ActivityBase {
 
                 // Prepare auth
                 mTwitter = new TwitterFactory().getInstance();
-                mTwitter.setOAuthConsumer(getString(R.string.hello_java), getString(R.string.hello_android));
+                mTwitter.setOAuthConsumer(ResourceUtils.getS(), ResourceUtils.getK());
 
                 // Start auth
                 startAuthentication();
@@ -149,7 +150,7 @@ public class OAuthActivity extends ActivityBase {
                     TweetHubApp.getInstance().init();
 
                     // Intent to MainActivity
-                    ToastUtils.showLongToast("認証に成功しました！");
+                    ToastUtils.showLongToast("TweetHubへようこそ！");
                     Intent intent = new Intent(OAuthActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();

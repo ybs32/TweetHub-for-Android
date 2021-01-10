@@ -45,12 +45,6 @@ public class PostActivity extends ActivityBase {
         setPostFragment(savedInstanceState);
     }
 
-    @Subscribe
-    public void onEvent(PostEvent event) {
-        finish();
-        overridePendingTransition(R.anim.none, R.anim.fade_out_to_bottom);
-    }
-
     @Override
     public void onStart() {
         super.onStart();
@@ -61,6 +55,12 @@ public class PostActivity extends ActivityBase {
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onEvent(PostEvent event) {
+        finish();
+        overridePendingTransition(R.anim.none, R.anim.fade_out_to_bottom);
     }
 
     @Override
@@ -111,7 +111,7 @@ public class PostActivity extends ActivityBase {
             ImageView image = (ImageView) ll.getChildAt(mImageUris.size() - 1);
             image.setOnClickListener(v ->
                     DialogUtils.showConfirmDialog(
-                            "写真をキャンセルしますか？",
+                            "画像をキャンセルしますか？",
                             (dialog, which) -> cancelImages()
                     )
             );
@@ -143,7 +143,7 @@ public class PostActivity extends ActivityBase {
         findViewById(R.id.linear_photo).setVisibility(View.GONE);
 
         // Show message
-        ToastUtils.showShortToast("写真をキャンセルしました。");
+        ToastUtils.showShortToast("画像をキャンセルしました。");
     }
 
 }

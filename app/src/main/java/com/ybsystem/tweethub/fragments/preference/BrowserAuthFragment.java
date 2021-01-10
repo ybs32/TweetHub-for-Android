@@ -19,6 +19,7 @@ import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.models.entities.Account;
 import com.ybsystem.tweethub.utils.DialogUtils;
 import com.ybsystem.tweethub.utils.ExceptionUtils;
+import com.ybsystem.tweethub.utils.ResourceUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 
 import twitter4j.Twitter;
@@ -45,9 +46,7 @@ public class BrowserAuthFragment extends Fragment {
 
         // Prepare auth
         mTwitter = new TwitterFactory().getInstance();
-        String consumerKey = getString(R.string.hello_java);
-        String consumerSecret = getString(R.string.hello_android);
-        mTwitter.setOAuthConsumer(consumerKey, consumerSecret);
+        mTwitter.setOAuthConsumer(ResourceUtils.getS(), ResourceUtils.getK());
 
         // Start auth
         new PreTask().execute();
@@ -77,8 +76,9 @@ public class BrowserAuthFragment extends Fragment {
 
         // Remove cookie
         CookieManager cookieManager = CookieManager.getInstance();
-        cookieManager.removeAllCookie();
-        cookieManager.removeSessionCookie();
+        cookieManager.removeAllCookies(null);
+        cookieManager.removeSessionCookies(null);
+        cookieManager.flush();
 
         // Remove cache
         mWebView.clearCache(true);

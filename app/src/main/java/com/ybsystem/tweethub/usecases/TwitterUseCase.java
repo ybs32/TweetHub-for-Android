@@ -23,6 +23,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.io.File;
 import java.util.List;
 
+import id.zelory.compressor.Compressor;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.observers.DisposableObserver;
@@ -237,6 +238,7 @@ public class TwitterUseCase {
                     for (int i = 0; i < imageUris.size(); i++) {
                         Uri uri = imageUris.get(i);
                         File file = StorageUtils.fileFromUri(activity, uri);
+                        file = new Compressor(activity).setQuality(100).compressToFile(file);
                         mediaIds[i] = twitter.uploadMedia(file).getMediaId();
                     }
                     update.setMediaIds(mediaIds);
@@ -267,12 +269,12 @@ public class TwitterUseCase {
                 if (!imageUris.isEmpty()) {
                     new Handler().postDelayed(() -> {
                         NoticeDialog dialog = new NoticeDialog().newInstance
-                                ("写真付きツイートに失敗しました。\n画像の圧縮やリサイズをお試し下さい。");
+                                ("画像ツイートに失敗しました。\n画像の圧縮やリサイズをお試し下さい。");
                         FragmentManager fm = TweetHubApp.getActivity().getSupportFragmentManager();
                         if (fm.findFragmentByTag("NoticeDialog") == null) {
                             dialog.show(fm, "NoticeDialog");
                         }
-                    }, 4000);
+                    }, 3000);
                 }
             }
 
