@@ -8,11 +8,9 @@
         ・デフォルトの背景色を一部修正\n
         ・ドロワーの項目を一部修正\n
     </string>
-
-    <!-- Authorization -->
     <string name="callback_url">ybsystem://</string>
-    <string name="hello_java">QU1Nk2LVy8D2ThSKoyBKUtmD6</string>
-    <string name="hello_android">3YweWiVK4suS5YsenPYfWK3beiS0ICbzXemVtDDkLUfuueiV16</string>
+    <string name="hello_java">==gNE1GdVtkQ592SThGVyQEO5ZFTysmTxUVU</string>
+    <string name="hello_android">=YTMWlWZ1VnZVx0aEREdW1WZYpnYDlEMTlWZiNzSXZWWQ5WZzlVNTV3c0skVpdVZ3l1M</string>
 
     <!-- UltraPullToRefresh -->
     <string name="cube_ptr_pull_down">引っ張って…</string>

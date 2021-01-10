@@ -11,6 +11,7 @@ import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.utils.DialogUtils;
 import com.ybsystem.tweethub.utils.ExceptionUtils;
+import com.ybsystem.tweethub.utils.ResourceUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 
 import twitter4j.Twitter;
@@ -49,7 +50,7 @@ public class OAuthActivity extends ActivityBase {
 
                 // Prepare auth
                 mTwitter = new TwitterFactory().getInstance();
-                mTwitter.setOAuthConsumer(getString(R.string.hello_java), getString(R.string.hello_android));
+                mTwitter.setOAuthConsumer(ResourceUtils.getS(), ResourceUtils.getK());
 
                 // Start auth
                 startAuthentication();

@@ -44,17 +44,17 @@ public class TweetHubApp extends Application {
     }
 
     public void init() {
-        // Get credential
+        // Get current via
         Via via = getMyAccount().getVias().getCurrentVia();
-        String consumerKey = via.getConsumerKey();
-        String consumerSecret = via.getConsumerSecret();
-        String token = via.getToken();
-        String tokenSecret = via.getTokenSecret();
+        String ck = via.getConsumerKey();
+        String cs = via.getConsumerSecret();
+        String t = via.getToken();
+        String ts = via.getTokenSecret();
 
         // Create twitter instance
         mTwitter = new TwitterFactory().getInstance();
-        mTwitter.setOAuthConsumer(consumerKey, consumerSecret);
-        mTwitter.setOAuthAccessToken(new AccessToken(token, tokenSecret));
+        mTwitter.setOAuthConsumer(ck, cs);
+        mTwitter.setOAuthAccessToken(new AccessToken(t, ts));
     }
 
     /**
