@@ -76,8 +76,9 @@ public class BrowserAuthFragment extends Fragment {
 
         // Remove cookie
         CookieManager cookieManager = CookieManager.getInstance();
-        cookieManager.removeAllCookie();
-        cookieManager.removeSessionCookie();
+        cookieManager.removeAllCookies(null);
+        cookieManager.removeSessionCookies(null);
+        cookieManager.flush();
 
         // Remove cache
         mWebView.clearCache(true);
