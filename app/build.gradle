@@ -56,6 +56,7 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.2.0'
     implementation 'com.jakewharton:butterknife:10.2.3'
     implementation 'com.jaredrummler:colorpicker:1.1.0'
+    implementation 'id.zelory:compressor:2.1.0'
     implementation "io.reactivex.rxjava3:rxjava:3.0.7"
     implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
     implementation project(':app:libs:UltraPullToRefresh')

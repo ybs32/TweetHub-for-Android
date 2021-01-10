@@ -111,7 +111,7 @@ public class PostActivity extends ActivityBase {
             ImageView image = (ImageView) ll.getChildAt(mImageUris.size() - 1);
             image.setOnClickListener(v ->
                     DialogUtils.showConfirmDialog(
-                            "写真をキャンセルしますか？",
+                            "画像をキャンセルしますか？",
                             (dialog, which) -> cancelImages()
                     )
             );
@@ -143,7 +143,7 @@ public class PostActivity extends ActivityBase {
         findViewById(R.id.linear_photo).setVisibility(View.GONE);
 
         // Show message
-        ToastUtils.showShortToast("写真をキャンセルしました。");
+        ToastUtils.showShortToast("画像をキャンセルしました。");
     }
 
 }
