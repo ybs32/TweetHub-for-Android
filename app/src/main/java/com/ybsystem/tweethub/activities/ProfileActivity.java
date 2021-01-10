@@ -60,6 +60,23 @@ public class ProfileActivity extends ActivityBase {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onEvent(UserEvent event) {
+        updateMenu();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         this.mMenu = menu;
         getMenuInflater().inflate(R.menu.profile, menu);
@@ -97,23 +114,6 @@ public class ProfileActivity extends ActivityBase {
             default:
                 return false;
         }
-    }
-
-    @Subscribe
-    public void onEvent(UserEvent event) {
-        updateMenu();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
     }
 
     private void fetchTwitterUser(long userId, Bundle savedInstanceState) {

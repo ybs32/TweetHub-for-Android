@@ -60,7 +60,6 @@ public class MainActivity extends ActivityBase
         setMainFragment(savedInstanceState);
         setDrawerFragment(savedInstanceState);
         setTweetAction(savedInstanceState);
-        setMoreActionButton();
         setWallpaper();
         showUpdateInfo();
     }
@@ -162,7 +161,7 @@ public class MainActivity extends ActivityBase
                 transaction.replace(R.id.frame_easy_tweet, fragment);
                 transaction.commit();
             }
-            // Hide floating button
+            // Hide buttons
             findViewById(R.id.fab).setVisibility(View.GONE);
             findViewById(R.id.rfab).setVisibility(View.GONE);
         } else {
@@ -172,15 +171,13 @@ public class MainActivity extends ActivityBase
                 startActivityForResult(intent, 0);
                 overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
             });
+            // MoreButton
+            setMoreActionButton();
         }
     }
 
     private void setMoreActionButton() {
-        // Check setting
-        if (PrefSystem.isEasyTweetEnabled()) {
-            return;
-        }
-        // Init
+        // Find
         RapidFloatingActionLayout rfaLayout = findViewById(R.id.rfal);
         RapidFloatingActionButton rfaButton = findViewById(R.id.rfab);
 
@@ -226,20 +223,21 @@ public class MainActivity extends ActivityBase
 
     private void showUpdateInfo() {
         String version = TweetHubApp.getAppData().getVersion();
-        String appVersion = getString(R.string.app_version);
-        String appVersionInfo = getString(R.string.app_update_info);
+        String newVersion = getString(R.string.app_version);
+        String updateInfo = getString(R.string.app_update_info);
+
         // Check version
-        if (version.equals(appVersion)) {
+        if (version.equals(newVersion)) {
             return;
         }
-        // Create and show
-        NoticeDialog dialog = new NoticeDialog().newInstance("アップデート情報", appVersionInfo);
+        // Show dialog
+        NoticeDialog dialog = new NoticeDialog().newInstance("アップデート情報", updateInfo);
         FragmentManager fm = getSupportFragmentManager();
         if (fm.findFragmentByTag("NoticeDialog") == null) {
             dialog.show(fm, "NoticeDialog");
         }
         // Save new version
-        TweetHubApp.getAppData().setVersion(appVersion);
+        TweetHubApp.getAppData().setVersion(newVersion);
     }
 
     private void showConfirmDialog() {

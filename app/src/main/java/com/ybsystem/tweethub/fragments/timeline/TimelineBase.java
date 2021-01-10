@@ -63,27 +63,6 @@ public abstract class TimelineBase extends Fragment {
         mNextPaging.setCount(PrefSystem.getScrollLoadCount());
     }
 
-    @Subscribe
-    public void onEvent(FooterEvent event) {
-        if (mRecyclerAdapter.getFooterView() != null) {
-            setFooterView();
-        }
-    }
-
-    @Subscribe
-    public void onEvent(StatusEvent event) {
-        TwitterStatus status = event.getStatus();
-        if (status != null) {
-            mRecyclerAdapter.remove(status);
-        }
-        mRecyclerAdapter.notifyDataSetChanged();
-    }
-
-    @Subscribe
-    public void onEvent(UserEvent event) {
-        mRecyclerAdapter.notifyDataSetChanged();
-    }
-
     @Override
     public void onStart() {
         super.onStart();
@@ -94,6 +73,25 @@ public abstract class TimelineBase extends Fragment {
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onEvent(FooterEvent event) {
+        if (mRecyclerAdapter.getFooterView() != null) {
+            setFooterView();
+        }
+    }
+
+    @Subscribe
+    public void onEvent(UserEvent event) {
+        mRecyclerAdapter.notifyDataSetChanged();
+    }
+
+    @Subscribe
+    public void onEvent(StatusEvent event) {
+        TwitterStatus status = event.getStatus();
+        if (status != null) mRecyclerAdapter.remove(status);
+        mRecyclerAdapter.notifyDataSetChanged();
     }
 
     public RecyclerView getRecyclerView() {

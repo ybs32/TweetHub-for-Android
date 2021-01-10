@@ -64,13 +64,6 @@ public class EasyTweetFragment extends Fragment {
         return view;
     }
 
-    @Subscribe
-    public void onEvent(PostEvent event) {
-        // Clear tweet
-        mPostEdit.getText().clear();
-        mPostEdit.clearFocus();
-    }
-
     @Override
     public void onStart() {
         super.onStart();
@@ -81,6 +74,13 @@ public class EasyTweetFragment extends Fragment {
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onEvent(PostEvent event) {
+        // Clear tweet
+        mPostEdit.getText().clear();
+        mPostEdit.clearFocus();
     }
 
     private void setUserIcon(View view) {

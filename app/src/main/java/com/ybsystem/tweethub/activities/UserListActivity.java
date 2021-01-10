@@ -46,6 +46,23 @@ public class UserListActivity extends ActivityBase {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onEvent(UserListEvent event) {
+        updateMenu();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         this.mMenu = menu;
         getMenuInflater().inflate(R.menu.userlist, menu);
@@ -63,23 +80,6 @@ public class UserListActivity extends ActivityBase {
             default:
                 return false;
         }
-    }
-
-    @Subscribe
-    public void onEvent(UserListEvent event) {
-        updateMenu();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
     }
 
     private void setUserListPager() {

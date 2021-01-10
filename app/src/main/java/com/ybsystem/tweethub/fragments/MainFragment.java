@@ -59,12 +59,6 @@ public class MainFragment extends Fragment {
 
         return view;
     }
-
-    @Subscribe(sticky = true)
-    public void onEvent(ColumnEvent event) {
-        mMainPagerAdapter.notifyDataSetChanged();
-        EventBus.getDefault().removeStickyEvent(event);
-    }
     
     @Override
     public void onStart() {
@@ -76,6 +70,12 @@ public class MainFragment extends Fragment {
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(sticky = true)
+    public void onEvent(ColumnEvent event) {
+        mMainPagerAdapter.notifyDataSetChanged();
+        EventBus.getDefault().removeStickyEvent(event);
     }
 
     private void setAppIcon(View view) {

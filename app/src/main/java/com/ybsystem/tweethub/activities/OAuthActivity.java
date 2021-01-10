@@ -41,7 +41,7 @@ public class OAuthActivity extends ActivityBase {
                 // Disable flag to not tap continuously
                 mClickEnable = false;
 
-                // Enable flag after 3 sec with timer
+                // Enable flag after 3 seconds
                 new Handler().postDelayed(() ->
                         mClickEnable = true,
                         3000

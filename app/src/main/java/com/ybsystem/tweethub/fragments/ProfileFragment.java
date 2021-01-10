@@ -63,11 +63,6 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
-    @Subscribe
-    public void onEvent(UserEvent event) {
-        setFollowButton(getView());
-    }
-
     @Override
     public void onStart() {
         super.onStart();
@@ -78,6 +73,11 @@ public class ProfileFragment extends Fragment {
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onEvent(UserEvent event) {
+        setFollowButton(getView());
     }
 
     private void setUserInfo(View view) {

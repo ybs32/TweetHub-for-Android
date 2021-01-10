@@ -45,12 +45,6 @@ public class PostActivity extends ActivityBase {
         setPostFragment(savedInstanceState);
     }
 
-    @Subscribe
-    public void onEvent(PostEvent event) {
-        finish();
-        overridePendingTransition(R.anim.none, R.anim.fade_out_to_bottom);
-    }
-
     @Override
     public void onStart() {
         super.onStart();
@@ -61,6 +55,12 @@ public class PostActivity extends ActivityBase {
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onEvent(PostEvent event) {
+        finish();
+        overridePendingTransition(R.anim.none, R.anim.fade_out_to_bottom);
     }
 
     @Override
