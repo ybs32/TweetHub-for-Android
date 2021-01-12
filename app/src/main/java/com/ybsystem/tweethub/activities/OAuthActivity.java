@@ -114,6 +114,7 @@ public class OAuthActivity extends ActivityBase {
         // Do nothing if not authorized
         if (intent == null
                 || intent.getData() == null
+                || intent.getData().toString().contains("denied=")
                 || !intent.getData().toString().startsWith(getString(R.string.callback_url))) {
             return;
         }
