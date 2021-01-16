@@ -27,7 +27,7 @@ public class AccountArrayAdapter extends ArrayAdapter<Account> {
                     .inflate(R.layout.list_item_common, parent, false);
         }
 
-        // Find view
+        // Find
         ImageView image = cv.findViewById(R.id.image_item);
         TextView text = cv.findViewById(R.id.text_item);
 

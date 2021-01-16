@@ -73,18 +73,17 @@ public class DrawerArrayAdapter extends ArrayAdapter<Integer> {
             tv.setLayoutParams(titleMargin);
         }
 
-        // Set contents
+        // Set item
         setItemByPosition(cv, position);
 
         return cv;
     }
 
     private void setItemByPosition(View cv, int position) {
-        // Init
+        // Find
         ImageView iv = cv.findViewById(R.id.image_item);
         TextView tv = cv.findViewById(R.id.text_item);
 
-        // Set each items
         switch (position) {
             case 1:
                 tv.setText("ホーム");
@@ -202,9 +201,9 @@ public class DrawerArrayAdapter extends ArrayAdapter<Integer> {
         });
 
         // Show dialog
-        FragmentManager manager = act.getSupportFragmentManager();
-        if (manager.findFragmentByTag("AccountDialog") == null) {
-            dialog.show(manager, "AccountDialog");
+        FragmentManager fm = act.getSupportFragmentManager();
+        if (fm.findFragmentByTag("AccountDialog") == null) {
+            dialog.show(fm, "AccountDialog");
         }
     }
 

@@ -35,7 +35,6 @@
             android:key="@string/pref_key_retweet_color"
             android:title="リツイート"
             app:cpv_allowPresets="false"
-            app:cpv_colorShape="square"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
             app:iconSpaceReserved="false" />
@@ -45,7 +44,6 @@
             android:key="@string/pref_key_reply_color"
             android:title="自分宛の返信"
             app:cpv_allowPresets="false"
-            app:cpv_colorShape="square"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
             app:iconSpaceReserved="false" />
@@ -55,7 +53,6 @@
             android:key="@string/pref_key_mytweet_color"
             android:title="自分のツイート"
             app:cpv_allowPresets="false"
-            app:cpv_colorShape="square"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
             app:iconSpaceReserved="false" />
@@ -71,7 +68,6 @@
             android:key="@string/pref_key_username_color"
             android:title="ユーザー名"
             app:cpv_allowPresets="false"
-            app:cpv_colorShape="square"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
             app:iconSpaceReserved="false" />
@@ -81,7 +77,6 @@
             android:key="@string/pref_key_relativetime_color"
             android:title="相対時刻"
             app:cpv_allowPresets="false"
-            app:cpv_colorShape="square"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
             app:iconSpaceReserved="false" />
@@ -91,7 +86,6 @@
             android:key="@string/pref_key_tweettext_color"
             android:title="ツイート本文"
             app:cpv_allowPresets="false"
-            app:cpv_colorShape="square"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
             app:iconSpaceReserved="false" />
@@ -101,7 +95,6 @@
             android:key="@string/pref_key_link_color"
             android:title="URL・ハッシュタグ"
             app:cpv_allowPresets="false"
-            app:cpv_colorShape="square"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
             app:iconSpaceReserved="false" />
@@ -117,7 +110,6 @@
             android:key="@string/pref_key_absolutetime_color"
             android:title="絶対時刻"
             app:cpv_allowPresets="false"
-            app:cpv_colorShape="square"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
             app:iconSpaceReserved="false" />
@@ -127,7 +119,6 @@
             android:key="@string/pref_key_via_color"
             android:title="クライアント名"
             app:cpv_allowPresets="false"
-            app:cpv_colorShape="square"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
             app:iconSpaceReserved="false" />
@@ -137,7 +128,6 @@
             android:key="@string/pref_key_rtfav_color"
             android:title="リツイート数・いいね数"
             app:cpv_allowPresets="false"
-            app:cpv_colorShape="square"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
             app:iconSpaceReserved="false" />
@@ -147,7 +137,6 @@
             android:key="@string/pref_key_retweetedby_color"
             android:title="Retweeted by"
             app:cpv_allowPresets="false"
-            app:cpv_colorShape="square"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
             app:iconSpaceReserved="false" />

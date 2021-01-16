@@ -50,9 +50,7 @@ public class UserRow extends RecyclerView.ViewHolder {
 
         // Apply app settings
         applyAppearanceSetting();
-        if (PrefTheme.isCustomThemeEnabled()) {
-            applyCustomThemeSetting();
-        }
+        applyCustomThemeSetting();
     }
 
     public void setUser(TwitterUser user) {
@@ -159,6 +157,10 @@ public class UserRow extends RecyclerView.ViewHolder {
     }
 
     private void applyCustomThemeSetting() {
+        // Check
+        if (!PrefTheme.isCustomThemeEnabled()) {
+            return;
+        }
         // Set tweet color
         this.mUserName.setTextColor(PrefTheme.getUserNameColor());
         this.mScreenName.setTextColor(PrefTheme.getUserNameColor());

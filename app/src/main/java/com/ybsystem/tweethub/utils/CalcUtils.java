@@ -14,7 +14,7 @@ public class CalcUtils {
     }
 
     /**
-     * Convert dp size to pixel
+     * Convert dp to pixel
      * @param dp DP size
      * @return Pixel size
      */
@@ -24,6 +24,11 @@ public class CalcUtils {
         return (int) (dp * metrics.density);
     }
 
+    /**
+     * Convert dp to sp
+     * @param dp DP size
+     * @return SP size
+     */
     public static int convertDp2Sp(int dp) {
         Resources res = TweetHubApp.getInstance().getResources();
         DisplayMetrics metrics = res.getDisplayMetrics();

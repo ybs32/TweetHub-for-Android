@@ -13,13 +13,11 @@ public class TrendTopicPagerAdapter extends FragmentPagerAdapter {
         super(manager);
     }
 
-    // ページ数
     @Override
     public int getCount() {
         return 2;
     }
 
-    // ページタイトル
     @Override
     public CharSequence getPageTitle(int position) {
 
@@ -32,7 +30,6 @@ public class TrendTopicPagerAdapter extends FragmentPagerAdapter {
         return null;
     }
 
-    // 各ページ
     @Override
     public Fragment getItem(int position) {
 

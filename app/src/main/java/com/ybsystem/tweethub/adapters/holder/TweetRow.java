@@ -95,7 +95,7 @@ public class TweetRow extends RecyclerView.ViewHolder {
         // ButterKnife
         ButterKnife.bind(this, itemView);
 
-        // Init variables
+        // Init
         this.mThumbnails = new ArrayList<>();
         this.mThumbnails.add(mThumbnail1);
         this.mThumbnails.add(mThumbnail2);
@@ -104,9 +104,7 @@ public class TweetRow extends RecyclerView.ViewHolder {
 
         // Apply app settings
         applyAppearanceSetting();
-        if (PrefTheme.isCustomThemeEnabled()) {
-            applyCustomThemeSetting();
-        }
+        applyCustomThemeSetting();
     }
 
     public void setStatus(TwitterStatus status) {
@@ -129,17 +127,17 @@ public class TweetRow extends RecyclerView.ViewHolder {
         String rtUserIconURL = PrefSystem.getProfileThumbByQuality(mStatus.getUser());
         ImageOption option = ImageOption.toEnum(PrefAppearance.getUserIconStyle());
 
-        if (!mStatus.isRetweet()) {
-            // When tweet
-            this.mRtUserIcon.setVisibility(View.GONE);
-            this.mRtArrowIcon.setVisibility(View.GONE);
-            GlideUtils.load(userIconURL, this.mUserIcon, option);
-        } else {
+        if (mStatus.isRetweet()) {
             // When retweet
             this.mRtUserIcon.setVisibility(View.VISIBLE);
             this.mRtArrowIcon.setVisibility(View.VISIBLE);
             GlideUtils.load(userIconURL, this.mUserIcon, option);
             GlideUtils.load(rtUserIconURL, this.mRtUserIcon, option);
+        } else {
+            // When tweet
+            this.mRtUserIcon.setVisibility(View.GONE);
+            this.mRtArrowIcon.setVisibility(View.GONE);
+            GlideUtils.load(userIconURL, this.mUserIcon, option);
         }
     }
 
@@ -361,6 +359,10 @@ public class TweetRow extends RecyclerView.ViewHolder {
     }
 
     private void applyCustomThemeSetting() {
+        // Check
+        if (!PrefTheme.isCustomThemeEnabled()) {
+            return;
+        }
         // Set tweet color
         this.mUserName.setTextColor(PrefTheme.getUserNameColor());
         this.mScreenName.setTextColor(PrefTheme.getUserNameColor());

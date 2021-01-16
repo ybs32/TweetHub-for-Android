@@ -50,11 +50,11 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        // Set contents
+        // Set
         setAppIcon(view);
         setMainTlPager(view);
 
-        // Fetch twitter user
+        // Fetch
         fetchMyTwitterUser();
 
         return view;
@@ -79,10 +79,10 @@ public class MainFragment extends Fragment {
     }
 
     private void setAppIcon(View view) {
-        // Find view
+        // Find
         ImageView icon = view.findViewById(R.id.image_app_icon);
 
-        // Set click listener
+        // Set icon clicked
         icon.setOnClickListener(v -> {
             DrawerLayout drawer = view.findViewById(R.id.drawer_layout);
             int g = GravityCompat.START;
@@ -92,7 +92,7 @@ public class MainFragment extends Fragment {
                 drawer.openDrawer(g);
             }
         });
-        // Set drawable resource
+        // Set icon image
         switch (PrefTheme.getTheme()) {
             case "LIGHT":
                 icon.setImageResource(R.drawable.ic_launcher);
@@ -116,14 +116,15 @@ public class MainFragment extends Fragment {
         tabLayout.setupWithViewPager(mMainTlPager);
         ViewGroup vg = (ViewGroup) tabLayout.getChildAt(0);
 
-        // Process for each tabs
+        // For each tab
         for (int i = 0; i < TweetHubApp.getMyAccount().getColumns().size(); i++) {
-            // When tab clicked
+            // Text adjust
             TextView tv = (TextView) ((LinearLayout) vg.getChildAt(i)).getChildAt(1);
             tv.setMaxEms(5);
             tv.setSingleLine();
             tv.setEllipsize(TextUtils.TruncateAt.END);
 
+            // When tab clicked
             final int TAB_NUM = i;
             vg.getChildAt(i).setOnClickListener(v -> {
                 // If current tab clicked, move top of the timeline

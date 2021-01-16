@@ -110,8 +110,6 @@ public class TimelineActivity extends ActivityBase {
                         new Column(-1, "", BLOCK, false)
                 );
                 break;
-            default:
-                break;
         }
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

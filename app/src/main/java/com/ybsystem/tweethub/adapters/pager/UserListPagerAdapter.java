@@ -25,13 +25,11 @@ public class UserListPagerAdapter extends FragmentPagerAdapter {
         this.mUserList = userList;
     }
 
-    // ページ数
     @Override
     public int getCount() {
         return 3;
     }
 
-    // ページタイトル
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position) {
@@ -45,7 +43,6 @@ public class UserListPagerAdapter extends FragmentPagerAdapter {
         return null;
     }
 
-    // 各ページ
     @Override
     public Fragment getItem(int position) {
         switch (position) {

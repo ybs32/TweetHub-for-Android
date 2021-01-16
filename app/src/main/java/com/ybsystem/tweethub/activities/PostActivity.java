@@ -66,12 +66,11 @@ public class PostActivity extends ActivityBase {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.post, menu);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             // 下書き保存
             case R.id.item_draft:
@@ -79,16 +78,15 @@ public class PostActivity extends ActivityBase {
                 EditText edit = findViewById(R.id.edit_post);
                 if (edit.length() == 0) {
                     ToastUtils.showShortToast("文字が入力されていません。");
-                    return false;
+                    return true;
                 }
                 // Save draft
                 EntityArray<String> drafts = TweetHubApp.getMyAccount().getDrafts();
                 drafts.add(edit.getText().toString());
                 ToastUtils.showShortToast("下書きを保存しました。");
                 return true;
-            default:
-                return false;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

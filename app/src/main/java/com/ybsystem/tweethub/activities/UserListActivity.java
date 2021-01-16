@@ -67,19 +67,18 @@ public class UserListActivity extends ActivityBase {
         this.mMenu = menu;
         getMenuInflater().inflate(R.menu.userlist, menu);
         updateMenu();
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
+            // 購読する
             case R.id.item_subscribe:
                 UserUseCase.subscribeList(mUserList);
                 return true;
-            default:
-                return false;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setUserListPager() {

@@ -90,6 +90,9 @@ public class StorageUtils {
         return file;
     }
 
+    /**
+     * Check if storage permitted
+     */
     public static boolean isPermitted(Context context) {
         int read = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE);
         int write = ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -98,12 +101,16 @@ public class StorageUtils {
                 && write == PackageManager.PERMISSION_GRANTED;
     }
 
+    /**
+     * Request storage permission
+     */
     public static void requestPermission(Activity activity) {
         ToastUtils.showShortToast("アクセス許可が必要です。");
-        new Handler().postDelayed(() ->
-                ActivityCompat.requestPermissions(activity, new String[]{
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0), 1500);
+        new Handler().postDelayed(() -> {
+            ActivityCompat.requestPermissions(activity, new String[]{
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+        }, 1500);
     }
 
 }
