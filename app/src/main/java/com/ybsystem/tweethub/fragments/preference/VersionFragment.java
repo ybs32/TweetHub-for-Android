@@ -22,7 +22,10 @@ public class VersionFragment extends Fragment {
     private void setVersionText(View view) {
         String newVersion = getString(R.string.app_update_info);
         String oldVersion =
-                "Ver.1.3.0\n" +
+                "Ver.1.3.1\n" +
+                        "・画像ツイートに失敗する不具合を修正\n" +
+                        "\n" +
+                        "Ver.1.3.0\n" +
                         "・タイムライン上でのツイート機能を実装\n" +
                         "・検索画面でツイートを可能に更新\n" +
                         "・デフォルトの背景色を一部修正\n" +
