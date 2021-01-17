@@ -1,9 +1,10 @@
 package com.ybsystem.tweethub.models.entities.twitter;
 
-import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+
+import androidx.core.text.HtmlCompat;
 
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.models.entities.Entity;
@@ -24,6 +25,8 @@ import twitter4j.URLEntity;
 import twitter4j.User;
 import twitter4j.UserMentionEntity;
 import twitter4j.util.TimeSpanConverter;
+
+import static androidx.core.text.HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -183,7 +186,7 @@ public class TwitterStatus extends Entity {
                 int end = url.getEnd();
                 start += offset;
                 end += offset;
-                if (start < ssb.length()) {
+                if (ssb.length() > start && ssb.length() >= end) {
                     String displayURL = url.getDisplayURL();
                     ssb.replace(start, end, displayURL);
                     ssb.setSpan(new ForegroundColorSpan(color), start, start + displayURL.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -201,17 +204,19 @@ public class TwitterStatus extends Entity {
                 start += offset;
                 end += offset;
             }
-            if (PrefAppearance.isShowThumbnail()) {
-                ssb.replace(start, end, "");
-            } else {
-                String displayURL = medias[0].getDisplayURL();
-                ssb.replace(start, end, displayURL);
-                ssb.setSpan(new ForegroundColorSpan(color), start, start + displayURL.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            if (ssb.length() > start && ssb.length() >= end) {
+                if (PrefAppearance.isShowThumbnail()) {
+                    ssb.replace(start, end, "");
+                } else {
+                    String displayURL = medias[0].getDisplayURL();
+                    ssb.replace(start, end, displayURL);
+                    ssb.setSpan(new ForegroundColorSpan(color), start, start + displayURL.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
             }
         }
 
         // Convert to string
-        String htmlText = Html.toHtml(ssb);
+        String htmlText = HtmlCompat.toHtml(ssb, TO_HTML_PARAGRAPH_LINES_CONSECUTIVE);
         htmlText = htmlText.replaceAll("\n", "");
         htmlText = htmlText.replaceFirst("(?s)" + "<p dir=\"ltr\">" + "(?!.*?" + "<p dir=\"ltr\">" + ")", "");
         htmlText = htmlText.replaceFirst("(?s)" + "</p>" + "(?!.*?" + "</p>" + ")", "");
