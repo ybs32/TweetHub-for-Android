@@ -21,13 +21,11 @@ public class ProfilePagerAdapter extends FragmentPagerAdapter {
         this.mUser = user;
     }
 
-    // ページ数
     @Override
     public int getCount() {
         return 3;
     }
 
-    // ページタイトル
     @Override
     public CharSequence getPageTitle(int position) {
 
@@ -42,7 +40,6 @@ public class ProfilePagerAdapter extends FragmentPagerAdapter {
         return null;
     }
 
-    // 各ページ
     @Override
     public Fragment getItem(int position) {
 

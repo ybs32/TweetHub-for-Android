@@ -53,7 +53,7 @@ public class SearchActivity extends ActivityBase {
         // Init
         mSearchWord = getIntent().getStringExtra("SEARCH_WORD");
 
-        // Set contents
+        // Set
         setContentView(R.layout.activity_search);
         setTweetAction(savedInstanceState);
 
@@ -74,21 +74,18 @@ public class SearchActivity extends ActivityBase {
         if (mSearchWord != null) {
             getMenuInflater().inflate(R.menu.search, menu);
         }
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
-
         switch (item.getItemId()) {
             // カラム追加
             case R.id.item_add_column:
                 showAddDialog();
                 return true;
-            default:
-                return false;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -98,8 +95,6 @@ public class SearchActivity extends ActivityBase {
         switch (resultCode) {
             case REBOOT_PREPARATION:
                 setResult(REBOOT_PREPARATION);
-                break;
-            default:
                 break;
         }
     }

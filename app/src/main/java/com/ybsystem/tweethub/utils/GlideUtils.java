@@ -38,8 +38,6 @@ public class GlideUtils {
                 options.placeholder(R.drawable.loading_thumbnail_circle);
                 options.circleCrop();
                 break;
-            default:
-                break;
         }
 
         GlideApp.with(view)

@@ -20,19 +20,16 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
         this.mColumns = TweetHubApp.getMyAccount().getColumns();
     }
 
-    // ページ数
     @Override
     public int getCount() {
         return mColumns.size();
     }
 
-    // ページタイトル
     @Override
     public CharSequence getPageTitle(int position) {
         return mColumns.get(position).getName();
     }
 
-    // 各ページ
     @Override
     public Fragment getItem(int position) {
         Column column = mColumns.get(position);

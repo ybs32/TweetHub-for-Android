@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -37,9 +38,10 @@ import java.util.ArrayList;
 import static com.ybsystem.tweethub.models.enums.ImageOption.*;
 
 public class PhotoActivity extends ActivityBase {
-
+    // Pager
     private ViewPager mPhotoPager;
 
+    // Intent
     private String mType; // "PROFILE", "BANNER", "MEDIA"
     private int mSize; // 0(:small), 1(:medium), 2(:large), 3(:orig)
     private int mPagerPosition;
@@ -49,7 +51,7 @@ public class PhotoActivity extends ActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Set view
+        // Set
         setContentView(R.layout.activity_photo);
         mPhotoPager = (PhotoViewPager) findViewById(R.id.view_pager);
         setContentView(mPhotoPager);
@@ -62,33 +64,38 @@ public class PhotoActivity extends ActivityBase {
 
         // Set contents
         setPhotoPager();
-        getSupportActionBar().setTitle("フォト (" + (mPagerPosition + 1) + "/" + mImageURLs.size() + ")");
+        setActionBarTitle();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.photo, menu);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
-
         switch (item.getItemId()) {
-            case R.id.item_save: // 保存する
-                // Check permission
+            // 保存する
+            case R.id.item_save:
                 if (!StorageUtils.isPermitted(this)) {
                     StorageUtils.requestPermission(this);
-                    return false;
+                    return true;
                 }
                 showQualitySelection(true);
                 return true;
-            case R.id.item_resize: // 他サイズで表示
+            // 他サイズで表示
+            case R.id.item_resize:
                 showQualitySelection(false);
                 return true;
-            default:
-                return false;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setActionBarTitle() {
+        ActionBar bar = getSupportActionBar();
+        if (bar != null) {
+            bar.setTitle("フォト (" + (mPagerPosition + 1) + "/" + mImageURLs.size() + ")");
         }
     }
 
@@ -99,7 +106,7 @@ public class PhotoActivity extends ActivityBase {
             @Override
             public void onPageSelected(int position) {
                 mPagerPosition = position;
-                getSupportActionBar().setTitle("フォト (" + (mPagerPosition + 1) + "/" + mImageURLs.size() + ")");
+                setActionBarTitle();
             }
 
             @Override
@@ -186,9 +193,9 @@ public class PhotoActivity extends ActivityBase {
             dialog.dismiss();
         });
 
-        FragmentManager manager = getSupportFragmentManager();
-        if (manager.findFragmentByTag("ListDialog") == null) {
-            dialog.show(manager, "ListDialog");
+        FragmentManager fm = getSupportFragmentManager();
+        if (fm.findFragmentByTag("ListDialog") == null) {
+            dialog.show(fm, "ListDialog");
         }
     }
 
@@ -229,7 +236,9 @@ public class PhotoActivity extends ActivityBase {
                 // Close
                 try {
                     if (out != null) out.close();
-                } catch (Exception ignored) {}
+                } catch (Exception ignored) {
+                    // Ignored
+                }
             }
         }
 

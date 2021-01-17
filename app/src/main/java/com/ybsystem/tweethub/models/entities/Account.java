@@ -16,6 +16,7 @@ public class Account extends Entity {
     private EntityArray<UserList> lists;
     private EntityArray<String> drafts;
     private EntityArray<String> hashtags;
+
     private boolean isCurrentAccount;
 
     public void setUser(TwitterUser user) {

@@ -34,15 +34,12 @@ public abstract class ActivityBase extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
-                break;
-            default:
-                break;
+                return true;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -73,8 +70,6 @@ public abstract class ActivityBase extends AppCompatActivity {
             case "activities.preference.VersionActivity":
                 overridePendingTransition(R.anim.zoom_in, R.anim.slide_out_to_right);
                 break;
-            default:
-                break;
         }
     }
 
@@ -85,8 +80,6 @@ public abstract class ActivityBase extends AppCompatActivity {
                 break;
             case "DARK":
                 setTheme(R.style.DarkTheme);
-                break;
-            default:
                 break;
         }
     }
@@ -114,8 +107,6 @@ public abstract class ActivityBase extends AppCompatActivity {
             case "activities.preference.AboutActivity":
             case "activities.preference.VersionActivity":
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                break;
-            default:
                 break;
         }
     }

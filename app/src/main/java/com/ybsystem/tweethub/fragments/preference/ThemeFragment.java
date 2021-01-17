@@ -3,8 +3,8 @@ package com.ybsystem.tweethub.fragments.preference;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Html;
 
+import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -19,6 +19,7 @@ import com.ybsystem.tweethub.utils.ResourceUtils;
 
 import java.util.ArrayList;
 
+import static androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT;
 import static com.ybsystem.tweethub.activities.preference.SettingActivity.*;
 import static com.ybsystem.tweethub.storages.PrefTheme.*;
 
@@ -95,8 +96,6 @@ public class ThemeFragment extends PreferenceFragmentBase {
             case "DARK":
                 getActivity().setTheme(R.style.DarkTheme);
                 break;
-            default:
-                break;
         }
         // Init custom colors
         mCustom.setChecked(false);
@@ -119,7 +118,9 @@ public class ThemeFragment extends PreferenceFragmentBase {
 
         // Change dependency item's text color
         for (Preference pref : mDependencyList) {
-            pref.setTitle(Html.fromHtml("<font color = " + color + ">" + pref.getTitle() + "</font>"));
+            pref.setTitle(HtmlCompat.fromHtml(
+                    "<font color = " + color + ">"+ pref.getTitle() + "</font>", FROM_HTML_MODE_COMPACT)
+            );
         }
     }
 

@@ -26,7 +26,7 @@ public class ThumbnailClickListener implements View.OnClickListener {
     public void onClick(View view){
         // Prepare
         Intent intent;
-        Activity activity = (Activity) view.getContext();
+        Activity act = (Activity) view.getContext();
 
         // Check media type
         String mediaType = mMediaEntities[0].getType();
@@ -37,19 +37,19 @@ public class ThumbnailClickListener implements View.OnClickListener {
                 String url = PrefSystem.getMediaByQuality(entity.getMediaURL());
                 imageURLs.add(url);
             }
-            intent = new Intent(activity, PhotoActivity.class);
+            intent = new Intent(act, PhotoActivity.class);
             intent.putExtra("TYPE", "MEDIA");
             intent.putExtra("PAGER_POSITION", mPosition);
             intent.putExtra("IMAGE_URLS", imageURLs);
         } else {
             // Video
-            intent = new Intent(activity, VideoActivity.class);
+            intent = new Intent(act, VideoActivity.class);
             intent.putExtra("MEDIA_ENTITY", mMediaEntities[0]);
         }
 
         // Start activity
-        activity.startActivity(intent);
-        activity.overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
+        act.startActivity(intent);
+        act.overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
     }
 
 }

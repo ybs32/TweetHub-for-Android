@@ -72,9 +72,9 @@ public class MainActivity extends ActivityBase
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        DrawerLayout d = findViewById(R.id.drawer_layout);
+        if (d.isDrawerOpen(GravityCompat.START)) {
+            d.closeDrawer(GravityCompat.START);
         } else if (PrefSystem.getConfirmSettings().contains(FINISH)) {
             showConfirmDialog();
         } else {
@@ -105,8 +105,6 @@ public class MainActivity extends ActivityBase
                 startActivityForResult(intent, 0);
                 overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
                 break;
-            default:
-                break;
         }
         mRfaHelper.toggleContent();
     }
@@ -127,8 +125,6 @@ public class MainActivity extends ActivityBase
                     ToastUtils.showShortToast("設定を適用しました。");
                     ActivityUtils.rebootActivity(MainActivity.this, 0, 0);
                 }, 1500);
-                break;
-            default:
                 break;
         }
     }
@@ -152,7 +148,6 @@ public class MainActivity extends ActivityBase
     }
 
     private void setTweetAction(Bundle savedInstanceState) {
-        // Check setting
         if (PrefSystem.isEasyTweetEnabled()) {
             // EasyTweet
             if (savedInstanceState == null) {
@@ -247,9 +242,9 @@ public class MainActivity extends ActivityBase
                 (d, which) -> finish()
         );
         // Show dialog
-        FragmentManager manager = getSupportFragmentManager();
-        if (manager.findFragmentByTag("ConfirmDialog") == null) {
-            dialog.show(manager, "ConfirmDialog");
+        FragmentManager fm = getSupportFragmentManager();
+        if (fm.findFragmentByTag("ConfirmDialog") == null) {
+            dialog.show(fm, "ConfirmDialog");
         }
     }
 
@@ -273,9 +268,9 @@ public class MainActivity extends ActivityBase
         });
 
         // Show dialog
-        FragmentManager manager = getSupportFragmentManager();
-        if (manager.findFragmentByTag("AccountDialog") == null) {
-            dialog.show(manager, "AccountDialog");
+        FragmentManager fm = getSupportFragmentManager();
+        if (fm.findFragmentByTag("AccountDialog") == null) {
+            dialog.show(fm, "AccountDialog");
         }
     }
 

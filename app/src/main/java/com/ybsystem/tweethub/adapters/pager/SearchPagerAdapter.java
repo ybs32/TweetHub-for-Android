@@ -16,13 +16,11 @@ public class SearchPagerAdapter extends FragmentPagerAdapter {
         this.mSearchWord = searchWord;
     }
 
-    // ページ数
     @Override
     public int getCount() {
         return 3;
     }
 
-    // ページタイトル
     @Override
     public CharSequence getPageTitle(int position) {
 
@@ -37,7 +35,6 @@ public class SearchPagerAdapter extends FragmentPagerAdapter {
         return null;
     }
 
-    // 各ページ
     @Override
     public Fragment getItem(int position) {
         switch (position) {

@@ -54,8 +54,10 @@ public class ProfileActivity extends ActivityBase {
         // Init
         long userId = getIntent().getLongExtra("USER_ID", 0);
 
-        // Fetch user
+        // Set
         setContentView(R.layout.activity_profile);
+
+        // Fetch user
         fetchTwitterUser(userId, savedInstanceState);
     }
 
@@ -80,12 +82,11 @@ public class ProfileActivity extends ActivityBase {
     public boolean onCreateOptionsMenu(Menu menu) {
         this.mMenu = menu;
         getMenuInflater().inflate(R.menu.profile, menu);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             // ミュート
             case R.id.item_mute:
@@ -111,9 +112,8 @@ public class ProfileActivity extends ActivityBase {
             case R.id.item_browser:
                 ClickUseCase.openUser(mUser);
                 return true;
-            default:
-                return false;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     private void fetchTwitterUser(long userId, Bundle savedInstanceState) {
