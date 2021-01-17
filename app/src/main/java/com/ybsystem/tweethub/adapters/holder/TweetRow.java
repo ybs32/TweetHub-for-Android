@@ -1,12 +1,12 @@
 package com.ybsystem.tweethub.adapters.holder;
 
-import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.core.text.HtmlCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ybsystem.tweethub.R;
@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT;
 import static com.ybsystem.tweethub.models.enums.ImageOption.*;
 
 public class TweetRow extends RecyclerView.ViewHolder {
@@ -142,7 +143,7 @@ public class TweetRow extends RecyclerView.ViewHolder {
     }
 
     public void setTweetText() {
-        this.mTweetText.setText(Html.fromHtml(mSource.getConvertedText()));
+        this.mTweetText.setText(HtmlCompat.fromHtml(mSource.getConvertedText(), FROM_HTML_MODE_COMPACT));
     }
 
     public void setRelativeTime() {
@@ -261,7 +262,7 @@ public class TweetRow extends RecyclerView.ViewHolder {
         TwitterStatus qtStatus = mSource.getQtStatus();
         this.mQuoteUserName.setText(qtStatus.getUser().getName());
         this.mQuoteScreenName.setText("@" + qtStatus.getUser().getScreenName());
-        this.mQuoteTweetText.setText(Html.fromHtml(qtStatus.getConvertedText()));
+        this.mQuoteTweetText.setText(HtmlCompat.fromHtml(qtStatus.getConvertedText(), FROM_HTML_MODE_COMPACT));
         this.mQuoteRelativeTime.setText(qtStatus.getConvertedRelativeTime());
         this.mQuoteContainer.setVisibility(View.VISIBLE);
         this.mQuoteContainer.setOnClickListener(new TweetClickListener(qtStatus, ClickAction.DETAIL));
