@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/item_saved_search"
+        android:title="保存した検索" />
+    <item
+        android:id="@+id/item_save_search"
+        android:title="検索を保存" />
+    <item
         android:id="@+id/item_add_column"
         android:title="カラムに追加" />
 </menu>
