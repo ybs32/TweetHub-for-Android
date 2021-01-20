@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
@@ -20,29 +21,43 @@ import com.ybsystem.tweethub.adapters.pager.SearchPagerAdapter;
 import com.ybsystem.tweethub.adapters.pager.TrendTopicPagerAdapter;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.fragments.EasyTweetFragment;
+import com.ybsystem.tweethub.fragments.dialog.ListDialog;
 import com.ybsystem.tweethub.libs.eventbus.ColumnEvent;
 import com.ybsystem.tweethub.models.entities.Column;
 import com.ybsystem.tweethub.models.entities.ColumnArray;
 import com.ybsystem.tweethub.storages.PrefSystem;
 import com.ybsystem.tweethub.usecases.ClickUseCase;
+import com.ybsystem.tweethub.usecases.SearchUseCase;
 import com.ybsystem.tweethub.utils.DialogUtils;
+import com.ybsystem.tweethub.utils.ExceptionUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.observers.DisposableObserver;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import twitter4j.ResponseList;
+import twitter4j.SavedSearch;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
 
 import static com.ybsystem.tweethub.activities.preference.SettingActivity.*;
 import static com.ybsystem.tweethub.models.enums.ColumnType.SEARCH;
 
 public class SearchActivity extends ActivityBase {
 
-    // SearchWord
-    private String mSearchWord;
+    // Menu
+    private Menu mMenu;
 
     // Trend/Topic
+    private EditText mSearchEdit;
     private ViewPager mTrendTopicPager;
     private TrendTopicPagerAdapter mTrendTopicPagerAdapter;
 
     // Search
+    private String mSearchWord;
     private ViewPager mSearchPager;
     private SearchPagerAdapter mSearchPagerAdapter;
 
@@ -60,8 +75,8 @@ public class SearchActivity extends ActivityBase {
         // Check if search word exists
         if (mSearchWord == null) {
             // Trend/Topic
-            setSearchEditText();
             setTrendTopicPager();
+            setSearchEditActionBar();
         } else {
             // Search result
             setSearchPager();
@@ -71,15 +86,23 @@ public class SearchActivity extends ActivityBase {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (mSearchWord != null) {
-            getMenuInflater().inflate(R.menu.search, menu);
-        }
+        this.mMenu = menu;
+        getMenuInflater().inflate(R.menu.search, menu);
+        updateMenu();
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            // 保存した検索
+            case R.id.item_saved_search:
+                fetchSavedSearch();
+                return true;
+            // 検索を保存
+            case R.id.item_save_search:
+                SearchUseCase.saveSearch(mSearchWord);
+                return true;
             // カラム追加
             case R.id.item_add_column:
                 showAddDialog();
@@ -97,6 +120,35 @@ public class SearchActivity extends ActivityBase {
                 setResult(REBOOT_PREPARATION);
                 break;
         }
+    }
+
+    private void updateMenu() {
+        MenuItem savedSearch = mMenu.findItem(R.id.item_saved_search);
+        MenuItem saveSearch = mMenu.findItem(R.id.item_save_search);
+        MenuItem addColumn = mMenu.findItem(R.id.item_add_column);
+
+        if (mSearchWord == null) {
+            saveSearch.setVisible(false);
+            addColumn.setVisible(false);
+        } else {
+            savedSearch.setVisible(false);
+        }
+    }
+
+    private void setTrendTopicPager() {
+        // Set trend/topic pager
+        mTrendTopicPager = findViewById(R.id.pager_common);
+        mTrendTopicPager.setOffscreenPageLimit(2);
+        mTrendTopicPagerAdapter = new TrendTopicPagerAdapter(getSupportFragmentManager());
+        mTrendTopicPager.setAdapter(mTrendTopicPagerAdapter);
+    }
+
+    private void setSearchPager() {
+        // Set search pager
+        mSearchPager = findViewById(R.id.pager_common);
+        mSearchPager.setOffscreenPageLimit(3);
+        mSearchPagerAdapter = new SearchPagerAdapter(getSupportFragmentManager(), mSearchWord);
+        mSearchPager.setAdapter(mSearchPagerAdapter);
     }
 
     private void setTweetAction(Bundle savedInstanceState) {
@@ -121,23 +173,7 @@ public class SearchActivity extends ActivityBase {
         }
     }
 
-    private void setTrendTopicPager() {
-        // Set trend/topic pager
-        mTrendTopicPager = findViewById(R.id.pager_common);
-        mTrendTopicPager.setOffscreenPageLimit(2);
-        mTrendTopicPagerAdapter = new TrendTopicPagerAdapter(getSupportFragmentManager());
-        mTrendTopicPager.setAdapter(mTrendTopicPagerAdapter);
-    }
-
-    private void setSearchPager() {
-        // Set search pager
-        mSearchPager = findViewById(R.id.pager_common);
-        mSearchPager.setOffscreenPageLimit(3);
-        mSearchPagerAdapter = new SearchPagerAdapter(getSupportFragmentManager(), mSearchWord);
-        mSearchPager.setAdapter(mSearchPagerAdapter);
-    }
-
-    private void setSearchEditText() {
+    private void setSearchEditActionBar() {
         // Set custom actionbar
         ViewGroup root = findViewById(android.R.id.content);
         View view = getLayoutInflater().inflate(R.layout.actionbar_search, root, false);
@@ -145,18 +181,17 @@ public class SearchActivity extends ActivityBase {
         getSupportActionBar().setDisplayShowCustomEnabled(true);
 
         // Set edit text
-        EditText edit = view.findViewById(R.id.edit_search);
-        edit.setOnKeyListener((v, keyCode, event) -> {
+        mSearchEdit = view.findViewById(R.id.edit_search);
+        mSearchEdit.setOnKeyListener((v, keyCode, event) -> {
             // When pressed enter
-            if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                if (edit.length() != 0) {
-                    // Close keyboard
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            if (mSearchEdit.length() != 0 && keyCode == KeyEvent.KEYCODE_ENTER
+                    && event.getAction() == KeyEvent.ACTION_DOWN) {
+                // Close keyboard
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
-                    // Intent to SearchActivity
-                    ClickUseCase.searchWord(edit.getText().toString());
-                }
+                // Intent to SearchActivity
+                ClickUseCase.searchWord(mSearchEdit.getText().toString());
                 return true;
             }
             return false;
@@ -169,7 +204,7 @@ public class SearchActivity extends ActivityBase {
             return;
         }
         DialogUtils.showConfirmDialog(
-                "検索結果をカラムに追加しますか？",
+                "カラムに追加しますか？",
                 (dialog, which) -> {
                     // Add column
                     ColumnArray<Column> columns = TweetHubApp.getMyAccount().getColumns();
@@ -185,6 +220,76 @@ public class SearchActivity extends ActivityBase {
                     setResult(REBOOT_PREPARATION);
                 }
         );
+    }
+
+    private void fetchSavedSearch() {
+        Observable<ResponseList<SavedSearch>> observable = Observable.create(e -> {
+            // Fetch
+            Twitter twitter = TweetHubApp.getTwitter();
+            ResponseList<SavedSearch> rl = twitter.getSavedSearches();
+
+            // Check
+            if (rl != null) {
+                e.onNext(rl);
+            }
+            e.onComplete();
+        });
+
+        DisposableObserver<ResponseList<SavedSearch>> disposable
+                = new DisposableObserver<ResponseList<SavedSearch>>() {
+            @Override
+            public void onNext(ResponseList<SavedSearch> rl) {
+                // Check empty
+                if (rl.isEmpty()) {
+                    ToastUtils.showShortToast("保存した検索はありません。");
+                    return;
+                }
+                // Show
+                showSavedSearch(rl);
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                // Failed...
+                TwitterException e = (TwitterException) t;
+                ToastUtils.showShortToast("検索の取得に失敗しました...");
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+            }
+
+            @Override
+            public void onComplete() {
+            }
+        };
+
+        observable
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(disposable);
+    }
+
+    private void showSavedSearch(ResponseList<SavedSearch> rl) {
+        // Create dialog
+        String[] items = new String[rl.size()];
+        for (int i = 0; i < rl.size(); i++) {
+            items[i] = rl.get(i).getName();
+        }
+        ListDialog dialog = new ListDialog().newInstance(items);
+
+        dialog.setOnItemClickListener((parent, v, position, id) -> {
+            ClickUseCase.searchWord(items[position]);
+            dialog.dismiss();
+        });
+        dialog.setOnItemLongClickListener((parent, v, position, id) -> {
+            SearchUseCase.destroySavedSearch(rl.get(position));
+            dialog.dismiss();
+            return true;
+        });
+
+        // Show dialog
+        FragmentManager fm = getSupportFragmentManager();
+        if (fm.findFragmentByTag("ListDialog") == null) {
+            dialog.show(fm, "ListDialog");
+        }
     }
 
     private boolean hasHashTag() {
