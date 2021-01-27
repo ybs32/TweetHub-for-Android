@@ -30,6 +30,7 @@ import com.ybsystem.tweethub.storages.PrefAppearance;
 import com.ybsystem.tweethub.storages.PrefSystem;
 import com.ybsystem.tweethub.usecases.TwitterUseCase;
 import com.ybsystem.tweethub.utils.GlideUtils;
+import com.ybsystem.tweethub.utils.KeyboardUtils;
 import com.ybsystem.tweethub.utils.ResourceUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -80,7 +81,13 @@ public class EasyTweetFragment extends Fragment {
     public void onEvent(PostEvent event) {
         // Clear tweet
         mPostEdit.getText().clear();
-        mPostEdit.clearFocus();
+
+        // Hide keyboard, clear focus
+        View focus = getActivity().getCurrentFocus();
+        if (focus != null) {
+            KeyboardUtils.closeKeyboard(focus);
+            focus.clearFocus();
+        }
     }
 
     private void setUserIcon(View view) {

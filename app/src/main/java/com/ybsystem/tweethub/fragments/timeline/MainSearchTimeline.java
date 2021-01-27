@@ -20,6 +20,7 @@ import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.usecases.ClickUseCase;
 import com.ybsystem.tweethub.usecases.SearchUseCase;
 import com.ybsystem.tweethub.utils.ExceptionUtils;
+import com.ybsystem.tweethub.utils.KeyboardUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -62,9 +63,7 @@ public class MainSearchTimeline extends TimelineBase {
             if (mSearchEdit.length() != 0 && keyCode == KeyEvent.KEYCODE_ENTER
                     && event.getAction() == KeyEvent.ACTION_DOWN) {
                 // Close keyboard
-                Activity act = getActivity();
-                InputMethodManager imm = (InputMethodManager) act.getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                KeyboardUtils.closeKeyboard(v);
 
                 // Intent to SearchActivity
                 ClickUseCase.searchWord(mSearchEdit.getText().toString());
