@@ -1,10 +1,12 @@
 package com.ybsystem.tweethub.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
 import androidx.core.view.GravityCompat;
@@ -46,7 +48,7 @@ public class MainActivity extends ActivityBase
         super.onCreate(savedInstanceState);
 
         // Check if account exists
-        if (!TweetHubApp.getAppData().existAccount()) {
+        if (TweetHubApp.getAppData().isAccountEmpty()) {
             // Intent to OAuthActivity
             Intent intent = new Intent(this, OAuthActivity.class);
             startActivity(intent);
@@ -217,6 +219,7 @@ public class MainActivity extends ActivityBase
     }
 
     private void showUpdateInfo() {
+        // Get version
         String version = TweetHubApp.getAppData().getVersion();
         String newVersion = getString(R.string.app_version);
         String updateInfo = getString(R.string.app_update_info);

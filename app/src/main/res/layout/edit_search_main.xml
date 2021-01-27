@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- 検索ボックス -->
+    <EditText
+        android:id="@+id/edit_search"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="20dp"
+        android:layout_toLeftOf="@+id/button_more"
+        android:hint="Twitterで検索"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:singleLine="true"
+        android:textColor="?android:attr/textColor"
+        android:textColorHint="?attr/colorMiddle"
+        android:textSize="16dp" />
+
+    <!-- Moreボタン -->
+    <ImageButton
+        android:id="@+id/button_more"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/bg_colorless"
+        android:padding="12dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_more_vertical"
+        android:tint="?attr/colorMiddle" />
+</RelativeLayout>
