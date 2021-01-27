@@ -21,9 +21,20 @@ public abstract class ActivityBase extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         TweetHubApp.setActivity(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        switch (getLocalClassName()) {
+            case "activities.MainActivity":
+            case "activities.SearchActivity":
+                findViewById(R.id.root).requestFocus();
+                break;
+        }
     }
 
     @Override
