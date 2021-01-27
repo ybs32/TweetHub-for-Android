@@ -72,12 +72,6 @@ public class TimelineActivity extends ActivityBase {
                         new Column(-1, "", FAVORITE, false)
                 );
                 break;
-            case RETWEETED:
-                getSupportActionBar().setTitle("リツイートされたツイート");
-                fragment = new MainTimeline().newInstance(
-                        new Column(-1, "", RETWEETED, false)
-                );
-                break;
             case TALK:
                 getSupportActionBar().setTitle("会話");
                 fragment = new TalkTimeline().newInstance(mStatus);

@@ -106,12 +106,12 @@ public class ColumnFragment extends Fragment {
 
         view.findViewById(R.id.button_add).setOnClickListener(v -> {
             //　Unavailable over 8 column
-            if (TweetHubApp.getMyAccount().getColumns().size() >= 10) {
+            if (TweetHubApp.getMyAccount().getColumns().size() >= 8) {
                 ToastUtils.showShortToast("これ以上追加できません。");
                 return;
             }
             // Create ListDialog
-            String[] items = {"@Mentions", "ホーム", "リスト", "リスト (単体)", PrefAppearance.getLikeFavText()};
+            String[] items = {"@Mentions", "ホーム", "リスト", "リスト (単体)", PrefAppearance.getLikeFavText(), "検索"};
             ListDialog dialog = new ListDialog().newInstance(items);
 
             // Set click listener
@@ -139,6 +139,11 @@ public class ColumnFragment extends Fragment {
                     case 4:
                         columns.add(
                                 new Column(-4, PrefAppearance.getLikeFavText(), FAVORITE, false)
+                        );
+                        break;
+                    case 5:
+                        columns.add(
+                                new Column(-5, "検索", SEARCH, false)
                         );
                         break;
                 }

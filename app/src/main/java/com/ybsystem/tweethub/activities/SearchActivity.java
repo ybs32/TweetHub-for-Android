@@ -12,7 +12,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
@@ -21,7 +20,6 @@ import com.ybsystem.tweethub.adapters.pager.SearchPagerAdapter;
 import com.ybsystem.tweethub.adapters.pager.TrendTopicPagerAdapter;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.fragments.EasyTweetFragment;
-import com.ybsystem.tweethub.fragments.dialog.ListDialog;
 import com.ybsystem.tweethub.libs.eventbus.ColumnEvent;
 import com.ybsystem.tweethub.models.entities.Column;
 import com.ybsystem.tweethub.models.entities.ColumnArray;
@@ -29,22 +27,12 @@ import com.ybsystem.tweethub.storages.PrefSystem;
 import com.ybsystem.tweethub.usecases.ClickUseCase;
 import com.ybsystem.tweethub.usecases.SearchUseCase;
 import com.ybsystem.tweethub.utils.DialogUtils;
-import com.ybsystem.tweethub.utils.ExceptionUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.observers.DisposableObserver;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-import twitter4j.ResponseList;
-import twitter4j.SavedSearch;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-
 import static com.ybsystem.tweethub.activities.preference.SettingActivity.*;
-import static com.ybsystem.tweethub.models.enums.ColumnType.SEARCH;
+import static com.ybsystem.tweethub.models.enums.ColumnType.SEARCH_SINGLE;
 
 public class SearchActivity extends ActivityBase {
 
@@ -97,7 +85,7 @@ public class SearchActivity extends ActivityBase {
         switch (item.getItemId()) {
             // 保存した検索
             case R.id.item_saved_search:
-                fetchSavedSearch();
+                SearchUseCase.showSavedSearch();
                 return true;
             // 検索を保存
             case R.id.item_save_search:
@@ -176,7 +164,7 @@ public class SearchActivity extends ActivityBase {
     private void setSearchEditActionBar() {
         // Set custom actionbar
         ViewGroup root = findViewById(android.R.id.content);
-        View view = getLayoutInflater().inflate(R.layout.actionbar_search, root, false);
+        View view = getLayoutInflater().inflate(R.layout.edit_search_bar, root, false);
         getSupportActionBar().setCustomView(view);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
 
@@ -199,7 +187,7 @@ public class SearchActivity extends ActivityBase {
     }
 
     private void showAddDialog() {
-        if (TweetHubApp.getMyAccount().getColumns().size() >= 10) {
+        if (TweetHubApp.getMyAccount().getColumns().size() >= 8) {
             ToastUtils.showShortToast("これ以上追加できません。");
             return;
         }
@@ -209,7 +197,7 @@ public class SearchActivity extends ActivityBase {
                     // Add column
                     ColumnArray<Column> columns = TweetHubApp.getMyAccount().getColumns();
                     boolean isSucceeded = columns.add(
-                            new Column(mSearchWord.hashCode(), mSearchWord, SEARCH, false));
+                            new Column(mSearchWord.hashCode(), mSearchWord, SEARCH_SINGLE, false));
                     // Check
                     if (!isSucceeded) {
                         return;
@@ -220,76 +208,6 @@ public class SearchActivity extends ActivityBase {
                     setResult(REBOOT_PREPARATION);
                 }
         );
-    }
-
-    private void fetchSavedSearch() {
-        Observable<ResponseList<SavedSearch>> observable = Observable.create(e -> {
-            // Fetch
-            Twitter twitter = TweetHubApp.getTwitter();
-            ResponseList<SavedSearch> rl = twitter.getSavedSearches();
-
-            // Check
-            if (rl != null) {
-                e.onNext(rl);
-            }
-            e.onComplete();
-        });
-
-        DisposableObserver<ResponseList<SavedSearch>> disposable
-                = new DisposableObserver<ResponseList<SavedSearch>>() {
-            @Override
-            public void onNext(ResponseList<SavedSearch> rl) {
-                // Check empty
-                if (rl.isEmpty()) {
-                    ToastUtils.showShortToast("保存した検索はありません。");
-                    return;
-                }
-                // Show
-                showSavedSearch(rl);
-            }
-
-            @Override
-            public void onError(Throwable t) {
-                // Failed...
-                TwitterException e = (TwitterException) t;
-                ToastUtils.showShortToast("検索の取得に失敗しました...");
-                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
-            }
-
-            @Override
-            public void onComplete() {
-            }
-        };
-
-        observable
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(disposable);
-    }
-
-    private void showSavedSearch(ResponseList<SavedSearch> rl) {
-        // Create dialog
-        String[] items = new String[rl.size()];
-        for (int i = 0; i < rl.size(); i++) {
-            items[i] = rl.get(i).getName();
-        }
-        ListDialog dialog = new ListDialog().newInstance(items);
-
-        dialog.setOnItemClickListener((parent, v, position, id) -> {
-            ClickUseCase.searchWord(items[position]);
-            dialog.dismiss();
-        });
-        dialog.setOnItemLongClickListener((parent, v, position, id) -> {
-            SearchUseCase.destroySavedSearch(rl.get(position));
-            dialog.dismiss();
-            return true;
-        });
-
-        // Show dialog
-        FragmentManager fm = getSupportFragmentManager();
-        if (fm.findFragmentByTag("ListDialog") == null) {
-            dialog.show(fm, "ListDialog");
-        }
     }
 
     private boolean hasHashTag() {

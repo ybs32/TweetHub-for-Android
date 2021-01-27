@@ -60,8 +60,7 @@
         <activity
             android:name=".activities.SearchActivity"
             android:configChanges="orientation|screenSize"
-            android:label=""
-            android:windowSoftInputMode="adjustResize|stateHidden" />
+            android:label="" />
         <activity
             android:name=".activities.PostActivity"
             android:configChanges="orientation|screenSize"

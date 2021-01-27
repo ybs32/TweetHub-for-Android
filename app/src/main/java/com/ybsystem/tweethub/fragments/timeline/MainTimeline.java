@@ -86,9 +86,6 @@ public class MainTimeline extends TimelineBase {
                     case LIST_SINGLE:
                         e.onNext(twitter.getUserListStatuses(mColumn.getId(), paging));
                         break;
-                    case RETWEETED:
-                        e.onNext(twitter.getRetweetsOfMe(paging));
-                        break;
                 }
                 e.onComplete();
             } catch (TwitterException ex) {
