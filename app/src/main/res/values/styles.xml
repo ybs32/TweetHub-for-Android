@@ -17,9 +17,9 @@
         <item name="colorDelete">#FF4444</item>
         <item name="colorLink">#3355EE</item>
         <item name="colorLinkWeak">#5577FF</item>
-        <item name="colorBgRetweet">#EBEFFF</item>
-        <item name="colorBgReply">#FFEBEF</item>
-        <item name="colorBgMyTweet">#EBFFEF</item>
+        <item name="colorBgRetweet">#EDF2FF</item>
+        <item name="colorBgReply">#FFEDF2</item>
+        <item name="colorBgMyTweet">#EDFFF2</item>
     </style>
 
     <style name="DarkTheme" parent="Theme.AppCompat">
@@ -40,9 +40,9 @@
         <item name="colorDelete">#FF5555</item>
         <item name="colorLink">#AACCFF</item>
         <item name="colorLinkWeak">#AACCFF</item>
-        <item name="colorBgRetweet">#383848</item>
-        <item name="colorBgReply">#483838</item>
-        <item name="colorBgMyTweet">#384838</item>
+        <item name="colorBgRetweet">#383B48</item>
+        <item name="colorBgReply">#48383B</item>
+        <item name="colorBgMyTweet">#38483B</item>
     </style>
 
     <style name="TabTheme16dpText" parent="TextAppearance.Design.Tab">
