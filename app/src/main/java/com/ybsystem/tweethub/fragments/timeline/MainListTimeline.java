@@ -134,11 +134,11 @@ public class MainListTimeline extends TimelineBase {
         // Connect async
         Observable<ResponseList<twitter4j.UserList>> observable = Observable.create(e -> {
             try {
-                ResponseList<twitter4j.UserList> lists;
+                ResponseList<twitter4j.UserList> rl;
                 Twitter twitter = TweetHubApp.getTwitter();
-                lists = twitter.getUserLists(twitter.getScreenName());
-                if (lists != null) {
-                    e.onNext(lists);
+                rl = twitter.getUserLists(twitter.getScreenName());
+                if (rl != null) {
+                    e.onNext(rl);
                 }
                 e.onComplete();
             } catch (TwitterException ex) {
@@ -149,18 +149,18 @@ public class MainListTimeline extends TimelineBase {
         DisposableObserver<ResponseList<twitter4j.UserList>> disposable =
                 new DisposableObserver<ResponseList<twitter4j.UserList>>() {
             @Override
-            public void onNext(ResponseList<twitter4j.UserList> lists) {
+            public void onNext(ResponseList<twitter4j.UserList> rl) {
                 // Clear list
                 ArrayList<UserList> listArray = TweetHubApp.getMyAccount().getLists();
                 listArray.clear();
 
                 // If user has no list
-                if (lists.size() == 0) {
+                if (rl.size() == 0) {
                     processError(view);
                     return;
                 }
                 // Save list
-                for (twitter4j.UserList list : lists) {
+                for (twitter4j.UserList list : rl) {
                     listArray.add(
                             new UserList(list.getId(), list.getName(), false)
                     );
@@ -192,7 +192,7 @@ public class MainListTimeline extends TimelineBase {
     }
 
     private void setDropDownMenu(View view) {
-        // Get my twitter list
+        // Get my list
         EntityArray<UserList> listArray = TweetHubApp.getMyAccount().getLists();
 
         // Create dropdown items

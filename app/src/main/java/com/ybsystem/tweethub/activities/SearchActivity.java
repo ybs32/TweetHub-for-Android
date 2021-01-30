@@ -1,6 +1,5 @@
 package com.ybsystem.tweethub.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -8,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
@@ -25,24 +23,28 @@ import com.ybsystem.tweethub.models.entities.Column;
 import com.ybsystem.tweethub.models.entities.ColumnArray;
 import com.ybsystem.tweethub.storages.PrefSystem;
 import com.ybsystem.tweethub.usecases.ClickUseCase;
+import com.ybsystem.tweethub.usecases.SearchUseCase;
 import com.ybsystem.tweethub.utils.DialogUtils;
+import com.ybsystem.tweethub.utils.KeyboardUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
 import static com.ybsystem.tweethub.activities.preference.SettingActivity.*;
-import static com.ybsystem.tweethub.models.enums.ColumnType.SEARCH;
+import static com.ybsystem.tweethub.models.enums.ColumnType.SEARCH_SINGLE;
 
 public class SearchActivity extends ActivityBase {
 
-    // SearchWord
-    private String mSearchWord;
+    // Menu
+    private Menu mMenu;
 
     // Trend/Topic
+    private EditText mSearchEdit;
     private ViewPager mTrendTopicPager;
     private TrendTopicPagerAdapter mTrendTopicPagerAdapter;
 
     // Search
+    private String mSearchWord;
     private ViewPager mSearchPager;
     private SearchPagerAdapter mSearchPagerAdapter;
 
@@ -60,8 +62,8 @@ public class SearchActivity extends ActivityBase {
         // Check if search word exists
         if (mSearchWord == null) {
             // Trend/Topic
-            setSearchEditText();
             setTrendTopicPager();
+            setSearchEditActionBar();
         } else {
             // Search result
             setSearchPager();
@@ -71,15 +73,23 @@ public class SearchActivity extends ActivityBase {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (mSearchWord != null) {
-            getMenuInflater().inflate(R.menu.search, menu);
-        }
+        this.mMenu = menu;
+        getMenuInflater().inflate(R.menu.search, menu);
+        updateMenu();
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            // 保存した検索
+            case R.id.item_saved_search:
+                SearchUseCase.showSavedSearch();
+                return true;
+            // 検索を保存
+            case R.id.item_save_search:
+                SearchUseCase.saveSearch(mSearchWord);
+                return true;
             // カラム追加
             case R.id.item_add_column:
                 showAddDialog();
@@ -97,6 +107,35 @@ public class SearchActivity extends ActivityBase {
                 setResult(REBOOT_PREPARATION);
                 break;
         }
+    }
+
+    private void updateMenu() {
+        MenuItem savedSearch = mMenu.findItem(R.id.item_saved_search);
+        MenuItem saveSearch = mMenu.findItem(R.id.item_save_search);
+        MenuItem addColumn = mMenu.findItem(R.id.item_add_column);
+
+        if (mSearchWord == null) {
+            saveSearch.setVisible(false);
+            addColumn.setVisible(false);
+        } else {
+            savedSearch.setVisible(false);
+        }
+    }
+
+    private void setTrendTopicPager() {
+        // Set trend/topic pager
+        mTrendTopicPager = findViewById(R.id.pager_common);
+        mTrendTopicPager.setOffscreenPageLimit(2);
+        mTrendTopicPagerAdapter = new TrendTopicPagerAdapter(getSupportFragmentManager());
+        mTrendTopicPager.setAdapter(mTrendTopicPagerAdapter);
+    }
+
+    private void setSearchPager() {
+        // Set search pager
+        mSearchPager = findViewById(R.id.pager_common);
+        mSearchPager.setOffscreenPageLimit(3);
+        mSearchPagerAdapter = new SearchPagerAdapter(getSupportFragmentManager(), mSearchWord);
+        mSearchPager.setAdapter(mSearchPagerAdapter);
     }
 
     private void setTweetAction(Bundle savedInstanceState) {
@@ -121,42 +160,24 @@ public class SearchActivity extends ActivityBase {
         }
     }
 
-    private void setTrendTopicPager() {
-        // Set trend/topic pager
-        mTrendTopicPager = findViewById(R.id.pager_common);
-        mTrendTopicPager.setOffscreenPageLimit(2);
-        mTrendTopicPagerAdapter = new TrendTopicPagerAdapter(getSupportFragmentManager());
-        mTrendTopicPager.setAdapter(mTrendTopicPagerAdapter);
-    }
-
-    private void setSearchPager() {
-        // Set search pager
-        mSearchPager = findViewById(R.id.pager_common);
-        mSearchPager.setOffscreenPageLimit(3);
-        mSearchPagerAdapter = new SearchPagerAdapter(getSupportFragmentManager(), mSearchWord);
-        mSearchPager.setAdapter(mSearchPagerAdapter);
-    }
-
-    private void setSearchEditText() {
+    private void setSearchEditActionBar() {
         // Set custom actionbar
         ViewGroup root = findViewById(android.R.id.content);
-        View view = getLayoutInflater().inflate(R.layout.actionbar_search, root, false);
+        View view = getLayoutInflater().inflate(R.layout.edit_search_bar, root, false);
         getSupportActionBar().setCustomView(view);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
 
         // Set edit text
-        EditText edit = view.findViewById(R.id.edit_search);
-        edit.setOnKeyListener((v, keyCode, event) -> {
+        mSearchEdit = view.findViewById(R.id.edit_search);
+        mSearchEdit.setOnKeyListener((v, keyCode, event) -> {
             // When pressed enter
-            if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                if (edit.length() != 0) {
-                    // Close keyboard
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            if (mSearchEdit.length() != 0 && keyCode == KeyEvent.KEYCODE_ENTER
+                    && event.getAction() == KeyEvent.ACTION_DOWN) {
+                // Close keyboard
+                KeyboardUtils.closeKeyboard(v);
 
-                    // Intent to SearchActivity
-                    ClickUseCase.searchWord(edit.getText().toString());
-                }
+                // Intent to SearchActivity
+                ClickUseCase.searchWord(mSearchEdit.getText().toString());
                 return true;
             }
             return false;
@@ -164,17 +185,17 @@ public class SearchActivity extends ActivityBase {
     }
 
     private void showAddDialog() {
-        if (TweetHubApp.getMyAccount().getColumns().size() >= 10) {
+        if (TweetHubApp.getMyAccount().getColumns().size() >= 8) {
             ToastUtils.showShortToast("これ以上追加できません。");
             return;
         }
         DialogUtils.showConfirmDialog(
-                "検索結果をカラムに追加しますか？",
+                "カラムに追加しますか？",
                 (dialog, which) -> {
                     // Add column
                     ColumnArray<Column> columns = TweetHubApp.getMyAccount().getColumns();
                     boolean isSucceeded = columns.add(
-                            new Column(mSearchWord.hashCode(), mSearchWord, SEARCH, false));
+                            new Column(mSearchWord.hashCode(), mSearchWord, SEARCH_SINGLE, false));
                     // Check
                     if (!isSucceeded) {
                         return;

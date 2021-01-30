@@ -24,8 +24,8 @@ public class AppData extends Entity {
         this.accounts = new AccountArray<>();
     }
 
-    public boolean existAccount() {
-        return !accounts.isEmpty();
+    public boolean isAccountEmpty() {
+        return accounts.isEmpty();
     }
 
     public void addAccount(final AccessToken token, final User user) {
@@ -53,6 +53,7 @@ public class AppData extends Entity {
         columns.add(new Column(-2, "ホーム", HOME, true));
         columns.add(new Column(-3, "リスト", LIST, false));
         columns.add(new Column(-4, "いいね", FAVORITE, false));
+        columns.add(new Column(-5, "検索", SEARCH, false));
         account.setColumns(columns);
 
         // Set lists, drafts, hashtags

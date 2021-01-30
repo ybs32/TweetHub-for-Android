@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.fragments.timeline.MainListTimeline;
+import com.ybsystem.tweethub.fragments.timeline.MainSearchTimeline;
 import com.ybsystem.tweethub.fragments.timeline.MainTimeline;
 import com.ybsystem.tweethub.fragments.timeline.SearchTweetTimeline;
 import com.ybsystem.tweethub.models.entities.Column;
@@ -36,7 +37,11 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
         switch (column.getType()) {
             case LIST:
                 return new MainListTimeline();
+            case LIST_SINGLE:
+                return new MainTimeline().newInstance(column);
             case SEARCH:
+                return new MainSearchTimeline();
+            case SEARCH_SINGLE:
                 return new SearchTweetTimeline().newInstance(column.getName());
             default:
                 return new MainTimeline().newInstance(column);

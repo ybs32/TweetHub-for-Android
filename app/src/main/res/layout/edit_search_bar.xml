@@ -14,5 +14,6 @@
         android:inputType="text"
         android:singleLine="true"
         android:textColor="#FFFFFF"
-        android:textColorHint="#DDDDDD" />
+        android:textColorHint="#DDDDDD"
+        android:textSize="16dp" />
 </RelativeLayout>

@@ -46,7 +46,7 @@ public class MainActivity extends ActivityBase
         super.onCreate(savedInstanceState);
 
         // Check if account exists
-        if (!TweetHubApp.getAppData().existAccount()) {
+        if (TweetHubApp.getAppData().isAccountEmpty()) {
             // Intent to OAuthActivity
             Intent intent = new Intent(this, OAuthActivity.class);
             startActivity(intent);
@@ -62,12 +62,6 @@ public class MainActivity extends ActivityBase
         setTweetAction(savedInstanceState);
         setWallpaper();
         showUpdateInfo();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        findViewById(R.id.root).requestFocus();
     }
 
     @Override
@@ -217,6 +211,7 @@ public class MainActivity extends ActivityBase
     }
 
     private void showUpdateInfo() {
+        // Get version
         String version = TweetHubApp.getAppData().getVersion();
         String newVersion = getString(R.string.app_version);
         String updateInfo = getString(R.string.app_update_info);
