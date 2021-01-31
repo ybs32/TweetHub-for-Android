@@ -14,7 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
-import com.ybsystem.tweethub.fragments.PostFragment;
+import com.ybsystem.tweethub.fragments.fragment.PostFragment;
 import com.ybsystem.tweethub.libs.eventbus.PostEvent;
 import com.ybsystem.tweethub.models.entities.EntityArray;
 import com.ybsystem.tweethub.utils.DialogUtils;
@@ -41,7 +41,7 @@ public class PostActivity extends ActivityBase {
         // Init
         mImageUris = new ArrayList<>();
 
-        // Set contents
+        // Set
         setPostFragment(savedInstanceState);
     }
 

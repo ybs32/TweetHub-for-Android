@@ -38,7 +38,7 @@ public class TimelineActivity extends ActivityBase {
             mUser = (TwitterUser) savedInstanceState.getSerializable("USER");
         }
 
-        // Set contents
+        // Set timeline
         setTimelineFragment();
     }
 

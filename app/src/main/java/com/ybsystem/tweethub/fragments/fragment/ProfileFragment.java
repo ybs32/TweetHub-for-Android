@@ -1,4 +1,4 @@
-package com.ybsystem.tweethub.fragments;
+package com.ybsystem.tweethub.fragments.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -54,7 +54,7 @@ public class ProfileFragment extends Fragment {
         // Init
         mUser = (TwitterUser) getArguments().getSerializable("USER");
 
-        // Set contents
+        // Set
         setUserInfo(view);
         setDescription(view);
         setFollowButton(view);
@@ -117,14 +117,16 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        // Set verify, lock mark
+        // Set verify mark
         ImageView verify = view.findViewById(R.id.image_verify_mark);
-        ImageView lock = view.findViewById(R.id.image_lock_mark);
         if (mUser.isVerified()) {
             verify.setVisibility(View.VISIBLE);
         } else {
             verify.setVisibility(View.GONE);
         }
+
+        // Set lock mark
+        ImageView lock = view.findViewById(R.id.image_lock_mark);
         if (mUser.isProtected()) {
             lock.setVisibility(View.VISIBLE);
         } else {

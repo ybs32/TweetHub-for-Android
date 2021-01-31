@@ -66,6 +66,7 @@ public class UserListDialog extends DialogFragment {
     }
 
     private void fetchUserList(View view) {
+        // Async
         Observable<Object> observable = Observable.create(e -> {
             // Fetch
             Twitter twitter = TweetHubApp.getTwitter();
@@ -96,7 +97,7 @@ public class UserListDialog extends DialogFragment {
                     dismiss();
                     return;
                 }
-                // Set user list
+                // Set adapter
                 setUserListAdapter();
                 AnimationUtils.fadeOut(view.findViewById(R.id.linear_loading), 0);
                 AnimationUtils.fadeIn(view.findViewById(R.id.list_view), 400);
@@ -119,8 +120,7 @@ public class UserListDialog extends DialogFragment {
             boolean isRegistered = mRegisteredLists.stream()
                     .anyMatch(regList -> regList.getId() == list.getId());
             adapter.add(
-                    new UserList(list.getId(), list.getName(), isRegistered)
-            );
+                    new UserList(list.getId(), list.getName(), isRegistered));
         }
     }
 

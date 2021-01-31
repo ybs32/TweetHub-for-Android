@@ -24,4 +24,5 @@ public class ActivityUtils {
         activity.overridePendingTransition(enterAnim, exitAnim);
         activity.startActivity(intent);
     }
+
 }

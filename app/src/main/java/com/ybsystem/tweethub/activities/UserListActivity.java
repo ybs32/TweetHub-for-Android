@@ -40,7 +40,7 @@ public class UserListActivity extends ActivityBase {
             getSupportActionBar().setTitle(mUserList.getName());
         }
 
-        // Set contents
+        // Set
         setContentView(R.layout.activity_pager);
         setUserListPager();
     }

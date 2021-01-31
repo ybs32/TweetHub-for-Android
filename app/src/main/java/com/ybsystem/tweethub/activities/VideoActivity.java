@@ -31,7 +31,7 @@ public class VideoActivity extends ActivityBase {
                 break;
         }
 
-        // Set contents
+        // Set view
         setContentView(R.layout.activity_video);
         setVideoView(media);
     }

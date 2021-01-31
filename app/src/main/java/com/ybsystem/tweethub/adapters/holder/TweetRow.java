@@ -18,13 +18,8 @@ import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUserMentionEntity;
 import com.ybsystem.tweethub.models.enums.ClickAction;
 import com.ybsystem.tweethub.models.enums.ImageOption;
-import com.ybsystem.tweethub.storages.PrefAppearance;
-import com.ybsystem.tweethub.storages.PrefClickAction;
-import com.ybsystem.tweethub.storages.PrefSystem;
-import com.ybsystem.tweethub.storages.PrefTheme;
-import com.ybsystem.tweethub.utils.CalcUtils;
-import com.ybsystem.tweethub.utils.GlideUtils;
-import com.ybsystem.tweethub.utils.ResourceUtils;
+import com.ybsystem.tweethub.storages.*;
+import com.ybsystem.tweethub.utils.*;
 
 import java.util.ArrayList;
 
@@ -104,8 +99,8 @@ public class TweetRow extends RecyclerView.ViewHolder {
         this.mThumbnails.add(mThumbnail4);
 
         // Apply app settings
+        applyThemeSetting();
         applyAppearanceSetting();
-        applyCustomThemeSetting();
     }
 
     public void setStatus(TwitterStatus status) {
@@ -331,35 +326,7 @@ public class TweetRow extends RecyclerView.ViewHolder {
         this.mDetailContainer.setVisibility(View.GONE);
     }
 
-    private void applyAppearanceSetting() {
-        // Set font size
-        int fontSize = PrefAppearance.getFontSize();
-        this.mUserName.setTextSize(fontSize);
-        this.mScreenName.setTextSize(fontSize - 1);
-        this.mTweetText.setTextSize(fontSize);
-        this.mRelativeTime.setTextSize(fontSize);
-        this.mAbsoluteTime.setTextSize(fontSize - 1);
-        this.mVia.setTextSize(fontSize - 1);
-        this.mRetweetedBy.setTextSize(fontSize - 1);
-        this.mRtCountText.setTextSize(fontSize - 1);
-        this.mFavCountText.setTextSize(fontSize - 1);
-        this.mQuoteUserName.setTextSize(fontSize);
-        this.mQuoteScreenName.setTextSize(fontSize - 1);
-        this.mQuoteTweetText.setTextSize(fontSize);
-        this.mQuoteRelativeTime.setTextSize(fontSize);
-
-        // Set user icon size
-        int dpSize = PrefAppearance.getUserIconSize();
-        mUserIcon.getLayoutParams().width = CalcUtils.convertDp2Px(dpSize);
-        mUserIcon.getLayoutParams().height = CalcUtils.convertDp2Px(dpSize);
-
-        // Set like fav style
-        mFavMark.setColorFilter(PrefAppearance.getLikeFavColor());
-        mFavMark.setImageResource(PrefAppearance.getLikeFavDrawable());
-        mFavCountIcon.setImageResource(PrefAppearance.getLikeFavDrawable());
-    }
-
-    private void applyCustomThemeSetting() {
+    private void applyThemeSetting() {
         // Check
         if (!PrefTheme.isCustomThemeEnabled()) {
             return;
@@ -386,6 +353,34 @@ public class TweetRow extends RecyclerView.ViewHolder {
         // Set detail color
         this.mDetailRtCount.setTextColor(PrefTheme.getRtFavColor());
         this.mDetailFavCount.setTextColor(PrefTheme.getRtFavColor());
+    }
+
+    private void applyAppearanceSetting() {
+        // Set font size
+        int fontSize = PrefAppearance.getFontSize();
+        this.mUserName.setTextSize(fontSize);
+        this.mScreenName.setTextSize(fontSize - 1);
+        this.mTweetText.setTextSize(fontSize);
+        this.mRelativeTime.setTextSize(fontSize);
+        this.mAbsoluteTime.setTextSize(fontSize - 1);
+        this.mVia.setTextSize(fontSize - 1);
+        this.mRetweetedBy.setTextSize(fontSize - 1);
+        this.mRtCountText.setTextSize(fontSize - 1);
+        this.mFavCountText.setTextSize(fontSize - 1);
+        this.mQuoteUserName.setTextSize(fontSize);
+        this.mQuoteScreenName.setTextSize(fontSize - 1);
+        this.mQuoteTweetText.setTextSize(fontSize);
+        this.mQuoteRelativeTime.setTextSize(fontSize);
+
+        // Set user icon size
+        int dpSize = PrefAppearance.getUserIconSize();
+        mUserIcon.getLayoutParams().width = CalcUtils.convertDp2Px(dpSize);
+        mUserIcon.getLayoutParams().height = CalcUtils.convertDp2Px(dpSize);
+
+        // Set like fav style
+        mFavMark.setColorFilter(PrefAppearance.getLikeFavColor());
+        mFavMark.setImageResource(PrefAppearance.getLikeFavDrawable());
+        mFavCountIcon.setImageResource(PrefAppearance.getLikeFavDrawable());
     }
 
 }

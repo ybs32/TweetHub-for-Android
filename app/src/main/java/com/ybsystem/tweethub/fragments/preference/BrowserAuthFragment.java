@@ -175,7 +175,7 @@ public class BrowserAuthFragment extends Fragment {
 
         private void addAccount() {
             // Check if already user added
-            for (Account account : TweetHubApp.getAppData().getAccounts()) {
+            for (Account account : TweetHubApp.getData().getAccounts()) {
                 if (accessToken.getUserId() == account.getUser().getId()) {
                     ToastUtils.showShortToast("エラーが発生しました...");
                     ToastUtils.showShortToast("既に追加済みのユーザです。");
@@ -185,7 +185,7 @@ public class BrowserAuthFragment extends Fragment {
                 }
             }
             // Add account
-            TweetHubApp.getAppData().addAccount(accessToken, user);
+            TweetHubApp.getData().addAccount(accessToken, user);
             TweetHubApp.getInstance().init();
 
             // Reboot application

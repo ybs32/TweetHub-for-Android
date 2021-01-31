@@ -18,6 +18,7 @@ public class ExceptionUtils {
 
     /**
      * Return error message that matches the error code
+     *
      * @param e TwitterException instance
      * @return Error message
      */

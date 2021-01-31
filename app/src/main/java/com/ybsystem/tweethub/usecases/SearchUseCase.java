@@ -151,7 +151,7 @@ public class SearchUseCase {
     }
 
     private static void showSsDialog(ResponseList<SavedSearch> rl) {
-        // Create dialog
+        // Create
         String[] items = new String[rl.size()];
         for (int i = 0; i < rl.size(); i++) {
             items[i] = rl.get(i).getName();
@@ -168,7 +168,7 @@ public class SearchUseCase {
             return true;
         });
 
-        // Show dialog
+        // Show
         FragmentManager fm = TweetHubApp.getActivity().getSupportFragmentManager();
         if (fm.findFragmentByTag("ListDialog") == null) {
             dialog.show(fm, "ListDialog");

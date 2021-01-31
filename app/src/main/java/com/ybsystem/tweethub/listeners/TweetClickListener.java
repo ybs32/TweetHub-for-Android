@@ -34,6 +34,7 @@ public class TweetClickListener implements View.OnClickListener, View.OnLongClic
     }
 
     private void click() {
+
         switch (mClickAction) {
             case MENU:
                 ClickUseCase.showTweetMenu(mStatus);
@@ -98,6 +99,7 @@ public class TweetClickListener implements View.OnClickListener, View.OnLongClic
             case NONE:
                 break;
         }
+
     }
 
 }

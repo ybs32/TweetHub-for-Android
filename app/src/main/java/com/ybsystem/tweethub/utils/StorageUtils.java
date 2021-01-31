@@ -60,7 +60,7 @@ public class StorageUtils {
         String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = activity.getContentResolver()
                 .query(uri, projection, null, null, null);
-        // Chech
+        // Check
         if (cursor == null || !cursor.moveToFirst()) {
             return "";
         }
@@ -87,6 +87,7 @@ public class StorageUtils {
         // Create file
         File file = new File(cursor.getString(0));
         cursor.close();
+
         return file;
     }
 

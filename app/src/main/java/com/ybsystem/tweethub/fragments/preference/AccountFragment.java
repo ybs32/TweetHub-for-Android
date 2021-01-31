@@ -47,7 +47,7 @@ public class AccountFragment extends Fragment {
         mListView.setDivider(null);
 
         // Add accounts
-        AccountArray<Account> accounts = TweetHubApp.getAppData().getAccounts();
+        AccountArray<Account> accounts = TweetHubApp.getData().getAccounts();
         for (Account account : accounts) {
             mArrayAdapter.add(account);
         }
@@ -61,7 +61,7 @@ public class AccountFragment extends Fragment {
 
             // Set click listener
             dialog.setOnItemClickListener((p, v, which, identity) -> {
-                AccountArray<Account> accounts = TweetHubApp.getAppData().getAccounts();
+                AccountArray<Account> accounts = TweetHubApp.getData().getAccounts();
                 switch (which) {
                     case 0:
                         accounts.movePrev(position);
@@ -70,7 +70,7 @@ public class AccountFragment extends Fragment {
                         accounts.moveNext(position);
                         break;
                     case 2:
-                        confirmRemove(accounts, position);
+                        showConfirmDialog(accounts, position);
                         break;
                 }
                 refreshListView();
@@ -93,20 +93,20 @@ public class AccountFragment extends Fragment {
         });
     }
 
-    private void confirmRemove(AccountArray<Account> accounts, int position) {
+    private void showConfirmDialog(AccountArray<Account> accounts, int position) {
         // Check
         if (position == accounts.getCurrentAccountNum()) {
             ToastUtils.showShortToast("使用中のアカウントです。");
             return;
         }
-        // Create dialog
+        // Create
         ConfirmDialog confirmDialog = new ConfirmDialog().newInstance("アカウントを解除しますか？");
         confirmDialog.setOnPositiveClickListener((dialog, which) -> {
             accounts.remove(position);
             refreshListView();
             ToastUtils.showShortToast("アカウントを解除しました。");
         });
-        // Show dialog
+        // Show
         if (getFragmentManager().findFragmentByTag("ConfirmDialog") == null) {
             confirmDialog.show(getFragmentManager(), "ConfirmDialog");
         }
@@ -118,7 +118,7 @@ public class AccountFragment extends Fragment {
         mArrayAdapter.clear();
 
         // Add accounts
-        AccountArray<Account> accounts = TweetHubApp.getAppData().getAccounts();
+        AccountArray<Account> accounts = TweetHubApp.getData().getAccounts();
         for (Account account : accounts) {
             mArrayAdapter.add(account);
         }
