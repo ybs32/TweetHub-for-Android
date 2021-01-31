@@ -7,13 +7,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Wallpaper -->
-    <ImageView
-        android:id="@+id/image_wallpaper"
+    <!-- Prevent resizing by IME -->
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:visibility="gone" />
+        android:fillViewport="true">
+
+        <!-- Wallpaper -->
+        <ImageView
+            android:id="@+id/image_wallpaper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+    </ScrollView>
 
     <!-- MainFragment -->
     <FrameLayout
