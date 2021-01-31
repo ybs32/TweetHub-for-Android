@@ -17,8 +17,10 @@ import com.wangjie.rapidfloatingactionbutton.*;
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.activities.preference.SettingActivity;
 import com.ybsystem.tweethub.application.TweetHubApp;
-import com.ybsystem.tweethub.fragments.*;
 import com.ybsystem.tweethub.fragments.dialog.*;
+import com.ybsystem.tweethub.fragments.fragment.DrawerFragment;
+import com.ybsystem.tweethub.fragments.fragment.EasyTweetFragment;
+import com.ybsystem.tweethub.fragments.fragment.MainFragment;
 import com.ybsystem.tweethub.libs.glide.GlideApp;
 import com.ybsystem.tweethub.libs.rfab.CardItem;
 import com.ybsystem.tweethub.libs.rfab.RapidFloatingActionListView;
@@ -46,8 +48,7 @@ public class MainActivity extends ActivityBase
         super.onCreate(savedInstanceState);
 
         // Check if account exists
-        if (TweetHubApp.getAppData().isAccountEmpty()) {
-            // Intent to OAuthActivity
+        if (TweetHubApp.getData().isAccountEmpty()) {
             Intent intent = new Intent(this, OAuthActivity.class);
             startActivity(intent);
             finish();
@@ -212,7 +213,7 @@ public class MainActivity extends ActivityBase
 
     private void showUpdateInfo() {
         // Get version
-        String version = TweetHubApp.getAppData().getVersion();
+        String version = TweetHubApp.getData().getVersion();
         String newVersion = getString(R.string.app_version);
         String updateInfo = getString(R.string.app_update_info);
 
@@ -227,16 +228,16 @@ public class MainActivity extends ActivityBase
             dialog.show(fm, "NoticeDialog");
         }
         // Save new version
-        TweetHubApp.getAppData().setVersion(newVersion);
+        TweetHubApp.getData().setVersion(newVersion);
     }
 
     private void showConfirmDialog() {
-        // Create dialog
+        // Create
         ConfirmDialog dialog = new ConfirmDialog().newInstance("アプリを終了しますか？");
         dialog.setOnPositiveClickListener(
                 (d, which) -> finish()
         );
-        // Show dialog
+        // Show
         FragmentManager fm = getSupportFragmentManager();
         if (fm.findFragmentByTag("ConfirmDialog") == null) {
             dialog.show(fm, "ConfirmDialog");
@@ -244,8 +245,8 @@ public class MainActivity extends ActivityBase
     }
 
     private void showAccountDialog() {
-        // Create dialog
-        AccountArray<Account> accounts = TweetHubApp.getAppData().getAccounts();
+        // Create
+        AccountArray<Account> accounts = TweetHubApp.getData().getAccounts();
         String[] items = new String[accounts.size()];
         for (int i = 0; i < accounts.size(); i++) {
             TwitterUser user = accounts.get(i).getUser();
@@ -262,7 +263,7 @@ public class MainActivity extends ActivityBase
             ActivityUtils.rebootActivity(MainActivity.this, 0, 0);
         });
 
-        // Show dialog
+        // Show
         FragmentManager fm = getSupportFragmentManager();
         if (fm.findFragmentByTag("AccountDialog") == null) {
             dialog.show(fm, "AccountDialog");

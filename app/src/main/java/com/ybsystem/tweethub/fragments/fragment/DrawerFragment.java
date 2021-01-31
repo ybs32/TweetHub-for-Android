@@ -1,4 +1,4 @@
-package com.ybsystem.tweethub.fragments;
+package com.ybsystem.tweethub.fragments.fragment;
 
 import android.os.Bundle;
 
@@ -29,7 +29,7 @@ public class DrawerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_drawer, container, false);
 
-        // Set contents
+        // Set
         setDrawerProfile(view);
         setDrawerItemList(view);
 
@@ -44,7 +44,7 @@ public class DrawerFragment extends Fragment {
         userName.setText(user.getName());
         screenName.setText("@" + user.getScreenName());
 
-        // Load user images
+        // Set user images
         ImageView userIcon = view.findViewById(R.id.image_user_icon);
         ImageView bannerImage = view.findViewById(R.id.image_banner);
         ImageOption option = ImageOption.toEnum(PrefAppearance.getUserIconStyle());

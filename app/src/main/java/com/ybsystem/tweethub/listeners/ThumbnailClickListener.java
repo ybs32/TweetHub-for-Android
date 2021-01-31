@@ -29,8 +29,8 @@ public class ThumbnailClickListener implements View.OnClickListener {
         Activity act = (Activity) view.getContext();
 
         // Check media type
-        String mediaType = mMediaEntities[0].getType();
-        if (mediaType.equals("photo")) {
+        String type = mMediaEntities[0].getType();
+        if (type.equals("photo")) {
             // Photo
             ArrayList<String> imageURLs = new ArrayList<>();
             for (TwitterMediaEntity entity : mMediaEntities) {

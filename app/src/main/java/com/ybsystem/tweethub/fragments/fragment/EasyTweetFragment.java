@@ -1,4 +1,4 @@
-package com.ybsystem.tweethub.fragments;
+package com.ybsystem.tweethub.fragments.fragment;
 
 import android.app.Activity;
 import android.content.Context;
@@ -57,7 +57,7 @@ public class EasyTweetFragment extends Fragment {
         // Init
         mSearchWord = getActivity().getIntent().getStringExtra("SEARCH_WORD");
 
-        // Set contents
+        // Set
         setUserIcon(view);
         setPostEdit(view);
         setPostButton(view);
@@ -91,17 +91,17 @@ public class EasyTweetFragment extends Fragment {
     }
 
     private void setUserIcon(View view) {
-        // Set image
+        // Set icon image
         String url = PrefSystem.getProfileThumbByQuality(TweetHubApp.getMyUser());
         ImageView icon = view.findViewById(R.id.image_user_icon);
         ImageOption option = ImageOption.toEnum(PrefAppearance.getUserIconStyle());
         GlideUtils.load(url, icon, option);
 
-        // Set click listener
+        // When icon clicked
         icon.setOnClickListener(v -> {
             Activity act = getActivity();
             if (act.getLocalClassName().equals("activities.MainActivity")) {
-                // MainActivity
+                // If MainActivity
                 DrawerLayout drawer = act.findViewById(R.id.drawer_layout);
                 int g = GravityCompat.START;
                 if (drawer.isDrawerOpen(g)) {
@@ -110,7 +110,7 @@ public class EasyTweetFragment extends Fragment {
                     drawer.openDrawer(g);
                 }
             } else {
-                // Others
+                // If other activities
                 Intent intent = new Intent(act, ProfileActivity.class);
                 intent.putExtra("USER_ID", TweetHubApp.getMyUser().getId());
                 startActivityForResult(intent, 0);
@@ -124,7 +124,7 @@ public class EasyTweetFragment extends Fragment {
         mTextCount = view.findViewById(R.id.text_count);
         mPostEdit = view.findViewById(R.id.edit_post);
 
-        // When focused
+        // When edit focused
         mPostEdit.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
                 // If text is empty, then set HashTag
@@ -163,10 +163,10 @@ public class EasyTweetFragment extends Fragment {
             // Check text length
             int length = mPostEdit.getText().length();
             if (length == 0) {
-                intentToPost(v.getContext());
+                intentToPostActivity(v.getContext());
                 return;
             }
-            // Create tweet, then post
+            // Create tweet and post
             StatusUpdate update = new StatusUpdate(
                     mPostEdit.getText().toString()
             );
@@ -186,12 +186,12 @@ public class EasyTweetFragment extends Fragment {
 
         // When long clicked
         view.findViewById(R.id.button_post).setOnLongClickListener(v -> {
-            intentToPost(v.getContext());
+            intentToPostActivity(v.getContext());
             return true;
         });
     }
 
-    private void intentToPost(Context context) {
+    private void intentToPostActivity(Context context) {
         Intent intent = new Intent(context, PostActivity.class);
         if (hasHashTag()) intent.putExtra("TWEET_SUFFIX", mSearchWord);
         startActivityForResult(intent, 0);

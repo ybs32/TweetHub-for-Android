@@ -29,14 +29,14 @@ public class DialogUtils {
      */
     public static void showConfirmDialog(String text,
                                          DialogInterface.OnClickListener listener) {
-        // Create dialog
+        // Create
         ConfirmDialog dialog = new ConfirmDialog().newInstance(text);
         dialog.setOnPositiveClickListener(listener);
 
-        // Show dialog
-        FragmentManager fmanager = TweetHubApp.getActivity().getSupportFragmentManager();
-        if (fmanager.findFragmentByTag("ConfirmDialog") == null) {
-            dialog.show(fmanager, "ConfirmDialog");
+        // Show
+        FragmentManager fm = TweetHubApp.getActivity().getSupportFragmentManager();
+        if (fm.findFragmentByTag("ConfirmDialog") == null) {
+            dialog.show(fm, "ConfirmDialog");
         }
     }
 
@@ -50,10 +50,11 @@ public class DialogUtils {
         SpannableString spanMessage = new SpannableString(message);
         spanMessage.setSpan(new RelativeSizeSpan(1.2f), 0, spanMessage.length(), 0);
 
-        // Create dialog
+        // Create
         sProgressDialog = new ProgressDialog(context);
         sProgressDialog.setMessage(spanMessage);
 
+        // Show
         // Prevent accidental closing by screen tap （※Back button is available）
         sProgressDialog.setCanceledOnTouchOutside(false);
         sProgressDialog.show();

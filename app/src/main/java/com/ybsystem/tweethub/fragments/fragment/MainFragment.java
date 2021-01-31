@@ -1,4 +1,4 @@
-package com.ybsystem.tweethub.fragments;
+package com.ybsystem.tweethub.fragments.fragment;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -82,16 +82,6 @@ public class MainFragment extends Fragment {
         // Find
         ImageView icon = view.findViewById(R.id.image_app_icon);
 
-        // Set icon clicked
-        icon.setOnClickListener(v -> {
-            DrawerLayout drawer = view.findViewById(R.id.drawer_layout);
-            int g = GravityCompat.START;
-            if (drawer.isDrawerOpen(g)) {
-                drawer.closeDrawer(g);
-            } else {
-                drawer.openDrawer(g);
-            }
-        });
         // Set icon image
         switch (PrefTheme.getTheme()) {
             case "LIGHT":
@@ -101,6 +91,17 @@ public class MainFragment extends Fragment {
                 icon.setImageResource(R.drawable.ic_launcher_dark);
                 break;
         }
+
+        // When icon clicked
+        icon.setOnClickListener(v -> {
+            DrawerLayout drawer = view.findViewById(R.id.drawer_layout);
+            int g = GravityCompat.START;
+            if (drawer.isDrawerOpen(g)) {
+                drawer.closeDrawer(g);
+            } else {
+                drawer.openDrawer(g);
+            }
+        });
     }
 
     private void setMainTlPager(View view) {
@@ -138,6 +139,7 @@ public class MainFragment extends Fragment {
     }
 
     private void fetchMyTwitterUser() {
+        // Async
         Observable<User> observable = Observable.create(e -> {
             // Fetch
             Twitter twitter = TweetHubApp.getTwitter();
@@ -180,6 +182,7 @@ public class MainFragment extends Fragment {
     }
 
     private void fetchUserIDs(int type, ArrayList<Long> list, long cursor) {
+        // Async
         Observable<IDs> observable = Observable.create(e -> {
             // Fetch
             Twitter twitter = TweetHubApp.getTwitter();
