@@ -51,13 +51,10 @@ public class ProfileActivity extends ActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Init
-        long userId = getIntent().getLongExtra("USER_ID", 0);
-
-        // Set
         setContentView(R.layout.activity_profile);
 
-        // Fetch
+        // Fetch user
+        long userId = getIntent().getLongExtra("USER_ID", 0);
         fetchTwitterUser(userId, savedInstanceState);
     }
 
@@ -118,7 +115,7 @@ public class ProfileActivity extends ActivityBase {
 
     private void fetchTwitterUser(long userId, Bundle savedInstanceState) {
         // Async
-        Observable<Object> observable = Observable.create(e -> {
+        Observable<User> observable = Observable.create(e -> {
             // Fetch user
             Twitter twitter = TweetHubApp.getTwitter();
             User user4j = twitter.showUser(userId);
@@ -128,13 +125,25 @@ public class ProfileActivity extends ActivityBase {
                 mRelation = twitter.showFriendship(
                         TweetHubApp.getMyUser().getId(), mUser.getId()
                 );
+                e.onNext(user4j);
             }
             e.onComplete();
         });
 
-        DisposableObserver<Object> disposable = new DisposableObserver<Object>() {
+        DisposableObserver<User> disposable = new DisposableObserver<User>() {
             @Override
-            public void onNext(Object o) {
+            public void onNext(User ignored) {
+                // Success
+                mUser.setFriend(mRelation.isSourceFollowingTarget());
+                mUser.setFollower(mRelation.isSourceFollowedByTarget());
+                mUser.setMuting(mRelation.isSourceMutingTarget());
+                mUser.setBlocking(mRelation.isSourceBlockingTarget());
+
+                // Main process
+                setProfileFragment(savedInstanceState);
+                setProfileTlPager();
+                updateMenu();
+                showScreen();
             }
 
             @Override
@@ -149,17 +158,6 @@ public class ProfileActivity extends ActivityBase {
 
             @Override
             public void onComplete() {
-                // Success
-                mUser.setFriend(mRelation.isSourceFollowingTarget());
-                mUser.setFollower(mRelation.isSourceFollowedByTarget());
-                mUser.setMuting(mRelation.isSourceMutingTarget());
-                mUser.setBlocking(mRelation.isSourceBlockingTarget());
-
-                // Main process
-                setProfileFragment(savedInstanceState);
-                setProfileTlPager();
-                updateMenu();
-                showScreen();
             }
         };
 

@@ -54,7 +54,7 @@ public class MainFragment extends Fragment {
         setAppIcon(view);
         setMainTlPager(view);
 
-        // Fetch
+        // Fetch user
         fetchMyTwitterUser();
 
         return view;

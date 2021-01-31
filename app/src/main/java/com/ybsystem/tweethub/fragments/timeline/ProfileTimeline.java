@@ -52,7 +52,7 @@ public class ProfileTimeline extends TimelineBase {
         mIsPrivate = (boolean) getArguments().getSerializable("PRIVATE");
         mScrollLoad = true;
 
-        // Set contents
+        // Set view
         setRecyclerView(view);
         setRecyclerAdapter(new TweetRecyclerAdapter());
         setUltraPullToRefresh(view);

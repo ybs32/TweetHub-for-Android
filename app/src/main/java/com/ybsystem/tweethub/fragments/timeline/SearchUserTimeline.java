@@ -43,7 +43,7 @@ public class SearchUserTimeline extends TimelineBase {
         mSearchWord = getArguments().getString("SEARCH_WORD");
         mScrollLoad = true;
 
-        // Set contents
+        // Set view
         setRecyclerView(view);
         setRecyclerAdapter(new UserRecyclerAdapter());
         setUltraPullToRefresh(view);
