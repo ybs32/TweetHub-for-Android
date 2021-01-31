@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.storages.PrefTheme;
 import com.ybsystem.tweethub.usecases.ClickUseCase;
-import com.ybsystem.tweethub.utils.ResourceUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,11 +28,8 @@ public class TrendRow extends RecyclerView.ViewHolder {
         // ButterKnife
         ButterKnife.bind(this, itemView);
 
-        // Apply color
-        int color = PrefTheme.isCustomThemeEnabled()
-                ? PrefTheme.getLinkColor()
-                : ResourceUtils.getLinkColor();
-        mTrendText.setTextColor(color);
+        // Apply app settings
+        applyThemeSetting();
     }
 
     public void setTrend(Trend trend) {
@@ -48,6 +44,15 @@ public class TrendRow extends RecyclerView.ViewHolder {
         mClickContainer.setOnClickListener(
                 view -> ClickUseCase.searchWord(mTrend.getName())
         );
+    }
+
+    private void applyThemeSetting() {
+        // Check
+        if (!PrefTheme.isCustomThemeEnabled()) {
+            return;
+        }
+        // Set trend color
+        mTrendText.setTextColor(PrefTheme.getLinkColor());
     }
 
 }

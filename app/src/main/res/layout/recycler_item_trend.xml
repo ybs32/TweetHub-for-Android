@@ -3,7 +3,7 @@
     android:id="@+id/relative_click"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_normal">
+    android:background="@drawable/bg_colorless">
 
     <TextView
         android:id="@+id/text_trend"
@@ -14,5 +14,6 @@
         android:layout_marginRight="60dp"
         android:layout_marginBottom="16dp"
         android:singleLine="true"
+        android:textColor="?attr/colorLink"
         android:textSize="16dp" />
 </RelativeLayout>
