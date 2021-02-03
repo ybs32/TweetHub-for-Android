@@ -104,13 +104,13 @@ public class PostFragment extends Fragment {
         tweetRow.setUserIcon();
         tweetRow.setTweetText();
         tweetRow.setRelativeTime();
-        tweetRow.setThumbnail();
         tweetRow.setAbsoluteTime();
         tweetRow.setVia();
         tweetRow.setRtFavCount();
         tweetRow.setRetweetedBy();
-        tweetRow.setQuoteTweet();
         tweetRow.setMarks();
+        tweetRow.setThumbnail();
+        tweetRow.setQuoteTweet();
         tweetRow.setBackgroundColor();
     }
 

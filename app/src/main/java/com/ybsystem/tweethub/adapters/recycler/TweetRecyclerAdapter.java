@@ -63,9 +63,9 @@ public class TweetRecyclerAdapter extends RecyclerAdapterBase<TwitterStatus> {
         tweetRow.setUserIcon();
         tweetRow.setTweetText();
         tweetRow.setRelativeTime();
+        tweetRow.setMarks();
         tweetRow.setQuoteTweet();
         tweetRow.setDetailTweet();
-        tweetRow.setMarks();
         tweetRow.setBackgroundColor();
         tweetRow.setTweetClickListener();
 
