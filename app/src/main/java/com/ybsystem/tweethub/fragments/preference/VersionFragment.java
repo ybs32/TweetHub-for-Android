@@ -22,7 +22,13 @@ public class VersionFragment extends Fragment {
     private void setVersionText(View view) {
         String newVersion = getString(R.string.app_update_info);
         String oldVersion =
-                "Ver.1.3.2\n" +
+                        "\n" +
+                        "Ver.1.4.0\n" +
+                        "・検索カラムを追加\n" +
+                        "・保存した検索に対応\n" +
+                        "・キーボード関連の不具合修正\n" +
+                        "\n" +
+                        "Ver.1.3.2\n" +
                         "・認証時にクラッシュする不具合を修正\n" +
                         "・タイムラインで強制終了する不具合を修正\n" +
                         "\n" +
