@@ -61,7 +61,7 @@ public class AppData extends Entity {
         account.setDrafts(new EntityArray<>());
         account.setHashtags(new EntityArray<>());
 
-        // Add account
+        // Save account
         this.accounts.add(account);
         this.accounts.setCurrentAccount(accounts.size() - 1);
     }

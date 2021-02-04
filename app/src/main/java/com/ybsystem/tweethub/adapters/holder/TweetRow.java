@@ -18,13 +18,8 @@ import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUserMentionEntity;
 import com.ybsystem.tweethub.models.enums.ClickAction;
 import com.ybsystem.tweethub.models.enums.ImageOption;
-import com.ybsystem.tweethub.storages.PrefAppearance;
-import com.ybsystem.tweethub.storages.PrefClickAction;
-import com.ybsystem.tweethub.storages.PrefSystem;
-import com.ybsystem.tweethub.storages.PrefTheme;
-import com.ybsystem.tweethub.utils.CalcUtils;
-import com.ybsystem.tweethub.utils.GlideUtils;
-import com.ybsystem.tweethub.utils.ResourceUtils;
+import com.ybsystem.tweethub.storages.*;
+import com.ybsystem.tweethub.utils.*;
 
 import java.util.ArrayList;
 
@@ -57,6 +52,12 @@ public class TweetRow extends RecyclerView.ViewHolder {
     @BindView(R.id.image_fav_count) ImageView mFavCountIcon;
     @BindView(R.id.text_retweeted_by) TextView mRetweetedBy;
 
+    // Mark
+    @BindView(R.id.image_lock_mark) ImageView mLockMark;
+    @BindView(R.id.image_verify_mark) ImageView mVerifyMark;
+    @BindView(R.id.image_rt_mark) ImageView mRtMark;
+    @BindView(R.id.image_favorite_mark) ImageView mFavMark;
+
     // Thumbnail
     private ArrayList<ImageView> mThumbnails;
     @BindView(R.id.image_play) ImageView mPlayIcon;
@@ -67,28 +68,22 @@ public class TweetRow extends RecyclerView.ViewHolder {
     @BindView(R.id.relative_thumbnail) RelativeLayout mThumbnailContainer;
 
     // Quote
+    @BindView(R.id.relative_quote) RelativeLayout mQuoteContainer;
     @BindView(R.id.text_user_name_quote) TextView mQuoteUserName;
     @BindView(R.id.text_screen_name_quote) TextView mQuoteScreenName;
     @BindView(R.id.text_tweet_quote) TextView mQuoteTweetText;
     @BindView(R.id.text_relative_time_quote) TextView mQuoteRelativeTime;
-    @BindView(R.id.relative_quote) RelativeLayout mQuoteContainer;
 
     // Detail
+    @BindView(R.id.relative_detail) RelativeLayout mDetailContainer;
     @BindView(R.id.text_rt_count_detail) TextView mDetailRtCount;
     @BindView(R.id.text_fav_count_detail) TextView mDetailFavCount;
-    @BindView(R.id.linear_detail) LinearLayout mDetailContainer;
-
-    // Mark
-    @BindView(R.id.image_lock_mark) ImageView mLockMark;
-    @BindView(R.id.image_verify_mark) ImageView mVerifyMark;
-    @BindView(R.id.image_rt_mark) ImageView mRtMark;
-    @BindView(R.id.image_favorite_mark) ImageView mFavMark;
 
     // Click
+    @BindView(R.id.linear_click) LinearLayout mClickContainer;
     @BindView(R.id.view_left_click) View mLeftClick;
     @BindView(R.id.view_middle_click) View mMiddleClick;
     @BindView(R.id.view_right_click) View mRightClick;
-    @BindView(R.id.linear_click) LinearLayout mClickContainer;
 
     public TweetRow(View itemView) {
         super(itemView);
@@ -104,8 +99,8 @@ public class TweetRow extends RecyclerView.ViewHolder {
         this.mThumbnails.add(mThumbnail4);
 
         // Apply app settings
+        applyThemeSetting();
         applyAppearanceSetting();
-        applyCustomThemeSetting();
     }
 
     public void setStatus(TwitterStatus status) {
@@ -193,6 +188,32 @@ public class TweetRow extends RecyclerView.ViewHolder {
         this.mRetweetedBy.setVisibility(View.VISIBLE);
     }
 
+    public void setMarks() {
+        // Check retweeted tweet by myself
+        if (mStatus.isRetweeted())
+            this.mRtMark.setVisibility(View.VISIBLE);
+        else
+            this.mRtMark.setVisibility(View.GONE);
+
+        // Check favorited tweet by myself
+        if (mStatus.isFavorited())
+            this.mFavMark.setVisibility(View.VISIBLE);
+        else
+            this.mFavMark.setVisibility(View.GONE);
+
+        // Check verified user
+        if (mSource.getUser().isVerified())
+            this.mVerifyMark.setVisibility(View.VISIBLE);
+        else
+            this.mVerifyMark.setVisibility(View.GONE);
+
+        // Check protected user
+        if (mSource.getUser().isProtected())
+            this.mLockMark.setVisibility(View.VISIBLE);
+        else
+            this.mLockMark.setVisibility(View.GONE);
+    }
+
     public void setThumbnail() {
         TwitterMediaEntity[] medias = mSource.getMediaEntities();
 
@@ -220,36 +241,6 @@ public class TweetRow extends RecyclerView.ViewHolder {
             thumbnail.setOnClickListener(new ThumbnailClickListener(i, medias));
         }
         this.mThumbnailContainer.setVisibility(View.VISIBLE);
-    }
-
-    public void setBackgroundColor() {
-        // Check if reply
-        boolean isReply = false;
-        for (TwitterUserMentionEntity mention : mSource.getUserMentionEntities()) {
-            if (mention.getId() == TweetHubApp.getMyUser().getId()) {
-                isReply = true;
-            }
-        }
-        // Set custom theme
-        if (mSource.getUser().getId() == TweetHubApp.getMyUser().getId()) {
-            // My tweet
-            mClickContainer.setBackgroundColor(
-                PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgMyTweetColor() : ResourceUtils.getBgMyTweetColor()
-            );
-        } else if (isReply) {
-            // Reply
-            mClickContainer.setBackgroundColor(
-                PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgReplyColor() : ResourceUtils.getBgReplyColor()
-            );
-        } else if (mStatus.isRetweet()) {
-            // Retweet
-            mClickContainer.setBackgroundColor(
-                PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgRetweetColor() : ResourceUtils.getBgRetweetColor()
-            );
-        } else {
-            // Tweet
-            mClickContainer.setBackgroundColor(0);
-        }
     }
 
     public void setQuoteTweet() {
@@ -280,30 +271,33 @@ public class TweetRow extends RecyclerView.ViewHolder {
         this.mDetailContainer.setVisibility(View.VISIBLE);
     }
 
-    public void setMarks() {
-        // Check retweeted tweet by myself
-        if (mStatus.isRetweeted())
-            this.mRtMark.setVisibility(View.VISIBLE);
+    public void setBackgroundColor() {
+        // Check if reply
+        boolean isReply = false;
+        for (TwitterUserMentionEntity mention : mSource.getUserMentionEntities()) {
+            if (mention.getScreenName().equals(TweetHubApp.getMyUser().getScreenName())) {
+                isReply = true;
+            }
+        }
+        // Set custom theme
+        if (mSource.getUser().getId() == TweetHubApp.getMyUser().getId())
+            // My tweet
+            mClickContainer.setBackgroundColor(
+                    PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgMyTweetColor() : ResourceUtils.getBgMyTweetColor()
+            );
+        else if (isReply)
+            // Reply
+            mClickContainer.setBackgroundColor(
+                    PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgReplyColor() : ResourceUtils.getBgReplyColor()
+            );
+        else if (mStatus.isRetweet())
+            // Retweet
+            mClickContainer.setBackgroundColor(
+                    PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgRetweetColor() : ResourceUtils.getBgRetweetColor()
+            );
         else
-            this.mRtMark.setVisibility(View.GONE);
-
-        // Check favorited tweet by myself
-        if (mStatus.isFavorited())
-            this.mFavMark.setVisibility(View.VISIBLE);
-        else
-            this.mFavMark.setVisibility(View.GONE);
-
-        // Check verified user
-        if (mSource.getUser().isVerified())
-            this.mVerifyMark.setVisibility(View.VISIBLE);
-        else
-            this.mVerifyMark.setVisibility(View.GONE);
-
-        // Check protected user
-        if (mSource.getUser().isProtected())
-            this.mLockMark.setVisibility(View.VISIBLE);
-        else
-            this.mLockMark.setVisibility(View.GONE);
+            // Tweet
+            mClickContainer.setBackgroundColor(0);
     }
 
     public void setTweetClickListener() {
@@ -329,6 +323,35 @@ public class TweetRow extends RecyclerView.ViewHolder {
         this.mThumbnailContainer.setVisibility(View.GONE);
         this.mQuoteContainer.setVisibility(View.GONE);
         this.mDetailContainer.setVisibility(View.GONE);
+    }
+
+    private void applyThemeSetting() {
+        // Check
+        if (!PrefTheme.isCustomThemeEnabled()) {
+            return;
+        }
+        // Set tweet color
+        this.mUserName.setTextColor(PrefTheme.getUserNameColor());
+        this.mScreenName.setTextColor(PrefTheme.getUserNameColor());
+        this.mRelativeTime.setTextColor(PrefTheme.getRelativeTimeColor());
+        this.mTweetText.setTextColor(PrefTheme.getTweetTextColor());
+        this.mAbsoluteTime.setTextColor(PrefTheme.getAbsoluteTimeColor());
+        this.mVia.setTextColor(PrefTheme.getViaColor());
+        this.mRtCountText.setTextColor(PrefTheme.getRtFavColor());
+        this.mRtCountIcon.setColorFilter(PrefTheme.getRtFavColor());
+        this.mFavCountText.setTextColor(PrefTheme.getRtFavColor());
+        this.mFavCountIcon.setColorFilter(PrefTheme.getRtFavColor());
+        this.mRetweetedBy.setTextColor(PrefTheme.getRetweetedByColor());
+
+        // Set quote color
+        this.mQuoteUserName.setTextColor(PrefTheme.getUserNameColor());
+        this.mQuoteScreenName.setTextColor(PrefTheme.getUserNameColor());
+        this.mQuoteRelativeTime.setTextColor(PrefTheme.getRelativeTimeColor());
+        this.mQuoteTweetText.setTextColor(PrefTheme.getTweetTextColor());
+
+        // Set detail color
+        this.mDetailRtCount.setTextColor(PrefTheme.getRtFavColor());
+        this.mDetailFavCount.setTextColor(PrefTheme.getRtFavColor());
     }
 
     private void applyAppearanceSetting() {
@@ -357,35 +380,6 @@ public class TweetRow extends RecyclerView.ViewHolder {
         mFavMark.setColorFilter(PrefAppearance.getLikeFavColor());
         mFavMark.setImageResource(PrefAppearance.getLikeFavDrawable());
         mFavCountIcon.setImageResource(PrefAppearance.getLikeFavDrawable());
-    }
-
-    private void applyCustomThemeSetting() {
-        // Check
-        if (!PrefTheme.isCustomThemeEnabled()) {
-            return;
-        }
-        // Set tweet color
-        this.mUserName.setTextColor(PrefTheme.getUserNameColor());
-        this.mScreenName.setTextColor(PrefTheme.getUserNameColor());
-        this.mRelativeTime.setTextColor(PrefTheme.getRelativeTimeColor());
-        this.mTweetText.setTextColor(PrefTheme.getTweetTextColor());
-        this.mAbsoluteTime.setTextColor(PrefTheme.getAbsoluteTimeColor());
-        this.mVia.setTextColor(PrefTheme.getViaColor());
-        this.mRtCountText.setTextColor(PrefTheme.getRtFavColor());
-        this.mRtCountIcon.setColorFilter(PrefTheme.getRtFavColor());
-        this.mFavCountText.setTextColor(PrefTheme.getRtFavColor());
-        this.mFavCountIcon.setColorFilter(PrefTheme.getRtFavColor());
-        this.mRetweetedBy.setTextColor(PrefTheme.getRetweetedByColor());
-
-        // Set quote color
-        this.mQuoteUserName.setTextColor(PrefTheme.getUserNameColor());
-        this.mQuoteScreenName.setTextColor(PrefTheme.getUserNameColor());
-        this.mQuoteRelativeTime.setTextColor(PrefTheme.getRelativeTimeColor());
-        this.mQuoteTweetText.setTextColor(PrefTheme.getTweetTextColor());
-
-        // Set detail color
-        this.mDetailRtCount.setTextColor(PrefTheme.getRtFavColor());
-        this.mDetailFavCount.setTextColor(PrefTheme.getRtFavColor());
     }
 
 }

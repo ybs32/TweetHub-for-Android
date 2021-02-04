@@ -1,4 +1,4 @@
-package com.ybsystem.tweethub.fragments;
+package com.ybsystem.tweethub.fragments.fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -69,7 +69,7 @@ public class PostFragment extends Fragment {
         mImageUris = ((PostActivity) getActivity()).mImageUris;
         mActionBar = ((PostActivity) getActivity()).getSupportActionBar();
 
-        // Set contents
+        // Set
         setTweet(view);
         setPostEdit(view);
         setIntentData();
@@ -104,18 +104,18 @@ public class PostFragment extends Fragment {
         tweetRow.setUserIcon();
         tweetRow.setTweetText();
         tweetRow.setRelativeTime();
-        tweetRow.setThumbnail();
         tweetRow.setAbsoluteTime();
         tweetRow.setVia();
         tweetRow.setRtFavCount();
         tweetRow.setRetweetedBy();
-        tweetRow.setQuoteTweet();
         tweetRow.setMarks();
+        tweetRow.setThumbnail();
+        tweetRow.setQuoteTweet();
         tweetRow.setBackgroundColor();
     }
 
     private void setPostEdit(View view) {
-        // Init
+        // Find
         mTextCount = view.findViewById(R.id.text_count);
         mPostEdit = view.findViewById(R.id.edit_post);
 
@@ -187,6 +187,7 @@ public class PostFragment extends Fragment {
     private void setPostButton(View view) {
         // Post button
         view.findViewById(R.id.button_post).setOnClickListener(v -> {
+
             // Check text length
             int length = mPostEdit.getText().length();
             if (length == 0 && mImageUris.isEmpty()) {
@@ -221,6 +222,7 @@ public class PostFragment extends Fragment {
     private void setDraftButton(View view) {
         // Draft button
         view.findViewById(R.id.button_draft).setOnClickListener(v -> {
+
             // Check drafts
             EntityArray<String> drafts = TweetHubApp.getMyAccount().getDrafts();
             if (drafts.isEmpty()) {
@@ -231,6 +233,7 @@ public class PostFragment extends Fragment {
                 }
                 return;
             }
+
             // Create dialog
             String[] items = new String[drafts.size()];
             for (int i = 0; i < drafts.size(); i++) {
@@ -255,10 +258,11 @@ public class PostFragment extends Fragment {
                 dialog.dismiss();
                 return true;
             });
+
             // Show dialog
-            FragmentManager manager = getActivity().getSupportFragmentManager();
-            if (manager.findFragmentByTag("DraftDialog") == null) {
-                dialog.show(manager, "DraftDialog");
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            if (fm.findFragmentByTag("DraftDialog") == null) {
+                dialog.show(fm, "DraftDialog");
             }
         });
     }
@@ -266,6 +270,7 @@ public class PostFragment extends Fragment {
     private void setHashtagButton(View view) {
         // Hashtag button
         view.findViewById(R.id.button_hashtag).setOnClickListener(v -> {
+
             // Check hashtag
             EntityArray<String> hashtags = TweetHubApp.getMyAccount().getHashtags();
             if (hashtags.isEmpty()) {
@@ -276,6 +281,7 @@ public class PostFragment extends Fragment {
                 }
                 return;
             }
+
             // Create dialog
             String[] items = new String[hashtags.size()];
             for (int i = 0; i < hashtags.size(); i++) {
@@ -300,10 +306,11 @@ public class PostFragment extends Fragment {
                 dialog.dismiss();
                 return true;
             });
+
             // Show dialog
-            FragmentManager manager = getActivity().getSupportFragmentManager();
-            if (manager.findFragmentByTag("HashtagDialog") == null) {
-                dialog.show(manager, "HashtagDialog");
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            if (fm.findFragmentByTag("HashtagDialog") == null) {
+                dialog.show(fm, "HashtagDialog");
             }
         });
     }

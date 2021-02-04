@@ -17,7 +17,7 @@ public class Entity implements PropertyChangeListener, Serializable {
 
     @Override
     public void propertyChange() {
-        AppData appData = TweetHubApp.getAppData();
+        AppData appData = TweetHubApp.getData();
         PrefEntity.saveAppData(appData);
     }
 

@@ -17,7 +17,7 @@ import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.adapters.pager.SearchPagerAdapter;
 import com.ybsystem.tweethub.adapters.pager.TrendTopicPagerAdapter;
 import com.ybsystem.tweethub.application.TweetHubApp;
-import com.ybsystem.tweethub.fragments.EasyTweetFragment;
+import com.ybsystem.tweethub.fragments.fragment.EasyTweetFragment;
 import com.ybsystem.tweethub.libs.eventbus.ColumnEvent;
 import com.ybsystem.tweethub.models.entities.Column;
 import com.ybsystem.tweethub.models.entities.ColumnArray;
@@ -35,7 +35,6 @@ import static com.ybsystem.tweethub.models.enums.ColumnType.SEARCH_SINGLE;
 
 public class SearchActivity extends ActivityBase {
 
-    // Menu
     private Menu mMenu;
 
     // Trend/Topic

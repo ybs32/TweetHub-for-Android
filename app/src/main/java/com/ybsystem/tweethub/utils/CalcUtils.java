@@ -14,7 +14,8 @@ public class CalcUtils {
     }
 
     /**
-     * Convert dp to pixel
+     * Convert dp to pixel size
+     *
      * @param dp DP size
      * @return Pixel size
      */
@@ -25,7 +26,8 @@ public class CalcUtils {
     }
 
     /**
-     * Convert dp to sp
+     * Convert dp to sp size
+     *
      * @param dp DP size
      * @return SP size
      */

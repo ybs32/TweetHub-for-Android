@@ -1,11 +1,9 @@
 <resources>
     <string name="app_name">TweetHub</string>
-    <string name="app_version">1.4.0</string>
+    <string name="app_version">1.4.1</string>
     <string name="app_update_info">
-        Ver.1.4.0\n
-        ・検索カラムを追加\n
-        ・保存した検索に対応\n
-        ・キーボード関連の不具合修正\n
+        Ver.1.4.1\n
+        ・壁紙関連の不具合修正
     </string>
     <string name="callback_url">ybsystem://</string>
     <string name="hello_java">==gNE1GdVtkQ592SThGVyQEO5ZFTysmTxUVU</string>

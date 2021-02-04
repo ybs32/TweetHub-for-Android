@@ -147,7 +147,7 @@ public class OAuthActivity extends ActivityBase {
                 // If get accessToken and user
                 if (e == null && accessToken != null && user != null) {
                     // Add account
-                    TweetHubApp.getAppData().addAccount(accessToken, user);
+                    TweetHubApp.getData().addAccount(accessToken, user);
                     TweetHubApp.getInstance().init();
 
                     // Intent to MainActivity

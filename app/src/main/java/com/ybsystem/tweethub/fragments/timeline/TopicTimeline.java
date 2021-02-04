@@ -32,7 +32,7 @@ public class TopicTimeline extends TimelineBase {
         // Init
         mScrollLoad = true;
 
-        // Set contents
+        // Set view
         setRecyclerView(view);
         setRecyclerAdapter(new TweetRecyclerAdapter());
         setUltraPullToRefresh(view);

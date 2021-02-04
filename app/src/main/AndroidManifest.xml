@@ -27,7 +27,8 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".activities.MainActivity"
-            android:configChanges="orientation|screenSize">
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -60,7 +61,8 @@
         <activity
             android:name=".activities.SearchActivity"
             android:configChanges="orientation|screenSize"
-            android:label="" />
+            android:label=""
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activities.PostActivity"
             android:configChanges="orientation|screenSize"

@@ -180,8 +180,8 @@ public class DrawerArrayAdapter extends ArrayAdapter<Integer> {
     }
 
     private void showAccountDialog() {
-        // Create dialog
-        AccountArray<Account> accounts = TweetHubApp.getAppData().getAccounts();
+        // Create
+        AccountArray<Account> accounts = TweetHubApp.getData().getAccounts();
         String[] items = new String[accounts.size()];
         for (int i = 0; i < accounts.size(); i++) {
             TwitterUser user = accounts.get(i).getUser();
@@ -200,7 +200,7 @@ public class DrawerArrayAdapter extends ArrayAdapter<Integer> {
             ActivityUtils.rebootActivity(act, 0, 0);
         });
 
-        // Show dialog
+        // Show
         FragmentManager fm = act.getSupportFragmentManager();
         if (fm.findFragmentByTag("AccountDialog") == null) {
             dialog.show(fm, "AccountDialog");

@@ -21,7 +21,7 @@ public class EntityArray<T> extends ArrayList<T>
 
     @Override
     public void propertyChange() {
-        AppData appData = TweetHubApp.getAppData();
+        AppData appData = TweetHubApp.getData();
         PrefEntity.saveAppData(appData);
     }
 

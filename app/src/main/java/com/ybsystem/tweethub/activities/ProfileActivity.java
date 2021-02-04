@@ -16,7 +16,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.adapters.pager.ProfilePagerAdapter;
 import com.ybsystem.tweethub.application.TweetHubApp;
-import com.ybsystem.tweethub.fragments.ProfileFragment;
+import com.ybsystem.tweethub.fragments.fragment.ProfileFragment;
 import com.ybsystem.tweethub.fragments.dialog.UserListDialog;
 import com.ybsystem.tweethub.fragments.timeline.TimelineBase;
 import com.ybsystem.tweethub.libs.eventbus.UserEvent;
@@ -51,13 +51,10 @@ public class ProfileActivity extends ActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Init
-        long userId = getIntent().getLongExtra("USER_ID", 0);
-
-        // Set
         setContentView(R.layout.activity_profile);
 
         // Fetch user
+        long userId = getIntent().getLongExtra("USER_ID", 0);
         fetchTwitterUser(userId, savedInstanceState);
     }
 
@@ -103,7 +100,7 @@ public class ProfileActivity extends ActivityBase {
             // リストに追加
             case R.id.item_add_list:
                 UserListDialog dialog = new UserListDialog().newInstance(mUser);
-                FragmentManager fm = TweetHubApp.getActivity().getSupportFragmentManager();
+                FragmentManager fm = getSupportFragmentManager();
                 if (fm.findFragmentByTag("UserListDialog") == null) {
                     dialog.show(fm, "UserListDialog");
                 }
@@ -117,7 +114,8 @@ public class ProfileActivity extends ActivityBase {
     }
 
     private void fetchTwitterUser(long userId, Bundle savedInstanceState) {
-        Observable<Object> observable = Observable.create(e -> {
+        // Async
+        Observable<User> observable = Observable.create(e -> {
             // Fetch user
             Twitter twitter = TweetHubApp.getTwitter();
             User user4j = twitter.showUser(userId);
@@ -127,13 +125,25 @@ public class ProfileActivity extends ActivityBase {
                 mRelation = twitter.showFriendship(
                         TweetHubApp.getMyUser().getId(), mUser.getId()
                 );
+                e.onNext(user4j);
             }
             e.onComplete();
         });
 
-        DisposableObserver<Object> disposable = new DisposableObserver<Object>() {
+        DisposableObserver<User> disposable = new DisposableObserver<User>() {
             @Override
-            public void onNext(Object o) {
+            public void onNext(User ignored) {
+                // Success
+                mUser.setFriend(mRelation.isSourceFollowingTarget());
+                mUser.setFollower(mRelation.isSourceFollowedByTarget());
+                mUser.setMuting(mRelation.isSourceMutingTarget());
+                mUser.setBlocking(mRelation.isSourceBlockingTarget());
+
+                // Main process
+                setProfileFragment(savedInstanceState);
+                setProfileTlPager();
+                updateMenu();
+                showScreen();
             }
 
             @Override
@@ -148,19 +158,6 @@ public class ProfileActivity extends ActivityBase {
 
             @Override
             public void onComplete() {
-                // Success
-                mUser.setFriend(mRelation.isSourceFollowingTarget());
-                mUser.setFollower(mRelation.isSourceFollowedByTarget());
-                mUser.setMuting(mRelation.isSourceMutingTarget());
-                mUser.setBlocking(mRelation.isSourceBlockingTarget());
-
-                // Set contents
-                updateMenu();
-                setProfileFragment(savedInstanceState);
-                setProfileTlPager();
-                new Handler().postDelayed(() ->
-                        findViewById(R.id.view_cover).setVisibility(View.GONE), 200
-                );
             }
         };
 
@@ -168,35 +165,6 @@ public class ProfileActivity extends ActivityBase {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(disposable);
-    }
-
-    private void updateMenu() {
-        // Init
-        MenuItem mute = mMenu.findItem(R.id.item_mute);
-        MenuItem block = mMenu.findItem(R.id.item_block);
-        MenuItem reply = mMenu.findItem(R.id.item_reply);
-        MenuItem addList = mMenu.findItem(R.id.item_add_list);
-
-        // Check myself
-        if (mUser.isMyself()) {
-            mute.setVisible(false);
-            block.setVisible(false);
-            reply.setVisible(false);
-            addList.setVisible(false);
-            return;
-        }
-        // Check muting
-        if (mUser.isMuting()) {
-            mute.setTitle("ミュート解除");
-        } else {
-            mute.setTitle("ミュート");
-        }
-        // Check blocking
-        if (mUser.isBlocking()) {
-            block.setTitle("ブロック解除");
-        } else {
-            block.setTitle("ブロック");
-        }
     }
 
     private void setProfileFragment(Bundle savedInstanceState) {
@@ -226,18 +194,56 @@ public class ProfileActivity extends ActivityBase {
         TabLayout tabLayout = findViewById(R.id.tab_profile);
         tabLayout.setupWithViewPager(mProfileTlPager);
         ViewGroup vg = (ViewGroup) tabLayout.getChildAt(0);
+
+        // When tab clicked
         for (int i = 0; i < 3; i++) {
-            // When tab clicked
             final int TAB_NUM = i;
             vg.getChildAt(i).setOnClickListener(v -> {
                 // If current tab clicked, move top of the timeline
                 int currentPage = mProfileTlPager.getCurrentItem();
                 if (currentPage == TAB_NUM) {
-                    TimelineBase timeline = (TimelineBase) mProfilePagerAdapter.instantiateItem(mProfileTlPager, currentPage);
+                    TimelineBase timeline = (TimelineBase)
+                            mProfilePagerAdapter.instantiateItem(mProfileTlPager, currentPage);
                     timeline.getRecyclerView().scrollToPosition(0);
                 }
             });
         }
+    }
+
+    private void updateMenu() {
+        // Find
+        MenuItem mute = mMenu.findItem(R.id.item_mute);
+        MenuItem block = mMenu.findItem(R.id.item_block);
+        MenuItem reply = mMenu.findItem(R.id.item_reply);
+        MenuItem addList = mMenu.findItem(R.id.item_add_list);
+
+        // Check if myself
+        if (mUser.isMyself()) {
+            mute.setVisible(false);
+            block.setVisible(false);
+            reply.setVisible(false);
+            addList.setVisible(false);
+            return;
+        }
+        // Check muting
+        if (mUser.isMuting()) {
+            mute.setTitle("ミュート解除");
+        } else {
+            mute.setTitle("ミュート");
+        }
+        // Check blocking
+        if (mUser.isBlocking()) {
+            block.setTitle("ブロック解除");
+        } else {
+            block.setTitle("ブロック");
+        }
+    }
+
+    private void showScreen() {
+        new Handler().postDelayed(() ->
+            findViewById(R.id.view_cover).setVisibility(View.GONE),
+            200
+        );
     }
 
 }

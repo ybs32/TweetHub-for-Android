@@ -41,7 +41,7 @@ public class MainListTimeline extends TimelineBase {
         // Inflate
         View view = inflater.inflate(R.layout.fragment_timeline_list, container, false);
 
-        // Set contents
+        // Set view
         setRecyclerView(view);
         setRecyclerAdapter(new TweetRecyclerAdapter());
         setUltraPullToRefresh(view);

@@ -49,8 +49,8 @@ public class UserRow extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
 
         // Apply app settings
+        applyThemeSetting();
         applyAppearanceSetting();
-        applyCustomThemeSetting();
     }
 
     public void setUser(TwitterUser user) {
@@ -143,6 +143,17 @@ public class UserRow extends RecyclerView.ViewHolder {
         );
     }
 
+    private void applyThemeSetting() {
+        // Check
+        if (!PrefTheme.isCustomThemeEnabled()) {
+            return;
+        }
+        // Set tweet color
+        this.mUserName.setTextColor(PrefTheme.getUserNameColor());
+        this.mScreenName.setTextColor(PrefTheme.getUserNameColor());
+        this.mProfileText.setTextColor(PrefTheme.getTweetTextColor());
+    }
+
     private void applyAppearanceSetting() {
         // Set font size
         int fontSize = PrefAppearance.getFontSize();
@@ -154,17 +165,6 @@ public class UserRow extends RecyclerView.ViewHolder {
         int dpSize = PrefAppearance.getUserIconSize();
         mUserIcon.getLayoutParams().width = CalcUtils.convertDp2Px(dpSize);
         mUserIcon.getLayoutParams().height = CalcUtils.convertDp2Px(dpSize);
-    }
-
-    private void applyCustomThemeSetting() {
-        // Check
-        if (!PrefTheme.isCustomThemeEnabled()) {
-            return;
-        }
-        // Set tweet color
-        this.mUserName.setTextColor(PrefTheme.getUserNameColor());
-        this.mScreenName.setTextColor(PrefTheme.getUserNameColor());
-        this.mProfileText.setTextColor(PrefTheme.getTweetTextColor());
     }
 
 }

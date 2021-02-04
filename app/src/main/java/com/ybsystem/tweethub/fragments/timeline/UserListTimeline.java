@@ -46,7 +46,7 @@ public class UserListTimeline extends TimelineBase {
         mColumn = (Column) getArguments().getSerializable("COLUMN");
         mScrollLoad = true;
 
-        // Set contents
+        // Set view
         setRecyclerView(view);
         setRecyclerAdapter(new UserListRecyclerAdapter());
         setUltraPullToRefresh(view);

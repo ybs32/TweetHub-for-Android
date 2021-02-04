@@ -29,7 +29,7 @@ public class TrendTimeline extends TimelineBase {
         // Init
         mScrollLoad = true;
 
-        // Set contents
+        // Set view
         setRecyclerView(view);
         setRecyclerAdapter(new TrendRecyclerAdapter());
         setUltraPullToRefresh(view);

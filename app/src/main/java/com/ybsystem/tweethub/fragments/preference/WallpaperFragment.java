@@ -69,17 +69,13 @@ public class WallpaperFragment extends PreferenceFragmentBase {
     }
 
     private void intentToGallery() {
-        ActivityCompat.requestPermissions(getActivity(), new String[]{
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                0);
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         getActivity().startActivityForResult(intent, REQUEST_GALLERY);
     }
 
     private void showConfirmDialog() {
-        // Create dialog
+        // Create
         ConfirmDialog confirmDialog = new ConfirmDialog().newInstance("壁紙を解除しますか？");
         confirmDialog.setOnPositiveClickListener((dialog, which) -> {
             getActivity().setResult(REBOOT_PREPARATION);
@@ -87,7 +83,7 @@ public class WallpaperFragment extends PreferenceFragmentBase {
             mAddWallpaper.setSummary(PrefWallpaper.getWallpaperPath());
             ToastUtils.showShortToast("壁紙を解除しました。");
         });
-        // Show dialog
+        // Show
         if (getFragmentManager().findFragmentByTag("ConfirmDialog") == null) {
             confirmDialog.show(getFragmentManager(), "ConfirmDialog");
         }

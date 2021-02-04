@@ -33,7 +33,7 @@ public class TweetHubApp extends Application {
 
         sTweetHubApp = this;
 
-        // Check if the app launch first time
+        // Check if launch first time
         mAppData = PrefEntity.loadAppData();
         if (mAppData == null) {
             mAppData = new AppData();
@@ -57,58 +57,30 @@ public class TweetHubApp extends Application {
         mTwitter.setOAuthAccessToken(new AccessToken(t, ts));
     }
 
-    /**
-     * Get application class instance
-     * @return Instance of application class
-     */
     public static synchronized TweetHubApp getInstance() {
         return sTweetHubApp;
     }
 
-    /**
-     * Get current activity instance
-     * @return Instance of current activity
-     */
     public static AppCompatActivity getActivity() {
         return getInstance().mActivity;
     }
 
-    /**
-     * Set current activity instance
-     * @param activity Activity
-     */
     public static void setActivity(AppCompatActivity activity) {
         getInstance().mActivity = activity;
     }
 
-    /**
-     * Get app data instance
-     * @return Instance of app data
-     */
-    public static AppData getAppData() {
+    public static AppData getData() {
         return getInstance().mAppData;
     }
 
-    /**
-     * Get account instance
-     * @return Instance of account
-     */
     public static Account getMyAccount() {
-        return getAppData().getAccounts().getCurrentAccount();
+        return getData().getAccounts().getCurrentAccount();
     }
 
-    /**
-     * Get twitter user instance
-     * @return Instance of twitter user
-     */
     public static TwitterUser getMyUser() {
         return getMyAccount().getUser();
     }
 
-    /**
-     * Get twitter instance
-     * @return Instance of twitter
-     */
     public static Twitter getTwitter() {
         return getInstance().mTwitter;
     }

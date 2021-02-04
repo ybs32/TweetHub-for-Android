@@ -51,7 +51,7 @@ public class PhotoActivity extends ActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Set
+        // Set view
         setContentView(R.layout.activity_photo);
         mPhotoPager = (PhotoViewPager) findViewById(R.id.view_pager);
         setContentView(mPhotoPager);
@@ -62,7 +62,7 @@ public class PhotoActivity extends ActivityBase {
         mPagerPosition = getIntent().getIntExtra("PAGER_POSITION", -1);
         mImageURLs = (ArrayList<String>) getIntent().getSerializableExtra("IMAGE_URLS");
 
-        // Set contents
+        // Set pager
         setPhotoPager();
         setActionBarTitle();
     }

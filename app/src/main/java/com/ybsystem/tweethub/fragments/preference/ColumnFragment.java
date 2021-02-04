@@ -44,7 +44,7 @@ public class ColumnFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_manage, container, false);
 
-        // Set contents
+        // Set
         setColumnList(view);
         setListItemClickListener();
         setAddButtonClickListener(view);
