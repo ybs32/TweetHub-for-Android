@@ -11,25 +11,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.activities.SearchActivity;
 import com.ybsystem.tweethub.activities.TimelineActivity;
 import com.ybsystem.tweethub.activities.UserListActivity;
 import com.ybsystem.tweethub.activities.preference.SettingActivity;
 import com.ybsystem.tweethub.application.TweetHubApp;
-import com.ybsystem.tweethub.fragments.dialog.ChoiceDialog;
-import com.ybsystem.tweethub.models.entities.Account;
-import com.ybsystem.tweethub.models.entities.AccountArray;
-import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweethub.models.enums.ColumnType;
 import com.ybsystem.tweethub.storages.PrefAppearance;
-import com.ybsystem.tweethub.utils.ActivityUtils;
 import com.ybsystem.tweethub.utils.CalcUtils;
 import com.ybsystem.tweethub.utils.DialogUtils;
-import com.ybsystem.tweethub.utils.ToastUtils;
 
 import static com.ybsystem.tweethub.models.enums.ColumnType.*;
 
@@ -128,7 +119,7 @@ public class DrawerArrayAdapter extends ArrayAdapter<Integer> {
             case 11:
                 tv.setText("アカウント");
                 iv.setImageResource(R.drawable.ic_user);
-                cv.setOnClickListener(v -> showAccountDialog());
+                cv.setOnClickListener(v -> DialogUtils.showAccountDialog());
                 break;
             case 12:
                 tv.setText("設定");
@@ -177,34 +168,6 @@ public class DrawerArrayAdapter extends ArrayAdapter<Integer> {
                     TweetHubApp.getActivity().startActivity(intent);
                 }
         );
-    }
-
-    private void showAccountDialog() {
-        // Create
-        AccountArray<Account> accounts = TweetHubApp.getData().getAccounts();
-        String[] items = new String[accounts.size()];
-        for (int i = 0; i < accounts.size(); i++) {
-            TwitterUser user = accounts.get(i).getUser();
-            items[i] = user.getName() + " (@" + user.getScreenName() + ")";
-        }
-        ChoiceDialog dialog = new ChoiceDialog()
-                .newInstance(items, accounts.getCurrentAccountNum());
-
-        // When item clicked
-        FragmentActivity act = (FragmentActivity) getContext();
-        dialog.setOnItemClickListener((d, position) -> {
-            // Change account and reboot
-            accounts.setCurrentAccount(position);
-            TweetHubApp.getInstance().init();
-            ToastUtils.showShortToast("アカウントを切り替えました。");
-            ActivityUtils.rebootActivity(act, 0, 0);
-        });
-
-        // Show
-        FragmentManager fm = act.getSupportFragmentManager();
-        if (fm.findFragmentByTag("AccountDialog") == null) {
-            dialog.show(fm, "AccountDialog");
-        }
     }
 
 }
