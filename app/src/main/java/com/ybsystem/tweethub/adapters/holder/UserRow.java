@@ -1,6 +1,5 @@
 package com.ybsystem.tweethub.adapters.holder;
 
-import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,7 +18,6 @@ import com.ybsystem.tweethub.usecases.ClickUseCase;
 import com.ybsystem.tweethub.usecases.UserUseCase;
 import com.ybsystem.tweethub.utils.CalcUtils;
 import com.ybsystem.tweethub.utils.GlideUtils;
-import com.ybsystem.tweethub.utils.ResourceUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,41 +74,12 @@ public class UserRow extends RecyclerView.ViewHolder {
     }
 
     public void setFollowButton() {
-        String text;
-        int textColor;
-        int background;
-
-        // Check relation
-        if (mUser.isMyself()) {
-            text = "あなた";
-            textColor = Color.parseColor("#FFFFFF");
-            background = R.drawable.bg_rounded_purple;
-        } else if (mUser.isBlocking()) {
-            text = "ブロック中";
-            textColor = ResourceUtils.getAccentColor();
-            background = R.drawable.bg_rounded_reverse;
-        } else if (mUser.isFriend() && mUser.isFollower()) {
-            text = "相互フォロー";
-            textColor = Color.parseColor("#FFFFFF");
-            background = R.drawable.bg_rounded_purple;
-        } else if (mUser.isFriend()) {
-            text = "フォロー中";
-            textColor = Color.parseColor("#FFFFFF");
-            background = R.drawable.bg_rounded_purple;
-        } else if (mUser.isFollower()) {
-            text = "フォロワー";
-            textColor = ResourceUtils.getAccentColor();
-            background = R.drawable.bg_rounded_reverse;
-        } else {
-            text = "フォロー";
-            textColor = ResourceUtils.getAccentColor();
-            background = R.drawable.bg_rounded_reverse;
-        }
-
         // Set follow button
-        mFollowButton.setText(text);
-        mFollowButton.setTextColor(textColor);
-        mFollowButton.setBackground(ResourceUtils.getDrawable(background));
+        mFollowButton.setText(mUser.getRelationText());
+        mFollowButton.setTextColor(mUser.getRelationTextColor());
+        mFollowButton.setBackground(mUser.getRelationBackground());
+
+        // When follow button clicked
         mFollowButton.setOnClickListener(view -> {
             if (mUser.isMyself() || mUser.isBlocking()) {
                 return;
