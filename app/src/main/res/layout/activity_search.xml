@@ -36,7 +36,7 @@
         app:borderWidth="0dp"
         tools:ignore="RelativeOverlap" />
 
-    <!-- 簡易ツイート -->
+    <!-- かんたんツイート -->
     <FrameLayout
         android:id="@+id/frame_easy_tweet"
         android:layout_width="match_parent"

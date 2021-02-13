@@ -36,7 +36,7 @@ public class OAuthActivity extends ActivityBase {
 
         setContentView(R.layout.activity_oauth);
 
-        // When user clicked auth button
+        // When auth button clicked
         findViewById(R.id.button_oauth).setOnClickListener(v -> {
             if (mClickEnable) {
                 // Disable flag to not tap continuously

@@ -33,6 +33,7 @@ public class UserUseCase {
         String success = isFriend ? "フォローを解除しました。" : "フォローしました。";
         String fail = isFriend ? "フォロー解除に失敗しました..." : "フォローに失敗しました...";
 
+        // Async
         Observable<Object> observable = Observable.create(e -> {
             try {
                 if (isFriend) {
@@ -44,9 +45,12 @@ public class UserUseCase {
             } catch (TwitterException ex) {
                 e.onError(ex);
             }
-        });
+        })
+        .subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread());
 
-        DisposableObserver<Object> disposable = new DisposableObserver<Object>() {
+        // Result
+        DisposableObserver<Object> disp = new DisposableObserver<Object>() {
             @Override
             public void onNext(Object obj) {
             }
@@ -75,20 +79,14 @@ public class UserUseCase {
             }
         };
 
-        // Show confirm dialog
+        // Confirm
         if (PrefSystem.getConfirmSettings().contains(FOLLOW)) {
             DialogUtils.showConfirmDialog(
                     confirm,
-                    (dialog, which) -> observable
-                            .subscribeOn(Schedulers.newThread())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(disposable)
+                    (dialog, which) -> observable.subscribe(disp)
             );
         } else {
-            observable
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(disposable);
+            observable.subscribe(disp);
         }
     }
 
@@ -99,6 +97,7 @@ public class UserUseCase {
         String success = isMuting ? "ミュートを解除しました。" : "ミュートしました。";
         String fail = isMuting ? "ミュート解除に失敗しました..." : "ミュートに失敗しました...";
 
+        // Async
         Observable<Object> observable = Observable.create(e -> {
             try {
                 if (isMuting) {
@@ -110,9 +109,12 @@ public class UserUseCase {
             } catch (TwitterException ex) {
                 e.onError(ex);
             }
-        });
+        })
+        .subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread());
 
-        DisposableObserver<Object> disposable = new DisposableObserver<Object>() {
+        // Result
+        DisposableObserver<Object> disp = new DisposableObserver<Object>() {
             @Override
             public void onNext(Object obj) {
             }
@@ -141,20 +143,14 @@ public class UserUseCase {
             }
         };
 
-        // Show confirm dialog
+        // Confirm
         if (PrefSystem.getConfirmSettings().contains(MUTE)) {
             DialogUtils.showConfirmDialog(
                     confirm,
-                    (dialog, which) -> observable
-                            .subscribeOn(Schedulers.newThread())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(disposable)
+                    (dialog, which) -> observable.subscribe(disp)
             );
         } else {
-            observable
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(disposable);
+            observable.subscribe(disp);
         }
     }
 
@@ -165,6 +161,7 @@ public class UserUseCase {
         String success = isBlocking ? "ブロックを解除しました。" : "ブロックしました。";
         String fail = isBlocking ? "ブロック解除に失敗しました..." : "ブロックに失敗しました...";
 
+        // Async
         Observable<Object> observable = Observable.create(e -> {
             try {
                 if (isBlocking) {
@@ -176,9 +173,12 @@ public class UserUseCase {
             } catch (TwitterException ex) {
                 e.onError(ex);
             }
-        });
+        })
+        .subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread());
 
-        DisposableObserver<Object> disposable = new DisposableObserver<Object>() {
+        // Result
+        DisposableObserver<Object> disp = new DisposableObserver<Object>() {
             @Override
             public void onNext(Object obj) {
             }
@@ -209,20 +209,14 @@ public class UserUseCase {
             }
         };
 
-        // Show confirm dialog
+        // Confirm
         if (PrefSystem.getConfirmSettings().contains(BLOCK)) {
             DialogUtils.showConfirmDialog(
                     confirm,
-                    (dialog, which) -> observable
-                            .subscribeOn(Schedulers.newThread())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(disposable)
+                    (dialog, which) -> observable.subscribe(disp)
             );
         } else {
-            observable
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(disposable);
+            observable.subscribe(disp);
         }
     }
 
@@ -233,6 +227,7 @@ public class UserUseCase {
         String success = isSubscribing ? "購読を解除しました。" : "リストを購読しました。";
         String fail = isSubscribing ? "購読解除に失敗しました..." : "購読に失敗しました...";
 
+        // Async
         Observable<Object> observable = Observable.create(e -> {
             try {
                 if (isSubscribing) {
@@ -244,9 +239,12 @@ public class UserUseCase {
             } catch (TwitterException ex) {
                 e.onError(ex);
             }
-        });
+        })
+        .subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread());
 
-        DisposableObserver<Object> disposable = new DisposableObserver<Object>() {
+        // Result
+        DisposableObserver<Object> disp = new DisposableObserver<Object>() {
             @Override
             public void onNext(Object obj) {
             }
@@ -273,20 +271,14 @@ public class UserUseCase {
             }
         };
 
-        // Show confirm dialog
+        // Confirm
         if (PrefSystem.getConfirmSettings().contains(SUBSCRIBE)) {
             DialogUtils.showConfirmDialog(
                     confirm,
-                    (dialog, which) -> observable
-                            .subscribeOn(Schedulers.newThread())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(disposable)
+                    (dialog, which) -> observable.subscribe(disp)
             );
         } else {
-            observable
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(disposable);
+            observable.subscribe(disp);
         }
     }
 
@@ -297,6 +289,7 @@ public class UserUseCase {
         String success = name + (isRegistering ? "から削除しました。" : "に追加しました。");
         String fail = name + (isRegistering ? "から削除に失敗しました..." : "への追加に失敗しました...");
 
+        // Async
         Observable<Object> observable = Observable.create(e -> {
             try {
                 if (isRegistering) {
@@ -310,6 +303,7 @@ public class UserUseCase {
             }
         });
 
+        // Result
         DisposableObserver<Object> disposable = new DisposableObserver<Object>() {
             @Override
             public void onNext(Object obj) {

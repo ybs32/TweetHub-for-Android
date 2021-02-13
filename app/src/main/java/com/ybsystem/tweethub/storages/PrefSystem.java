@@ -21,11 +21,10 @@ public class PrefSystem extends PrefBase {
 
     public static final String KEY_CONFIRM_SETTING = RES.getString(R.string.pref_key_confirm_setting);
 
-    public static final String KEY_EASY_TWEET = RES.getString(R.string.pref_key_easy_tweet);
-
     public static final String KEY_COUNT_BOOT_LOAD = RES.getString(R.string.pref_key_count_boot_load);
     public static final String KEY_COUNT_SCROLL_LOAD = RES.getString(R.string.pref_key_count_scroll_load);
 
+    public static final String KEY_EASY_TWEET = RES.getString(R.string.pref_key_easy_tweet);
 
     private PrefSystem() {
     }
@@ -162,12 +161,6 @@ public class PrefSystem extends PrefBase {
         }
     }
 
-    // ----- ツイート -----
-
-    public static boolean isEasyTweetEnabled() {
-        return getDefaultSharedPreferences().getBoolean(KEY_EASY_TWEET, true);
-    }
-
     // ----- タイムライン -----
 
     public static int getBootLoadCount() {
@@ -180,6 +173,12 @@ public class PrefSystem extends PrefBase {
         return Integer.parseInt(
                 getDefaultSharedPreferences().getString(KEY_COUNT_SCROLL_LOAD, "100")
         );
+    }
+
+    // ----- ツイート -----
+
+    public static boolean isEasyTweetEnabled() {
+        return getDefaultSharedPreferences().getBoolean(KEY_EASY_TWEET, true);
     }
 
 }

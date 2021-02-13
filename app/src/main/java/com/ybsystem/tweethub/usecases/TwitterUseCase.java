@@ -47,6 +47,7 @@ public class TwitterUseCase {
         String success = isRetweeted ? "リツイートを解除しました。" : "リツイートしました。";
         String fail = isRetweeted ? "リツイート解除に失敗しました..." : "リツイートに失敗しました...";
 
+        // Async
         Observable<Object> observable = Observable.create(e -> {
             try {
                 if (isRetweeted) {
@@ -58,9 +59,12 @@ public class TwitterUseCase {
             } catch (TwitterException ex) {
                 e.onError(ex);
             }
-        });
+        })
+        .subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread());
 
-        DisposableObserver<Object> disposable = new DisposableObserver<Object>() {
+        // Result
+        DisposableObserver<Object> disp = new DisposableObserver<Object>() {
             @Override
             public void onNext(Object obj) {
             }
@@ -90,31 +94,26 @@ public class TwitterUseCase {
             }
         };
 
-        // Show confirm dialog
+        // Confirm
         if (PrefSystem.getConfirmSettings().contains(RETWEET)) {
             DialogUtils.showConfirmDialog(
                     confirm,
-                    (dialog, which) -> observable
-                            .subscribeOn(Schedulers.newThread())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(disposable)
+                    (dialog, which) -> observable.subscribe(disp)
             );
         } else {
-            observable
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(disposable);
+            observable.subscribe(disp);
         }
     }
 
     public static void favorite(TwitterStatus status) {
         // Create text
         boolean isFavorited = status.isFavorited();
-        String str = PrefAppearance.getLikeFavText();
-        String confirm = isFavorited ? str + "を解除しますか？" : str + "しますか？";
-        String success = isFavorited ? str + "を解除しました。" : str + "しました。";
-        String fail = isFavorited ? str + "解除に失敗しました..." : str + "に失敗しました...";
+        String fav = PrefAppearance.getLikeFavText();
+        String confirm = isFavorited ? fav + "を解除しますか？" : fav + "しますか？";
+        String success = isFavorited ? fav + "を解除しました。" : fav + "しました。";
+        String fail = isFavorited ? fav + "解除に失敗しました..." : fav + "に失敗しました...";
 
+        // Async
         Observable<Object> observable = Observable.create(e -> {
             try {
                 if (isFavorited) {
@@ -126,9 +125,12 @@ public class TwitterUseCase {
             } catch (TwitterException ex) {
                 e.onError(ex);
             }
-        });
+        })
+        .subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread());
 
-        DisposableObserver<Object> disposable = new DisposableObserver<Object>() {
+        // Result
+        DisposableObserver<Object> disp = new DisposableObserver<Object>() {
             @Override
             public void onNext(Object obj) {
             }
@@ -157,24 +159,19 @@ public class TwitterUseCase {
             }
         };
 
-        // Show confirm dialog
+        // Confirm
         if (PrefSystem.getConfirmSettings().contains(LIKE)) {
             DialogUtils.showConfirmDialog(
                     confirm,
-                    (dialog, which) -> observable
-                            .subscribeOn(Schedulers.newThread())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(disposable)
+                    (dialog, which) -> observable.subscribe(disp)
             );
         } else {
-            observable
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(disposable);
+            observable.subscribe(disp);
         }
     }
 
     public static void delete(TwitterStatus status) {
+        // Async
         Observable<Object> observable = Observable.create(e -> {
             try {
                 TweetHubApp.getTwitter().destroyStatus(status.getId());
@@ -182,9 +179,12 @@ public class TwitterUseCase {
             } catch (TwitterException ex) {
                 e.onError(ex);
             }
-        });
+        })
+        .subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread());
 
-        DisposableObserver<Object> disposable = new DisposableObserver<Object>() {
+        // Result
+        DisposableObserver<Object> disp = new DisposableObserver<Object>() {
             @Override
             public void onNext(Object obj) {
             }
@@ -205,36 +205,31 @@ public class TwitterUseCase {
             }
         };
 
-        // Show confirm dialog
+        // Confirm
         if (PrefSystem.getConfirmSettings().contains(DELETE)) {
             DialogUtils.showConfirmDialog(
                     "ツイートを削除しますか？",
-                    (dialog, which) -> observable
-                            .subscribeOn(Schedulers.newThread())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(disposable)
+                    (dialog, which) -> observable.subscribe(disp)
             );
         } else {
-            observable
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(disposable);
+            observable.subscribe(disp);
         }
     }
 
     public static void post(StatusUpdate update, List<Uri> imageUris) {
+        // Async
         Observable<Object> observable = Observable.create(e -> {
             try {
                 Twitter twitter = TweetHubApp.getTwitter();
-                Activity activity = TweetHubApp.getActivity();
+                Activity act = TweetHubApp.getActivity();
 
                 // Check media
                 if (!imageUris.isEmpty()) {
                     long[] mediaIds = new long[imageUris.size()];
                     for (int i = 0; i < imageUris.size(); i++) {
                         Uri uri = imageUris.get(i);
-                        File file = StorageUtils.fileFromUri(activity, uri);
-                        file = new Compressor(activity).setQuality(100).compressToFile(file);
+                        File file = StorageUtils.fileFromUri(act, uri);
+                        file = new Compressor(act).setQuality(100).compressToFile(file);
                         mediaIds[i] = twitter.uploadMedia(file).getMediaId();
                     }
                     update.setMediaIds(mediaIds);
@@ -246,9 +241,13 @@ public class TwitterUseCase {
             } catch (TwitterException ex) {
                 e.onError(ex);
             }
-        });
+        })
+        .subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread())
+        .doFinally(DialogUtils::dismissProgressDialog);
 
-        DisposableObserver<Object> disposable = new DisposableObserver<Object>() {
+        // Result
+        DisposableObserver<Object> disp = new DisposableObserver<Object>() {
             @Override
             public void onNext(Object obj) {
             }
@@ -271,26 +270,18 @@ public class TwitterUseCase {
             }
         };
 
-        // Show confirm dialog
+        // Confirm
         if (PrefSystem.getConfirmSettings().contains(TWEET)) {
             DialogUtils.showConfirmDialog(
                     "ツイートしますか？",
                     (dialog, which) -> {
                         DialogUtils.showProgressDialog("送信中...", TweetHubApp.getActivity());
-                        observable
-                                .subscribeOn(Schedulers.newThread())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .doFinally(DialogUtils::dismissProgressDialog)
-                                .subscribe(disposable);
+                        observable.subscribe(disp);
                     }
             );
         } else {
             DialogUtils.showProgressDialog("送信中...", TweetHubApp.getActivity());
-            observable
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doFinally(DialogUtils::dismissProgressDialog)
-                    .subscribe(disposable);
+            observable.subscribe(disp);
         }
     }
 

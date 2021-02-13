@@ -1,14 +1,7 @@
 package com.ybsystem.tweethub.activities;
 
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,17 +15,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.github.chrisbanes.photoview.PhotoView;
 import com.ybsystem.tweethub.R;
-import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.fragments.dialog.ListDialog;
 import com.ybsystem.tweethub.libs.photo.PhotoViewPager;
-import com.ybsystem.tweethub.utils.DialogUtils;
+import com.ybsystem.tweethub.usecases.DownloadUseCase;
 import com.ybsystem.tweethub.utils.GlideUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 import com.ybsystem.tweethub.utils.StorageUtils;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import static com.ybsystem.tweethub.models.enums.ImageOption.*;
@@ -63,8 +52,8 @@ public class PhotoActivity extends ActivityBase {
         mImageURLs = (ArrayList<String>) getIntent().getSerializableExtra("IMAGE_URLS");
 
         // Set pager
-        setPhotoPager();
         setActionBarTitle();
+        setPhotoPager();
     }
 
     @Override
@@ -178,7 +167,7 @@ public class PhotoActivity extends ActivityBase {
                         url = getMediaBySize(url, position);
                         break;
                 }
-                new DownloadTask().execute(url);
+                DownloadUseCase.downloadImage(url);
             } else {
                 Intent intent = getIntent();
                 intent.putExtra("TYPE", mType);
@@ -196,62 +185,6 @@ public class PhotoActivity extends ActivityBase {
         FragmentManager fm = getSupportFragmentManager();
         if (fm.findFragmentByTag("ListDialog") == null) {
             dialog.show(fm, "ListDialog");
-        }
-    }
-
-    private static class DownloadTask extends AsyncTask<String, Void, Exception> {
-        private String path;
-
-        @Override
-        protected void onPreExecute() {
-            DialogUtils.showProgressDialog("通信中...", TweetHubApp.getActivity());
-        }
-
-        @Override
-        protected Exception doInBackground(String... url) {
-            FileOutputStream out = null;
-            try {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    // Over Android 10
-                    ContentResolver resolver = TweetHubApp.getActivity().getContentResolver();
-                    Uri uri = StorageUtils.createMediaUri(Environment.DIRECTORY_PICTURES, resolver);
-                    out = new FileOutputStream(resolver.openFileDescriptor(uri, "w").getFileDescriptor());
-                    path = StorageUtils.pathFromUri(TweetHubApp.getActivity(), uri);
-                } else {
-                    // Under Android 9
-                    File file = StorageUtils.createMediaFile(Environment.DIRECTORY_PICTURES);
-                    out = new FileOutputStream(file);
-                    path = file.getAbsolutePath();
-                }
-                // Write
-                InputStream input = new java.net.URL(url[0]).openStream();
-                BitmapFactory.decodeStream(input)
-                        .compress(Bitmap.CompressFormat.JPEG, 100, out);
-                out.flush();
-
-                return null;
-            } catch (Exception e) {
-                return e;
-            } finally {
-                // Close
-                try {
-                    if (out != null) out.close();
-                } catch (Exception ignored) {
-                    // Ignored
-                }
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Exception e) {
-            if (e == null) {
-                ToastUtils.showShortToast("画像を保存しました。");
-                ToastUtils.showLongToast("保存場所：" + path);
-            } else {
-                ToastUtils.showShortToast("エラーが発生しました...");
-                ToastUtils.showShortToast(e.getMessage());
-            }
-            DialogUtils.dismissProgressDialog();
         }
     }
 

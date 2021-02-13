@@ -1,11 +1,9 @@
 package com.ybsystem.tweethub.fragments.preference;
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.core.app.ActivityCompat;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 

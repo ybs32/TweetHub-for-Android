@@ -19,6 +19,7 @@ import com.ybsystem.tweethub.libs.eventbus.PostEvent;
 import com.ybsystem.tweethub.models.entities.EntityArray;
 import com.ybsystem.tweethub.utils.DialogUtils;
 import com.ybsystem.tweethub.utils.GlideUtils;
+import com.ybsystem.tweethub.utils.KeyboardUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -59,6 +60,13 @@ public class PostActivity extends ActivityBase {
 
     @Subscribe
     public void onEvent(PostEvent event) {
+        // Close keyboard
+        View focus = getCurrentFocus();
+        if (focus != null) {
+            KeyboardUtils.closeKeyboard(focus);
+            focus.clearFocus();
+        }
+        // Finish
         finish();
         overridePendingTransition(R.anim.none, R.anim.fade_out_to_bottom);
     }
