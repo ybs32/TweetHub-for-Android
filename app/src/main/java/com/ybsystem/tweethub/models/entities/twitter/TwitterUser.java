@@ -1,7 +1,12 @@
 package com.ybsystem.tweethub.models.entities.twitter;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+
+import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.models.entities.Entity;
+import com.ybsystem.tweethub.utils.ResourceUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -193,6 +198,35 @@ public class TwitterUser extends Entity {
         return isProtected()
                 && !isFriend()
                 && !isMyself();
+    }
+
+    public String getRelationText() {
+        if (isMyself())
+            return "あなた";
+        else if (isBlocking())
+            return "ブロック中";
+        else if (isFriend() && isFollower())
+            return "相互フォロー";
+        else if (isFriend())
+            return "フォロー中";
+        else if (isFollower())
+            return "フォロワー";
+        else
+            return "フォロー";
+    }
+
+    public int getRelationTextColor() {
+        if (isMyself() || isFriend())
+            return Color.parseColor("#FFFFFF");
+        else
+            return ResourceUtils.getAccentColor();
+    }
+
+    public Drawable getRelationBackground() {
+        if (isMyself() || isFriend())
+            return ResourceUtils.getDrawable(R.drawable.bg_rounded_purple);
+        else
+            return ResourceUtils.getDrawable(R.drawable.bg_rounded_reverse);
     }
 
 }

@@ -2,7 +2,6 @@ package com.ybsystem.tweethub.fragments.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 
 import com.ybsystem.tweethub.R;
@@ -24,7 +22,6 @@ import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweethub.storages.PrefSystem;
 import com.ybsystem.tweethub.usecases.UserUseCase;
 import com.ybsystem.tweethub.utils.GlideUtils;
-import com.ybsystem.tweethub.utils.ResourceUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -54,7 +51,8 @@ public class ProfileFragment extends Fragment {
         // Init
         mUser = (TwitterUser) getArguments().getSerializable("USER");
 
-        // Set
+        // Set view
+        setMarks(view);
         setUserInfo(view);
         setDescription(view);
         setFollowButton(view);
@@ -80,43 +78,7 @@ public class ProfileFragment extends Fragment {
         setFollowButton(getView());
     }
 
-    private void setUserInfo(View view) {
-        // Set user name
-        TextView userName = view.findViewById(R.id.text_user_name);
-        TextView screenName = view.findViewById(R.id.text_screen_name);
-        userName.setText(mUser.getName());
-        screenName.setText("@" + mUser.getScreenName());
-
-        // Set profile icon
-        String profileURL = PrefSystem.getProfileByQuality(mUser);
-        ImageView profileImg = view.findViewById(R.id.image_user_icon);
-        GlideUtils.load(profileURL, profileImg, CIRCLE);
-        profileImg.setOnClickListener(v -> {
-            Activity activity = getActivity();
-            Intent intent = new Intent(activity, PhotoActivity.class);
-            intent.putExtra("TYPE", "PROFILE");
-            intent.putExtra("PAGER_POSITION", 0);
-            intent.putExtra("IMAGE_URLS", new ArrayList<>(Arrays.asList(profileURL)));
-            activity.startActivity(intent);
-            activity.overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
-        });
-
-        // Set banner
-        String bannerURL = PrefSystem.getBannerByQuality(mUser);
-        ImageView bannerImg = view.findViewById(R.id.image_banner);
-        GlideUtils.load(bannerURL, bannerImg, NONE);
-        bannerImg.setOnClickListener(v -> {
-            if (bannerURL != null) {
-                Activity activity = getActivity();
-                Intent intent = new Intent(activity, PhotoActivity.class);
-                intent.putExtra("TYPE", "BANNER");
-                intent.putExtra("PAGER_POSITION", 0);
-                intent.putExtra("IMAGE_URLS", new ArrayList<>(Arrays.asList(bannerURL)));
-                activity.startActivity(intent);
-                activity.overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
-            }
-        });
-
+    private void setMarks(View view) {
         // Set verify mark
         ImageView verify = view.findViewById(R.id.image_verify_mark);
         if (mUser.isVerified()) {
@@ -134,8 +96,50 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    private void setUserInfo(View view) {
+        // Set user name
+        TextView userName = view.findViewById(R.id.text_user_name);
+        TextView screenName = view.findViewById(R.id.text_screen_name);
+        userName.setText(mUser.getName());
+        screenName.setText("@" + mUser.getScreenName());
+
+        // Set profile icon
+        String profileURL = PrefSystem.getProfileByQuality(mUser);
+        ImageView profileImg = view.findViewById(R.id.image_user_icon);
+        GlideUtils.load(profileURL, profileImg, CIRCLE);
+
+        // When profile icon clicked
+        profileImg.setOnClickListener(v -> {
+            Activity act = getActivity();
+            Intent intent = new Intent(act, PhotoActivity.class);
+            intent.putExtra("TYPE", "PROFILE");
+            intent.putExtra("PAGER_POSITION", 0);
+            intent.putExtra("IMAGE_URLS", new ArrayList<>(Arrays.asList(profileURL)));
+            act.startActivity(intent);
+            act.overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
+        });
+
+        // Set banner
+        String bannerURL = PrefSystem.getBannerByQuality(mUser);
+        ImageView bannerImg = view.findViewById(R.id.image_banner);
+        GlideUtils.load(bannerURL, bannerImg, NONE);
+
+        // When banner clicked
+        bannerImg.setOnClickListener(v -> {
+            if (bannerURL != null) {
+                Activity act = getActivity();
+                Intent intent = new Intent(act, PhotoActivity.class);
+                intent.putExtra("TYPE", "BANNER");
+                intent.putExtra("PAGER_POSITION", 0);
+                intent.putExtra("IMAGE_URLS", new ArrayList<>(Arrays.asList(bannerURL)));
+                act.startActivity(intent);
+                act.overridePendingTransition(R.anim.fade_in_from_bottom, R.anim.none);
+            }
+        });
+    }
+
     private void setDescription(View view) {
-        // Change description url
+        // Replace description url
         String desc = mUser.getDescription();
         TwitterURLEntity[] entities = mUser.getDescriptionURLEntities();
         if (entities != null && entities.length != 0) {
@@ -172,42 +176,13 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setFollowButton(View view) {
-        String text;
-        int textColor;
-        int background;
-
-        // Check relation
-        if (mUser.isMyself()) {
-            text = "あなた";
-            textColor = Color.parseColor("#FFFFFF");
-            background = R.drawable.bg_rounded_purple;
-        } else if (mUser.isBlocking()) {
-            text = "ブロック中";
-            textColor = ResourceUtils.getAccentColor();
-            background = R.drawable.bg_rounded_reverse;
-        } else if (mUser.isFriend() && mUser.isFollower()) {
-            text = "相互フォロー";
-            textColor = Color.parseColor("#FFFFFF");
-            background = R.drawable.bg_rounded_purple;
-        } else if (mUser.isFriend()) {
-            text = "フォロー中";
-            textColor = Color.parseColor("#FFFFFF");
-            background = R.drawable.bg_rounded_purple;
-        } else if (mUser.isFollower()) {
-            text = "フォロワー";
-            textColor = ResourceUtils.getAccentColor();
-            background = R.drawable.bg_rounded_reverse;
-        } else {
-            text = "フォロー";
-            textColor = ResourceUtils.getAccentColor();
-            background = R.drawable.bg_rounded_reverse;
-        }
-
         // Set follow button
         Button button = view.findViewById(R.id.button_follow);
-        button.setText(text);
-        button.setTextColor(textColor);
-        button.setBackground(AppCompatResources.getDrawable(getContext(), background));
+        button.setText(mUser.getRelationText());
+        button.setTextColor(mUser.getRelationTextColor());
+        button.setBackground(mUser.getRelationBackground());
+
+        // When follow button clicked
         button.setOnClickListener(v -> {
             if (mUser.isMyself() || mUser.isBlocking()) {
                 return;
