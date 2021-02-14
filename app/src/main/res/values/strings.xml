@@ -6,8 +6,6 @@
         ・壁紙関連の不具合修正
     </string>
     <string name="callback_url">ybsystem://</string>
-    <string name="hello_java">==gNE1GdVtkQ592SThGVyQEO5ZFTysmTxUVU</string>
-    <string name="hello_android">=YTMWlWZ1VnZVx0aEREdW1WZYpnYDlEMTlWZiNzSXZWWQ5WZzlVNTV3c0skVpdVZ3l1M</string>
 
     <!-- UltraPullToRefresh -->
     <string name="cube_ptr_pull_down">引っ張って…</string>

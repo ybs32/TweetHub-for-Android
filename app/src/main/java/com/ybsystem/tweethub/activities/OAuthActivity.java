@@ -50,7 +50,7 @@ public class OAuthActivity extends ActivityBase {
 
                 // Prepare auth
                 mTwitter = new TwitterFactory().getInstance();
-                mTwitter.setOAuthConsumer(ResourceUtils.getS(), ResourceUtils.getK());
+                mTwitter.setOAuthConsumer(ResourceUtils.getK(), ResourceUtils.getS());
 
                 // Start auth
                 startAuthentication();
@@ -70,7 +70,7 @@ public class OAuthActivity extends ActivityBase {
 
             @Override
             protected void onPreExecute() {
-                DialogUtils.showProgressDialog("接続中...", OAuthActivity.this);
+                DialogUtils.showProgress("接続中...", OAuthActivity.this);
             }
 
             @Override
@@ -87,7 +87,7 @@ public class OAuthActivity extends ActivityBase {
 
             @Override
             protected void onPostExecute(TwitterException e) {
-                DialogUtils.dismissProgressDialog();
+                DialogUtils.dismissProgress();
 
                 // If authorization url can be acquired
                 if (e == null && authorizationURL != null && authorizationURL != "") {
@@ -125,7 +125,7 @@ public class OAuthActivity extends ActivityBase {
 
             @Override
             protected void onPreExecute() {
-                DialogUtils.showProgressDialog("読み込み中...", OAuthActivity.this);
+                DialogUtils.showProgress("読み込み中...", OAuthActivity.this);
             }
 
             @Override
@@ -142,7 +142,7 @@ public class OAuthActivity extends ActivityBase {
 
             @Override
             protected void onPostExecute(TwitterException e) {
-                DialogUtils.dismissProgressDialog();
+                DialogUtils.dismissProgress();
 
                 // If get accessToken and user
                 if (e == null && accessToken != null && user != null) {

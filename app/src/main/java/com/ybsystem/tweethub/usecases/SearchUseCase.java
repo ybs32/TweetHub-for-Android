@@ -54,7 +54,7 @@ public class SearchUseCase {
         };
 
         // Show confirm dialog
-        DialogUtils.showConfirmDialog(
+        DialogUtils.showConfirm(
                 "検索を保存しますか？",
                 (dialog, which) -> observable
                         .subscribeOn(Schedulers.newThread())
@@ -95,7 +95,7 @@ public class SearchUseCase {
         };
 
         // Show confirm dialog
-        DialogUtils.showConfirmDialog(
+        DialogUtils.showConfirm(
                 "検索を削除しますか？",
                 (dialog, which) -> observable
                         .subscribeOn(Schedulers.newThread())

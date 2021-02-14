@@ -81,7 +81,7 @@ public class UserUseCase {
 
         // Confirm
         if (PrefSystem.getConfirmSettings().contains(FOLLOW)) {
-            DialogUtils.showConfirmDialog(
+            DialogUtils.showConfirm(
                     confirm,
                     (dialog, which) -> observable.subscribe(disp)
             );
@@ -145,7 +145,7 @@ public class UserUseCase {
 
         // Confirm
         if (PrefSystem.getConfirmSettings().contains(MUTE)) {
-            DialogUtils.showConfirmDialog(
+            DialogUtils.showConfirm(
                     confirm,
                     (dialog, which) -> observable.subscribe(disp)
             );
@@ -211,7 +211,7 @@ public class UserUseCase {
 
         // Confirm
         if (PrefSystem.getConfirmSettings().contains(BLOCK)) {
-            DialogUtils.showConfirmDialog(
+            DialogUtils.showConfirm(
                     confirm,
                     (dialog, which) -> observable.subscribe(disp)
             );
@@ -273,7 +273,7 @@ public class UserUseCase {
 
         // Confirm
         if (PrefSystem.getConfirmSettings().contains(SUBSCRIBE)) {
-            DialogUtils.showConfirmDialog(
+            DialogUtils.showConfirm(
                     confirm,
                     (dialog, which) -> observable.subscribe(disp)
             );

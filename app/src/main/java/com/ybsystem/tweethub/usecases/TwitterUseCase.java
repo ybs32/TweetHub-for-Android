@@ -96,7 +96,7 @@ public class TwitterUseCase {
 
         // Confirm
         if (PrefSystem.getConfirmSettings().contains(RETWEET)) {
-            DialogUtils.showConfirmDialog(
+            DialogUtils.showConfirm(
                     confirm,
                     (dialog, which) -> observable.subscribe(disp)
             );
@@ -161,7 +161,7 @@ public class TwitterUseCase {
 
         // Confirm
         if (PrefSystem.getConfirmSettings().contains(LIKE)) {
-            DialogUtils.showConfirmDialog(
+            DialogUtils.showConfirm(
                     confirm,
                     (dialog, which) -> observable.subscribe(disp)
             );
@@ -207,7 +207,7 @@ public class TwitterUseCase {
 
         // Confirm
         if (PrefSystem.getConfirmSettings().contains(DELETE)) {
-            DialogUtils.showConfirmDialog(
+            DialogUtils.showConfirm(
                     "ツイートを削除しますか？",
                     (dialog, which) -> observable.subscribe(disp)
             );
@@ -244,7 +244,7 @@ public class TwitterUseCase {
         })
         .subscribeOn(Schedulers.newThread())
         .observeOn(AndroidSchedulers.mainThread())
-        .doFinally(DialogUtils::dismissProgressDialog);
+        .doFinally(DialogUtils::dismissProgress);
 
         // Result
         DisposableObserver<Object> disp = new DisposableObserver<Object>() {
@@ -272,15 +272,15 @@ public class TwitterUseCase {
 
         // Confirm
         if (PrefSystem.getConfirmSettings().contains(TWEET)) {
-            DialogUtils.showConfirmDialog(
+            DialogUtils.showConfirm(
                     "ツイートしますか？",
                     (dialog, which) -> {
-                        DialogUtils.showProgressDialog("送信中...", TweetHubApp.getActivity());
+                        DialogUtils.showProgress("送信中...", TweetHubApp.getActivity());
                         observable.subscribe(disp);
                     }
             );
         } else {
-            DialogUtils.showProgressDialog("送信中...", TweetHubApp.getActivity());
+            DialogUtils.showProgress("送信中...", TweetHubApp.getActivity());
             observable.subscribe(disp);
         }
     }

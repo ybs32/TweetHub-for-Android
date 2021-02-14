@@ -159,7 +159,7 @@ public class ColumnFragment extends Fragment {
     }
 
     private void fetchUserList() {
-        DialogUtils.showProgressDialog("読み込み中...", getContext());
+        DialogUtils.showProgress("読み込み中...", getContext());
 
         Observable<ResponseList<UserList>> observable = Observable.create(e -> {
             // Fetch
@@ -221,7 +221,7 @@ public class ColumnFragment extends Fragment {
         observable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doFinally(DialogUtils::dismissProgressDialog)
+                .doFinally(DialogUtils::dismissProgress)
                 .subscribe(disposable);
     }
 

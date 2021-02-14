@@ -8,8 +8,8 @@ import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
 import com.ybsystem.tweethub.R;
-import com.ybsystem.tweethub.fragments.dialog.ConfirmDialog;
 import com.ybsystem.tweethub.storages.PrefWallpaper;
+import com.ybsystem.tweethub.utils.DialogUtils;
 import com.ybsystem.tweethub.utils.StorageUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 
@@ -73,18 +73,16 @@ public class WallpaperFragment extends PreferenceFragmentBase {
     }
 
     private void showConfirmDialog() {
-        // Create
-        ConfirmDialog confirmDialog = new ConfirmDialog().newInstance("壁紙を解除しますか？");
-        confirmDialog.setOnPositiveClickListener((dialog, which) -> {
-            getActivity().setResult(REBOOT_PREPARATION);
-            PrefWallpaper.saveWallpaperPath("未設定");
-            mAddWallpaper.setSummary(PrefWallpaper.getWallpaperPath());
-            ToastUtils.showShortToast("壁紙を解除しました。");
-        });
         // Show
-        if (getFragmentManager().findFragmentByTag("ConfirmDialog") == null) {
-            confirmDialog.show(getFragmentManager(), "ConfirmDialog");
-        }
+        DialogUtils.showConfirm(
+                "壁紙を解除しますか？",
+                (dialog, which) -> {
+                    getActivity().setResult(REBOOT_PREPARATION);
+                    PrefWallpaper.saveWallpaperPath("未設定");
+                    mAddWallpaper.setSummary(PrefWallpaper.getWallpaperPath());
+                    ToastUtils.showShortToast("壁紙を解除しました。");
+                }
+        );
     }
 
 }

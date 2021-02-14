@@ -13,10 +13,10 @@ import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.activities.preference.BrowserAuthActivity;
 import com.ybsystem.tweethub.adapters.array.AccountArrayAdapter;
 import com.ybsystem.tweethub.application.TweetHubApp;
-import com.ybsystem.tweethub.fragments.dialog.ConfirmDialog;
 import com.ybsystem.tweethub.fragments.dialog.ListDialog;
 import com.ybsystem.tweethub.models.entities.Account;
 import com.ybsystem.tweethub.models.entities.AccountArray;
+import com.ybsystem.tweethub.utils.DialogUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 
 import static com.ybsystem.tweethub.activities.preference.SettingActivity.*;
@@ -99,17 +99,15 @@ public class AccountFragment extends Fragment {
             ToastUtils.showShortToast("使用中のアカウントです。");
             return;
         }
-        // Create
-        ConfirmDialog confirmDialog = new ConfirmDialog().newInstance("アカウントを解除しますか？");
-        confirmDialog.setOnPositiveClickListener((dialog, which) -> {
-            accounts.remove(position);
-            refreshListView();
-            ToastUtils.showShortToast("アカウントを解除しました。");
-        });
         // Show
-        if (getFragmentManager().findFragmentByTag("ConfirmDialog") == null) {
-            confirmDialog.show(getFragmentManager(), "ConfirmDialog");
-        }
+        DialogUtils.showConfirm(
+                "アカウントを解除しますか？",
+                (dialog, which) -> {
+                    accounts.remove(position);
+                    refreshListView();
+                    ToastUtils.showShortToast("アカウントを解除しました。");
+                }
+        );
     }
 
     private void refreshListView() {

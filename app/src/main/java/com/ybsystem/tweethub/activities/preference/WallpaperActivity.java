@@ -67,9 +67,9 @@ public class WallpaperActivity extends ActivityBase {
         c.close();
 
         // Finish activity
-        DialogUtils.showProgressDialog("設定を適用中...", this);
+        DialogUtils.showProgress("設定を適用中...", this);
         new Handler().postDelayed(() -> {
-            DialogUtils.dismissProgressDialog();
+            DialogUtils.dismissProgress();
             setResult(REBOOT_IMMEDIATE);
             finish();
         }, 1500);

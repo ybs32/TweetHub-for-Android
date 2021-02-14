@@ -39,8 +39,8 @@ public class AppData extends Entity {
         ViaArray<Via> vias = new ViaArray<>();
         Via via = new Via();
         via.setName("TweetHub");
-        via.setConsumerKey(ResourceUtils.getS());
-        via.setConsumerSecret(ResourceUtils.getK());
+        via.setConsumerKey(ResourceUtils.getK());
+        via.setConsumerSecret(ResourceUtils.getS());
         via.setToken(token.getToken());
         via.setTokenSecret(token.getTokenSecret());
         via.setCurrentVia(true);

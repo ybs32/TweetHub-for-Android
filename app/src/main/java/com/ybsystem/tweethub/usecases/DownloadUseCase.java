@@ -53,12 +53,12 @@ public class DownloadUseCase {
         };
 
         // Show progress
-        DialogUtils.showProgressDialog("通信中...", TweetHubApp.getActivity());
+        DialogUtils.showProgress("通信中...", TweetHubApp.getActivity());
 
         // Subscribe
         observable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doFinally(DialogUtils::dismissProgressDialog)
+                .doFinally(DialogUtils::dismissProgress)
                 .subscribe(disp);
     }
 

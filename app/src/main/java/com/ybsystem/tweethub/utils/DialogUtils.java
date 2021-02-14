@@ -30,7 +30,7 @@ public class DialogUtils {
      *
      * @param message Message to display in dialog
      */
-    public static void showProgressDialog(String message, Context context) {
+    public static void showProgress(String message, Context context) {
         // Increase text size
         SpannableString spanMessage = new SpannableString(message);
         spanMessage.setSpan(new RelativeSizeSpan(1.2f), 0, spanMessage.length(), 0);
@@ -48,7 +48,7 @@ public class DialogUtils {
     /**
      * Close progress dialog
      */
-    public static void dismissProgressDialog() {
+    public static void dismissProgress() {
         if (sProgressDialog != null && sProgressDialog.isShowing()) {
             sProgressDialog.dismiss();
         }
@@ -60,7 +60,7 @@ public class DialogUtils {
      * @param text     Message to display in dialog
      * @param listener Positive click listener
      */
-    public static void showConfirmDialog(String text,
+    public static void showConfirm(String text,
                                          DialogInterface.OnClickListener listener) {
         // Create
         ConfirmDialog dialog = new ConfirmDialog().newInstance(text);
@@ -80,7 +80,7 @@ public class DialogUtils {
      * @param selected Selected position
      * @param listener Item click listener
      */
-    public static void showChoiceDialog(String[] items, int selected,
+    public static void showChoice(String[] items, int selected,
                                         DialogInterface.OnClickListener listener) {
         // Create
         ChoiceDialog dialog = new ChoiceDialog().newInstance(items, selected);
@@ -96,7 +96,7 @@ public class DialogUtils {
     /**
      * Show choice dialog for switching accounts
      */
-    public static void showAccountDialog() {
+    public static void showAccountChoice() {
         // Create
         AccountArray<Account> accounts = TweetHubApp.getData().getAccounts();
         String[] items = new String[accounts.size()];
@@ -105,7 +105,7 @@ public class DialogUtils {
             items[i] = user.getName() + " (@" + user.getScreenName() + ")";
         }
         // Show
-        showChoiceDialog(
+        showChoice(
                 items, accounts.getCurrentAccountNum(),
                 (dialog, which) -> {
                     // Change account and reboot

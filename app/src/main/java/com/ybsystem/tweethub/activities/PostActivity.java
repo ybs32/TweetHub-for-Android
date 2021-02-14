@@ -116,7 +116,7 @@ public class PostActivity extends ActivityBase {
             LinearLayout ll = findViewById(R.id.linear_photo);
             ImageView image = (ImageView) ll.getChildAt(mImageUris.size() - 1);
             image.setOnClickListener(v ->
-                    DialogUtils.showConfirmDialog(
+                    DialogUtils.showConfirm(
                             "画像をキャンセルしますか？",
                             (dialog, which) -> cancelImages()
                     )

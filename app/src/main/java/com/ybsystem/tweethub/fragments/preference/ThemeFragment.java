@@ -102,9 +102,9 @@ public class ThemeFragment extends PreferenceFragmentBase {
         PrefTheme.initCustomColors();
 
         // Finish activity
-        DialogUtils.showProgressDialog("設定を適用中...", getActivity());
+        DialogUtils.showProgress("設定を適用中...", getActivity());
         new Handler().postDelayed(() -> {
-            DialogUtils.dismissProgressDialog();
+            DialogUtils.dismissProgress();
             getActivity().setResult(1);
             getActivity().finish();
         }, 1500);

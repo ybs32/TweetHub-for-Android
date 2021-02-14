@@ -248,7 +248,7 @@ public class PostFragment extends Fragment {
                 dialog.dismiss();
             });
             dialog.setOnItemLongClickListener((parent, v1, position, id) -> {
-                DialogUtils.showConfirmDialog(
+                DialogUtils.showConfirm(
                         "下書きを削除しますか？",
                         (d, which) -> {
                             drafts.remove(position);
@@ -296,7 +296,7 @@ public class PostFragment extends Fragment {
                 dialog.dismiss();
             });
             dialog.setOnItemLongClickListener((parent, v1, position, id) -> {
-                DialogUtils.showConfirmDialog(
+                DialogUtils.showConfirm(
                         "ハッシュタグを削除しますか？",
                         (d, which) -> {
                             hashtags.remove(position);
@@ -322,9 +322,9 @@ public class PostFragment extends Fragment {
                 return;
             }
             // Coming soon...
-            DialogUtils.showProgressDialog("読み込み中...", getContext());
+            DialogUtils.showProgress("読み込み中...", getContext());
             new Handler().postDelayed(() -> {
-                DialogUtils.dismissProgressDialog();
+                DialogUtils.dismissProgress();
                 ToastUtils.showShortToast("カメラを起動できません。");
             }, 1500);
         });
