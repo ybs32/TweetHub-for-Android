@@ -58,9 +58,8 @@ public class UserUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                TwitterException e = (TwitterException) t;
                 ToastUtils.showShortToast(fail);
-                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
             @Override
@@ -122,9 +121,8 @@ public class UserUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                TwitterException e = (TwitterException) t;
                 ToastUtils.showShortToast(fail);
-                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
             @Override
@@ -186,9 +184,8 @@ public class UserUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                TwitterException e = (TwitterException) t;
                 ToastUtils.showShortToast(fail);
-                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
             @Override
@@ -252,9 +249,8 @@ public class UserUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                TwitterException e = (TwitterException) t;
                 ToastUtils.showShortToast(fail);
-                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
             @Override
@@ -312,9 +308,8 @@ public class UserUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                TwitterException e = (TwitterException) t;
                 ToastUtils.showShortToast(fail);
-                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
             @Override

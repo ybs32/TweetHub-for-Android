@@ -83,9 +83,8 @@ public class UserListDialog extends DialogFragment {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                TwitterException e = (TwitterException) t;
                 ToastUtils.showShortToast("リストの取得に失敗しました...");
-                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
                 dismiss();
             }
 

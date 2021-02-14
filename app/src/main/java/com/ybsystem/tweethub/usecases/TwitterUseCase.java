@@ -72,9 +72,8 @@ public class TwitterUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                TwitterException e = (TwitterException) t;
                 ToastUtils.showShortToast(fail);
-                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
             @Override
@@ -138,9 +137,8 @@ public class TwitterUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                TwitterException e = (TwitterException) t;
                 ToastUtils.showShortToast(fail);
-                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
             @Override
@@ -192,9 +190,8 @@ public class TwitterUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                TwitterException e = (TwitterException) t;
                 ToastUtils.showShortToast("ツイートの削除に失敗しました...");
-                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
             @Override
@@ -255,11 +252,8 @@ public class TwitterUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                if (t instanceof TwitterException) {
-                    TwitterException e = (TwitterException) t;
-                    ToastUtils.showShortToast("ツイートに失敗しました...");
-                    ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
-                }
+                ToastUtils.showShortToast("ツイートに失敗しました...");
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
             @Override

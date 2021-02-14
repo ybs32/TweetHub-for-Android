@@ -75,8 +75,7 @@ public class TrendTimeline extends TimelineBase {
 
                 // Show error message if loaded by user action
                 if (isPullLoad || isClickLoad) {
-                    TwitterException e = (TwitterException) t;
-                    ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                    ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
                 }
                 mFooterClick = true;
             }

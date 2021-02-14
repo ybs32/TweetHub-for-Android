@@ -85,9 +85,8 @@ public class PreviewDialog extends DialogFragment {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                TwitterException e = (TwitterException) t;
                 ToastUtils.showShortToast("読み込みに失敗しました...");
-                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
             @Override
