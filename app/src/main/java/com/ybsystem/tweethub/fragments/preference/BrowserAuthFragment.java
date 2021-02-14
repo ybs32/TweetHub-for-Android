@@ -46,7 +46,7 @@ public class BrowserAuthFragment extends Fragment {
 
         // Prepare auth
         mTwitter = new TwitterFactory().getInstance();
-        mTwitter.setOAuthConsumer(ResourceUtils.getS(), ResourceUtils.getK());
+        mTwitter.setOAuthConsumer(ResourceUtils.getK(), ResourceUtils.getS());
 
         // Start auth
         new PreTask().execute();
@@ -189,9 +189,9 @@ public class BrowserAuthFragment extends Fragment {
             TweetHubApp.getInstance().init();
 
             // Reboot application
-            DialogUtils.showProgressDialog("読み込み中...", getActivity());
+            DialogUtils.showProgress("読み込み中...", getActivity());
             new Handler().postDelayed(() -> {
-                DialogUtils.dismissProgressDialog();
+                DialogUtils.dismissProgress();
                 ToastUtils.showShortToast("アカウントを追加しました。");
                 getActivity().setResult(REBOOT_IMMEDIATE);
                 getActivity().finish();

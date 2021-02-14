@@ -42,18 +42,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="ツイート"
-        app:iconSpaceReserved="false">
-
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="@string/pref_key_easy_tweet"
-            android:title="簡易ツイート"
-            android:summary="タイムライン下部にツイート欄を表示"
-            app:iconSpaceReserved="false" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
         android:title="タイムライン"
         app:iconSpaceReserved="false">
 
@@ -73,6 +61,18 @@
             android:entryValues="@array/count_scroll_load_values"
             android:key="@string/pref_key_count_scroll_load"
             android:title="スクロール時の取得件数"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="ツイート"
+        app:iconSpaceReserved="false">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key_easy_tweet"
+            android:title="かんたんツイート"
+            android:summary="タイムライン上にツイート欄を表示"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>

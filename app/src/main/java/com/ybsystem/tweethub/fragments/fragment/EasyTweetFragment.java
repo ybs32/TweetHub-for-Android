@@ -82,7 +82,7 @@ public class EasyTweetFragment extends Fragment {
         // Clear tweet
         mPostEdit.getText().clear();
 
-        // Hide keyboard, clear focus
+        // Close keyboard
         View focus = getActivity().getCurrentFocus();
         if (focus != null) {
             KeyboardUtils.closeKeyboard(focus);

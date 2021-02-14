@@ -52,25 +52,25 @@ public class UserRow extends RecyclerView.ViewHolder {
     }
 
     public void setUser(TwitterUser user) {
-        this.mUser = user;
+        mUser = user;
     }
 
     public void setUserName() {
-        this.mUserName.setText(mUser.getName());
+        mUserName.setText(mUser.getName());
     }
 
     public void setScreenName() {
-        this.mScreenName.setText("@" + mUser.getScreenName());
+        mScreenName.setText("@" + mUser.getScreenName());
     }
 
     public void setUserIcon() {
         String userIconURL = PrefSystem.getProfileThumbByQuality(mUser);
         ImageOption option = ImageOption.toEnum(PrefAppearance.getUserIconStyle());
-        GlideUtils.load(userIconURL, this.mUserIcon, option);
+        GlideUtils.load(userIconURL, mUserIcon, option);
     }
 
     public void setProfileText() {
-        this.mProfileText.setText(mUser.getDescription());
+        mProfileText.setText(mUser.getDescription());
     }
 
     public void setFollowButton() {
@@ -94,15 +94,15 @@ public class UserRow extends RecyclerView.ViewHolder {
     public void setMarks() {
         // Check verified user
         if (mUser.isVerified()) {
-            this.mVerifyMark.setVisibility(View.VISIBLE);
+            mVerifyMark.setVisibility(View.VISIBLE);
         } else {
-            this.mVerifyMark.setVisibility(View.GONE);
+            mVerifyMark.setVisibility(View.GONE);
         }
         // Check protected user
         if (mUser.isProtected()) {
-            this.mLockMark.setVisibility(View.VISIBLE);
+            mLockMark.setVisibility(View.VISIBLE);
         } else {
-            this.mLockMark.setVisibility(View.GONE);
+            mLockMark.setVisibility(View.GONE);
         }
     }
 
@@ -118,17 +118,17 @@ public class UserRow extends RecyclerView.ViewHolder {
             return;
         }
         // Set tweet color
-        this.mUserName.setTextColor(PrefTheme.getUserNameColor());
-        this.mScreenName.setTextColor(PrefTheme.getUserNameColor());
-        this.mProfileText.setTextColor(PrefTheme.getTweetTextColor());
+        mUserName.setTextColor(PrefTheme.getUserNameColor());
+        mScreenName.setTextColor(PrefTheme.getUserNameColor());
+        mProfileText.setTextColor(PrefTheme.getTweetTextColor());
     }
 
     private void applyAppearanceSetting() {
         // Set font size
         int fontSize = PrefAppearance.getFontSize();
-        this.mUserName.setTextSize(fontSize);
-        this.mScreenName.setTextSize(fontSize - 1);
-        this.mProfileText.setTextSize(fontSize);
+        mUserName.setTextSize(fontSize);
+        mScreenName.setTextSize(fontSize - 1);
+        mProfileText.setTextSize(fontSize);
 
         // Set user icon size
         int dpSize = PrefAppearance.getUserIconSize();

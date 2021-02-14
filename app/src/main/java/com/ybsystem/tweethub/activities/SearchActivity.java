@@ -188,7 +188,7 @@ public class SearchActivity extends ActivityBase {
             ToastUtils.showShortToast("これ以上追加できません。");
             return;
         }
-        DialogUtils.showConfirmDialog(
+        DialogUtils.showConfirm(
                 "カラムに追加しますか？",
                 (dialog, which) -> {
                     // Add column

@@ -46,42 +46,42 @@ public class UserListRow extends RecyclerView.ViewHolder {
     }
 
     public void setUserList(TwitterUserList userList) {
-        this.mUserList = userList;
+        mUserList = userList;
     }
 
     public void setName() {
-        this.mName.setText(mUserList.getName());
+        mName.setText(mUserList.getName());
     }
 
     public void setUserIcon() {
         String userIconURL = PrefSystem.getProfileThumbByQuality(mUserList.getUser());
         ImageOption option = ImageOption.toEnum(PrefAppearance.getUserIconStyle());
-        GlideUtils.load(userIconURL, this.mUserIcon, option);
+        GlideUtils.load(userIconURL, mUserIcon, option);
     }
 
     public void setDescription() {
         String description = mUserList.getDescription();
         if (description.equals("")) {
-            this.mDescription.setVisibility(View.GONE);
+            mDescription.setVisibility(View.GONE);
         } else {
-            this.mDescription.setText(description);
-            this.mDescription.setVisibility(View.VISIBLE);
+            mDescription.setText(description);
+            mDescription.setVisibility(View.VISIBLE);
         }
     }
 
     public void setMemberCount() {
-        this.mMemberCount.setText(mUserList.getMemberCount() + "人のメンバー");
+        mMemberCount.setText(mUserList.getMemberCount() + "人のメンバー");
     }
 
     public void setCreator() {
-        this.mCreator.setText(mUserList.getUser().getName() + "さんが作成");
+        mCreator.setText(mUserList.getUser().getName() + "さんが作成");
     }
 
     public void setMarks() {
         if (mUserList.isProtected()) {
-            this.mLockMark.setVisibility(View.VISIBLE);
+            mLockMark.setVisibility(View.VISIBLE);
         } else {
-            this.mLockMark.setVisibility(View.GONE);
+            mLockMark.setVisibility(View.GONE);
         }
     }
 

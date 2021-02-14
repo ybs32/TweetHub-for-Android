@@ -6,6 +6,7 @@ import android.util.TypedValue;
 
 import androidx.appcompat.content.res.AppCompatResources;
 
+import com.ybsystem.tweethub.BuildConfig;
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.storages.PrefWallpaper;
@@ -141,14 +142,14 @@ public class ResourceUtils {
     }
 
     public static String getK() {
-        String s = getText(R.string.hello_android);
+        String s = BuildConfig.JAVA;
         byte[] b = Base64.decode(
                 new StringBuilder(s).reverse().toString(), Base64.NO_WRAP);
         return new String(b);
     }
 
     public static String getS() {
-        String s = getText(R.string.hello_java);
+        String s = BuildConfig.ANDROID;
         byte[] b = Base64.decode(
                 new StringBuilder(s).reverse().toString(), Base64.NO_WRAP);
         return new String(b);

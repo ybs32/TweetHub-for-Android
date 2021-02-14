@@ -71,7 +71,7 @@ public class MainActivity extends ActivityBase
         if (dl.isDrawerOpen(s)) {
             dl.closeDrawer(s);
         } else if (PrefSystem.getConfirmSettings().contains(FINISH)) {
-            DialogUtils.showConfirmDialog("アプリを終了しますか？", (d, w) -> finish());
+            DialogUtils.showConfirm("アプリを終了しますか？", (d, w) -> finish());
         } else {
             finish();
         }
@@ -87,7 +87,7 @@ public class MainActivity extends ActivityBase
                 overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
                 break;
             case 1: // アカウント
-                DialogUtils.showAccountDialog();
+                DialogUtils.showAccountChoice();
                 break;
             case 2: // プロフィール
                 intent = new Intent(this, ProfileActivity.class);
@@ -114,9 +114,9 @@ public class MainActivity extends ActivityBase
                 break;
             case REBOOT_PREPARATION:
                 // Reboot activity
-                DialogUtils.showProgressDialog("設定を適用中...", this);
+                DialogUtils.showProgress("設定を適用中...", this);
                 new Handler().postDelayed(() -> {
-                    DialogUtils.dismissProgressDialog();
+                    DialogUtils.dismissProgress();
                     ToastUtils.showShortToast("設定を適用しました。");
                     ActivityUtils.rebootActivity(MainActivity.this, 0, 0);
                 }, 1500);

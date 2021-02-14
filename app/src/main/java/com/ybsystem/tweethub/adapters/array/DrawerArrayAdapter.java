@@ -119,7 +119,7 @@ public class DrawerArrayAdapter extends ArrayAdapter<Integer> {
             case 11:
                 tv.setText("アカウント");
                 iv.setImageResource(R.drawable.ic_user);
-                cv.setOnClickListener(v -> DialogUtils.showAccountDialog());
+                cv.setOnClickListener(v -> DialogUtils.showAccountChoice());
                 break;
             case 12:
                 tv.setText("設定");
@@ -160,7 +160,7 @@ public class DrawerArrayAdapter extends ArrayAdapter<Integer> {
     }
 
     private void openOfficialPlayStore() {
-        DialogUtils.showConfirmDialog(
+        DialogUtils.showConfirm(
                 "公式アプリで確認する",
                 (dialog, which) -> {
                     Uri uri = Uri.parse("market://details?id=com.twitter.android");
