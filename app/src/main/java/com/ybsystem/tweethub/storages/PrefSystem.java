@@ -61,11 +61,11 @@ public class PrefSystem extends PrefBase {
     public static String getProfileByQuality(TwitterUser user) {
         switch (getImageQuality()) {
             case LOW:
-                return user.getBiggerProfileImageURL(); // bigger (73x73)
+                return user.getBiggerProfileImageURLHttps(); // bigger (73x73)
             case MIDDLE:
-                return user.getProfileImageURL400x400(); // 400x400 (400x400)
+                return user.getProfileImageURL400x400Https(); // 400x400 (400x400)
             case HIGH:
-                return user.getOriginalProfileImageURL(); // original (512x512)
+                return user.getOriginalProfileImageURLHttps(); // original (512x512)
             default:
                 return null;
         }
@@ -74,10 +74,10 @@ public class PrefSystem extends PrefBase {
     public static String getProfileThumbByQuality(TwitterUser user) {
         switch (getImageQuality()) {
             case LOW:
-                return user.getProfileImageUrl(); // normal (48x48)
+                return user.getProfileImageUrlHttps(); // normal (48x48)
             case MIDDLE:
             case HIGH:
-                return user.getBiggerProfileImageURL(); // bigger (73x73)
+                return user.getBiggerProfileImageURLHttps(); // bigger (73x73)
             default:
                 return null;
         }

@@ -5,7 +5,6 @@
         Ver.1.4.1\n
         ・壁紙関連の不具合修正
     </string>
-    <string name="callback_url">ybsystem://</string>
 
     <!-- UltraPullToRefresh -->
     <string name="cube_ptr_pull_down">引っ張って…</string>

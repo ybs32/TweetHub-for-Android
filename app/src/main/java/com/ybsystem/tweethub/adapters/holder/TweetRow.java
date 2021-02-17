@@ -234,7 +234,7 @@ public class TweetRow extends RecyclerView.ViewHolder {
         }
         // Set thumbnails
         for (int i = 0; i < medias.length; i++) {
-            String imageURL = PrefSystem.getMediaThumbByQuality(medias[i].getMediaURL());
+            String imageURL = PrefSystem.getMediaThumbByQuality(medias[i].getMediaURLHttps());
             ImageView thumbnail = mThumbnails.get(i);
             GlideUtils.load(imageURL, thumbnail, NONE);
             thumbnail.setVisibility(View.VISIBLE);

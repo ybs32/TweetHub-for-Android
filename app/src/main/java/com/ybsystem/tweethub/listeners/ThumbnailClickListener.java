@@ -34,7 +34,7 @@ public class ThumbnailClickListener implements View.OnClickListener {
             // Photo
             ArrayList<String> imageURLs = new ArrayList<>();
             for (TwitterMediaEntity entity : mMediaEntities) {
-                String url = PrefSystem.getMediaByQuality(entity.getMediaURL());
+                String url = PrefSystem.getMediaByQuality(entity.getMediaURLHttps());
                 imageURLs.add(url);
             }
             intent = new Intent(act, PhotoActivity.class);

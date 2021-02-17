@@ -14,8 +14,9 @@ android {
         targetSdkVersion 29
         versionCode 12
         versionName "1.4.1"
-        buildConfigField("String", "JAVA", prop['java'])
-        buildConfigField("String", "ANDROID", prop['android'])
+        buildConfigField("String", "CK", prop['ck'])
+        buildConfigField("String", "CS", prop['cs'])
+        buildConfigField("String", "CB", prop['cb'])
     }
 
     buildTypes {

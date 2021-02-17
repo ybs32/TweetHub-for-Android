@@ -7,11 +7,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.ybsystem.tweethub.BuildConfig;
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.utils.DialogUtils;
 import com.ybsystem.tweethub.utils.ExceptionUtils;
-import com.ybsystem.tweethub.utils.ResourceUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 
 import twitter4j.Twitter;
@@ -50,7 +50,7 @@ public class OAuthActivity extends ActivityBase {
 
                 // Prepare auth
                 mTwitter = new TwitterFactory().getInstance();
-                mTwitter.setOAuthConsumer(ResourceUtils.getK(), ResourceUtils.getS());
+                mTwitter.setOAuthConsumer(BuildConfig.CK, BuildConfig.CS);
 
                 // Start auth
                 startAuthentication();
@@ -77,7 +77,7 @@ public class OAuthActivity extends ActivityBase {
             protected TwitterException doInBackground(Void... params) {
                 // Fetch authorization url
                 try {
-                    mRequestToken = mTwitter.getOAuthRequestToken(getString(R.string.callback_url));
+                    mRequestToken = mTwitter.getOAuthRequestToken(BuildConfig.CB);
                     authorizationURL = mRequestToken.getAuthorizationURL();
                     return null;
                 } catch (TwitterException e) {
@@ -115,7 +115,7 @@ public class OAuthActivity extends ActivityBase {
         if (intent == null
                 || intent.getData() == null
                 || intent.getData().toString().contains("denied=")
-                || !intent.getData().toString().startsWith(getString(R.string.callback_url))) {
+                || !intent.getData().toString().startsWith(BuildConfig.CB)) {
             return;
         }
 

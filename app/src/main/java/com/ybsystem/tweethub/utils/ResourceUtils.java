@@ -1,12 +1,10 @@
 package com.ybsystem.tweethub.utils;
 
 import android.graphics.drawable.Drawable;
-import android.util.Base64;
 import android.util.TypedValue;
 
 import androidx.appcompat.content.res.AppCompatResources;
 
-import com.ybsystem.tweethub.BuildConfig;
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.storages.PrefWallpaper;
@@ -139,20 +137,6 @@ public class ResourceUtils {
         } else {
             return PrefWallpaper.applyTransparency(color);
         }
-    }
-
-    public static String getK() {
-        String s = BuildConfig.JAVA;
-        byte[] b = Base64.decode(
-                new StringBuilder(s).reverse().toString(), Base64.NO_WRAP);
-        return new String(b);
-    }
-
-    public static String getS() {
-        String s = BuildConfig.ANDROID;
-        byte[] b = Base64.decode(
-                new StringBuilder(s).reverse().toString(), Base64.NO_WRAP);
-        return new String(b);
     }
 
 }

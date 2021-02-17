@@ -102,12 +102,12 @@ public class EasyTweetFragment extends Fragment {
             Activity act = getActivity();
             if (act.getLocalClassName().equals("activities.MainActivity")) {
                 // If MainActivity
-                DrawerLayout drawer = act.findViewById(R.id.drawer_layout);
-                int g = GravityCompat.START;
-                if (drawer.isDrawerOpen(g)) {
-                    drawer.closeDrawer(g);
+                DrawerLayout d = act.findViewById(R.id.drawer_layout);
+                int s = GravityCompat.START;
+                if (d.isDrawerOpen(s)) {
+                    d.closeDrawer(s);
                 } else {
-                    drawer.openDrawer(g);
+                    d.openDrawer(s);
                 }
             } else {
                 // If other activities

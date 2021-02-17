@@ -14,12 +14,12 @@ import android.webkit.WebViewClient;
 
 import androidx.fragment.app.Fragment;
 
+import com.ybsystem.tweethub.BuildConfig;
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.models.entities.Account;
 import com.ybsystem.tweethub.utils.DialogUtils;
 import com.ybsystem.tweethub.utils.ExceptionUtils;
-import com.ybsystem.tweethub.utils.ResourceUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 
 import twitter4j.Twitter;
@@ -46,7 +46,7 @@ public class BrowserAuthFragment extends Fragment {
 
         // Prepare auth
         mTwitter = new TwitterFactory().getInstance();
-        mTwitter.setOAuthConsumer(ResourceUtils.getK(), ResourceUtils.getS());
+        mTwitter.setOAuthConsumer(BuildConfig.CK, BuildConfig.CS);
 
         // Start auth
         new PreTask().execute();
@@ -102,7 +102,7 @@ public class BrowserAuthFragment extends Fragment {
         @Override
         protected TwitterException doInBackground(Void... params) {
             try {
-                String callbackURL =  getString(R.string.callback_url);
+                String callbackURL =  BuildConfig.CB;
                 mRequestToken = mTwitter.getOAuthRequestToken(callbackURL);
                 authorizationURL = mRequestToken.getAuthorizationURL();
                 return null;

@@ -64,14 +64,14 @@ public class MainActivity extends ActivityBase
 
     @Override
     public void onBackPressed() {
+        DrawerLayout d = findViewById(R.id.drawer_layout);
         int s = GravityCompat.START;
-        DrawerLayout dl = findViewById(R.id.drawer_layout);
 
         // Check drawer state
-        if (dl.isDrawerOpen(s)) {
-            dl.closeDrawer(s);
+        if (d.isDrawerOpen(s)) {
+            d.closeDrawer(s);
         } else if (PrefSystem.getConfirmSettings().contains(FINISH)) {
-            DialogUtils.showConfirm("アプリを終了しますか？", (d, w) -> finish());
+            DialogUtils.showConfirm("アプリを終了しますか？", (di, wh) -> finish());
         } else {
             finish();
         }

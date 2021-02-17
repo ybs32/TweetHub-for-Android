@@ -76,7 +76,7 @@ public class TwitterUser extends Entity {
     private String originalProfileImageURL;
     private String originalProfileImageURLHttps;
     private String profileImageURL400x400;
-    private String profileImageURLHttps400x400;
+    private String profileImageURL400x400Https;
 
     private String profileBannerURL;
     private String profileBannerRetinaURL;
@@ -163,7 +163,7 @@ public class TwitterUser extends Entity {
         this.originalProfileImageURL = user.getOriginalProfileImageURL();
         this.originalProfileImageURLHttps = user.getOriginalProfileImageURLHttps();
         this.profileImageURL400x400 = user.get400x400ProfileImageURL();
-        this.profileImageURLHttps400x400 = user.get400x400ProfileImageURLHttps();
+        this.profileImageURL400x400Https = user.get400x400ProfileImageURLHttps();
 
         this.profileBannerURL = user.getProfileBannerURL();
         this.profileBannerRetinaURL = user.getProfileBannerRetinaURL();
