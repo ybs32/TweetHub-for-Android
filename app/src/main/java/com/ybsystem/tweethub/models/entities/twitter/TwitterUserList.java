@@ -53,4 +53,5 @@ public class TwitterUserList extends Entity {
         // Custom
         this.isOwner = false;
     }
+
 }

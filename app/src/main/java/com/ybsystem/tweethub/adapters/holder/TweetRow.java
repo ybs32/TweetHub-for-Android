@@ -312,7 +312,8 @@ public class TweetRow extends RecyclerView.ViewHolder {
         mRightClick.setOnLongClickListener(new TweetClickListener(mStatus, PrefClickAction.getRightLongClick()));
     }
 
-    public void hideOptionalFields() {
+    public void initVisibilities() {
+        // Set visibility
         mAbsoluteTime.setVisibility(View.GONE);
         mVia.setVisibility(View.GONE);
         mRtCountText.setVisibility(View.GONE);

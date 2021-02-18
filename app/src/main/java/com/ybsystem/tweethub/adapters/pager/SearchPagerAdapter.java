@@ -23,7 +23,6 @@ public class SearchPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-
         switch (position) {
             case 0:
                 return "リアルタイム";

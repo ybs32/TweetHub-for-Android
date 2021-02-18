@@ -86,10 +86,8 @@ public class TweetDialog extends DialogFragment {
     }
 
     private void renderTweet(TweetRow tweetRow) {
-        // Hide optional fields
-        tweetRow.hideOptionalFields();
-
         // Set all fields
+        tweetRow.initVisibilities();
         tweetRow.setStatus(mStatus);
         tweetRow.setUserName();
         tweetRow.setScreenName();

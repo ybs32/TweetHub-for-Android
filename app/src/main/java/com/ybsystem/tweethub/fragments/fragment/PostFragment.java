@@ -97,7 +97,7 @@ public class PostFragment extends Fragment {
 
         // Render tweet
         TweetRow tweetRow = new TweetRow(view);
-        tweetRow.hideOptionalFields();
+        tweetRow.initVisibilities();
         tweetRow.setStatus(status);
         tweetRow.setUserName();
         tweetRow.setScreenName();

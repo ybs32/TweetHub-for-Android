@@ -19,4 +19,5 @@ public class TwitterHashtagEntity extends Entity {
         this.start = hashtagEntity.getStart();
         this.end = hashtagEntity.getEnd();
     }
+
 }
