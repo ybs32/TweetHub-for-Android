@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">TweetHub</string>
-    <string name="app_version">1.4.1</string>
+    <string name="app_version">1.5.0</string>
     <string name="app_update_info">
-        Ver.1.4.1\n
-        ・壁紙関連の不具合修正
+        Ver.1.5.0\n
+        ・ソースコードを公開\n
+        　(オープンソース化)
     </string>
 
     <!-- UltraPullToRefresh -->
