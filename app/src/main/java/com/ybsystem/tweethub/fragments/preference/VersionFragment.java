@@ -23,6 +23,9 @@ public class VersionFragment extends Fragment {
         String newVersion = getString(R.string.app_update_info);
         String oldVersion =
                         "\n" +
+                        "Ver.1.4.1\n" +
+                        "・壁紙関連の不具合修正\n" +
+                        "\n" +
                         "Ver.1.4.0\n" +
                         "・検索カラムを追加\n" +
                         "・保存した検索に対応\n" +
