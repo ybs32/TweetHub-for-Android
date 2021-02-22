@@ -23,6 +23,7 @@ public class TweetHubApp extends Application {
 
     @SuppressLint("StaticFieldLeak")
     private static TweetHubApp sTweetHubApp;
+
     private AppCompatActivity mActivity;
     private AppData mAppData;
     private Twitter mTwitter;

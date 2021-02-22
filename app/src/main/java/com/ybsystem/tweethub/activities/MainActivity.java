@@ -24,9 +24,6 @@ import com.ybsystem.tweethub.fragments.fragment.MainFragment;
 import com.ybsystem.tweethub.libs.glide.GlideApp;
 import com.ybsystem.tweethub.libs.rfab.CardItem;
 import com.ybsystem.tweethub.libs.rfab.RapidFloatingActionListView;
-import com.ybsystem.tweethub.models.entities.Account;
-import com.ybsystem.tweethub.models.entities.AccountArray;
-import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweethub.storages.*;
 import com.ybsystem.tweethub.utils.*;
 
@@ -68,10 +65,13 @@ public class MainActivity extends ActivityBase
     @Override
     public void onBackPressed() {
         DrawerLayout d = findViewById(R.id.drawer_layout);
-        if (d.isDrawerOpen(GravityCompat.START)) {
-            d.closeDrawer(GravityCompat.START);
+        int s = GravityCompat.START;
+
+        // Check drawer state
+        if (d.isDrawerOpen(s)) {
+            d.closeDrawer(s);
         } else if (PrefSystem.getConfirmSettings().contains(FINISH)) {
-            showConfirmDialog();
+            DialogUtils.showConfirm("アプリを終了しますか？", (di, wh) -> finish());
         } else {
             finish();
         }
@@ -87,7 +87,7 @@ public class MainActivity extends ActivityBase
                 overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
                 break;
             case 1: // アカウント
-                showAccountDialog();
+                DialogUtils.showAccountChoice();
                 break;
             case 2: // プロフィール
                 intent = new Intent(this, ProfileActivity.class);
@@ -114,9 +114,9 @@ public class MainActivity extends ActivityBase
                 break;
             case REBOOT_PREPARATION:
                 // Reboot activity
-                DialogUtils.showProgressDialog("設定を適用中...", this);
+                DialogUtils.showProgress("設定を適用中...", this);
                 new Handler().postDelayed(() -> {
-                    DialogUtils.dismissProgressDialog();
+                    DialogUtils.dismissProgress();
                     ToastUtils.showShortToast("設定を適用しました。");
                     ActivityUtils.rebootActivity(MainActivity.this, 0, 0);
                 }, 1500);
@@ -229,45 +229,6 @@ public class MainActivity extends ActivityBase
         }
         // Save new version
         TweetHubApp.getData().setVersion(newVersion);
-    }
-
-    private void showConfirmDialog() {
-        // Create
-        ConfirmDialog dialog = new ConfirmDialog().newInstance("アプリを終了しますか？");
-        dialog.setOnPositiveClickListener(
-                (d, which) -> finish()
-        );
-        // Show
-        FragmentManager fm = getSupportFragmentManager();
-        if (fm.findFragmentByTag("ConfirmDialog") == null) {
-            dialog.show(fm, "ConfirmDialog");
-        }
-    }
-
-    private void showAccountDialog() {
-        // Create
-        AccountArray<Account> accounts = TweetHubApp.getData().getAccounts();
-        String[] items = new String[accounts.size()];
-        for (int i = 0; i < accounts.size(); i++) {
-            TwitterUser user = accounts.get(i).getUser();
-            items[i] = user.getName() + " (@" + user.getScreenName() + ")";
-        }
-        ChoiceDialog dialog = new ChoiceDialog()
-                .newInstance(items, accounts.getCurrentAccountNum());
-
-        dialog.setOnItemClickListener((d, position) -> {
-            // Change account and reboot
-            accounts.setCurrentAccount(position);
-            TweetHubApp.getInstance().init();
-            ToastUtils.showShortToast("アカウントを切り替えました。");
-            ActivityUtils.rebootActivity(MainActivity.this, 0, 0);
-        });
-
-        // Show
-        FragmentManager fm = getSupportFragmentManager();
-        if (fm.findFragmentByTag("AccountDialog") == null) {
-            dialog.show(fm, "AccountDialog");
-        }
     }
 
 }

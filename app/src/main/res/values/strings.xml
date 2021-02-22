@@ -1,13 +1,11 @@
 <resources>
     <string name="app_name">TweetHub</string>
-    <string name="app_version">1.4.1</string>
+    <string name="app_version">1.5.0</string>
     <string name="app_update_info">
-        Ver.1.4.1\n
-        ・壁紙関連の不具合修正
+        Ver.1.5.0\n
+        ・ソースコードを公開\n
+        　(オープンソース化)
     </string>
-    <string name="callback_url">ybsystem://</string>
-    <string name="hello_java">==gNE1GdVtkQ592SThGVyQEO5ZFTysmTxUVU</string>
-    <string name="hello_android">=YTMWlWZ1VnZVx0aEREdW1WZYpnYDlEMTlWZiNzSXZWWQ5WZzlVNTV3c0skVpdVZ3l1M</string>
 
     <!-- UltraPullToRefresh -->
     <string name="cube_ptr_pull_down">引っ張って…</string>
@@ -74,9 +72,9 @@
     <string name="pref_key_quality_image">pref_key_quality_image</string>
     <string name="pref_key_quality_video">pref_key_quality_video</string>
     <string name="pref_key_confirm_setting">pref_key_confirm_setting</string>
-    <string name="pref_key_easy_tweet">pref_key_easy_tweet</string>
     <string name="pref_key_count_boot_load">pref_key_count_boot_load</string>
     <string name="pref_key_count_scroll_load">pref_key_count_scroll_load</string>
+    <string name="pref_key_easy_tweet">pref_key_easy_tweet</string>
 
     <!-- Wallpaper settings -->
     <string name="pref_key_add_wallpaper">pref_key_add_wallpaper</string>

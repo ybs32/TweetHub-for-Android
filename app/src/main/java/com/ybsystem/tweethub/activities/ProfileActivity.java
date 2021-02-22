@@ -149,9 +149,8 @@ public class ProfileActivity extends ActivityBase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                TwitterException e = (TwitterException) t;
                 ToastUtils.showShortToast("ユーザーの取得に失敗しました...");
-                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
                 finish();
                 overridePendingTransition(R.anim.zoom_in, R.anim.slide_out_to_right);
             }

@@ -26,7 +26,7 @@ import com.ybsystem.tweethub.fragments.dialog.NoticeDialog;
 import com.ybsystem.tweethub.models.entities.EntityArray;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUserMentionEntity;
-import com.ybsystem.tweethub.usecases.TwitterUseCase;
+import com.ybsystem.tweethub.usecases.StatusUseCase;
 import com.ybsystem.tweethub.utils.DialogUtils;
 import com.ybsystem.tweethub.utils.ResourceUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
@@ -97,7 +97,7 @@ public class PostFragment extends Fragment {
 
         // Render tweet
         TweetRow tweetRow = new TweetRow(view);
-        tweetRow.hideOptionalFields();
+        tweetRow.initVisibilities();
         tweetRow.setStatus(status);
         tweetRow.setUserName();
         tweetRow.setScreenName();
@@ -204,7 +204,7 @@ public class PostFragment extends Fragment {
                     mPostEdit.getText().toString() + quoteURL
             );
             update.setInReplyToStatusId(replyId);
-            TwitterUseCase.post(update, mImageUris);
+            StatusUseCase.post(update, mImageUris);
 
             // Save hashtag
             EntityArray<String> hashtags = TweetHubApp.getMyAccount().getHashtags();
@@ -248,7 +248,7 @@ public class PostFragment extends Fragment {
                 dialog.dismiss();
             });
             dialog.setOnItemLongClickListener((parent, v1, position, id) -> {
-                DialogUtils.showConfirmDialog(
+                DialogUtils.showConfirm(
                         "下書きを削除しますか？",
                         (d, which) -> {
                             drafts.remove(position);
@@ -296,7 +296,7 @@ public class PostFragment extends Fragment {
                 dialog.dismiss();
             });
             dialog.setOnItemLongClickListener((parent, v1, position, id) -> {
-                DialogUtils.showConfirmDialog(
+                DialogUtils.showConfirm(
                         "ハッシュタグを削除しますか？",
                         (d, which) -> {
                             hashtags.remove(position);
@@ -322,9 +322,9 @@ public class PostFragment extends Fragment {
                 return;
             }
             // Coming soon...
-            DialogUtils.showProgressDialog("読み込み中...", getContext());
+            DialogUtils.showProgress("読み込み中...", getContext());
             new Handler().postDelayed(() -> {
-                DialogUtils.dismissProgressDialog();
+                DialogUtils.dismissProgress();
                 ToastUtils.showShortToast("カメラを起動できません。");
             }, 1500);
         });

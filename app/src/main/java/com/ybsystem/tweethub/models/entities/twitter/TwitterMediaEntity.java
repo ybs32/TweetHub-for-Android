@@ -37,4 +37,5 @@ public class TwitterMediaEntity extends Entity {
         this.start = mediaEntity.getStart();
         this.end = mediaEntity.getEnd();
     }
+
 }

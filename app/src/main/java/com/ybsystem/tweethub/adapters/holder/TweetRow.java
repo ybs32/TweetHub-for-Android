@@ -92,11 +92,11 @@ public class TweetRow extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
 
         // Init
-        this.mThumbnails = new ArrayList<>();
-        this.mThumbnails.add(mThumbnail1);
-        this.mThumbnails.add(mThumbnail2);
-        this.mThumbnails.add(mThumbnail3);
-        this.mThumbnails.add(mThumbnail4);
+        mThumbnails = new ArrayList<>();
+        mThumbnails.add(mThumbnail1);
+        mThumbnails.add(mThumbnail2);
+        mThumbnails.add(mThumbnail3);
+        mThumbnails.add(mThumbnail4);
 
         // Apply app settings
         applyThemeSetting();
@@ -104,18 +104,18 @@ public class TweetRow extends RecyclerView.ViewHolder {
     }
 
     public void setStatus(TwitterStatus status) {
-        this.mStatus = status;
-        this.mSource = mStatus.isRetweet()
+        mStatus = status;
+        mSource = mStatus.isRetweet()
                 ? mStatus.getRtStatus()
                 : mStatus;
     }
 
     public void setUserName() {
-        this.mUserName.setText(mSource.getUser().getName());
+        mUserName.setText(mSource.getUser().getName());
     }
 
     public void setScreenName() {
-        this.mScreenName.setText("@" + mSource.getUser().getScreenName());
+        mScreenName.setText("@" + mSource.getUser().getScreenName());
     }
 
     public void setUserIcon() {
@@ -125,93 +125,93 @@ public class TweetRow extends RecyclerView.ViewHolder {
 
         if (mStatus.isRetweet()) {
             // When retweet
-            this.mRtUserIcon.setVisibility(View.VISIBLE);
-            this.mRtArrowIcon.setVisibility(View.VISIBLE);
-            GlideUtils.load(userIconURL, this.mUserIcon, option);
-            GlideUtils.load(rtUserIconURL, this.mRtUserIcon, option);
+            mRtUserIcon.setVisibility(View.VISIBLE);
+            mRtArrowIcon.setVisibility(View.VISIBLE);
+            GlideUtils.load(userIconURL, mUserIcon, option);
+            GlideUtils.load(rtUserIconURL, mRtUserIcon, option);
         } else {
             // When tweet
-            this.mRtUserIcon.setVisibility(View.GONE);
-            this.mRtArrowIcon.setVisibility(View.GONE);
-            GlideUtils.load(userIconURL, this.mUserIcon, option);
+            mRtUserIcon.setVisibility(View.GONE);
+            mRtArrowIcon.setVisibility(View.GONE);
+            GlideUtils.load(userIconURL, mUserIcon, option);
         }
     }
 
     public void setTweetText() {
-        this.mTweetText.setText(HtmlCompat.fromHtml(mSource.getConvertedText(), FROM_HTML_MODE_COMPACT));
+        mTweetText.setText(HtmlCompat.fromHtml(mSource.getConvertedText(), FROM_HTML_MODE_COMPACT));
     }
 
     public void setRelativeTime() {
-        this.mRelativeTime.setText(mSource.getConvertedRelativeTime());
+        mRelativeTime.setText(mSource.getConvertedRelativeTime());
     }
 
     public void setAbsoluteTime() {
-        this.mAbsoluteTime.setText(mSource.getConvertedAbsoluteTime());
-        this.mAbsoluteTime.setVisibility(View.VISIBLE);
+        mAbsoluteTime.setText(mSource.getConvertedAbsoluteTime());
+        mAbsoluteTime.setVisibility(View.VISIBLE);
     }
 
     public void setVia() {
-        this.mVia.setText(mSource.getConvertedVia());
-        this.mVia.setVisibility(View.VISIBLE);
+        mVia.setText(mSource.getConvertedVia());
+        mVia.setVisibility(View.VISIBLE);
     }
 
     public void setRtFavCount() {
         // Set retweet count
         int rtCount = mSource.getRetweetCount();
         if (rtCount == 0) {
-            this.mRtCountText.setVisibility(View.GONE);
-            this.mRtCountIcon.setVisibility(View.GONE);
+            mRtCountText.setVisibility(View.GONE);
+            mRtCountIcon.setVisibility(View.GONE);
         } else {
-            this.mRtCountText.setText(String.valueOf(rtCount));
-            this.mRtCountText.setVisibility(View.VISIBLE);
-            this.mRtCountIcon.setVisibility(View.VISIBLE);
+            mRtCountText.setText(String.valueOf(rtCount));
+            mRtCountText.setVisibility(View.VISIBLE);
+            mRtCountIcon.setVisibility(View.VISIBLE);
         }
         // Set favorite count
         int favCount = mSource.getFavoriteCount();
         if (favCount == 0) {
-            this.mFavCountText.setVisibility(View.GONE);
-            this.mFavCountIcon.setVisibility(View.GONE);
+            mFavCountText.setVisibility(View.GONE);
+            mFavCountIcon.setVisibility(View.GONE);
         } else {
-            this.mFavCountText.setText(String.valueOf(favCount));
-            this.mFavCountText.setVisibility(View.VISIBLE);
-            this.mFavCountIcon.setVisibility(View.VISIBLE);
+            mFavCountText.setText(String.valueOf(favCount));
+            mFavCountText.setVisibility(View.VISIBLE);
+            mFavCountIcon.setVisibility(View.VISIBLE);
         }
     }
 
     public void setRetweetedBy() {
         if (!mStatus.isRetweet()) {
-            this.mRetweetedBy.setVisibility(View.GONE);
+            mRetweetedBy.setVisibility(View.GONE);
             return;
         }
         // Set retweeted by
-        this.mRetweetedBy.setText(mStatus.getUser().getName() + " さんがリツイート");
-        this.mRetweetedBy.setVisibility(View.VISIBLE);
+        mRetweetedBy.setText(mStatus.getUser().getName() + " さんがリツイート");
+        mRetweetedBy.setVisibility(View.VISIBLE);
     }
 
     public void setMarks() {
         // Check retweeted tweet by myself
         if (mStatus.isRetweeted())
-            this.mRtMark.setVisibility(View.VISIBLE);
+            mRtMark.setVisibility(View.VISIBLE);
         else
-            this.mRtMark.setVisibility(View.GONE);
+            mRtMark.setVisibility(View.GONE);
 
         // Check favorited tweet by myself
         if (mStatus.isFavorited())
-            this.mFavMark.setVisibility(View.VISIBLE);
+            mFavMark.setVisibility(View.VISIBLE);
         else
-            this.mFavMark.setVisibility(View.GONE);
+            mFavMark.setVisibility(View.GONE);
 
         // Check verified user
         if (mSource.getUser().isVerified())
-            this.mVerifyMark.setVisibility(View.VISIBLE);
+            mVerifyMark.setVisibility(View.VISIBLE);
         else
-            this.mVerifyMark.setVisibility(View.GONE);
+            mVerifyMark.setVisibility(View.GONE);
 
         // Check protected user
         if (mSource.getUser().isProtected())
-            this.mLockMark.setVisibility(View.VISIBLE);
+            mLockMark.setVisibility(View.VISIBLE);
         else
-            this.mLockMark.setVisibility(View.GONE);
+            mLockMark.setVisibility(View.GONE);
     }
 
     public void setThumbnail() {
@@ -219,28 +219,28 @@ public class TweetRow extends RecyclerView.ViewHolder {
 
         // When media not exist, hide and exit
         if (medias == null || medias.length == 0) {
-            this.mThumbnailContainer.setVisibility(View.GONE);
+            mThumbnailContainer.setVisibility(View.GONE);
             return;
         }
         // Init visibility because recycling convertView
-        this.mPlayIcon.setVisibility(View.GONE);
-        for (ImageView thumbnail : this.mThumbnails) {
+        mPlayIcon.setVisibility(View.GONE);
+        for (ImageView thumbnail : mThumbnails) {
             thumbnail.setVisibility(View.GONE);
         }
 
         // When video exist, show play icon
         if (medias[0].getVideoVariants().length > 0) {
-            this.mPlayIcon.setVisibility(View.VISIBLE);
+            mPlayIcon.setVisibility(View.VISIBLE);
         }
         // Set thumbnails
         for (int i = 0; i < medias.length; i++) {
-            String imageURL = PrefSystem.getMediaThumbByQuality(medias[i].getMediaURL());
-            ImageView thumbnail = this.mThumbnails.get(i);
+            String imageURL = PrefSystem.getMediaThumbByQuality(medias[i].getMediaURLHttps());
+            ImageView thumbnail = mThumbnails.get(i);
             GlideUtils.load(imageURL, thumbnail, NONE);
             thumbnail.setVisibility(View.VISIBLE);
             thumbnail.setOnClickListener(new ThumbnailClickListener(i, medias));
         }
-        this.mThumbnailContainer.setVisibility(View.VISIBLE);
+        mThumbnailContainer.setVisibility(View.VISIBLE);
     }
 
     public void setQuoteTweet() {
@@ -251,12 +251,12 @@ public class TweetRow extends RecyclerView.ViewHolder {
         }
         // Set quote tweet
         TwitterStatus qtStatus = mSource.getQtStatus();
-        this.mQuoteUserName.setText(qtStatus.getUser().getName());
-        this.mQuoteScreenName.setText("@" + qtStatus.getUser().getScreenName());
-        this.mQuoteTweetText.setText(HtmlCompat.fromHtml(qtStatus.getConvertedText(), FROM_HTML_MODE_COMPACT));
-        this.mQuoteRelativeTime.setText(qtStatus.getConvertedRelativeTime());
-        this.mQuoteContainer.setVisibility(View.VISIBLE);
-        this.mQuoteContainer.setOnClickListener(new TweetClickListener(qtStatus, ClickAction.DETAIL));
+        mQuoteUserName.setText(qtStatus.getUser().getName());
+        mQuoteScreenName.setText("@" + qtStatus.getUser().getScreenName());
+        mQuoteTweetText.setText(HtmlCompat.fromHtml(qtStatus.getConvertedText(), FROM_HTML_MODE_COMPACT));
+        mQuoteRelativeTime.setText(qtStatus.getConvertedRelativeTime());
+        mQuoteContainer.setVisibility(View.VISIBLE);
+        mQuoteContainer.setOnClickListener(new TweetClickListener(qtStatus, ClickAction.DETAIL));
     }
 
     public void setDetailTweet() {
@@ -266,9 +266,9 @@ public class TweetRow extends RecyclerView.ViewHolder {
             return;
         }
         // Set detail rt fav
-        this.mDetailRtCount.setText(mSource.getRetweetCount() + " リツイート");
-        this.mDetailFavCount.setText(mSource.getFavoriteCount() + " " + PrefAppearance.getLikeFavText());
-        this.mDetailContainer.setVisibility(View.VISIBLE);
+        mDetailRtCount.setText(mSource.getRetweetCount() + " リツイート");
+        mDetailFavCount.setText(mSource.getFavoriteCount() + " " + PrefAppearance.getLikeFavText());
+        mDetailContainer.setVisibility(View.VISIBLE);
     }
 
     public void setBackgroundColor() {
@@ -302,27 +302,28 @@ public class TweetRow extends RecyclerView.ViewHolder {
 
     public void setTweetClickListener() {
         // Set click listener
-        this.mLeftClick.setOnClickListener(new TweetClickListener(mStatus, PrefClickAction.getLeftClick()));
-        this.mMiddleClick.setOnClickListener(new TweetClickListener(mStatus, PrefClickAction.getMiddleClick()));
-        this.mRightClick.setOnClickListener(new TweetClickListener(mStatus, PrefClickAction.getRightClick()));
+        mLeftClick.setOnClickListener(new TweetClickListener(mStatus, PrefClickAction.getLeftClick()));
+        mMiddleClick.setOnClickListener(new TweetClickListener(mStatus, PrefClickAction.getMiddleClick()));
+        mRightClick.setOnClickListener(new TweetClickListener(mStatus, PrefClickAction.getRightClick()));
 
         // Set long click listener
-        this.mLeftClick.setOnLongClickListener(new TweetClickListener(mStatus, PrefClickAction.getLeftLongClick()));
-        this.mMiddleClick.setOnLongClickListener(new TweetClickListener(mStatus, PrefClickAction.getMiddleLongClick()));
-        this.mRightClick.setOnLongClickListener(new TweetClickListener(mStatus, PrefClickAction.getRightLongClick()));
+        mLeftClick.setOnLongClickListener(new TweetClickListener(mStatus, PrefClickAction.getLeftLongClick()));
+        mMiddleClick.setOnLongClickListener(new TweetClickListener(mStatus, PrefClickAction.getMiddleLongClick()));
+        mRightClick.setOnLongClickListener(new TweetClickListener(mStatus, PrefClickAction.getRightLongClick()));
     }
 
-    public void hideOptionalFields() {
-        this.mAbsoluteTime.setVisibility(View.GONE);
-        this.mVia.setVisibility(View.GONE);
-        this.mRtCountText.setVisibility(View.GONE);
-        this.mRtCountIcon.setVisibility(View.GONE);
-        this.mFavCountText.setVisibility(View.GONE);
-        this.mFavCountIcon.setVisibility(View.GONE);
-        this.mRetweetedBy.setVisibility(View.GONE);
-        this.mThumbnailContainer.setVisibility(View.GONE);
-        this.mQuoteContainer.setVisibility(View.GONE);
-        this.mDetailContainer.setVisibility(View.GONE);
+    public void initVisibilities() {
+        // Set visibility
+        mAbsoluteTime.setVisibility(View.GONE);
+        mVia.setVisibility(View.GONE);
+        mRtCountText.setVisibility(View.GONE);
+        mRtCountIcon.setVisibility(View.GONE);
+        mFavCountText.setVisibility(View.GONE);
+        mFavCountIcon.setVisibility(View.GONE);
+        mRetweetedBy.setVisibility(View.GONE);
+        mThumbnailContainer.setVisibility(View.GONE);
+        mQuoteContainer.setVisibility(View.GONE);
+        mDetailContainer.setVisibility(View.GONE);
     }
 
     private void applyThemeSetting() {
@@ -331,45 +332,45 @@ public class TweetRow extends RecyclerView.ViewHolder {
             return;
         }
         // Set tweet color
-        this.mUserName.setTextColor(PrefTheme.getUserNameColor());
-        this.mScreenName.setTextColor(PrefTheme.getUserNameColor());
-        this.mRelativeTime.setTextColor(PrefTheme.getRelativeTimeColor());
-        this.mTweetText.setTextColor(PrefTheme.getTweetTextColor());
-        this.mAbsoluteTime.setTextColor(PrefTheme.getAbsoluteTimeColor());
-        this.mVia.setTextColor(PrefTheme.getViaColor());
-        this.mRtCountText.setTextColor(PrefTheme.getRtFavColor());
-        this.mRtCountIcon.setColorFilter(PrefTheme.getRtFavColor());
-        this.mFavCountText.setTextColor(PrefTheme.getRtFavColor());
-        this.mFavCountIcon.setColorFilter(PrefTheme.getRtFavColor());
-        this.mRetweetedBy.setTextColor(PrefTheme.getRetweetedByColor());
+        mUserName.setTextColor(PrefTheme.getUserNameColor());
+        mScreenName.setTextColor(PrefTheme.getUserNameColor());
+        mRelativeTime.setTextColor(PrefTheme.getRelativeTimeColor());
+        mTweetText.setTextColor(PrefTheme.getTweetTextColor());
+        mAbsoluteTime.setTextColor(PrefTheme.getAbsoluteTimeColor());
+        mVia.setTextColor(PrefTheme.getViaColor());
+        mRtCountText.setTextColor(PrefTheme.getRtFavColor());
+        mRtCountIcon.setColorFilter(PrefTheme.getRtFavColor());
+        mFavCountText.setTextColor(PrefTheme.getRtFavColor());
+        mFavCountIcon.setColorFilter(PrefTheme.getRtFavColor());
+        mRetweetedBy.setTextColor(PrefTheme.getRetweetedByColor());
 
         // Set quote color
-        this.mQuoteUserName.setTextColor(PrefTheme.getUserNameColor());
-        this.mQuoteScreenName.setTextColor(PrefTheme.getUserNameColor());
-        this.mQuoteRelativeTime.setTextColor(PrefTheme.getRelativeTimeColor());
-        this.mQuoteTweetText.setTextColor(PrefTheme.getTweetTextColor());
+        mQuoteUserName.setTextColor(PrefTheme.getUserNameColor());
+        mQuoteScreenName.setTextColor(PrefTheme.getUserNameColor());
+        mQuoteRelativeTime.setTextColor(PrefTheme.getRelativeTimeColor());
+        mQuoteTweetText.setTextColor(PrefTheme.getTweetTextColor());
 
         // Set detail color
-        this.mDetailRtCount.setTextColor(PrefTheme.getRtFavColor());
-        this.mDetailFavCount.setTextColor(PrefTheme.getRtFavColor());
+        mDetailRtCount.setTextColor(PrefTheme.getRtFavColor());
+        mDetailFavCount.setTextColor(PrefTheme.getRtFavColor());
     }
 
     private void applyAppearanceSetting() {
         // Set font size
         int fontSize = PrefAppearance.getFontSize();
-        this.mUserName.setTextSize(fontSize);
-        this.mScreenName.setTextSize(fontSize - 1);
-        this.mTweetText.setTextSize(fontSize);
-        this.mRelativeTime.setTextSize(fontSize);
-        this.mAbsoluteTime.setTextSize(fontSize - 1);
-        this.mVia.setTextSize(fontSize - 1);
-        this.mRetweetedBy.setTextSize(fontSize - 1);
-        this.mRtCountText.setTextSize(fontSize - 1);
-        this.mFavCountText.setTextSize(fontSize - 1);
-        this.mQuoteUserName.setTextSize(fontSize);
-        this.mQuoteScreenName.setTextSize(fontSize - 1);
-        this.mQuoteTweetText.setTextSize(fontSize);
-        this.mQuoteRelativeTime.setTextSize(fontSize);
+        mUserName.setTextSize(fontSize);
+        mScreenName.setTextSize(fontSize - 1);
+        mTweetText.setTextSize(fontSize);
+        mRelativeTime.setTextSize(fontSize);
+        mAbsoluteTime.setTextSize(fontSize - 1);
+        mVia.setTextSize(fontSize - 1);
+        mRetweetedBy.setTextSize(fontSize - 1);
+        mRtCountText.setTextSize(fontSize - 1);
+        mFavCountText.setTextSize(fontSize - 1);
+        mQuoteUserName.setTextSize(fontSize);
+        mQuoteScreenName.setTextSize(fontSize - 1);
+        mQuoteTweetText.setTextSize(fontSize);
+        mQuoteRelativeTime.setTextSize(fontSize);
 
         // Set user icon size
         int dpSize = PrefAppearance.getUserIconSize();

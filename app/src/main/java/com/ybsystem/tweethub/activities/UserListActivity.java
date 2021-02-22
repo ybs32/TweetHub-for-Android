@@ -11,7 +11,7 @@ import com.ybsystem.tweethub.adapters.pager.UserListPagerAdapter;
 import com.ybsystem.tweethub.libs.eventbus.UserListEvent;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUserList;
-import com.ybsystem.tweethub.usecases.UserUseCase;
+import com.ybsystem.tweethub.usecases.UserListUseCase;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -75,7 +75,7 @@ public class UserListActivity extends ActivityBase {
         switch (item.getItemId()) {
             // 購読する
             case R.id.item_subscribe:
-                UserUseCase.subscribeList(mUserList);
+                UserListUseCase.subscribeList(mUserList);
                 return true;
         }
         return super.onOptionsItemSelected(item);

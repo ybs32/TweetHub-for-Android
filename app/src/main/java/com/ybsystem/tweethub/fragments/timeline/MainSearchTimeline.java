@@ -1,14 +1,11 @@
 package com.ybsystem.tweethub.fragments.timeline;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -136,8 +133,7 @@ public class MainSearchTimeline extends TimelineBase {
 
                 // Show error message if loaded by user action
                 if (isPullLoad || isClickLoad) {
-                    TwitterException e = (TwitterException) t;
-                    ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                    ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
                 }
                 mFooterClick = true;
             }

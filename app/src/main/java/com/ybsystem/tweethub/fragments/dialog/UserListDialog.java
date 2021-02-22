@@ -17,7 +17,7 @@ import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.models.entities.UserList;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
-import com.ybsystem.tweethub.usecases.UserUseCase;
+import com.ybsystem.tweethub.usecases.UserListUseCase;
 import com.ybsystem.tweethub.utils.AnimationUtils;
 import com.ybsystem.tweethub.utils.ExceptionUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
@@ -28,7 +28,6 @@ import io.reactivex.rxjava3.observers.DisposableObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import twitter4j.ResponseList;
 import twitter4j.Twitter;
-import twitter4j.TwitterException;
 
 public class UserListDialog extends DialogFragment {
 
@@ -83,9 +82,8 @@ public class UserListDialog extends DialogFragment {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                TwitterException e = (TwitterException) t;
                 ToastUtils.showShortToast("リストの取得に失敗しました...");
-                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
                 dismiss();
             }
 
@@ -149,7 +147,7 @@ public class UserListDialog extends DialogFragment {
             // When check changed
             checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (buttonView.isPressed()) {
-                    UserUseCase.updateListUser(userList, mTargetUser, !isChecked);
+                    UserListUseCase.updateListUser(userList, mTargetUser, !isChecked);
                 }
             });
 

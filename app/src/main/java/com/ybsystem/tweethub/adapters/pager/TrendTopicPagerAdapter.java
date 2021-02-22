@@ -20,7 +20,6 @@ public class TrendTopicPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-
         switch (position) {
             case 0:
                 return "トレンド";
@@ -32,7 +31,6 @@ public class TrendTopicPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-
         switch (position) {
             case 0:
                 return new TrendTimeline();

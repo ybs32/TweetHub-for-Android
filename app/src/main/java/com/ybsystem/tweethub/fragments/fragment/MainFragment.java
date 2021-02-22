@@ -94,12 +94,12 @@ public class MainFragment extends Fragment {
 
         // When icon clicked
         icon.setOnClickListener(v -> {
-            DrawerLayout drawer = view.findViewById(R.id.drawer_layout);
-            int g = GravityCompat.START;
-            if (drawer.isDrawerOpen(g)) {
-                drawer.closeDrawer(g);
+            DrawerLayout d = view.findViewById(R.id.drawer_layout);
+            int s = GravityCompat.START;
+            if (d.isDrawerOpen(s)) {
+                d.closeDrawer(s);
             } else {
-                drawer.openDrawer(g);
+                d.openDrawer(s);
             }
         });
     }

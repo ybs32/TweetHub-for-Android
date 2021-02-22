@@ -27,4 +27,5 @@ public class TwitterUserMentionEntity extends Entity {
         this.start = userMentionEntity.getStart();
         this.end = userMentionEntity.getEnd();
     }
+
 }

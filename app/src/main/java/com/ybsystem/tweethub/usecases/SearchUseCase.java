@@ -41,9 +41,8 @@ public class SearchUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                TwitterException e = (TwitterException) t;
                 ToastUtils.showShortToast("検索の保存に失敗しました...");
-                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
             @Override
@@ -54,7 +53,7 @@ public class SearchUseCase {
         };
 
         // Show confirm dialog
-        DialogUtils.showConfirmDialog(
+        DialogUtils.showConfirm(
                 "検索を保存しますか？",
                 (dialog, which) -> observable
                         .subscribeOn(Schedulers.newThread())
@@ -82,9 +81,8 @@ public class SearchUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                TwitterException e = (TwitterException) t;
                 ToastUtils.showShortToast("検索の削除に失敗しました...");
-                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
             @Override
@@ -95,7 +93,7 @@ public class SearchUseCase {
         };
 
         // Show confirm dialog
-        DialogUtils.showConfirmDialog(
+        DialogUtils.showConfirm(
                 "検索を削除しますか？",
                 (dialog, which) -> observable
                         .subscribeOn(Schedulers.newThread())
@@ -134,9 +132,8 @@ public class SearchUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                TwitterException e = (TwitterException) t;
                 ToastUtils.showShortToast("検索の取得に失敗しました...");
-                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
             @Override

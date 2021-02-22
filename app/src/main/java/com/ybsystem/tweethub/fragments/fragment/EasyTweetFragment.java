@@ -28,7 +28,7 @@ import com.ybsystem.tweethub.models.entities.EntityArray;
 import com.ybsystem.tweethub.models.enums.ImageOption;
 import com.ybsystem.tweethub.storages.PrefAppearance;
 import com.ybsystem.tweethub.storages.PrefSystem;
-import com.ybsystem.tweethub.usecases.TwitterUseCase;
+import com.ybsystem.tweethub.usecases.StatusUseCase;
 import com.ybsystem.tweethub.utils.GlideUtils;
 import com.ybsystem.tweethub.utils.KeyboardUtils;
 import com.ybsystem.tweethub.utils.ResourceUtils;
@@ -82,7 +82,7 @@ public class EasyTweetFragment extends Fragment {
         // Clear tweet
         mPostEdit.getText().clear();
 
-        // Hide keyboard, clear focus
+        // Close keyboard
         View focus = getActivity().getCurrentFocus();
         if (focus != null) {
             KeyboardUtils.closeKeyboard(focus);
@@ -102,12 +102,12 @@ public class EasyTweetFragment extends Fragment {
             Activity act = getActivity();
             if (act.getLocalClassName().equals("activities.MainActivity")) {
                 // If MainActivity
-                DrawerLayout drawer = act.findViewById(R.id.drawer_layout);
-                int g = GravityCompat.START;
-                if (drawer.isDrawerOpen(g)) {
-                    drawer.closeDrawer(g);
+                DrawerLayout d = act.findViewById(R.id.drawer_layout);
+                int s = GravityCompat.START;
+                if (d.isDrawerOpen(s)) {
+                    d.closeDrawer(s);
                 } else {
-                    drawer.openDrawer(g);
+                    d.openDrawer(s);
                 }
             } else {
                 // If other activities
@@ -170,7 +170,7 @@ public class EasyTweetFragment extends Fragment {
             StatusUpdate update = new StatusUpdate(
                     mPostEdit.getText().toString()
             );
-            TwitterUseCase.post(update, new ArrayList<>());
+            StatusUseCase.post(update, new ArrayList<>());
 
             // Save hashtag
             EntityArray<String> hashtags = TweetHubApp.getMyAccount().getHashtags();

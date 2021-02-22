@@ -53,10 +53,8 @@ public class TweetRecyclerAdapter extends RecyclerAdapterBase<TwitterStatus> {
     }
 
     private void renderTweet(TweetRow tweetRow, TwitterStatus status) {
-        // Hide optional fields
-        tweetRow.hideOptionalFields();
-
         // Set fields
+        tweetRow.initVisibilities();
         tweetRow.setStatus(status);
         tweetRow.setUserName();
         tweetRow.setScreenName();
@@ -69,6 +67,7 @@ public class TweetRecyclerAdapter extends RecyclerAdapterBase<TwitterStatus> {
         tweetRow.setBackgroundColor();
         tweetRow.setTweetClickListener();
 
+        // Check detail
         if (status.isDetail()) {
             tweetRow.setAbsoluteTime();
             tweetRow.setThumbnail();

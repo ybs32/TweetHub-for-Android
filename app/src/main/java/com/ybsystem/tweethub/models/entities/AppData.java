@@ -1,9 +1,9 @@
 package com.ybsystem.tweethub.models.entities;
 
+import com.ybsystem.tweethub.BuildConfig;
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUser;
-import com.ybsystem.tweethub.utils.ResourceUtils;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -39,8 +39,8 @@ public class AppData extends Entity {
         ViaArray<Via> vias = new ViaArray<>();
         Via via = new Via();
         via.setName("TweetHub");
-        via.setConsumerKey(ResourceUtils.getS());
-        via.setConsumerSecret(ResourceUtils.getK());
+        via.setConsumerKey(BuildConfig.CK);
+        via.setConsumerSecret(BuildConfig.CS);
         via.setToken(token.getToken());
         via.setTokenSecret(token.getTokenSecret());
         via.setCurrentVia(true);

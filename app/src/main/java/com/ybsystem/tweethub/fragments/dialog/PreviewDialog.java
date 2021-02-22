@@ -56,9 +56,9 @@ public class PreviewDialog extends DialogFragment {
     }
 
     private void loadTweet(View view) {
+        // Async
         Observable<Object> observable = Observable.create(e -> {
             try {
-                // Prepare
                 Twitter twitter = TweetHubApp.getTwitter();
                 Query tweetQuery = new Query("from:MomentsJapan exclude:retweets exclude:nativeretweets");
                 Query retweetQuery = new Query("from:MomentsJapan filter:nativeretweets");
@@ -85,9 +85,8 @@ public class PreviewDialog extends DialogFragment {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                TwitterException e = (TwitterException) t;
                 ToastUtils.showShortToast("読み込みに失敗しました...");
-                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
             @Override
@@ -132,7 +131,7 @@ public class PreviewDialog extends DialogFragment {
 
     private void renderTweet(View view, TwitterStatus status) {
         TweetRow tweetRow = new TweetRow(view);
-        tweetRow.hideOptionalFields();
+        tweetRow.initVisibilities();
         tweetRow.setStatus(status);
         tweetRow.setUserName();
         tweetRow.setScreenName();

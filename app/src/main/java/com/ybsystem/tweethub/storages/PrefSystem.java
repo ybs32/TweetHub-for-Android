@@ -21,11 +21,10 @@ public class PrefSystem extends PrefBase {
 
     public static final String KEY_CONFIRM_SETTING = RES.getString(R.string.pref_key_confirm_setting);
 
-    public static final String KEY_EASY_TWEET = RES.getString(R.string.pref_key_easy_tweet);
-
     public static final String KEY_COUNT_BOOT_LOAD = RES.getString(R.string.pref_key_count_boot_load);
     public static final String KEY_COUNT_SCROLL_LOAD = RES.getString(R.string.pref_key_count_scroll_load);
 
+    public static final String KEY_EASY_TWEET = RES.getString(R.string.pref_key_easy_tweet);
 
     private PrefSystem() {
     }
@@ -62,11 +61,11 @@ public class PrefSystem extends PrefBase {
     public static String getProfileByQuality(TwitterUser user) {
         switch (getImageQuality()) {
             case LOW:
-                return user.getBiggerProfileImageURL(); // bigger (73x73)
+                return user.getBiggerProfileImageURLHttps(); // bigger (73x73)
             case MIDDLE:
-                return user.getProfileImageURL400x400(); // 400x400 (400x400)
+                return user.getProfileImageURL400x400Https(); // 400x400 (400x400)
             case HIGH:
-                return user.getOriginalProfileImageURL(); // original (512x512)
+                return user.getOriginalProfileImageURLHttps(); // original (512x512)
             default:
                 return null;
         }
@@ -75,10 +74,10 @@ public class PrefSystem extends PrefBase {
     public static String getProfileThumbByQuality(TwitterUser user) {
         switch (getImageQuality()) {
             case LOW:
-                return user.getProfileImageUrl(); // normal (48x48)
+                return user.getProfileImageUrlHttps(); // normal (48x48)
             case MIDDLE:
             case HIGH:
-                return user.getBiggerProfileImageURL(); // bigger (73x73)
+                return user.getBiggerProfileImageURLHttps(); // bigger (73x73)
             default:
                 return null;
         }
@@ -162,12 +161,6 @@ public class PrefSystem extends PrefBase {
         }
     }
 
-    // ----- ツイート -----
-
-    public static boolean isEasyTweetEnabled() {
-        return getDefaultSharedPreferences().getBoolean(KEY_EASY_TWEET, true);
-    }
-
     // ----- タイムライン -----
 
     public static int getBootLoadCount() {
@@ -180,6 +173,12 @@ public class PrefSystem extends PrefBase {
         return Integer.parseInt(
                 getDefaultSharedPreferences().getString(KEY_COUNT_SCROLL_LOAD, "100")
         );
+    }
+
+    // ----- ツイート -----
+
+    public static boolean isEasyTweetEnabled() {
+        return getDefaultSharedPreferences().getBoolean(KEY_EASY_TWEET, true);
     }
 
 }

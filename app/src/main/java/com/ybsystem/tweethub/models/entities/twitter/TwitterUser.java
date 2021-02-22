@@ -1,7 +1,12 @@
 package com.ybsystem.tweethub.models.entities.twitter;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+
+import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.models.entities.Entity;
+import com.ybsystem.tweethub.utils.ResourceUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -71,7 +76,7 @@ public class TwitterUser extends Entity {
     private String originalProfileImageURL;
     private String originalProfileImageURLHttps;
     private String profileImageURL400x400;
-    private String profileImageURLHttps400x400;
+    private String profileImageURL400x400Https;
 
     private String profileBannerURL;
     private String profileBannerRetinaURL;
@@ -158,7 +163,7 @@ public class TwitterUser extends Entity {
         this.originalProfileImageURL = user.getOriginalProfileImageURL();
         this.originalProfileImageURLHttps = user.getOriginalProfileImageURLHttps();
         this.profileImageURL400x400 = user.get400x400ProfileImageURL();
-        this.profileImageURLHttps400x400 = user.get400x400ProfileImageURLHttps();
+        this.profileImageURL400x400Https = user.get400x400ProfileImageURLHttps();
 
         this.profileBannerURL = user.getProfileBannerURL();
         this.profileBannerRetinaURL = user.getProfileBannerRetinaURL();
@@ -193,6 +198,35 @@ public class TwitterUser extends Entity {
         return isProtected()
                 && !isFriend()
                 && !isMyself();
+    }
+
+    public String getRelationText() {
+        if (isMyself())
+            return "あなた";
+        else if (isBlocking())
+            return "ブロック中";
+        else if (isFriend() && isFollower())
+            return "相互フォロー";
+        else if (isFriend())
+            return "フォロー中";
+        else if (isFollower())
+            return "フォロワー";
+        else
+            return "フォロー";
+    }
+
+    public int getRelationTextColor() {
+        if (isMyself() || isFriend())
+            return Color.parseColor("#FFFFFF");
+        else
+            return ResourceUtils.getAccentColor();
+    }
+
+    public Drawable getRelationBackground() {
+        if (isMyself() || isFriend())
+            return ResourceUtils.getDrawable(R.drawable.bg_rounded_purple);
+        else
+            return ResourceUtils.getDrawable(R.drawable.bg_rounded_reverse);
     }
 
 }

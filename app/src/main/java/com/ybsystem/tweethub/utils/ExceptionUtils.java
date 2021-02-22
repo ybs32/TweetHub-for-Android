@@ -19,14 +19,16 @@ public class ExceptionUtils {
     /**
      * Return error message that matches the error code
      *
-     * @param e TwitterException instance
+     * @param t Throwable instance
      * @return Error message
      */
-    public static String getErrorMessage(TwitterException e) {
+    public static String getErrorMessage(Throwable t) {
 
-        if (e == null) {
+        if (!(t instanceof TwitterException)) {
             return "読み込みエラー";
         }
+
+        TwitterException e = (TwitterException) t;
 
         if (e.isCausedByNetworkIssue()) {
             return "ネットワーク接続エラー";

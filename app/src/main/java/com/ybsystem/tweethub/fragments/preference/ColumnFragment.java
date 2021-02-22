@@ -159,7 +159,7 @@ public class ColumnFragment extends Fragment {
     }
 
     private void fetchUserList() {
-        DialogUtils.showProgressDialog("読み込み中...", getContext());
+        DialogUtils.showProgress("読み込み中...", getContext());
 
         Observable<ResponseList<UserList>> observable = Observable.create(e -> {
             // Fetch
@@ -208,9 +208,8 @@ public class ColumnFragment extends Fragment {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                TwitterException e = (TwitterException) t;
                 ToastUtils.showShortToast("リストの取得に失敗しました...");
-                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
+                ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
             @Override
@@ -221,7 +220,7 @@ public class ColumnFragment extends Fragment {
         observable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doFinally(DialogUtils::dismissProgressDialog)
+                .doFinally(DialogUtils::dismissProgress)
                 .subscribe(disposable);
     }
 

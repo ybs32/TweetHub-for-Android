@@ -26,7 +26,7 @@ import twitter4j.User;
 import twitter4j.UserMentionEntity;
 import twitter4j.util.TimeSpanConverter;
 
-import static androidx.core.text.HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE;
+import static androidx.core.text.HtmlCompat.TO_HTML_PARAGRAPH_LINES_INDIVIDUAL;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -216,10 +216,11 @@ public class TwitterStatus extends Entity {
         }
 
         // Convert to string
-        String htmlText = HtmlCompat.toHtml(ssb, TO_HTML_PARAGRAPH_LINES_CONSECUTIVE);
-        htmlText = htmlText.replaceAll("\n", "");
-        htmlText = htmlText.replaceFirst("(?s)" + "<p dir=\"ltr\">" + "(?!.*?" + "<p dir=\"ltr\">" + ")", "");
+        String htmlText = HtmlCompat.toHtml(ssb, TO_HTML_PARAGRAPH_LINES_INDIVIDUAL);
+        String match = "<p dir=\"ltr\" style=\"margin-top:0; margin-bottom:0;\">";
+        htmlText = htmlText.replaceFirst("(?s)" + match + "(?!.*?" + match + ")", "");
         htmlText = htmlText.replaceFirst("(?s)" + "</p>" + "(?!.*?" + "</p>" + ")", "");
+        htmlText = htmlText.replaceAll("\n", "");
 
         return htmlText;
     }
