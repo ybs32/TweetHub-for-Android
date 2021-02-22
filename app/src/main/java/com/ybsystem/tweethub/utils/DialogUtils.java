@@ -2,7 +2,7 @@ package com.ybsystem.tweethub.utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 
@@ -60,8 +60,7 @@ public class DialogUtils {
      * @param text     Message to display in dialog
      * @param listener Positive click listener
      */
-    public static void showConfirm(String text,
-                                         DialogInterface.OnClickListener listener) {
+    public static void showConfirm(String text, OnClickListener listener) {
         // Create
         ConfirmDialog dialog = new ConfirmDialog().newInstance(text);
         dialog.setOnPositiveClickListener(listener);
@@ -80,8 +79,7 @@ public class DialogUtils {
      * @param selected Selected position
      * @param listener Item click listener
      */
-    public static void showChoice(String[] items, int selected,
-                                        DialogInterface.OnClickListener listener) {
+    public static void showChoice(String[] items, int selected, OnClickListener listener) {
         // Create
         ChoiceDialog dialog = new ChoiceDialog().newInstance(items, selected);
         dialog.setOnItemClickListener(listener);

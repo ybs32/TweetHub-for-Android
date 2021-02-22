@@ -26,7 +26,7 @@ import com.ybsystem.tweethub.fragments.dialog.NoticeDialog;
 import com.ybsystem.tweethub.models.entities.EntityArray;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUserMentionEntity;
-import com.ybsystem.tweethub.usecases.TwitterUseCase;
+import com.ybsystem.tweethub.usecases.StatusUseCase;
 import com.ybsystem.tweethub.utils.DialogUtils;
 import com.ybsystem.tweethub.utils.ResourceUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
@@ -204,7 +204,7 @@ public class PostFragment extends Fragment {
                     mPostEdit.getText().toString() + quoteURL
             );
             update.setInReplyToStatusId(replyId);
-            TwitterUseCase.post(update, mImageUris);
+            StatusUseCase.post(update, mImageUris);
 
             // Save hashtag
             EntityArray<String> hashtags = TweetHubApp.getMyAccount().getHashtags();

@@ -26,7 +26,7 @@ import com.ybsystem.tweethub.adapters.holder.TweetRow;
 import com.ybsystem.tweethub.storages.PrefAppearance;
 import com.ybsystem.tweethub.storages.PrefClickAction;
 import com.ybsystem.tweethub.usecases.ClickUseCase;
-import com.ybsystem.tweethub.usecases.TwitterUseCase;
+import com.ybsystem.tweethub.usecases.StatusUseCase;
 import com.ybsystem.tweethub.utils.CalcUtils;
 import com.ybsystem.tweethub.utils.ResourceUtils;
 
@@ -204,7 +204,7 @@ public class TweetDialog extends DialogFragment {
             if (mStatus.isRetweeted()) {
                 adapter.add(
                         new Menu(retweetIcon, retweetColor, "リツイート解除",
-                                () -> TwitterUseCase.retweet(mStatus))
+                                () -> StatusUseCase.retweet(mStatus))
                 );
             } else if (mSource.isPublic()) {
                 adapter.add(
@@ -217,12 +217,12 @@ public class TweetDialog extends DialogFragment {
             if (mStatus.isFavorited()) {
                 adapter.add(
                         new Menu(favoriteIcon, favoriteColor, PrefAppearance.getLikeFavText() + "解除",
-                                () -> TwitterUseCase.favorite(mStatus))
+                                () -> StatusUseCase.favorite(mStatus))
                 );
             } else {
                 adapter.add(
                         new Menu(favoriteIcon, favoriteColor, PrefAppearance.getLikeFavText(),
-                                () -> TwitterUseCase.favorite(mStatus))
+                                () -> StatusUseCase.favorite(mStatus))
                 );
             }
         }
@@ -242,7 +242,7 @@ public class TweetDialog extends DialogFragment {
             if (mSource.isMyTweet() && !mStatus.isRetweet()) {
                 adapter.add(
                         new Menu(deleteIcon, deleteColor, "削除する",
-                                () -> TwitterUseCase.delete(mStatus))
+                                () -> StatusUseCase.delete(mStatus))
                 );
             }
         }
@@ -345,11 +345,11 @@ public class TweetDialog extends DialogFragment {
 
         if (label.equals("リツイート")) {
             runnable = PrefClickAction.getClickRetweet().equals(action)
-                    ? () -> TwitterUseCase.retweet(mStatus)
+                    ? () -> StatusUseCase.retweet(mStatus)
                     : () -> ClickUseCase.quote(mSource);
         } else if (label.equals("リツイート解除")) {
             runnable = PrefClickAction.getClickRetweet().equals(action)
-                    ? () -> TwitterUseCase.retweet(mStatus)
+                    ? () -> StatusUseCase.retweet(mStatus)
                     : () -> ClickUseCase.quote(mSource);
         } else if (label.startsWith("#")) {
             runnable = PrefClickAction.getClickHashtag().equals(action)

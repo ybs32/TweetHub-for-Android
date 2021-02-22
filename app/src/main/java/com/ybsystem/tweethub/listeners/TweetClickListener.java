@@ -8,7 +8,7 @@ import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterURLEntity;
 import com.ybsystem.tweethub.models.enums.ClickAction;
 import com.ybsystem.tweethub.usecases.ClickUseCase;
-import com.ybsystem.tweethub.usecases.TwitterUseCase;
+import com.ybsystem.tweethub.usecases.StatusUseCase;
 
 public class TweetClickListener implements View.OnClickListener, View.OnLongClickListener {
 
@@ -43,13 +43,13 @@ public class TweetClickListener implements View.OnClickListener, View.OnLongClic
                 ClickUseCase.reply(mSource);
                 break;
             case RETWEET:
-                TwitterUseCase.retweet(mStatus);
+                StatusUseCase.retweet(mStatus);
                 break;
             case QUOTE:
                 ClickUseCase.quote(mSource);
                 break;
             case LIKE:
-                TwitterUseCase.favorite(mStatus);
+                StatusUseCase.favorite(mStatus);
                 break;
             case TALK:
                 if (mSource.isTalk()
@@ -60,7 +60,7 @@ public class TweetClickListener implements View.OnClickListener, View.OnLongClic
                 break;
             case DELETE:
                 if (mSource.isMyTweet() && !mStatus.isRetweet()) {
-                    TwitterUseCase.delete(mStatus);
+                    StatusUseCase.delete(mStatus);
                 }
                 break;
             case URL:

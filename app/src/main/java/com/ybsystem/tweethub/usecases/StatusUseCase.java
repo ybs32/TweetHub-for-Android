@@ -30,9 +30,9 @@ import twitter4j.TwitterException;
 
 import static com.ybsystem.tweethub.models.enums.ConfirmAction.*;
 
-public class TwitterUseCase {
+public class StatusUseCase {
 
-    private TwitterUseCase() {
+    private StatusUseCase() {
     }
 
     public static void retweet(TwitterStatus status) {
