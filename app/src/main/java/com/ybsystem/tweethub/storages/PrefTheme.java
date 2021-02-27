@@ -3,7 +3,7 @@ package com.ybsystem.tweethub.storages;
 import android.content.SharedPreferences;
 
 import com.ybsystem.tweethub.R;
-import com.ybsystem.tweethub.utils.ResourceUtils;
+import com.ybsystem.tweethub.resources.ResColor;
 
 public class PrefTheme extends PrefBase {
 
@@ -107,17 +107,17 @@ public class PrefTheme extends PrefBase {
     // 初期化用
     public static void initCustomColors() {
         SharedPreferences.Editor editor = getDefaultSharedPreferences().edit();
-        editor.putInt(KEY_RETWEET_COLOR, ResourceUtils.getBgRetweetColor());
-        editor.putInt(KEY_REPLY_COLOR, ResourceUtils.getBgReplyColor());
-        editor.putInt(KEY_MYTWEET_COLOR, ResourceUtils.getBgMyTweetColor());
-        editor.putInt(KEY_USERNAME_COLOR, ResourceUtils.getTextColor());
-        editor.putInt(KEY_RELATIVETIME_COLOR, ResourceUtils.getTextColor());
-        editor.putInt(KEY_TWEETTEXT_COLOR, ResourceUtils.getTextColor());
-        editor.putInt(KEY_LINK_COLOR, ResourceUtils.getLinkColor());
-        editor.putInt(KEY_ABSOLUTETIME_COLOR, ResourceUtils.getStrongColor());
-        editor.putInt(KEY_VIA_COLOR, ResourceUtils.getStrongColor());
-        editor.putInt(KEY_RTFAV_COLOR, ResourceUtils.getStrongColor());
-        editor.putInt(KEY_RETWEETEDBY_COLOR, ResourceUtils.getStrongColor());
+        editor.putInt(KEY_RETWEET_COLOR, ResColor.BG_RETWEET);
+        editor.putInt(KEY_REPLY_COLOR, ResColor.BG_REPLY);
+        editor.putInt(KEY_MYTWEET_COLOR, ResColor.BG_MYTWEET);
+        editor.putInt(KEY_USERNAME_COLOR, ResColor.TEXT);
+        editor.putInt(KEY_RELATIVETIME_COLOR, ResColor.TEXT);
+        editor.putInt(KEY_TWEETTEXT_COLOR, ResColor.TEXT);
+        editor.putInt(KEY_LINK_COLOR, ResColor.LINK);
+        editor.putInt(KEY_ABSOLUTETIME_COLOR, ResColor.STRONG);
+        editor.putInt(KEY_VIA_COLOR, ResColor.STRONG);
+        editor.putInt(KEY_RTFAV_COLOR, ResColor.STRONG);
+        editor.putInt(KEY_RETWEETEDBY_COLOR, ResColor.STRONG);
         editor.apply();
     }
 

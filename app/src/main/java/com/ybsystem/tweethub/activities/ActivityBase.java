@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
+import com.ybsystem.tweethub.resources.ResColor;
 import com.ybsystem.tweethub.storages.PrefTheme;
 
 public abstract class ActivityBase extends AppCompatActivity {
@@ -16,8 +17,13 @@ public abstract class ActivityBase extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TweetHubApp.setActivity(this);
+
+        // Set
         setTheme();
         setBackButton();
+
+        // Init resources
+        ResColor.init();
     }
 
     @Override

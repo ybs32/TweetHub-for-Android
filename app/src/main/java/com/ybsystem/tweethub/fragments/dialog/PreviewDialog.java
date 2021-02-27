@@ -12,9 +12,9 @@ import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.adapters.holder.TweetRow;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
+import com.ybsystem.tweethub.resources.ResColor;
 import com.ybsystem.tweethub.utils.AnimationUtils;
 import com.ybsystem.tweethub.utils.ExceptionUtils;
-import com.ybsystem.tweethub.utils.ResourceUtils;
 import com.ybsystem.tweethub.utils.ToastUtils;
 
 import java.util.List;
@@ -42,7 +42,7 @@ public class PreviewDialog extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_preview, null);
 
         // Set background color
-        int color = ResourceUtils.getBackgroundColor();
+        int color = ResColor.BACKGROUND;
         view.findViewById(R.id.linear_preview).setBackgroundColor(color);
 
         // Load

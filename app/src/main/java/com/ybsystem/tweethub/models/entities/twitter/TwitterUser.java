@@ -3,10 +3,12 @@ package com.ybsystem.tweethub.models.entities.twitter;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
+import androidx.appcompat.content.res.AppCompatResources;
+
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.models.entities.Entity;
-import com.ybsystem.tweethub.utils.ResourceUtils;
+import com.ybsystem.tweethub.resources.ResColor;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -219,14 +221,16 @@ public class TwitterUser extends Entity {
         if (isMyself() || isFriend())
             return Color.parseColor("#FFFFFF");
         else
-            return ResourceUtils.getAccentColor();
+            return ResColor.ACCENT;
     }
 
     public Drawable getRelationBackground() {
         if (isMyself() || isFriend())
-            return ResourceUtils.getDrawable(R.drawable.bg_rounded_purple);
+            return AppCompatResources.getDrawable(
+                    TweetHubApp.getActivity(), R.drawable.bg_rounded_purple);
         else
-            return ResourceUtils.getDrawable(R.drawable.bg_rounded_reverse);
+            return AppCompatResources.getDrawable(
+                    TweetHubApp.getActivity(), R.drawable.bg_rounded_reverse);
     }
 
 }

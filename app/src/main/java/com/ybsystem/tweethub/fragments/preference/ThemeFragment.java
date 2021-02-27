@@ -13,9 +13,9 @@ import androidx.preference.SwitchPreference;
 
 import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.fragments.dialog.PreviewDialog;
+import com.ybsystem.tweethub.resources.ResColor;
 import com.ybsystem.tweethub.storages.PrefTheme;
 import com.ybsystem.tweethub.utils.DialogUtils;
-import com.ybsystem.tweethub.utils.ResourceUtils;
 
 import java.util.ArrayList;
 
@@ -88,7 +88,7 @@ public class ThemeFragment extends PreferenceFragmentBase {
     }
 
     private void changeTheme() {
-        // For initializing custom colors
+        // Init custom colors
         switch (PrefTheme.getTheme()) {
             case "LIGHT":
                 getActivity().setTheme(R.style.LightTheme);
@@ -97,9 +97,11 @@ public class ThemeFragment extends PreferenceFragmentBase {
                 getActivity().setTheme(R.style.DarkTheme);
                 break;
         }
-        // Init custom colors
-        mCustom.setChecked(false);
+        ResColor.init();
         PrefTheme.initCustomColors();
+
+        // Disable custom
+        mCustom.setChecked(false);
 
         // Finish activity
         DialogUtils.showProgress("設定を適用中...", getActivity());
@@ -113,8 +115,8 @@ public class ThemeFragment extends PreferenceFragmentBase {
     private void changeDependencyTextColor() {
         // Get dependency color
         String color = mCustom.isChecked()
-                ? String.valueOf(ResourceUtils.getTextColor())
-                : String.valueOf(ResourceUtils.getWeakColor());
+                ? String.valueOf(ResColor.TEXT)
+                : String.valueOf(ResColor.WEAK);
 
         // Change dependency item's text color
         for (Preference pref : mDependencyList) {

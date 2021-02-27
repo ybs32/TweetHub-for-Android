@@ -18,6 +18,7 @@ import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUserMentionEntity;
 import com.ybsystem.tweethub.models.enums.ClickAction;
 import com.ybsystem.tweethub.models.enums.ImageOption;
+import com.ybsystem.tweethub.resources.*;
 import com.ybsystem.tweethub.storages.*;
 import com.ybsystem.tweethub.utils.*;
 
@@ -283,17 +284,17 @@ public class TweetRow extends RecyclerView.ViewHolder {
         if (mSource.getUser().getId() == TweetHubApp.getMyUser().getId())
             // My tweet
             mClickContainer.setBackgroundColor(
-                    PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgMyTweetColor() : ResourceUtils.getBgMyTweetColor()
+                    PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgMyTweetColor() : ResColor.BG_MYTWEET
             );
         else if (isReply)
             // Reply
             mClickContainer.setBackgroundColor(
-                    PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgReplyColor() : ResourceUtils.getBgReplyColor()
+                    PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgReplyColor() : ResColor.BG_REPLY
             );
         else if (mStatus.isRetweet())
             // Retweet
             mClickContainer.setBackgroundColor(
-                    PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgRetweetColor() : ResourceUtils.getBgRetweetColor()
+                    PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgRetweetColor() : ResColor.BG_RETWEET
             );
         else
             // Tweet

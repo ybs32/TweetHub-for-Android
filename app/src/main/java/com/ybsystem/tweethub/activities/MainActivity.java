@@ -18,12 +18,11 @@ import com.ybsystem.tweethub.R;
 import com.ybsystem.tweethub.activities.preference.SettingActivity;
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.fragments.dialog.*;
-import com.ybsystem.tweethub.fragments.fragment.DrawerFragment;
-import com.ybsystem.tweethub.fragments.fragment.EasyTweetFragment;
-import com.ybsystem.tweethub.fragments.fragment.MainFragment;
+import com.ybsystem.tweethub.fragments.fragment.*;
 import com.ybsystem.tweethub.libs.glide.GlideApp;
 import com.ybsystem.tweethub.libs.rfab.CardItem;
 import com.ybsystem.tweethub.libs.rfab.RapidFloatingActionListView;
+import com.ybsystem.tweethub.resources.*;
 import com.ybsystem.tweethub.storages.*;
 import com.ybsystem.tweethub.utils.*;
 
@@ -198,7 +197,7 @@ public class MainActivity extends ActivityBase
             return;
         }
         // Get color
-        int color = ResourceUtils.getBackgroundColor();
+        int color = ResColor.BACKGROUND;
         color = PrefWallpaper.applyTransparency(color);
 
         // Visible wallpaper

@@ -8,9 +8,9 @@ import androidx.core.text.HtmlCompat;
 
 import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.models.entities.Entity;
+import com.ybsystem.tweethub.resources.ResColor;
 import com.ybsystem.tweethub.storages.PrefAppearance;
 import com.ybsystem.tweethub.storages.PrefTheme;
-import com.ybsystem.tweethub.utils.ResourceUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -159,7 +159,7 @@ public class TwitterStatus extends Entity {
         SpannableStringBuilder ssb = new SpannableStringBuilder(status.getText());
 
         int color = PrefTheme.isCustomThemeEnabled()
-                ? PrefTheme.getLinkColor() : ResourceUtils.getLinkColor();
+                ? PrefTheme.getLinkColor() : ResColor.LINK;
 
         // @Mentions
         UserMentionEntity[] mentions = status.getUserMentionEntities();

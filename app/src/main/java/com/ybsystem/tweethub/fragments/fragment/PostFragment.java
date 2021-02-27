@@ -26,11 +26,9 @@ import com.ybsystem.tweethub.fragments.dialog.NoticeDialog;
 import com.ybsystem.tweethub.models.entities.EntityArray;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweethub.models.entities.twitter.TwitterUserMentionEntity;
+import com.ybsystem.tweethub.resources.*;
 import com.ybsystem.tweethub.usecases.StatusUseCase;
-import com.ybsystem.tweethub.utils.DialogUtils;
-import com.ybsystem.tweethub.utils.ResourceUtils;
-import com.ybsystem.tweethub.utils.ToastUtils;
-import com.ybsystem.tweethub.utils.StorageUtils;
+import com.ybsystem.tweethub.utils.*;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -124,8 +122,7 @@ public class PostFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 int length = s.toString().length();
-                int color = length > 140
-                        ? Color.RED : ResourceUtils.getTextColor();
+                int color = length > 140 ? Color.RED : ResColor.TEXT;
                 // Change count
                 mTextCount.setText(Integer.toString(140 - length));
                 mTextCount.setTextColor(color);

@@ -26,12 +26,11 @@ import com.ybsystem.tweethub.application.TweetHubApp;
 import com.ybsystem.tweethub.libs.eventbus.PostEvent;
 import com.ybsystem.tweethub.models.entities.EntityArray;
 import com.ybsystem.tweethub.models.enums.ImageOption;
-import com.ybsystem.tweethub.storages.PrefAppearance;
-import com.ybsystem.tweethub.storages.PrefSystem;
+import com.ybsystem.tweethub.resources.*;
+import com.ybsystem.tweethub.storages.*;
 import com.ybsystem.tweethub.usecases.StatusUseCase;
 import com.ybsystem.tweethub.utils.GlideUtils;
 import com.ybsystem.tweethub.utils.KeyboardUtils;
-import com.ybsystem.tweethub.utils.ResourceUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -140,8 +139,7 @@ public class EasyTweetFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 int length = s.toString().length();
-                int color = length > 140
-                        ? Color.RED : ResourceUtils.getTextColor();
+                int color = length > 140 ? Color.RED : ResColor.TEXT;
                 // Change count
                 mTextCount.setText(Integer.toString(140 - length));
                 mTextCount.setTextColor(color);

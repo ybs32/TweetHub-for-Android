@@ -16,19 +16,14 @@ import android.widget.TextView;
 import androidx.fragment.app.DialogFragment;
 
 import com.ybsystem.tweethub.R;
-import com.ybsystem.tweethub.application.TweetHubApp;
-import com.ybsystem.tweethub.models.entities.twitter.TwitterHashtagEntity;
-import com.ybsystem.tweethub.models.entities.twitter.TwitterStatus;
-import com.ybsystem.tweethub.models.entities.twitter.TwitterURLEntity;
-import com.ybsystem.tweethub.models.entities.twitter.TwitterUserMentionEntity;
-import com.ybsystem.tweethub.models.enums.TweetMenu;
 import com.ybsystem.tweethub.adapters.holder.TweetRow;
-import com.ybsystem.tweethub.storages.PrefAppearance;
-import com.ybsystem.tweethub.storages.PrefClickAction;
-import com.ybsystem.tweethub.usecases.ClickUseCase;
-import com.ybsystem.tweethub.usecases.StatusUseCase;
+import com.ybsystem.tweethub.application.TweetHubApp;
+import com.ybsystem.tweethub.models.entities.twitter.*;
+import com.ybsystem.tweethub.models.enums.TweetMenu;
+import com.ybsystem.tweethub.resources.*;
+import com.ybsystem.tweethub.storages.*;
+import com.ybsystem.tweethub.usecases.*;
 import com.ybsystem.tweethub.utils.CalcUtils;
-import com.ybsystem.tweethub.utils.ResourceUtils;
 
 import java.util.Set;
 
@@ -179,18 +174,18 @@ public class TweetDialog extends DialogFragment {
         int twitterIcon = R.drawable.ic_twitter;
 
         // Menu color
-        int replyColor = ResourceUtils.getStrongColor();
-        int retweetColor = ResourceUtils.getRetweetColor();
+        int replyColor = ResColor.STRONG;
+        int retweetColor = ResColor.RETWEET;
         int favoriteColor = PrefAppearance.getLikeFavColor();
-        int talkColor = ResourceUtils.getTalkColor();
-        int deleteColor = ResourceUtils.getDeleteColor();
-        int urlColor = ResourceUtils.getLinkWeakColor();
-        int hashColor = ResourceUtils.getLinkWeakColor();
-        int userColor = ResourceUtils.getStrongColor();
-        int copyColor = ResourceUtils.getStrongColor();
-        int detailColor = ResourceUtils.getStrongColor();
-        int shareColor = ResourceUtils.getStrongColor();
-        int twitterColor = ResourceUtils.getStrongColor();
+        int talkColor = ResColor.TALK;
+        int deleteColor = ResColor.DELETE;
+        int urlColor = ResColor.LINK_WEAK;
+        int hashColor = ResColor.LINK_WEAK;
+        int userColor = ResColor.STRONG;
+        int copyColor = ResColor.STRONG;
+        int detailColor = ResColor.STRONG;
+        int shareColor = ResColor.STRONG;
+        int twitterColor = ResColor.STRONG;
 
         // Reply
         if (menuSetting.contains(REPLY)) {
