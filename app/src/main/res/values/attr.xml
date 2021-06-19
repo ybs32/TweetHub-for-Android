@@ -3,6 +3,7 @@
     <attr name="colorWeak" />
     <attr name="colorMiddle" />
     <attr name="colorStrong" />
+    <attr name="colorUserName" />
     <attr name="colorRetweet" />
     <attr name="colorFavorite" />
     <attr name="colorLike" />

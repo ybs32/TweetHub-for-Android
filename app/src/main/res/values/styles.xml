@@ -10,6 +10,7 @@
         <item name="colorWeak">#BBBDBF</item>
         <item name="colorMiddle">#888A8C</item>
         <item name="colorStrong">#555759</item>
+        <item name="colorUserName">#111111</item>
         <item name="colorRetweet">#44BB55</item>
         <item name="colorFavorite">#EEAA22</item>
         <item name="colorLike">#EE4477</item>
@@ -32,7 +33,8 @@
         <item name="colorControlHighlight">#444648</item>
         <item name="colorWeak">#66686A</item>
         <item name="colorMiddle">#999B9D</item>
-        <item name="colorStrong">#CCCED0</item>
+        <item name="colorStrong">#AAAEB0</item>
+        <item name="colorUserName">#AAAAAA</item>
         <item name="colorRetweet">#66DD88</item>
         <item name="colorFavorite">#FFBB33</item>
         <item name="colorLike">#EE6699</item>
