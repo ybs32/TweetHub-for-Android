@@ -35,7 +35,6 @@ import io.reactivex.rxjava3.observers.DisposableObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import twitter4j.Relationship;
 import twitter4j.Twitter;
-import twitter4j.TwitterException;
 import twitter4j.User;
 
 public class ProfileActivity extends ActivityBase {

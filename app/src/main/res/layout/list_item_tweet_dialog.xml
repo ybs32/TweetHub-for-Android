@@ -10,13 +10,24 @@
     android:paddingTop="13dp"
     android:paddingBottom="13dp">
 
-    <!-- Icon -->
-    <ImageView
-        android:id="@+id/image_item"
-        android:layout_width="23dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="30dp"
-        app:tint="?attr/colorMiddle" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="54dp">
+
+        <!-- Icon -->
+        <ImageView
+            android:id="@+id/image_icon"
+            android:layout_width="23dp"
+            android:layout_height="23dp"/>
+
+        <!-- UserIcon -->
+        <ImageView
+            android:id="@+id/image_user_icon"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:padding="1dp"/>
+    </RelativeLayout>
 
     <!-- Label -->
     <TextView
@@ -24,7 +35,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="30dp"
         android:layout_weight="1.0"
         android:gravity="center_vertical"
         android:singleLine="true"

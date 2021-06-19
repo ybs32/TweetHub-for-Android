@@ -25,15 +25,17 @@ import com.ybsystem.tweethub.models.enums.TweetMenu;
 import com.ybsystem.tweethub.adapters.holder.TweetRow;
 import com.ybsystem.tweethub.storages.PrefAppearance;
 import com.ybsystem.tweethub.storages.PrefClickAction;
+import com.ybsystem.tweethub.storages.PrefSystem;
 import com.ybsystem.tweethub.usecases.ClickUseCase;
 import com.ybsystem.tweethub.usecases.StatusUseCase;
-import com.ybsystem.tweethub.utils.CalcUtils;
+import com.ybsystem.tweethub.utils.GlideUtils;
 import com.ybsystem.tweethub.utils.ResourceUtils;
 
 import java.util.Set;
 
 import lombok.Data;
 
+import static com.ybsystem.tweethub.models.enums.ImageOption.*;
 import static com.ybsystem.tweethub.models.enums.TweetMenu.*;
 
 public class TweetDialog extends DialogFragment {
@@ -109,13 +111,15 @@ public class TweetDialog extends DialogFragment {
         private int drawable;
         private int color;
         private String label;
+        private String userIconURL;
         private Runnable runnable;
 
-        public Menu(int drawable, int color,
-                    String label, Runnable runnable) {
+        public Menu(int drawable, int color, String label,
+                    String userIconURL, Runnable runnable) {
             this.drawable = drawable;
             this.color = color;
             this.label = label;
+            this.userIconURL = userIconURL;
             this.runnable = runnable;
         }
     }
@@ -132,29 +136,30 @@ public class TweetDialog extends DialogFragment {
             View cv = convertView;
             if (cv == null) {
                 cv = LayoutInflater.from(getContext())
-                        .inflate(R.layout.list_item_common, parent, false);
+                        .inflate(R.layout.list_item_tweet_dialog, parent, false);
             }
             // Get item
             Menu menu = getItem(position);
 
             // Set image
-            ImageView iv = cv.findViewById(R.id.image_item);
-            iv.setImageResource(menu.getDrawable());
-            iv.setColorFilter(menu.getColor());
+            ImageView icon = cv.findViewById(R.id.image_icon);
+            ImageView userIcon = cv.findViewById(R.id.image_user_icon);
+            if (menu.getUserIconURL().equals("")) {
+                // Icon
+                icon.setImageResource(menu.getDrawable());
+                icon.setColorFilter(menu.getColor());
+                icon.setVisibility(View.VISIBLE);
+                userIcon.setVisibility(View.GONE);
+            } else {
+                // UserIcon
+                GlideUtils.load(menu.getUserIconURL(), userIcon, CIRCLE);
+                userIcon.setVisibility(View.VISIBLE);
+                icon.setVisibility(View.GONE);
+            }
 
             // Set text
             TextView tv = cv.findViewById(R.id.text_item);
             tv.setText(menu.getLabel());
-
-            // Adjust layout margin
-            ViewGroup.MarginLayoutParams logoMargin = (ViewGroup.MarginLayoutParams) iv.getLayoutParams();
-            ViewGroup.MarginLayoutParams titleMargin = (ViewGroup.MarginLayoutParams) tv.getLayoutParams();
-            int dp30 = CalcUtils.convertDp2Px(30);
-            int dp54 = CalcUtils.convertDp2Px(54);
-            logoMargin.setMargins(dp54, 0, 0, 0);
-            titleMargin.setMargins(dp30, 0, dp30, 0);
-            iv.setLayoutParams(logoMargin);
-            tv.setLayoutParams(titleMargin);
 
             return cv;
         }
@@ -195,7 +200,7 @@ public class TweetDialog extends DialogFragment {
         // Reply
         if (menuSetting.contains(REPLY)) {
             adapter.add(
-                    new Menu(replyIcon, replyColor, "返信する",
+                    new Menu(replyIcon, replyColor, "返信する", "",
                             () -> ClickUseCase.reply(mSource))
             );
         }
@@ -203,12 +208,12 @@ public class TweetDialog extends DialogFragment {
         if (menuSetting.contains(RETWEET)) {
             if (mStatus.isRetweeted()) {
                 adapter.add(
-                        new Menu(retweetIcon, retweetColor, "リツイート解除",
+                        new Menu(retweetIcon, retweetColor, "リツイート解除", "",
                                 () -> StatusUseCase.retweet(mStatus))
                 );
             } else if (mSource.isPublic()) {
                 adapter.add(
-                        new Menu(retweetIcon, retweetColor, "リツイート", null)
+                        new Menu(retweetIcon, retweetColor, "リツイート", "", null)
                 );
             }
         }
@@ -216,12 +221,12 @@ public class TweetDialog extends DialogFragment {
         if (menuSetting.contains(LIKE)) {
             if (mStatus.isFavorited()) {
                 adapter.add(
-                        new Menu(favoriteIcon, favoriteColor, PrefAppearance.getLikeFavText() + "解除",
+                        new Menu(favoriteIcon, favoriteColor, PrefAppearance.getLikeFavText() + "解除", "",
                                 () -> StatusUseCase.favorite(mStatus))
                 );
             } else {
                 adapter.add(
-                        new Menu(favoriteIcon, favoriteColor, PrefAppearance.getLikeFavText(),
+                        new Menu(favoriteIcon, favoriteColor, PrefAppearance.getLikeFavText(), "",
                                 () -> StatusUseCase.favorite(mStatus))
                 );
             }
@@ -232,7 +237,7 @@ public class TweetDialog extends DialogFragment {
                     && !TweetHubApp.getActivity().getSupportActionBar().getTitle().equals("会話")
                     && !TweetHubApp.getActivity().getSupportActionBar().getTitle().equals("詳細")) {
                 adapter.add(
-                        new Menu(talkIcon, talkColor, "会話を表示",
+                        new Menu(talkIcon, talkColor, "会話を表示", "",
                                 () -> ClickUseCase.showTalk(mSource))
                 );
             }
@@ -241,7 +246,7 @@ public class TweetDialog extends DialogFragment {
         if (menuSetting.contains(DELETE)) {
             if (mSource.isMyTweet() && !mStatus.isRetweet()) {
                 adapter.add(
-                        new Menu(deleteIcon, deleteColor, "削除する",
+                        new Menu(deleteIcon, deleteColor, "削除する", "",
                                 () -> StatusUseCase.delete(mStatus))
                 );
             }
@@ -250,7 +255,7 @@ public class TweetDialog extends DialogFragment {
         if (menuSetting.contains(URL)) {
             for (TwitterURLEntity entity : mSource.getUrlEntities()) {
                 adapter.add(
-                        new Menu(urlIcon, urlColor, entity.getDisplayURL(),
+                        new Menu(urlIcon, urlColor, entity.getDisplayURL(), "",
                                 () -> ClickUseCase.openURL(entity.getUrl()))
                 );
             }
@@ -259,7 +264,7 @@ public class TweetDialog extends DialogFragment {
         if (menuSetting.contains(HASH)) {
             for (TwitterHashtagEntity entity : mSource.getHashtagEntities()) {
                 adapter.add(
-                        new Menu(hashIcon, hashColor, "#" + entity.getText(), null)
+                        new Menu(hashIcon, hashColor, "#" + entity.getText(), "", null)
                 );
             }
         }
@@ -267,17 +272,19 @@ public class TweetDialog extends DialogFragment {
         if (menuSetting.contains(USER)) {
             adapter.add(
                     new Menu(userIcon, userColor, "@" + mSource.getUser().getScreenName(),
+                            PrefSystem.getProfileThumbByQuality(mSource.getUser()),
                             () -> ClickUseCase.showUser(mSource.getUser().getId()))
             );
             if (mStatus.isRetweet()) {
                 adapter.add(
                         new Menu(userIcon, userColor, "@" + mStatus.getUser().getScreenName(),
+                                PrefSystem.getProfileThumbByQuality(mStatus.getUser()),
                                 () -> ClickUseCase.showUser(mStatus.getUser().getId()))
                 );
             }
             for (TwitterUserMentionEntity entity : mSource.getUserMentionEntities()) {
                 adapter.add(
-                        new Menu(userIcon, userColor, "@" + entity.getScreenName(),
+                        new Menu(userIcon, userColor, "@" + entity.getScreenName(), "",
                                 () -> ClickUseCase.showUser(entity.getId()))
                 );
             }
@@ -285,28 +292,28 @@ public class TweetDialog extends DialogFragment {
         // Copy
         if (menuSetting.contains(COPY)) {
             adapter.add(
-                    new Menu(copyIcon, copyColor, "本文をコピー",
+                    new Menu(copyIcon, copyColor, "本文をコピー", "",
                             () -> ClickUseCase.copyText(mSource))
             );
         }
         // Detail
         if (menuSetting.contains(DETAIL)) {
             adapter.add(
-                    new Menu(detailIcon, detailColor, "ツイート詳細",
+                    new Menu(detailIcon, detailColor, "ツイート詳細", "",
                             () -> ClickUseCase.showDetail(mSource))
             );
         }
         // Share
         if (menuSetting.contains(SHARE)) {
             adapter.add(
-                    new Menu(shareIcon, shareColor, "共有する",
+                    new Menu(shareIcon, shareColor, "共有する", "",
                             () -> ClickUseCase.share(mStatus))
             );
         }
         // OpenTwitter
         if (menuSetting.contains(TWITTER)) {
             adapter.add(
-                    new Menu(twitterIcon, twitterColor, "Twitterで開く",
+                    new Menu(twitterIcon, twitterColor, "Twitterで開く", "",
                             () -> ClickUseCase.openStatus(mStatus))
             );
         }
