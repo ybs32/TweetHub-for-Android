@@ -84,6 +84,10 @@ public class ResourceUtils {
         return getColor(R.attr.colorStrong);
     }
 
+    public static int getUserNameColor() {
+        return getColor(R.attr.colorUserName);
+    }
+
     public static int getRetweetColor() {
         return getColor(R.attr.colorRetweet);
     }
