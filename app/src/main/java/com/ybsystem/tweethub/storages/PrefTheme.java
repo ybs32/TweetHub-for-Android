@@ -110,7 +110,7 @@ public class PrefTheme extends PrefBase {
         editor.putInt(KEY_RETWEET_COLOR, ResourceUtils.getBgRetweetColor());
         editor.putInt(KEY_REPLY_COLOR, ResourceUtils.getBgReplyColor());
         editor.putInt(KEY_MYTWEET_COLOR, ResourceUtils.getBgMyTweetColor());
-        editor.putInt(KEY_USERNAME_COLOR, ResourceUtils.getTextColor());
+        editor.putInt(KEY_USERNAME_COLOR, ResourceUtils.getUserNameColor());
         editor.putInt(KEY_RELATIVETIME_COLOR, ResourceUtils.getTextColor());
         editor.putInt(KEY_TWEETTEXT_COLOR, ResourceUtils.getTextColor());
         editor.putInt(KEY_LINK_COLOR, ResourceUtils.getLinkColor());

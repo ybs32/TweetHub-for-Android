@@ -23,6 +23,10 @@ public class VersionFragment extends Fragment {
         String newVersion = getString(R.string.app_update_info);
         String oldVersion =
                         "\n" +
+                        "Ver.1.5.0\n" +
+                        "・ソースコードを公開\n" +
+                        "　(オープンソース化)\n" +
+                        "\n" +
                         "Ver.1.4.1\n" +
                         "・壁紙関連の不具合修正\n" +
                         "\n" +
