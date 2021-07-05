@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relative_click"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_colorless"
+    android:padding="8dp">
+
+    <!-- 「ユーザーアイコン」 -->
+    <ImageView
+        android:id="@+id/image_user_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="2dp" />
+
+    <LinearLayout
+        android:id="@+id/linear_top"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@+id/image_user_icon"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
+
+        <!-- 「鍵マーク」 -->
+        <ImageView
+            android:id="@+id/image_lock_mark"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginRight="2dp"
+            android:src="@drawable/ic_lock"
+            app:tint="?android:attr/textColor" />
+
+        <!-- 「リスト名」 -->
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="リスト名"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- 「説明」 -->
+    <TextView
+        android:id="@+id/text_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_top"
+        android:layout_alignLeft="@+id/linear_top"
+        android:layout_marginTop="4dp"
+        android:lineSpacingMultiplier="1.1"
+        android:text="今日も１日、がんばるぞい！"
+        android:textSize="14dp" />
+
+    <!-- 「メンバー数」 -->
+    <TextView
+        android:id="@+id/text_member_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_description"
+        android:layout_alignLeft="@+id/text_description"
+        android:layout_marginTop="4dp"
+        android:text="〇人のメンバー"
+        android:textColor="?attr/colorStrong"
+        android:textSize="14dp" />
+
+    <!-- 「作成者」 -->
+    <TextView
+        android:id="@+id/text_creator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_member_count"
+        android:layout_alignLeft="@+id/text_member_count"
+        android:text="〇〇さんが作成"
+        android:textColor="?attr/colorStrong"
+        android:textSize="14dp" />
+</RelativeLayout>

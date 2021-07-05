@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="size_user_icon_entries">
+        <item>最小</item>
+        <item>小</item>
+        <item>普通</item>
+        <item>大</item>
+        <item>最大</item>
+    </string-array>
+
+    <string-array name="size_user_icon_values">
+        <item>44</item>
+        <item>46</item>
+        <item>48</item>
+        <item>50</item>
+        <item>52</item>
+    </string-array>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="style_user_icon_entries">
+        <item>丸</item>
+        <item>四角</item>
+    </string-array>
+
+    <string-array name="style_user_icon_values">
+        <item>CIRCLE</item>
+        <item>SQUARE</item>
+    </string-array>
+</resources>

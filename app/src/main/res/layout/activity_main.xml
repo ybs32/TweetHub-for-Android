@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rfab="http://schemas.android.com/apk/res-auto"
+    xmlns:rfal="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Prevent resizing by IME -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <!-- Wallpaper -->
+        <ImageView
+            android:id="@+id/image_wallpaper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+    </ScrollView>
+
+    <!-- MainFragment -->
+    <FrameLayout
+        android:id="@+id/frame_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Floating buttons -->
+    <com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout
+        android:id="@+id/rfal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        rfal:rfal_frame_alpha="0.5"
+        rfal:rfal_frame_color="#000000">
+
+        <!-- Tweet button -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/rfab"
+            android:layout_alignEnd="@+id/rfab"
+            android:backgroundTint="?attr/colorPrimary"
+            android:src="@drawable/ic_tweet"
+            android:tint="#FFFFFF"
+            app:borderWidth="0dp" />
+
+        <!-- More button -->
+        <com.wangjie.rapidfloatingactionbutton.RapidFloatingActionButton
+            android:id="@+id/rfab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="6dp"
+            app:borderWidth="0dp"
+            rfab:rfab_color_normal="?attr/colorPrimary"
+            rfab:rfab_color_pressed="?attr/colorControlHighlight" />
+    </com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout>
+</RelativeLayout>

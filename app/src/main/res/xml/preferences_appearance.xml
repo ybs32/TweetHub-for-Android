@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <PreferenceCategory
+        android:title="サイズ"
+        app:iconSpaceReserved="false">
+
+        <ListPreference
+            android:defaultValue="14"
+            android:dialogTitle="サイズの選択"
+            android:entries="@array/size_font_entries"
+            android:entryValues="@array/size_font_values"
+            android:key="@string/pref_key_size_font"
+            android:title="フォントサイズ"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:defaultValue="48"
+            android:dialogTitle="サイズの選択"
+            android:entries="@array/size_user_icon_entries"
+            android:entryValues="@array/size_user_icon_values"
+            android:key="@string/pref_key_size_user_icon"
+            android:title="ユーザーアイコンサイズ"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="スタイル"
+        app:iconSpaceReserved="false">
+
+        <ListPreference
+            android:defaultValue="LIKE"
+            android:dialogTitle="スタイルの選択"
+            android:entries="@array/style_like_fav_entries"
+            android:entryValues="@array/style_like_fav_values"
+            android:key="@string/pref_key_style_like_fav"
+            android:title="いいね / お気に入り"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:defaultValue="CIRCLE"
+            android:dialogTitle="スタイルの選択"
+            android:entries="@array/style_user_icon_entries"
+            android:entryValues="@array/style_user_icon_values"
+            android:key="@string/pref_key_style_user_icon"
+            android:title="ユーザーアイコン（丸 / 四角）"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="表示項目"
+        app:iconSpaceReserved="false">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_key_show_absolute_time"
+            android:title="絶対時刻"
+            app:iconSpaceReserved="false" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_key_show_via"
+            android:title="クライアント名"
+            app:iconSpaceReserved="false" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_key_show_rt_fav_count"
+            android:title="リツイート数・いいね数"
+            app:iconSpaceReserved="false" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_key_show_retweeted_by"
+            android:title="Retweeted by"
+            app:iconSpaceReserved="false" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key_show_thumbnail"
+            android:title="サムネイル画像"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

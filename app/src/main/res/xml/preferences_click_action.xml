@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <PreferenceCategory
+        android:title="タップ"
+        app:iconSpaceReserved="false">
+
+        <ListPreference
+            android:defaultValue="MENU"
+            android:dialogTitle="動作の選択"
+            android:entries="@array/click_action_entries"
+            android:entryValues="@array/click_action_values"
+            android:key="@string/pref_key_left_click"
+            android:title="左タップ"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:defaultValue="MENU"
+            android:dialogTitle="動作の選択"
+            android:entries="@array/click_action_entries"
+            android:entryValues="@array/click_action_values"
+            android:key="@string/pref_key_middle_click"
+            android:title="中央タップ"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:defaultValue="MENU"
+            android:dialogTitle="動作の選択"
+            android:entries="@array/click_action_entries"
+            android:entryValues="@array/click_action_values"
+            android:key="@string/pref_key_right_click"
+            android:title="右タップ"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="ロングタップ"
+        app:iconSpaceReserved="false">
+
+        <ListPreference
+            android:defaultValue="URL"
+            android:dialogTitle="動作の選択"
+            android:entries="@array/click_action_entries"
+            android:entryValues="@array/click_action_values"
+            android:key="@string/pref_key_left_long_click"
+            android:title="左ロングタップ"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:defaultValue="URL"
+            android:dialogTitle="動作の選択"
+            android:entries="@array/click_action_entries"
+            android:entryValues="@array/click_action_values"
+            android:key="@string/pref_key_middle_long_click"
+            android:title="中央ロングタップ"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:defaultValue="URL"
+            android:dialogTitle="動作の選択"
+            android:entries="@array/click_action_entries"
+            android:entryValues="@array/click_action_values"
+            android:key="@string/pref_key_right_long_click"
+            android:title="右ロングタップ"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="ツイートメニュー"
+        app:iconSpaceReserved="false">
+
+        <MultiSelectListPreference
+            android:defaultValue="@array/tweet_menu_defaults"
+            android:dialogTitle="アイテムの選択"
+            android:entries="@array/tweet_menu_entries"
+            android:entryValues="@array/tweet_menu_values"
+            android:key="@string/pref_key_tweet_menu"
+            android:title="メニュー表示アイテム"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:defaultValue="NORMAL"
+            android:dialogTitle="動作の選択"
+            android:entries="@array/click_retweet_entries"
+            android:entryValues="@array/click_retweet_values"
+            android:key="@string/pref_key_click_retweet"
+            android:title="リツイートのタップ"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:defaultValue="NORMAL"
+            android:dialogTitle="動作の選択"
+            android:entries="@array/click_hashtag_entries"
+            android:entryValues="@array/click_hashtag_values"
+            android:key="@string/pref_key_click_hashtag"
+            android:title="ハッシュタグのタップ"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>
