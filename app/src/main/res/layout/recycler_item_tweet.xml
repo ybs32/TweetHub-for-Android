@@ -357,7 +357,7 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:text="via TweetHub for Android"
+                    android:text="via TweetMate for Android"
                     android:textColor="?attr/colorStrong"
                     android:textSize="13dp" />
 

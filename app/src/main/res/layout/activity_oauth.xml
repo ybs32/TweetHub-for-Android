@@ -16,14 +16,16 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/ic_launcher" />
+            android:src="@mipmap/ic_launcher_adaptive_fore" />
 
         <!-- アプリ名 -->
         <TextView
             android:layout_width="220dp"
             android:layout_height="100dp"
+            android:layout_marginRight="20dp"
+            android:paddingRight="20dp"
             android:gravity="center"
-            android:text="TweetHub"
+            android:text="@string/app_name"
             android:textColor="#FFFFFF"
             android:textSize="40dp" />
     </LinearLayout>

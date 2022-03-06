@@ -1,4 +1,4 @@
-# TweetHub-for-Android
+# TweetMate-for-Android
 
 ### What is this repository for? ###
 
