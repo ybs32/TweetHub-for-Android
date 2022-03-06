@@ -82,16 +82,6 @@ public class MainFragment extends Fragment {
         // Find
         ImageView icon = view.findViewById(R.id.image_app_icon);
 
-        // Set icon image
-        switch (PrefTheme.getTheme()) {
-            case "LIGHT":
-                icon.setImageResource(R.drawable.ic_launcher);
-                break;
-            case "DARK":
-                icon.setImageResource(R.drawable.ic_launcher_dark);
-                break;
-        }
-
         // When icon clicked
         icon.setOnClickListener(v -> {
             DrawerLayout d = view.findViewById(R.id.drawer_layout);

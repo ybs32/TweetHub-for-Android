@@ -29,9 +29,9 @@ public abstract class ActivityBase extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
-        switch (getLocalClassName()) {
-            case "activities.MainActivity":
-            case "activities.SearchActivity":
+        switch (TweetHubApp.getActivityName(getLocalClassName())) {
+            case "MainActivity":
+            case "SearchActivity":
                 findViewById(R.id.root).requestFocus();
                 break;
         }
@@ -56,29 +56,29 @@ public abstract class ActivityBase extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        switch (getLocalClassName()) {
-            case "activities.MainActivity":
+        switch (TweetHubApp.getActivityName(getLocalClassName())) {
+            case "MainActivity":
                 break;
-            case "activities.PostActivity":
-            case "activities.PhotoActivity":
-            case "activities.VideoActivity":
+            case "PostActivity":
+            case "PhotoActivity":
+            case "VideoActivity":
                 overridePendingTransition(R.anim.none, R.anim.fade_out_to_bottom);
                 break;
-            case "activities.ProfileActivity":
-            case "activities.TimelineActivity":
-            case "activities.UserListActivity":
-            case "activities.SearchActivity":
-            case "activities.preference.SettingActivity":
-            case "activities.preference.ThemeActivity":
-            case "activities.preference.AppearanceActivity":
-            case "activities.preference.ClickActionActivity":
-            case "activities.preference.SystemActivity":
-            case "activities.preference.WallpaperActivity":
-            case "activities.preference.ColumnActivity":
-            case "activities.preference.AccountActivity":
-            case "activities.preference.BrowserAuthActivity":
-            case "activities.preference.AboutActivity":
-            case "activities.preference.VersionActivity":
+            case "ProfileActivity":
+            case "TimelineActivity":
+            case "UserListActivity":
+            case "SearchActivity":
+            case "SettingActivity":
+            case "ThemeActivity":
+            case "AppearanceActivity":
+            case "ClickActionActivity":
+            case "SystemActivity":
+            case "WallpaperActivity":
+            case "ColumnActivity":
+            case "AccountActivity":
+            case "BrowserAuthActivity":
+            case "AboutActivity":
+            case "VersionActivity":
                 overridePendingTransition(R.anim.zoom_in, R.anim.slide_out_to_right);
                 break;
         }
@@ -96,27 +96,27 @@ public abstract class ActivityBase extends AppCompatActivity {
     }
 
     private void setBackButton() {
-        switch (getLocalClassName()) {
-            case "activities.MainActivity":
-            case "activities.PostActivity":
-            case "activities.PhotoActivity":
-            case "activities.VideoActivity":
+        switch (TweetHubApp.getActivityName(getLocalClassName())) {
+            case "MainActivity":
+            case "PostActivity":
+            case "PhotoActivity":
+            case "VideoActivity":
                 break;
-            case "activities.ProfileActivity":
-            case "activities.TimelineActivity":
-            case "activities.UserListActivity":
-            case "activities.SearchActivity":
-            case "activities.preference.SettingActivity":
-            case "activities.preference.ThemeActivity":
-            case "activities.preference.AppearanceActivity":
-            case "activities.preference.ClickActionActivity":
-            case "activities.preference.SystemActivity":
-            case "activities.preference.WallpaperActivity":
-            case "activities.preference.ColumnActivity":
-            case "activities.preference.AccountActivity":
-            case "activities.preference.BrowserAuthActivity":
-            case "activities.preference.AboutActivity":
-            case "activities.preference.VersionActivity":
+            case "ProfileActivity":
+            case "TimelineActivity":
+            case "UserListActivity":
+            case "SearchActivity":
+            case "SettingActivity":
+            case "ThemeActivity":
+            case "AppearanceActivity":
+            case "ClickActionActivity":
+            case "SystemActivity":
+            case "WallpaperActivity":
+            case "ColumnActivity":
+            case "AccountActivity":
+            case "BrowserAuthActivity":
+            case "AboutActivity":
+            case "VersionActivity":
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 break;
         }

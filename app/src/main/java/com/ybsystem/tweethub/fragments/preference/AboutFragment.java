@@ -22,7 +22,7 @@ public class AboutFragment extends Fragment {
     private void setAboutText(View view) {
         String text =
                 "TweetHub (Ver." + getString(R.string.app_version) + ")\n" +
-                        "Copyright (C) 2020-2021 ybsystem All Rights Reserved.\n" +
+                        "Copyright (C) 2020-2022 ybsystem All Rights Reserved.\n" +
                         "\n" +
                         "This application includes the work that is distributed in the Apache License 2.0.\n" +
                         "\n" +
@@ -105,7 +105,9 @@ public class AboutFragment extends Fragment {
                         "AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n" +
                         "LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n" +
                         "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\n" +
-                        "THE SOFTWARE.\n";
+                        "THE SOFTWARE.\n" +
+                        "\n" +
+                        "This application contains icon materials distributed by ICOOON MONO.\n";
 
         TextView tv = view.findViewById(R.id.text_description);
         tv.setText(text);

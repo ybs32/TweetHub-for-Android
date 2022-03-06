@@ -62,6 +62,11 @@ public class TweetHubApp extends Application {
         return sTweetHubApp;
     }
 
+    public static String getActivityName(String fullName) {
+        String[] arr = fullName.split("\\.");
+        return arr[arr.length - 1];
+    }
+
     public static AppCompatActivity getActivity() {
         return getInstance().mActivity;
     }

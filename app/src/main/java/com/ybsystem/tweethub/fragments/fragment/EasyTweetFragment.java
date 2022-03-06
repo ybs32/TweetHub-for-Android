@@ -100,7 +100,7 @@ public class EasyTweetFragment extends Fragment {
         // When icon clicked
         icon.setOnClickListener(v -> {
             Activity act = getActivity();
-            if (act.getLocalClassName().equals("activities.MainActivity")) {
+            if (TweetHubApp.getActivityName(act.getLocalClassName()).equals("MainActivity")) {
                 // If MainActivity
                 DrawerLayout d = act.findViewById(R.id.drawer_layout);
                 int s = GravityCompat.START;
