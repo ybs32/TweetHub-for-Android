@@ -24,7 +24,7 @@
 -keep class twitter4j.** { *; }
 
 # NoSuchFieldException
--keep class com.ybsystem.tweethub.** { <fields>; }
+-keep class com.ybsystem.tweetmate.** { <fields>; }
 
 # EventBus
 -keepattributes *Annotation*

@@ -18,8 +18,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:padding="4dp"
-            android:src="@drawable/ic_launcher" />
+            android:padding="6dp"
+            android:src="@mipmap/ic_launcher" />
 
         <!-- スライディングタブ -->
         <com.google.android.material.tabs.TabLayout
