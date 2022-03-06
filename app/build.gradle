@@ -5,15 +5,15 @@ def prop = new Properties()
 prop.load(new FileInputStream(file))
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.ybsystem.tweethub"
         minSdkVersion 26
-        targetSdkVersion 29
-        versionCode 15
-        versionName "1.5.1"
+        targetSdkVersion 30
+        versionCode 17
+        versionName "2.0.0"
         buildConfigField("String", "CK", prop['ck'])
         buildConfigField("String", "CS", prop['cs'])
         buildConfigField("String", "CB", prop['cb'])
