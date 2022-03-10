@@ -12,7 +12,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.ybsystem.tweetmate.R;
-import com.ybsystem.tweetmate.fragments.dialog.PreviewDialog;
+import com.ybsystem.tweetmate.fragments.dialog.PreviewThemeDialog;
 import com.ybsystem.tweetmate.storages.PrefTheme;
 import com.ybsystem.tweetmate.utils.DialogUtils;
 import com.ybsystem.tweetmate.utils.ResourceUtils;
@@ -45,12 +45,13 @@ public class ThemeFragment extends PreferenceFragmentBase {
         // Custom
         mCustom = findPreference(KEY_THEME_CUSTOM);
 
+        // Preview
         mPreview = findPreference(KEY_THEME_PREVIEW);
         mPreview.setOnPreferenceClickListener(
                 preference -> {
                     FragmentManager fm = getFragmentManager();
-                    if (fm.findFragmentByTag("PreviewDialog") == null) {
-                        new PreviewDialog().show(fm, "PreviewDialog");
+                    if (fm.findFragmentByTag("PreviewThemeDialog") == null) {
+                        new PreviewThemeDialog().show(fm, "PreviewThemeDialog");
                     }
                     return true;
                 }
