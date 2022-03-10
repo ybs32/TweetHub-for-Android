@@ -28,7 +28,7 @@ import twitter4j.QueryResult;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
-public class PreviewDialog extends DialogFragment {
+public class PreviewThemeDialog extends DialogFragment {
 
     private QueryResult mTweetResult;
     private QueryResult mRetweetResult;
@@ -39,7 +39,7 @@ public class PreviewDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Inflate
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View view = inflater.inflate(R.layout.dialog_preview, null);
+        View view = inflater.inflate(R.layout.dialog_preview_theme, null);
 
         // Set background color
         int color = ResourceUtils.getBackgroundColor();

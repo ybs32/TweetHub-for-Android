@@ -2,9 +2,13 @@ package com.ybsystem.tweetmate.fragments.preference;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.ListPreference;
+import androidx.preference.PreferenceScreen;
 
 import com.ybsystem.tweetmate.R;
+import com.ybsystem.tweetmate.fragments.dialog.PreviewAppearanceDialog;
 
 import static com.ybsystem.tweetmate.activities.preference.SettingActivity.*;
 import static com.ybsystem.tweetmate.storages.PrefAppearance.*;
@@ -14,6 +18,7 @@ public class AppearanceFragment extends PreferenceFragmentBase {
     // Preferences
     private ListPreference mFontSize, mUserIconSize;
     private ListPreference mLikeFavStyle, mUserIconStyle;
+    private PreferenceScreen mPreview;
 
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
@@ -35,6 +40,18 @@ public class AppearanceFragment extends PreferenceFragmentBase {
         // User icon style
         mUserIconStyle = findPreference(KEY_STYLE_USER_ICON);
         mUserIconStyle.setSummary(mUserIconStyle.getEntry());
+
+        // Preview
+        mPreview = findPreference(KEY_APPEARANCE_PREVIEW);
+        mPreview.setOnPreferenceClickListener(
+                preference -> {
+                    FragmentManager fm = getFragmentManager();
+                    if (fm.findFragmentByTag("PreviewAppearanceDialog") == null) {
+                        new PreviewAppearanceDialog().show(fm, "PreviewAppearanceDialog");
+                    }
+                    return true;
+                }
+        );
     }
 
     @Override
