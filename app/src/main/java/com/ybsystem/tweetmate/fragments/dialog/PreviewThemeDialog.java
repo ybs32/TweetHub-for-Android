@@ -18,6 +18,7 @@ import com.ybsystem.tweetmate.utils.ResourceUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -113,9 +114,15 @@ public class PreviewThemeDialog extends DialogFragment {
                 }
                 // My Tweet
                 if (!mMyTweetStatuses.isEmpty()) {
-                    View v = view.findViewById(R.id.include_mytweet);
-                    renderTweet(v, new TwitterStatus(mMyTweetStatuses.get(0)));
-                    v.setVisibility(View.VISIBLE);
+                    // Exclude retweet
+                    mMyTweetStatuses = mMyTweetStatuses.stream()
+                            .filter(status -> !status.isRetweet()).collect(Collectors.toList());
+
+                    if (!mMyTweetStatuses.isEmpty()) {
+                        View v = view.findViewById(R.id.include_mytweet);
+                        renderTweet(v, new TwitterStatus(mMyTweetStatuses.get(0)));
+                        v.setVisibility(View.VISIBLE);
+                    }
                 }
                 // Show
                 AnimationUtils.fadeOut(view.findViewById(R.id.linear_loading), 200);
