@@ -22,10 +22,14 @@ public class PreviewAppearanceDialog extends DialogFragment {
         // Inflate
         View view = inflater.inflate(R.layout.dialog_preview_appearance, null);
 
+        // Declare
+        long TwitterJpUserId = 7080152L;
+        boolean isPrivate = false;
+
         // Create timeline
         Fragment fragment = new ProfileTimeline().newInstance(
-                new Column(7080152L, "", USER_TWEET, false),
-                false
+                new Column(TwitterJpUserId, "", USER_TWEET, false),
+                isPrivate
         );
 
         // Set timeline
