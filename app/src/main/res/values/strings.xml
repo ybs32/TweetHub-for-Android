@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">TweetMate</string>
-    <string name="app_version">2.0.0</string>
+    <string name="app_version">2.0.1</string>
     <string name="app_update_info">
-        Ver.2.0.0\n
-        ・アプリ名とアイコンを刷新\n
-        ・ライセンス表記を追加
+        Ver.2.0.1\n
+        ・テーマ設定のプレビュー機能を修正\n
+        ・タイムライン設定にプレビューを追加
     </string>
 
     <!-- UltraPullToRefresh -->
