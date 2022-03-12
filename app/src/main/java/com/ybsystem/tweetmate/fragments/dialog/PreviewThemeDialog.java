@@ -5,6 +5,9 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.fragment.app.DialogFragment;
 
@@ -35,6 +38,18 @@ public class PreviewThemeDialog extends DialogFragment {
     private QueryResult mRetweetResult;
     private List<twitter4j.Status> mReplyStatuses;
     private List<twitter4j.Status> mMyTweetStatuses;
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        // Show full screen
+        Window window = getDialog().getWindow();
+        WindowManager.LayoutParams params = window.getAttributes();
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+        window.setAttributes(params);
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
