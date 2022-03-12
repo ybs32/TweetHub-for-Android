@@ -33,6 +33,7 @@ import java.util.List;
 
 import static com.ybsystem.tweetmate.activities.preference.SettingActivity.*;
 import static com.ybsystem.tweetmate.models.enums.ConfirmAction.*;
+import static com.ybsystem.tweetmate.resources.ResColor.*;
 
 public class MainActivity extends ActivityBase
         implements RapidFloatingActionListView.OnRfaListViewListener {
@@ -198,7 +199,7 @@ public class MainActivity extends ActivityBase
             return;
         }
         // Get color
-        int color = ResourceUtils.getBackgroundColor();
+        int color = COLOR_BACKGROUND;
         color = PrefWallpaper.applyTransparency(color);
 
         // Visible wallpaper

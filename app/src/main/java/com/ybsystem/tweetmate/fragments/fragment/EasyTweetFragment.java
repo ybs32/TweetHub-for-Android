@@ -31,7 +31,6 @@ import com.ybsystem.tweetmate.storages.PrefSystem;
 import com.ybsystem.tweetmate.usecases.StatusUseCase;
 import com.ybsystem.tweetmate.utils.GlideUtils;
 import com.ybsystem.tweetmate.utils.KeyboardUtils;
-import com.ybsystem.tweetmate.utils.ResourceUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -41,6 +40,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import twitter4j.StatusUpdate;
+
+import static com.ybsystem.tweetmate.resources.ResColor.*;
 
 public class EasyTweetFragment extends Fragment {
     // Edit
@@ -140,8 +141,8 @@ public class EasyTweetFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 int length = s.toString().length();
-                int color = length > 140
-                        ? Color.RED : ResourceUtils.getTextColor();
+                int color = length > 140 ? Color.RED : COLOR_TEXT;
+
                 // Change count
                 mTextCount.setText(Integer.toString(140 - length));
                 mTextCount.setTextColor(color);

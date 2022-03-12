@@ -1,7 +1,8 @@
 package com.ybsystem.tweetmate.storages;
 
 import com.ybsystem.tweetmate.R;
-import com.ybsystem.tweetmate.utils.ResourceUtils;
+
+import static com.ybsystem.tweetmate.resources.ResColor.*;
 
 public class PrefAppearance extends PrefBase {
 
@@ -59,9 +60,9 @@ public class PrefAppearance extends PrefBase {
     public static int getLikeFavColor() {
         String style = getDefaultSharedPreferences().getString(KEY_STYLE_LIKE_FAV, "LIKE");
         if (style.equals("LIKE")) {
-            return ResourceUtils.getLikeColor();
+            return COLOR_LIKE;
         } else {
-            return ResourceUtils.getFavoriteColor();
+            return COLOR_FAVORITE;
         }
     }
 

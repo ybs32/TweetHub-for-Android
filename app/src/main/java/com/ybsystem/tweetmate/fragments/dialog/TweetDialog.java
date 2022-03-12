@@ -29,7 +29,6 @@ import com.ybsystem.tweetmate.storages.PrefSystem;
 import com.ybsystem.tweetmate.usecases.ClickUseCase;
 import com.ybsystem.tweetmate.usecases.StatusUseCase;
 import com.ybsystem.tweetmate.utils.GlideUtils;
-import com.ybsystem.tweetmate.utils.ResourceUtils;
 
 import java.util.Set;
 
@@ -37,6 +36,7 @@ import lombok.Data;
 
 import static com.ybsystem.tweetmate.models.enums.ImageOption.*;
 import static com.ybsystem.tweetmate.models.enums.TweetMenu.*;
+import static com.ybsystem.tweetmate.resources.ResColor.*;
 
 public class TweetDialog extends DialogFragment {
     // Status
@@ -184,18 +184,18 @@ public class TweetDialog extends DialogFragment {
         int twitterIcon = R.drawable.ic_twitter;
 
         // Menu color
-        int replyColor = ResourceUtils.getStrongColor();
-        int retweetColor = ResourceUtils.getRetweetColor();
+        int replyColor = COLOR_STRONG;
+        int retweetColor = COLOR_RETWEET;
         int favoriteColor = PrefAppearance.getLikeFavColor();
-        int talkColor = ResourceUtils.getTalkColor();
-        int deleteColor = ResourceUtils.getDeleteColor();
-        int urlColor = ResourceUtils.getLinkWeakColor();
-        int hashColor = ResourceUtils.getLinkWeakColor();
-        int userColor = ResourceUtils.getStrongColor();
-        int copyColor = ResourceUtils.getStrongColor();
-        int detailColor = ResourceUtils.getStrongColor();
-        int shareColor = ResourceUtils.getStrongColor();
-        int twitterColor = ResourceUtils.getStrongColor();
+        int talkColor = COLOR_TALK;
+        int deleteColor = COLOR_DELETE;
+        int urlColor = COLOR_LINK_WEAK;
+        int hashColor = COLOR_LINK_WEAK;
+        int userColor = COLOR_STRONG;
+        int copyColor = COLOR_STRONG;
+        int detailColor = COLOR_STRONG;
+        int shareColor = COLOR_STRONG;
+        int twitterColor = COLOR_STRONG;
 
         // Reply
         if (menuSetting.contains(REPLY)) {

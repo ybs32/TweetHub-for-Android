@@ -17,7 +17,6 @@ import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweetmate.utils.AnimationUtils;
 import com.ybsystem.tweetmate.utils.ExceptionUtils;
-import com.ybsystem.tweetmate.utils.ResourceUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
 
 import java.util.List;
@@ -31,6 +30,8 @@ import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
+
+import static com.ybsystem.tweetmate.resources.ResColor.*;
 
 public class PreviewThemeDialog extends DialogFragment {
 
@@ -58,7 +59,7 @@ public class PreviewThemeDialog extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_preview_theme, null);
 
         // Set background color
-        int color = ResourceUtils.getBackgroundColor();
+        int color = COLOR_BACKGROUND;
         view.findViewById(R.id.linear_preview).setBackgroundColor(color);
 
         // Load

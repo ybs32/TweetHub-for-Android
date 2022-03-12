@@ -10,7 +10,6 @@ import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.models.entities.Entity;
 import com.ybsystem.tweetmate.storages.PrefAppearance;
 import com.ybsystem.tweetmate.storages.PrefTheme;
-import com.ybsystem.tweetmate.utils.ResourceUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,6 +26,7 @@ import twitter4j.UserMentionEntity;
 import twitter4j.util.TimeSpanConverter;
 
 import static androidx.core.text.HtmlCompat.TO_HTML_PARAGRAPH_LINES_INDIVIDUAL;
+import static com.ybsystem.tweetmate.resources.ResColor.*;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -155,11 +155,9 @@ public class TwitterStatus extends Entity {
     }
 
     private static String createTweetText(Status status) {
-        // Prepare ssb
+        // Init
         SpannableStringBuilder ssb = new SpannableStringBuilder(status.getText());
-
-        int color = PrefTheme.isCustomThemeEnabled()
-                ? PrefTheme.getLinkColor() : ResourceUtils.getLinkColor();
+        int color = PrefTheme.isCustomThemeEnabled() ? PrefTheme.getLinkColor() : COLOR_LINK;
 
         // @Mentions
         UserMentionEntity[] mentions = status.getUserMentionEntities();

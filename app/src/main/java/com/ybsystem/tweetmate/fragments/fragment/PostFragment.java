@@ -28,7 +28,6 @@ import com.ybsystem.tweetmate.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUserMentionEntity;
 import com.ybsystem.tweetmate.usecases.StatusUseCase;
 import com.ybsystem.tweetmate.utils.DialogUtils;
-import com.ybsystem.tweetmate.utils.ResourceUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
 import com.ybsystem.tweetmate.utils.StorageUtils;
 
@@ -39,6 +38,7 @@ import java.util.regex.Pattern;
 import twitter4j.StatusUpdate;
 
 import static com.ybsystem.tweetmate.activities.PostActivity.*;
+import static com.ybsystem.tweetmate.resources.ResColor.*;
 
 public class PostFragment extends Fragment {
     // Edit
@@ -124,8 +124,8 @@ public class PostFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 int length = s.toString().length();
-                int color = length > 140
-                        ? Color.RED : ResourceUtils.getTextColor();
+                int color = length > 140 ? Color.RED : COLOR_TEXT;
+
                 // Change count
                 mTextCount.setText(Integer.toString(140 - length));
                 mTextCount.setTextColor(color);

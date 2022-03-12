@@ -28,6 +28,7 @@ import butterknife.ButterKnife;
 
 import static androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT;
 import static com.ybsystem.tweetmate.models.enums.ImageOption.*;
+import static com.ybsystem.tweetmate.resources.ResColor.*;
 
 public class TweetRow extends RecyclerView.ViewHolder {
     // Status
@@ -283,17 +284,17 @@ public class TweetRow extends RecyclerView.ViewHolder {
         if (mSource.getUser().getId() == TweetMateApp.getMyUser().getId())
             // My tweet
             mClickContainer.setBackgroundColor(
-                    PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgMyTweetColor() : ResourceUtils.getBgMyTweetColor()
+                    PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgMyTweetColor() : COLOR_BG_MYTWEET
             );
         else if (isReply)
             // Reply
             mClickContainer.setBackgroundColor(
-                    PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgReplyColor() : ResourceUtils.getBgReplyColor()
+                    PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgReplyColor() : COLOR_BG_REPLY
             );
         else if (mStatus.isRetweet())
             // Retweet
             mClickContainer.setBackgroundColor(
-                    PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgRetweetColor() : ResourceUtils.getBgRetweetColor()
+                    PrefTheme.isCustomThemeEnabled() ? PrefTheme.getBgRetweetColor() : COLOR_BG_RETWEET
             );
         else
             // Tweet

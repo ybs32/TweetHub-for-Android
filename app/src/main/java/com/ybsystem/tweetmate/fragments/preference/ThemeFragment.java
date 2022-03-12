@@ -13,14 +13,15 @@ import androidx.preference.SwitchPreference;
 
 import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.fragments.dialog.PreviewThemeDialog;
+import com.ybsystem.tweetmate.resources.ResColor;
 import com.ybsystem.tweetmate.storages.PrefTheme;
 import com.ybsystem.tweetmate.utils.DialogUtils;
-import com.ybsystem.tweetmate.utils.ResourceUtils;
 
 import java.util.ArrayList;
 
 import static androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT;
 import static com.ybsystem.tweetmate.activities.preference.SettingActivity.*;
+import static com.ybsystem.tweetmate.resources.ResColor.*;
 import static com.ybsystem.tweetmate.storages.PrefTheme.*;
 
 public class ThemeFragment extends PreferenceFragmentBase {
@@ -89,7 +90,7 @@ public class ThemeFragment extends PreferenceFragmentBase {
     }
 
     private void changeTheme() {
-        // For initializing custom colors
+        // Init custom colors
         switch (PrefTheme.getTheme()) {
             case "LIGHT":
                 getActivity().setTheme(R.style.LightTheme);
@@ -98,9 +99,11 @@ public class ThemeFragment extends PreferenceFragmentBase {
                 getActivity().setTheme(R.style.DarkTheme);
                 break;
         }
-        // Init custom colors
-        mCustom.setChecked(false);
+        ResColor.init();
         PrefTheme.initCustomColors();
+
+        // Disable custom
+        mCustom.setChecked(false);
 
         // Finish activity
         DialogUtils.showProgress("設定を適用中...", getActivity());
@@ -114,8 +117,8 @@ public class ThemeFragment extends PreferenceFragmentBase {
     private void changeDependencyTextColor() {
         // Get dependency color
         String color = mCustom.isChecked()
-                ? String.valueOf(ResourceUtils.getTextColor())
-                : String.valueOf(ResourceUtils.getWeakColor());
+                ? String.valueOf(COLOR_TEXT)
+                : String.valueOf(COLOR_WEAK);
 
         // Change dependency item's text color
         for (Preference pref : mDependencyList) {
