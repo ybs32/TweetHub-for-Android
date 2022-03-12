@@ -17,6 +17,8 @@ public class PrefAppearance extends PrefBase {
     public static final String KEY_SHOW_RETWEETED_BY = RES.getString(R.string.pref_key_show_retweeted_by);
     public static final String KEY_SHOW_THUMBNAIL = RES.getString(R.string.pref_key_show_thumbnail);
 
+    public static final String KEY_APPEARANCE_PREVIEW = RES.getString(R.string.pref_key_appearance_preview);
+
     private PrefAppearance() {
     }
 

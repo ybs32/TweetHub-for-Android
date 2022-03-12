@@ -5,6 +5,9 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.fragment.app.DialogFragment;
 
@@ -18,6 +21,7 @@ import com.ybsystem.tweetmate.utils.ResourceUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -28,7 +32,7 @@ import twitter4j.QueryResult;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
-public class PreviewDialog extends DialogFragment {
+public class PreviewThemeDialog extends DialogFragment {
 
     private QueryResult mTweetResult;
     private QueryResult mRetweetResult;
@@ -36,10 +40,22 @@ public class PreviewDialog extends DialogFragment {
     private List<twitter4j.Status> mMyTweetStatuses;
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        // Show full screen
+        Window window = getDialog().getWindow();
+        WindowManager.LayoutParams params = window.getAttributes();
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+        window.setAttributes(params);
+    }
+
+    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Inflate
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View view = inflater.inflate(R.layout.dialog_preview, null);
+        View view = inflater.inflate(R.layout.dialog_preview_theme, null);
 
         // Set background color
         int color = ResourceUtils.getBackgroundColor();
@@ -113,9 +129,15 @@ public class PreviewDialog extends DialogFragment {
                 }
                 // My Tweet
                 if (!mMyTweetStatuses.isEmpty()) {
-                    View v = view.findViewById(R.id.include_mytweet);
-                    renderTweet(v, new TwitterStatus(mMyTweetStatuses.get(0)));
-                    v.setVisibility(View.VISIBLE);
+                    // Exclude retweet
+                    mMyTweetStatuses = mMyTweetStatuses.stream()
+                            .filter(status -> !status.isRetweet()).collect(Collectors.toList());
+
+                    if (!mMyTweetStatuses.isEmpty()) {
+                        View v = view.findViewById(R.id.include_mytweet);
+                        renderTweet(v, new TwitterStatus(mMyTweetStatuses.get(0)));
+                        v.setVisibility(View.VISIBLE);
+                    }
                 }
                 // Show
                 AnimationUtils.fadeOut(view.findViewById(R.id.linear_loading), 200);
