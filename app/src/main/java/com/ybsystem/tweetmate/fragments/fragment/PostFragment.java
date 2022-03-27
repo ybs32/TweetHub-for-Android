@@ -4,13 +4,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -25,9 +25,14 @@ import com.ybsystem.tweetmate.fragments.dialog.ListDialog;
 import com.ybsystem.tweetmate.fragments.dialog.NoticeDialog;
 import com.ybsystem.tweetmate.models.entities.EntityArray;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterStatus;
+import com.ybsystem.tweetmate.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUserMentionEntity;
+import com.ybsystem.tweetmate.models.enums.ImageOption;
+import com.ybsystem.tweetmate.storages.PrefAppearance;
+import com.ybsystem.tweetmate.storages.PrefSystem;
 import com.ybsystem.tweetmate.usecases.StatusUseCase;
 import com.ybsystem.tweetmate.utils.DialogUtils;
+import com.ybsystem.tweetmate.utils.GlideUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
 import com.ybsystem.tweetmate.utils.StorageUtils;
 
@@ -77,9 +82,10 @@ public class PostFragment extends Fragment {
 
         // Set buttons
         setPostButton(view);
+        setUserButton(view);
+        setGalleryButton(view);
         setDraftButton(view);
         setHashtagButton(view);
-        setCameraGalleryButtons(view);
 
         return view;
     }
@@ -220,6 +226,34 @@ public class PostFragment extends Fragment {
         });
     }
 
+    private void setUserButton(View view) {
+        // Get user
+        TwitterUser user = TweetMateApp.getMyUser();
+        ImageView userButton = view.findViewById(R.id.button_user);
+
+        // Set user image
+        ImageOption option = ImageOption.toEnum(PrefAppearance.getUserIconStyle());
+        GlideUtils.load(PrefSystem.getProfileThumbByQuality(user), userButton, option);
+
+        // User button
+        userButton.findViewById(R.id.button_user).setOnClickListener(v -> {
+            // Coming soon...
+        });
+    }
+
+    private void setGalleryButton(View view) {
+        // Gallery button
+        view.findViewById(R.id.button_gallery).setOnClickListener(v -> {
+            if (!isPicAvailable()) {
+                return;
+            }
+            // Open gallery
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            getActivity().startActivityForResult(intent, REQUEST_GALLERY);
+        });
+    }
+
     private void setDraftButton(View view) {
         // Draft button
         view.findViewById(R.id.button_draft).setOnClickListener(v -> {
@@ -313,32 +347,6 @@ public class PostFragment extends Fragment {
             if (fm.findFragmentByTag("HashtagDialog") == null) {
                 dialog.show(fm, "HashtagDialog");
             }
-        });
-    }
-
-    private void setCameraGalleryButtons(View view) {
-        // Camera button
-        view.findViewById(R.id.button_camera).setOnClickListener(v -> {
-            if (!isPicAvailable()) {
-                return;
-            }
-            // Coming soon...
-            DialogUtils.showProgress(STR_LOADING, getContext());
-            new Handler().postDelayed(() -> {
-                DialogUtils.dismissProgress();
-                ToastUtils.showShortToast(STR_FAIL_OPEN_CAMERA);
-            }, 1500);
-        });
-
-        // Gallery button
-        view.findViewById(R.id.button_gallery).setOnClickListener(v -> {
-            if (!isPicAvailable()) {
-                return;
-            }
-            // Open gallery
-            Intent intent = new Intent(Intent.ACTION_PICK);
-            intent.setType("image/*");
-            getActivity().startActivityForResult(intent, REQUEST_GALLERY);
         });
     }
 
