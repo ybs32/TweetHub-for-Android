@@ -8,6 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="center"
-        android:text="確認メッセージ"
+        android:text="Message"
         android:textSize="18dp" />
 </LinearLayout>

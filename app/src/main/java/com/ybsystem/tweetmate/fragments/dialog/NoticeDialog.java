@@ -14,6 +14,8 @@ import androidx.fragment.app.DialogFragment;
 import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.utils.CalcUtils;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class NoticeDialog extends DialogFragment {
 
     private DialogInterface.OnClickListener mPositiveClickListener;
@@ -59,7 +61,7 @@ public class NoticeDialog extends DialogFragment {
         // Build dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(view);
-        builder.setPositiveButton("OK", mPositiveClickListener);
+        builder.setPositiveButton(STR_OK, mPositiveClickListener);
 
         AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(false);

@@ -17,7 +17,7 @@
         android:layout_marginRight="5dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/bg_rounded_purple"
-        android:text="追加する"
+        android:text="@string/add"
         android:textColor="#FFFFFF"
         android:textSize="16dp" />
 </RelativeLayout>

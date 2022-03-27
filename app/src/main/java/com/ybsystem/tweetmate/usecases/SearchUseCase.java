@@ -17,6 +17,8 @@ import twitter4j.SavedSearch;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class SearchUseCase {
 
     private SearchUseCase() {
@@ -41,20 +43,19 @@ public class SearchUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                ToastUtils.showShortToast("検索の保存に失敗しました...");
                 ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
             @Override
             public void onComplete() {
                 // Success
-                ToastUtils.showShortToast("「" + query + "」を保存しました。");
+                ToastUtils.showShortToast(STR_SUCCESS_SAVE_SEARCH);
             }
         };
 
         // Show confirm dialog
         DialogUtils.showConfirm(
-                "検索を保存しますか？",
+                STR_CONFIRM_SAVE_SEARCH,
                 (dialog, which) -> observable
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -81,20 +82,19 @@ public class SearchUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                ToastUtils.showShortToast("検索の削除に失敗しました...");
                 ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
             @Override
             public void onComplete() {
                 // Success
-                ToastUtils.showShortToast("「" + ss.getName() + "」を削除しました。");
+                ToastUtils.showShortToast(STR_SUCCESS_DESTROY_SEARCH);
             }
         };
 
         // Show confirm dialog
         DialogUtils.showConfirm(
-                "検索を削除しますか？",
+                STR_CONFIRM_DESTROY_SEARCH,
                 (dialog, which) -> observable
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -122,7 +122,7 @@ public class SearchUseCase {
             public void onNext(ResponseList<SavedSearch> rl) {
                 // Check empty
                 if (rl.isEmpty()) {
-                    ToastUtils.showShortToast("保存した検索はありません。");
+                    ToastUtils.showShortToast(STR_FAIL_NO_SEARCH);
                     return;
                 }
                 // Show
@@ -132,7 +132,6 @@ public class SearchUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                ToastUtils.showShortToast("検索の取得に失敗しました...");
                 ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 

@@ -2,6 +2,8 @@ package com.ybsystem.tweetmate.models.entities;
 
 import com.ybsystem.tweetmate.utils.ToastUtils;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class AccountArray<T extends Account> extends EntityArray<T> {
 
     public Account getCurrentAccount() {
@@ -35,7 +37,7 @@ public class AccountArray<T extends Account> extends EntityArray<T> {
     @Override
     public T remove(int index) {
         if(index == getCurrentAccountNum()) {
-            ToastUtils.showShortToast("使用中のアカウントです。");
+            ToastUtils.showShortToast(STR_FAIL_USING_ACCOUNT);
             return null;
         }
         return super.remove(index);

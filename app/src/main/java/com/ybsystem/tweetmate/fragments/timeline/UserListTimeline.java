@@ -25,6 +25,7 @@ import twitter4j.TwitterException;
 import twitter4j.UserList;
 
 import static com.ybsystem.tweetmate.models.enums.ColumnType.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class UserListTimeline extends TimelineBase {
 
@@ -58,7 +59,7 @@ public class UserListTimeline extends TimelineBase {
     @Override
     protected void loadTweet(boolean isPullLoad, boolean isClickLoad) {
         // Change footer
-        mFooterText.setText("読み込み中...");
+        mFooterText.setText(STR_LOADING);
         mFooterProgress.setVisibility(View.VISIBLE);
         mFooterView.setVisibility(View.VISIBLE);
 
@@ -93,7 +94,7 @@ public class UserListTimeline extends TimelineBase {
                 if (userLists.isEmpty()) {
                     // No list...
                     if (adapter.isEmpty()) {
-                        mFooterText.setText("リストなし");
+                        mFooterText.setText(STR_LIST_NONE);
                         mFooterProgress.setVisibility(View.GONE);
                     } else
                         mFooterView.setVisibility(View.GONE);
@@ -112,7 +113,7 @@ public class UserListTimeline extends TimelineBase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                mFooterText.setText("タップして読み込む");
+                mFooterText.setText(STR_TAP_TO_LOAD);
                 mFooterProgress.setVisibility(View.GONE);
 
                 // Show error message if loaded by user action

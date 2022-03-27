@@ -21,6 +21,7 @@ import com.ybsystem.tweetmate.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweetmate.utils.ToastUtils;
 
 import static com.ybsystem.tweetmate.models.enums.ColumnType.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class ClickUseCase {
 
@@ -113,7 +114,7 @@ public class ClickUseCase {
         // Check null
         if (clipboardManager != null) {
             clipboardManager.setPrimaryClip(ClipData.newPlainText("", status.getText()));
-            ToastUtils.showShortToast("ツイートをコピーしました。");
+            ToastUtils.showShortToast(STR_SUCCESS_COPY_TWEET);
         }
     }
 

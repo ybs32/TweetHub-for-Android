@@ -10,6 +10,8 @@ import com.ybsystem.tweetmate.models.enums.ClickAction;
 import com.ybsystem.tweetmate.usecases.ClickUseCase;
 import com.ybsystem.tweetmate.usecases.StatusUseCase;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class TweetClickListener implements View.OnClickListener, View.OnLongClickListener {
 
     private final TwitterStatus mStatus;
@@ -53,8 +55,8 @@ public class TweetClickListener implements View.OnClickListener, View.OnLongClic
                 break;
             case TALK:
                 if (mSource.isTalk()
-                        && !TweetMateApp.getActivity().getSupportActionBar().getTitle().equals("会話")
-                        && !TweetMateApp.getActivity().getSupportActionBar().getTitle().equals("詳細")) {
+                        && !TweetMateApp.getActivity().getSupportActionBar().getTitle().equals(STR_TALK)
+                        && !TweetMateApp.getActivity().getSupportActionBar().getTitle().equals(STR_DETAIL)) {
                     ClickUseCase.showTalk(mSource);
                 }
                 break;

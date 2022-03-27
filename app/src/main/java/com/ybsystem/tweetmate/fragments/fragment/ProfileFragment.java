@@ -31,6 +31,7 @@ import java.util.Arrays;
 
 import static com.ybsystem.tweetmate.models.enums.ColumnType.*;
 import static com.ybsystem.tweetmate.models.enums.ImageOption.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class ProfileFragment extends Fragment {
 
@@ -162,7 +163,7 @@ public class ProfileFragment extends Fragment {
         if (loc.length() == 0) {
             locText.setVisibility(View.GONE);
         } else {
-            locText.setText("場所：" + loc);
+            locText.setText(STR_LOCATION + "：" + loc);
         }
 
         // Set url
@@ -197,7 +198,7 @@ public class ProfileFragment extends Fragment {
     private void setFollowFollowerAndList(View view) {
         // Set follow
         TextView followText = view.findViewById(R.id.text_follow);
-        followText.setText("フォロー\n" + mUser.getFriendsCount());
+        followText.setText(STR_FOLLOW + "\n" + mUser.getFriendsCount());
         followText.setOnClickListener(v -> {
             if (mUser.isPrivate()) {
                 return;
@@ -212,7 +213,7 @@ public class ProfileFragment extends Fragment {
 
         // Set follower
         TextView followerText = view.findViewById(R.id.text_follower);
-        followerText.setText("フォロワー\n" + mUser.getFollowersCount());
+        followerText.setText(STR_FOLLOWER + "\n" + mUser.getFollowersCount());
         followerText.setOnClickListener(v -> {
             if (mUser.isPrivate()) {
                 return;
@@ -227,7 +228,7 @@ public class ProfileFragment extends Fragment {
 
         // Set list
         TextView listText = view.findViewById(R.id.text_list);
-        listText.setText("リスト\n" + mUser.getListedCount());
+        listText.setText(STR_LIST + "\n" + mUser.getListedCount());
         listText.setOnClickListener(v -> {
             if (mUser.isPrivate()) {
                 return;

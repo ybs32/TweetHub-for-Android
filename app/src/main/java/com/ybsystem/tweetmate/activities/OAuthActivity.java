@@ -21,6 +21,8 @@ import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class OAuthActivity extends ActivityBase {
 
     // For authorization
@@ -70,7 +72,7 @@ public class OAuthActivity extends ActivityBase {
 
             @Override
             protected void onPreExecute() {
-                DialogUtils.showProgress("接続中...", OAuthActivity.this);
+                DialogUtils.showProgress(STR_CONNECTING, OAuthActivity.this);
             }
 
             @Override
@@ -96,7 +98,7 @@ public class OAuthActivity extends ActivityBase {
                     startActivity(intent);
                 } else {
                     // Failed...
-                    ToastUtils.showShortToast("認証に失敗しました...");
+                    ToastUtils.showShortToast(STR_FAIL_AUTH);
                     ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
                 }
             }
@@ -125,7 +127,7 @@ public class OAuthActivity extends ActivityBase {
 
             @Override
             protected void onPreExecute() {
-                DialogUtils.showProgress("読み込み中...", OAuthActivity.this);
+                DialogUtils.showProgress(STR_LOADING, OAuthActivity.this);
             }
 
             @Override
@@ -151,13 +153,13 @@ public class OAuthActivity extends ActivityBase {
                     TweetMateApp.getInstance().init();
 
                     // Intent to MainActivity
-                    ToastUtils.showLongToast("TweetMateへようこそ！");
+                    ToastUtils.showLongToast(STR_SUCCESS_AUTH);
                     Intent intent = new Intent(OAuthActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 } else {
                     // Failed...
-                    ToastUtils.showShortToast("認証に失敗しました...");
+                    ToastUtils.showShortToast(STR_FAIL_AUTH);
                     ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
                 }
             }

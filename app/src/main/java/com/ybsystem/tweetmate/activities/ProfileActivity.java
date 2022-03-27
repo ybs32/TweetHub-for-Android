@@ -37,6 +37,8 @@ import twitter4j.Relationship;
 import twitter4j.Twitter;
 import twitter4j.User;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class ProfileActivity extends ActivityBase {
 
     private TwitterUser mUser;
@@ -84,19 +86,19 @@ public class ProfileActivity extends ActivityBase {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // ミュート
+            // Mute
             case R.id.item_mute:
                 UserUseCase.mute(mUser);
                 return true;
-            // ブロック
+            // Block
             case R.id.item_block:
                 UserUseCase.block(mUser);
                 return true;
-            // 返信する
+            // Replay
             case R.id.item_reply:
                 ClickUseCase.tweetWithPrefix("@" + mUser.getScreenName());
                 return true;
-            // リストに追加
+            // Add list
             case R.id.item_add_list:
                 UserListDialog dialog = new UserListDialog().newInstance(mUser);
                 FragmentManager fm = getSupportFragmentManager();
@@ -104,7 +106,7 @@ public class ProfileActivity extends ActivityBase {
                     dialog.show(fm, "UserListDialog");
                 }
                 return true;
-            // ブラウザで開く
+            // Open browser
             case R.id.item_browser:
                 ClickUseCase.openUser(mUser);
                 return true;
@@ -148,7 +150,7 @@ public class ProfileActivity extends ActivityBase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                ToastUtils.showShortToast("ユーザーの取得に失敗しました...");
+                ToastUtils.showShortToast(STR_FAIL_GET_USER);
                 ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
                 finish();
                 overridePendingTransition(R.anim.zoom_in, R.anim.slide_out_to_right);
@@ -168,7 +170,7 @@ public class ProfileActivity extends ActivityBase {
     private void setProfileFragment(Bundle savedInstanceState) {
         // Set actionbar text
         if (mUser.getId() == TweetMateApp.getMyUser().getId()) {
-            getSupportActionBar().setTitle("マイプロフィール");
+            getSupportActionBar().setTitle(STR_PROFILE_MYSELF);
         } else {
             getSupportActionBar().setTitle(mUser.getName() + " (@" + mUser.getScreenName() + ")");
         }
@@ -225,15 +227,15 @@ public class ProfileActivity extends ActivityBase {
         }
         // Check muting
         if (mUser.isMuting()) {
-            mute.setTitle("ミュート解除");
+            mute.setTitle(STR_UNMUTE);
         } else {
-            mute.setTitle("ミュート");
+            mute.setTitle(STR_MUTE);
         }
         // Check blocking
         if (mUser.isBlocking()) {
-            block.setTitle("ブロック解除");
+            block.setTitle(STR_UNBLOCK);
         } else {
-            block.setTitle("ブロック");
+            block.setTitle(STR_BLOCK);
         }
     }
 

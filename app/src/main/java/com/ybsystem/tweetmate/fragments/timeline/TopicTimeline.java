@@ -20,6 +20,8 @@ import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.TwitterException;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class TopicTimeline extends TimelineBase {
 
     private Query mQuery;
@@ -43,7 +45,7 @@ public class TopicTimeline extends TimelineBase {
     @Override
     protected void loadTweet(boolean isPullLoad, boolean isClickLoad) {
         // Change footer
-        mFooterText.setText("読み込み中...");
+        mFooterText.setText(STR_LOADING);
         mFooterProgress.setVisibility(View.VISIBLE);
         mFooterView.setVisibility(View.VISIBLE);
 
@@ -67,7 +69,7 @@ public class TopicTimeline extends TimelineBase {
                 if (result.getTweets().isEmpty()) {
                     // No tweet...
                     if (adapter.isEmpty()) {
-                        mFooterText.setText("ツイートなし");
+                        mFooterText.setText(STR_TWEET_NONE);
                         mFooterProgress.setVisibility(View.GONE);
                     } else
                         mFooterView.setVisibility(View.GONE);
@@ -93,7 +95,7 @@ public class TopicTimeline extends TimelineBase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                mFooterText.setText("タップして読み込む");
+                mFooterText.setText(STR_TAP_TO_LOAD);
                 mFooterProgress.setVisibility(View.GONE);
 
                 // Show error message if loaded by user action

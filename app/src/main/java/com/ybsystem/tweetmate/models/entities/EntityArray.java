@@ -10,6 +10,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import static com.ybsystem.tweetmate.resources.ResString.STR_FAIL_NO_MORE_MOVE;
+import static com.ybsystem.tweetmate.resources.ResString.STR_TWEET;
+
 public class EntityArray<T> extends ArrayList<T>
         implements PropertyChangeListener, Serializable {
 
@@ -47,7 +50,7 @@ public class EntityArray<T> extends ArrayList<T>
 
     public void movePrev(int index) {
         if (index == 0) {
-            ToastUtils.showShortToast("これ以上移動できません。");
+            ToastUtils.showShortToast(STR_FAIL_NO_MORE_MOVE);
             return;
         }
         Collections.swap(this, index, index - 1);
@@ -56,7 +59,7 @@ public class EntityArray<T> extends ArrayList<T>
 
     public void moveNext(int index) {
         if (index == size() - 1) {
-            ToastUtils.showShortToast("これ以上移動できません。");
+            ToastUtils.showShortToast(STR_FAIL_NO_MORE_MOVE);
             return;
         }
         Collections.swap(this, index, index + 1);

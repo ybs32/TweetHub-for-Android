@@ -29,6 +29,8 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
 import static com.ybsystem.tweetmate.models.enums.ConfirmAction.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
+import static com.ybsystem.tweetmate.resources.ResString.STR_SUCCESS_UNLIKE;
 
 public class StatusUseCase {
 
@@ -43,9 +45,8 @@ public class StatusUseCase {
 
         // Create text
         boolean isRetweeted = status.isRetweeted();
-        String confirm = isRetweeted ? "リツイートを解除しますか？" : "リツイートしますか？";
-        String success = isRetweeted ? "リツイートを解除しました。" : "リツイートしました。";
-        String fail = isRetweeted ? "リツイート解除に失敗しました..." : "リツイートに失敗しました...";
+        String confirm = isRetweeted ? STR_CONFIRM_UNRETWEET : STR_CONFIRM_RETWEET;
+        String success = isRetweeted ? STR_SUCCESS_UNRETWEET : STR_SUCCESS_RETWEET;
 
         // Async
         Observable<Object> observable = Observable.create(e -> {
@@ -72,7 +73,6 @@ public class StatusUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                ToastUtils.showShortToast(fail);
                 ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
@@ -107,10 +107,13 @@ public class StatusUseCase {
     public static void favorite(TwitterStatus status) {
         // Create text
         boolean isFavorited = status.isFavorited();
-        String fav = PrefAppearance.getLikeFavText();
-        String confirm = isFavorited ? fav + "を解除しますか？" : fav + "しますか？";
-        String success = isFavorited ? fav + "を解除しました。" : fav + "しました。";
-        String fail = isFavorited ? fav + "解除に失敗しました..." : fav + "に失敗しました...";
+        boolean isLikeStyle = PrefAppearance.getLikeFavText().equals(STR_LIKE);
+        String confirm = isFavorited
+                ? (isLikeStyle ? STR_CONFIRM_UNLIKE : STR_CONFIRM_UNFAVORITE)
+                : (isLikeStyle ? STR_CONFIRM_LIKE : STR_CONFIRM_FAVORITE);
+        String success = isFavorited
+                ? (isLikeStyle ? STR_SUCCESS_UNLIKE : STR_SUCCESS_UNFAVORITE)
+                : (isLikeStyle ? STR_SUCCESS_LIKE : STR_SUCCESS_FAVORITE);
 
         // Async
         Observable<Object> observable = Observable.create(e -> {
@@ -137,7 +140,6 @@ public class StatusUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                ToastUtils.showShortToast(fail);
                 ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
@@ -190,7 +192,6 @@ public class StatusUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                ToastUtils.showShortToast("ツイートの削除に失敗しました...");
                 ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
@@ -198,14 +199,14 @@ public class StatusUseCase {
             public void onComplete() {
                 // Success
                 EventBus.getDefault().post(new StatusEvent(status));
-                ToastUtils.showShortToast("ツイートを削除しました。");
+                ToastUtils.showShortToast(STR_SUCCESS_DESTROY_TWEET);
             }
         };
 
         // Confirm
         if (PrefSystem.getConfirmSettings().contains(DELETE)) {
             DialogUtils.showConfirm(
-                    "ツイートを削除しますか？",
+                    STR_CONFIRM_DESTROY_TWEET,
                     (dialog, which) -> observable.subscribe(disp)
             );
         } else {
@@ -252,7 +253,6 @@ public class StatusUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                ToastUtils.showShortToast("ツイートに失敗しました...");
                 ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
@@ -260,21 +260,21 @@ public class StatusUseCase {
             public void onComplete() {
                 // Success
                 EventBus.getDefault().post(new PostEvent());
-                ToastUtils.showShortToast("ツイートしました。");
+                ToastUtils.showShortToast(STR_SUCCESS_TWEET);
             }
         };
 
         // Confirm
         if (PrefSystem.getConfirmSettings().contains(TWEET)) {
             DialogUtils.showConfirm(
-                    "ツイートしますか？",
+                    STR_CONFIRM_TWEET,
                     (dialog, which) -> {
-                        DialogUtils.showProgress("送信中...", TweetMateApp.getActivity());
+                        DialogUtils.showProgress(STR_SENDING, TweetMateApp.getActivity());
                         observable.subscribe(disp);
                     }
             );
         } else {
-            DialogUtils.showProgress("送信中...", TweetMateApp.getActivity());
+            DialogUtils.showProgress(STR_SENDING, TweetMateApp.getActivity());
             observable.subscribe(disp);
         }
     }

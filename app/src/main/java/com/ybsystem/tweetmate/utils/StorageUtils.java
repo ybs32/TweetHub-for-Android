@@ -19,6 +19,8 @@ import androidx.core.content.ContextCompat;
 
 import java.io.File;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 /**
  * Utils class for accessing device storage
  */
@@ -106,7 +108,7 @@ public class StorageUtils {
      * Request storage permission
      */
     public static void requestPermission(Activity activity) {
-        ToastUtils.showShortToast("アクセス許可が必要です。");
+        ToastUtils.showShortToast(STR_FAIL_NEED_PERMISSION);
         new Handler().postDelayed(() -> {
             ActivityCompat.requestPermissions(activity, new String[]{
                     Manifest.permission.READ_EXTERNAL_STORAGE,

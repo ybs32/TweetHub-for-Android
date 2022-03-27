@@ -20,6 +20,8 @@ import com.ybsystem.tweetmate.utils.StorageUtils;
 
 import java.util.ArrayList;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class PhotoActivity extends ActivityBase {
     // Pager
     private ViewPager mPhotoPager;
@@ -78,7 +80,9 @@ public class PhotoActivity extends ActivityBase {
     private void setActionBarTitle() {
         ActionBar bar = getSupportActionBar();
         if (bar != null) {
-            bar.setTitle("フォト (" + (mPagerPosition + 1) + "/" + mImageURLs.size() + ")");
+            int currentPage = mPagerPosition + 1;
+            int totalPage = mImageURLs.size();
+            bar.setTitle(String.format("%s (%d/%d)", STR_PHOTO, currentPage, totalPage));
         }
     }
 
@@ -103,7 +107,7 @@ public class PhotoActivity extends ActivityBase {
     }
 
     private void showQualitySelection(boolean isDownload) {
-        String[] items = {"小サイズ", "中サイズ", "大サイズ", "オリジナル"};
+        String[] items = {STR_SMALL, STR_MEDIUM, STR_LARGE, STR_ORIG};
         ListDialog dialog = new ListDialog().newInstance(items);
 
         dialog.setOnItemClickListener((parent, view, position, id) -> {
@@ -130,7 +134,7 @@ public class PhotoActivity extends ActivityBase {
                 finish();
                 overridePendingTransition(0, 0);
                 startActivity(intent);
-                ToastUtils.showShortToast(items[position] + "を表示");
+                ToastUtils.showShortToast(items[position]);
             }
             dialog.dismiss();
         });

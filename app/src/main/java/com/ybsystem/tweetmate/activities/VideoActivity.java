@@ -9,6 +9,8 @@ import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterMediaEntity;
 import com.ybsystem.tweetmate.storages.PrefSystem;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class VideoActivity extends ActivityBase {
 
     private VideoView mVideoView;
@@ -24,10 +26,10 @@ public class VideoActivity extends ActivityBase {
         // Set actionbar title
         switch (media.getType()) {
             case "video":
-                getSupportActionBar().setTitle("ムービー");
+                getSupportActionBar().setTitle(STR_MOVIE);
                 break;
             case "animated_gif":
-                getSupportActionBar().setTitle("GIFアニメ");
+                getSupportActionBar().setTitle(STR_GIF);
                 break;
         }
 

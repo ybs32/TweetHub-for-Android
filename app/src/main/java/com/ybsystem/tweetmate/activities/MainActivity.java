@@ -33,6 +33,8 @@ import java.util.List;
 
 import static com.ybsystem.tweetmate.activities.preference.SettingActivity.*;
 import static com.ybsystem.tweetmate.models.enums.ConfirmAction.*;
+import static com.ybsystem.tweetmate.resources.ResColor.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class MainActivity extends ActivityBase
         implements RapidFloatingActionListView.OnRfaListViewListener {
@@ -71,7 +73,7 @@ public class MainActivity extends ActivityBase
         if (d.isDrawerOpen(s)) {
             d.closeDrawer(s);
         } else if (PrefSystem.getConfirmSettings().contains(FINISH)) {
-            DialogUtils.showConfirm("アプリを終了しますか？", (di, wh) -> finish());
+            DialogUtils.showConfirm(STR_CONFIRM_FINISH_APP, (di, wh) -> finish());
         } else {
             finish();
         }
@@ -81,21 +83,21 @@ public class MainActivity extends ActivityBase
     public void onItemClick(int position) {
         Intent intent;
         switch (position) {
-            case 0: // 検索
+            case 0: // Search
                 intent = new Intent(this, SearchActivity.class);
                 startActivityForResult(intent, 0);
                 overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
                 break;
-            case 1: // アカウント
+            case 1: // Account
                 DialogUtils.showAccountChoice();
                 break;
-            case 2: // プロフィール
+            case 2: // Profile
                 intent = new Intent(this, ProfileActivity.class);
                 intent.putExtra("USER_ID", TweetMateApp.getMyUser().getId());
                 startActivityForResult(intent, 0);
                 overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
                 break;
-            case 3: // 設定
+            case 3: // Settings
                 intent = new Intent(this, SettingActivity.class);
                 startActivityForResult(intent, 0);
                 overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
@@ -114,10 +116,10 @@ public class MainActivity extends ActivityBase
                 break;
             case REBOOT_PREPARATION:
                 // Reboot activity
-                DialogUtils.showProgress("設定を適用中...", this);
+                DialogUtils.showProgress(STR_APPLYING, this);
                 new Handler().postDelayed(() -> {
                     DialogUtils.dismissProgress();
-                    ToastUtils.showShortToast("設定を適用しました。");
+                    ToastUtils.showShortToast(STR_SUCCESS_APPLY);
                     ActivityUtils.rebootActivity(MainActivity.this, 0, 0);
                 }, 1500);
                 break;
@@ -176,10 +178,10 @@ public class MainActivity extends ActivityBase
         rfaListView.setOnRfaListViewListener(this);
 
         List<CardItem> cardItems = new ArrayList<>();
-        cardItems.add(new CardItem().setName("検索").setResId(R.drawable.ic_search));
-        cardItems.add(new CardItem().setName("アカウント").setResId(R.drawable.ic_user));
-        cardItems.add(new CardItem().setName("プロフィール").setResId(R.drawable.ic_doc));
-        cardItems.add(new CardItem().setName("設定").setResId(R.drawable.ic_setting));
+        cardItems.add(new CardItem().setName(STR_SEARCH).setResId(R.drawable.ic_search));
+        cardItems.add(new CardItem().setName(STR_ACCOUNT).setResId(R.drawable.ic_user));
+        cardItems.add(new CardItem().setName(STR_PROFILE).setResId(R.drawable.ic_doc));
+        cardItems.add(new CardItem().setName(STR_SETTINGS).setResId(R.drawable.ic_setting));
         rfaListView.setList(cardItems);
 
         // Build action button
@@ -194,11 +196,11 @@ public class MainActivity extends ActivityBase
     private void setWallpaper() {
         // Check setting
         String path = PrefWallpaper.getWallpaperPath();
-        if (path.equals("未設定")) {
+        if (path.equals(STR_NOT_SET)) {
             return;
         }
         // Get color
-        int color = ResourceUtils.getBackgroundColor();
+        int color = COLOR_BACKGROUND;
         color = PrefWallpaper.applyTransparency(color);
 
         // Visible wallpaper
@@ -222,7 +224,7 @@ public class MainActivity extends ActivityBase
             return;
         }
         // Show dialog
-        NoticeDialog dialog = new NoticeDialog().newInstance("アップデート情報", updateInfo);
+        NoticeDialog dialog = new NoticeDialog().newInstance(STR_UPDATE_INFO, updateInfo);
         FragmentManager fm = getSupportFragmentManager();
         if (fm.findFragmentByTag("NoticeDialog") == null) {
             dialog.show(fm, "NoticeDialog");

@@ -107,9 +107,7 @@ public abstract class TimelineBase extends Fragment {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 // When scrolling to the end of timeline
-                if (mScrollLoad
-                        && !recyclerView.canScrollVertically(1)) {
-                    // Load timeline
+                if (mScrollLoad && !recyclerView.canScrollVertically(1)) {
                     mScrollLoad = false;
                     loadTweet(false, false);
                 }
@@ -146,11 +144,6 @@ public abstract class TimelineBase extends Fragment {
 
         mFooterView.setOnClickListener(v -> {
             if (mFooterClick) {
-                // Change text
-                mFooterText.setText("読み込み中...");
-                mFooterProgress.setVisibility(View.VISIBLE);
-
-                // Load timeline
                 mFooterClick = false;
                 loadTweet(false, true);
             }

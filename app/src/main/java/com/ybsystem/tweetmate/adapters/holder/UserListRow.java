@@ -21,6 +21,8 @@ import com.ybsystem.tweetmate.utils.GlideUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class UserListRow extends RecyclerView.ViewHolder {
     // UserList
     private TwitterUserList mUserList;
@@ -70,11 +72,15 @@ public class UserListRow extends RecyclerView.ViewHolder {
     }
 
     public void setMemberCount() {
-        mMemberCount.setText(mUserList.getMemberCount() + "人のメンバー");
+        mMemberCount.setText(
+                getString(R.string.sentence_members, mUserList.getMemberCount())
+        );
     }
 
     public void setCreator() {
-        mCreator.setText(mUserList.getUser().getName() + "さんが作成");
+        mCreator.setText(
+                getString(R.string.sentence_created_by, mUserList.getUser().getName())
+        );
     }
 
     public void setMarks() {

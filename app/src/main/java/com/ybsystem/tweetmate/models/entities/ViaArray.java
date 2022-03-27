@@ -2,6 +2,8 @@ package com.ybsystem.tweetmate.models.entities;
 
 import com.ybsystem.tweetmate.utils.ToastUtils;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class ViaArray<T extends Via> extends EntityArray<T> {
 
     public Via getCurrentVia() {
@@ -36,7 +38,7 @@ public class ViaArray<T extends Via> extends EntityArray<T> {
     public boolean add(T e){
         for (Via via: this) {
             if (via.getConsumerKey().equals(e.getConsumerKey())) {
-                ToastUtils.showShortToast("既に追加されています。");
+                ToastUtils.showShortToast(STR_FAIL_ALREADY_ADD);
                 return false;
             }
         }
@@ -46,7 +48,7 @@ public class ViaArray<T extends Via> extends EntityArray<T> {
     @Override
     public T remove(int index) {
         if(index == getCurrentViaNum()) {
-            ToastUtils.showShortToast("使用中のキーです。");
+            ToastUtils.showShortToast(STR_FAIL_USING_VIA);
             return null;
         }
         return super.remove(index);
