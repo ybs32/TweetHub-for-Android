@@ -32,6 +32,7 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
 import static com.ybsystem.tweetmate.resources.ResColor.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class PreviewThemeDialog extends DialogFragment {
 
@@ -102,7 +103,7 @@ public class PreviewThemeDialog extends DialogFragment {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                ToastUtils.showShortToast("読み込みに失敗しました...");
+                ToastUtils.showShortToast(STR_FAIL_LOAD);
                 ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 

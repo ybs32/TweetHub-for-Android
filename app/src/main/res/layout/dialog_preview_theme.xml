@@ -11,18 +11,18 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <!-- プログレスバー -->
+        <!-- Spinner -->
         <ProgressBar
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginRight="20dp" />
 
-        <!-- 読み込み中... -->
+        <!-- Loading... -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:text="読み込み中..."
+            android:text="@string/loading"
             android:textSize="16dp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp"
-                android:text="ツイート"
+                android:text="@string/tweet"
                 android:textSize="18dp" />
 
             <include
@@ -56,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp"
-                android:text="リツイート"
+                android:text="@string/retweet"
                 android:textSize="18dp" />
 
             <include
@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp"
-                android:text="自分宛の返信"
+                android:text="@string/reply_to_you"
                 android:textSize="18dp" />
 
             <include
@@ -82,7 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp"
-                android:text="自分のツイート"
+                android:text="@string/my_tweet"
                 android:textSize="18dp" />
 
             <include

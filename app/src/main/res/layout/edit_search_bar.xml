@@ -5,13 +5,13 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
 
-    <!-- 検索ボックス -->
+    <!-- Search box -->
     <EditText
         android:id="@+id/edit_search"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginRight="4dp"
-        android:hint="Twitterで検索"
+        android:hint="@string/search_on_twitter"
         android:importantForAutofill="no"
         android:inputType="text"
         android:singleLine="true"

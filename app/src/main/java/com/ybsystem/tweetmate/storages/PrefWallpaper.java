@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 
 import com.ybsystem.tweetmate.R;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class PrefWallpaper extends PrefBase {
 
     public static final String KEY_ADD_WALLPAPER = RES.getString(R.string.pref_key_add_wallpaper);
@@ -15,7 +17,7 @@ public class PrefWallpaper extends PrefBase {
     }
 
     public static String getWallpaperPath() {
-        return getDefaultSharedPreferences().getString(KEY_WALLPAPER_PATH, "未設定");
+        return getDefaultSharedPreferences().getString(KEY_WALLPAPER_PATH, STR_NOT_SET);
     }
 
     public static void saveWallpaperPath(String wallpaperPath) {

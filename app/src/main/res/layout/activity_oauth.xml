@@ -12,15 +12,15 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <!-- アプリ画像 -->
+        <!-- App image -->
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@mipmap/ic_launcher_adaptive_fore" />
 
-        <!-- アプリ名 -->
+        <!-- App name -->
         <TextView
-            android:layout_width="220dp"
+            android:layout_width="240dp"
             android:layout_height="100dp"
             android:layout_marginRight="20dp"
             android:paddingRight="20dp"
@@ -37,22 +37,22 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <!-- 説明文 -->
+        <!-- Description -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="60dp"
-            android:text="アプリを利用するには\nTwitterアカウントが必要です。\n\n通知機能、ダイレクトメッセージを使用\nする場合は、公式アプリをご利用下さい。"
+            android:text="@string/sentence_notice_auth"
             android:textColor="#666666"
             android:textSize="14dp" />
 
-        <!-- ログインボタン -->
+        <!-- Login button -->
         <Button
             android:id="@+id/button_oauth"
             android:layout_width="260dp"
             android:layout_height="60dp"
             android:background="@drawable/bg_rounded_purple"
-            android:text="ログイン"
+            android:text="@string/login"
             android:textColor="#FFFFFF"
             android:textSize="20dp" />
     </LinearLayout>

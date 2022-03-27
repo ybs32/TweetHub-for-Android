@@ -14,6 +14,8 @@ import androidx.fragment.app.DialogFragment;
 
 import com.ybsystem.tweetmate.R;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class ConfirmDialog extends DialogFragment {
 
     private DialogInterface.OnClickListener mPositiveClickListener;
@@ -39,8 +41,8 @@ public class ConfirmDialog extends DialogFragment {
         // Create dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(view);
-        builder.setPositiveButton("OK", mPositiveClickListener);
-        builder.setNegativeButton("キャンセル", mNegativeClickListener);
+        builder.setPositiveButton(STR_OK, mPositiveClickListener);
+        builder.setNegativeButton(STR_CANCEL, mNegativeClickListener);
         AlertDialog dialog = builder.create();
 
         // Adjust button position to center

@@ -18,6 +18,7 @@ import twitter4j.URLEntity;
 import twitter4j.User;
 
 import static com.ybsystem.tweetmate.resources.ResColor.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -205,17 +206,17 @@ public class TwitterUser extends Entity {
 
     public String getRelationText() {
         if (isMyself())
-            return "あなた";
+            return STR_YOU;
         else if (isBlocking())
-            return "ブロック中";
+            return STR_BLOCKED;
         else if (isFriend() && isFollower())
-            return "相互フォロー";
+            return STR_MUTUAL;
         else if (isFriend())
-            return "フォロー中";
+            return STR_FOLLOWED;
         else if (isFollower())
-            return "フォロワー";
+            return STR_FOLLOWER;
         else
-            return "フォロー";
+            return STR_FOLLOW;
     }
 
     public int getRelationTextColor() {

@@ -3,6 +3,7 @@ package com.ybsystem.tweetmate.storages;
 import com.ybsystem.tweetmate.R;
 
 import static com.ybsystem.tweetmate.resources.ResColor.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class PrefAppearance extends PrefBase {
 
@@ -42,9 +43,19 @@ public class PrefAppearance extends PrefBase {
     public static String getLikeFavText() {
         String style = getDefaultSharedPreferences().getString(KEY_STYLE_LIKE_FAV, "LIKE");
         if (style.equals("LIKE")) {
-            return "いいね";
+            return STR_LIKE;
         } else {
-            return "お気に入り";
+            return STR_FAVORITE;
+        }
+    }
+
+
+    public static String getUnLikeFavText() {
+        String style = getDefaultSharedPreferences().getString(KEY_STYLE_LIKE_FAV, "LIKE");
+        if (style.equals("LIKE")) {
+            return STR_UNLIKE;
+        } else {
+            return STR_UNFAVORITE;
         }
     }
 

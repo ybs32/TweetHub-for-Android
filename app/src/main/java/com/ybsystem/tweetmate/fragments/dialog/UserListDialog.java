@@ -29,6 +29,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import twitter4j.ResponseList;
 import twitter4j.Twitter;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class UserListDialog extends DialogFragment {
 
     private ListView mListView;
@@ -82,7 +84,7 @@ public class UserListDialog extends DialogFragment {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                ToastUtils.showShortToast("リストの取得に失敗しました...");
+                ToastUtils.showShortToast(STR_FAIL_GET_LIST);
                 ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
                 dismiss();
             }
@@ -91,7 +93,7 @@ public class UserListDialog extends DialogFragment {
             public void onComplete() {
                 // Check size
                 if (mUserLists.isEmpty()) {
-                    ToastUtils.showShortToast("リストが存在しません。");
+                    ToastUtils.showShortToast(STR_FAIL_NO_LIST);
                     dismiss();
                     return;
                 }

@@ -31,7 +31,8 @@ import com.ybsystem.tweetmate.utils.ToastUtils;
 import org.greenrobot.eventbus.EventBus;
 
 import static com.ybsystem.tweetmate.activities.preference.SettingActivity.*;
-import static com.ybsystem.tweetmate.models.enums.ColumnType.SEARCH_SINGLE;
+import static com.ybsystem.tweetmate.models.enums.ColumnType.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class SearchActivity extends ActivityBase {
 
@@ -185,11 +186,11 @@ public class SearchActivity extends ActivityBase {
 
     private void showAddDialog() {
         if (TweetMateApp.getMyAccount().getColumns().size() >= 8) {
-            ToastUtils.showShortToast("これ以上追加できません。");
+            ToastUtils.showShortToast(STR_FAIL_NO_MORE_ADD);
             return;
         }
         DialogUtils.showConfirm(
-                "カラムに追加しますか？",
+                STR_CONFIRM_ADD_COLUMN,
                 (dialog, which) -> {
                     // Add column
                     ColumnArray<Column> columns = TweetMateApp.getMyAccount().getColumns();
@@ -200,7 +201,7 @@ public class SearchActivity extends ActivityBase {
                         return;
                     }
                     // Success
-                    ToastUtils.showShortToast("「" + mSearchWord + "」をカラムに追加しました。");
+                    ToastUtils.showShortToast(STR_SUCCESS_ADD_COLUMN);
                     EventBus.getDefault().postSticky(new ColumnEvent());
                     setResult(REBOOT_PREPARATION);
                 }

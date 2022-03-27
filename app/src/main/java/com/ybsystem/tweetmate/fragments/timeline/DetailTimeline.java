@@ -18,6 +18,8 @@ import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.TwitterException;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class DetailTimeline extends TimelineBase {
 
     // Status
@@ -59,7 +61,7 @@ public class DetailTimeline extends TimelineBase {
     @Override
     protected void loadTweet(boolean isPullLoad, boolean isClickLoad) {
         // Change footer
-        mFooterText.setText("読み込み中...");
+        mFooterText.setText(STR_LOADING);
         mFooterProgress.setVisibility(View.VISIBLE);
         mFooterView.setVisibility(View.VISIBLE);
 

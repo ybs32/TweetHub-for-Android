@@ -6,6 +6,8 @@ import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.storages.PrefWallpaper;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class ResColor {
 
     public static int COLOR_BACKGROUND;
@@ -76,7 +78,7 @@ public class ResColor {
      */
     private static int getBackgroundColor(int resId) {
         int color = getColor(resId);
-        if (PrefWallpaper.getWallpaperPath().equals("未設定")) {
+        if (PrefWallpaper.getWallpaperPath().equals(STR_NOT_SET)) {
             return color;
         } else {
             return PrefWallpaper.applyTransparency(color);

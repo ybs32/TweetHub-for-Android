@@ -22,6 +22,8 @@ import twitter4j.ResponseList;
 import twitter4j.TwitterException;
 import twitter4j.User;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class SearchUserTimeline extends TimelineBase {
 
     private int mPage;
@@ -53,7 +55,7 @@ public class SearchUserTimeline extends TimelineBase {
 
     protected void loadTweet(final boolean isPullLoad, final boolean isClickLoad) {
         // Change footer
-        mFooterText.setText("読み込み中...");
+        mFooterText.setText(STR_LOADING);
         mFooterProgress.setVisibility(View.VISIBLE);
         mFooterView.setVisibility(View.VISIBLE);
 
@@ -76,7 +78,7 @@ public class SearchUserTimeline extends TimelineBase {
                 if (userList.isEmpty()) {
                     // No tweet...
                     if (adapter.isEmpty()) {
-                        mFooterText.setText("ユーザーなし");
+                        mFooterText.setText(STR_USER_NONE);
                         mFooterProgress.setVisibility(View.GONE);
                     } else
                         mFooterView.setVisibility(View.GONE);
@@ -107,7 +109,7 @@ public class SearchUserTimeline extends TimelineBase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                mFooterText.setText("タップして読み込む");
+                mFooterText.setText(STR_TAP_TO_LOAD);
                 mFooterProgress.setVisibility(View.GONE);
 
                 // Show error message if loaded by user action

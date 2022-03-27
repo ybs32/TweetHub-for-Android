@@ -12,6 +12,7 @@ import com.ybsystem.tweetmate.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUserList;
 
 import static com.ybsystem.tweetmate.models.enums.ColumnType.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class UserListPagerAdapter extends FragmentPagerAdapter {
 
@@ -34,11 +35,11 @@ public class UserListPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return mUser != null ? "作成済み" : "ツイート";
+                return mUser != null ? STR_CREATED : STR_TWEET;
             case 1:
-                return mUser != null ? "購読中" : "メンバー\n" + mUserList.getMemberCount();
+                return mUser != null ? STR_SUBSCRIBED : STR_MEMBER + "\n" + mUserList.getMemberCount();
             case 2:
-                return mUser != null ? "追加された" : "購読中\n" + mUserList.getSubscriberCount();
+                return mUser != null ? STR_ADDED : STR_SUBSCRIBED + "\n" + mUserList.getSubscriberCount();
         }
         return null;
     }

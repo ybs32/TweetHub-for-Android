@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import static androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT;
 import static com.ybsystem.tweetmate.activities.preference.SettingActivity.*;
 import static com.ybsystem.tweetmate.resources.ResColor.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 import static com.ybsystem.tweetmate.storages.PrefTheme.*;
 
 public class ThemeFragment extends PreferenceFragmentBase {
@@ -106,7 +107,7 @@ public class ThemeFragment extends PreferenceFragmentBase {
         mCustom.setChecked(false);
 
         // Finish activity
-        DialogUtils.showProgress("設定を適用中...", getActivity());
+        DialogUtils.showProgress(STR_APPLYING, getActivity());
         new Handler().postDelayed(() -> {
             DialogUtils.dismissProgress();
             getActivity().setResult(1);

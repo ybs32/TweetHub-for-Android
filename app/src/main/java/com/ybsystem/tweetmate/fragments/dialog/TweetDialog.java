@@ -37,6 +37,7 @@ import lombok.Data;
 import static com.ybsystem.tweetmate.models.enums.ImageOption.*;
 import static com.ybsystem.tweetmate.models.enums.TweetMenu.*;
 import static com.ybsystem.tweetmate.resources.ResColor.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class TweetDialog extends DialogFragment {
     // Status
@@ -200,7 +201,7 @@ public class TweetDialog extends DialogFragment {
         // Reply
         if (menuSetting.contains(REPLY)) {
             adapter.add(
-                    new Menu(replyIcon, replyColor, "返信する", "",
+                    new Menu(replyIcon, replyColor, STR_REPLY_VERB, "",
                             () -> ClickUseCase.reply(mSource))
             );
         }
@@ -208,12 +209,12 @@ public class TweetDialog extends DialogFragment {
         if (menuSetting.contains(RETWEET)) {
             if (mStatus.isRetweeted()) {
                 adapter.add(
-                        new Menu(retweetIcon, retweetColor, "リツイート解除", "",
+                        new Menu(retweetIcon, retweetColor, STR_UNRETWEET, "",
                                 () -> StatusUseCase.retweet(mStatus))
                 );
             } else if (mSource.isPublic()) {
                 adapter.add(
-                        new Menu(retweetIcon, retweetColor, "リツイート", "", null)
+                        new Menu(retweetIcon, retweetColor, STR_RETWEET, "", null)
                 );
             }
         }
@@ -221,7 +222,7 @@ public class TweetDialog extends DialogFragment {
         if (menuSetting.contains(LIKE)) {
             if (mStatus.isFavorited()) {
                 adapter.add(
-                        new Menu(favoriteIcon, favoriteColor, PrefAppearance.getLikeFavText() + "解除", "",
+                        new Menu(favoriteIcon, favoriteColor, PrefAppearance.getUnLikeFavText(), "",
                                 () -> StatusUseCase.favorite(mStatus))
                 );
             } else {
@@ -234,10 +235,10 @@ public class TweetDialog extends DialogFragment {
         // Talk
         if (menuSetting.contains(TALK)) {
             if (mSource.isTalk()
-                    && !TweetMateApp.getActivity().getSupportActionBar().getTitle().equals("会話")
-                    && !TweetMateApp.getActivity().getSupportActionBar().getTitle().equals("詳細")) {
+                    && !TweetMateApp.getActivity().getSupportActionBar().getTitle().equals(STR_TALK)
+                    && !TweetMateApp.getActivity().getSupportActionBar().getTitle().equals(STR_DETAIL)) {
                 adapter.add(
-                        new Menu(talkIcon, talkColor, "会話を表示", "",
+                        new Menu(talkIcon, talkColor, STR_SHOW_TALK, "",
                                 () -> ClickUseCase.showTalk(mSource))
                 );
             }
@@ -246,7 +247,7 @@ public class TweetDialog extends DialogFragment {
         if (menuSetting.contains(DELETE)) {
             if (mSource.isMyTweet() && !mStatus.isRetweet()) {
                 adapter.add(
-                        new Menu(deleteIcon, deleteColor, "削除する", "",
+                        new Menu(deleteIcon, deleteColor, STR_DELETE, "",
                                 () -> StatusUseCase.delete(mStatus))
                 );
             }
@@ -292,28 +293,28 @@ public class TweetDialog extends DialogFragment {
         // Copy
         if (menuSetting.contains(COPY)) {
             adapter.add(
-                    new Menu(copyIcon, copyColor, "本文をコピー", "",
+                    new Menu(copyIcon, copyColor, STR_COPY, "",
                             () -> ClickUseCase.copyText(mSource))
             );
         }
         // Detail
         if (menuSetting.contains(DETAIL)) {
             adapter.add(
-                    new Menu(detailIcon, detailColor, "ツイート詳細", "",
+                    new Menu(detailIcon, detailColor, STR_DETAIL, "",
                             () -> ClickUseCase.showDetail(mSource))
             );
         }
         // Share
         if (menuSetting.contains(SHARE)) {
             adapter.add(
-                    new Menu(shareIcon, shareColor, "共有する", "",
+                    new Menu(shareIcon, shareColor, STR_SHARE, "",
                             () -> ClickUseCase.share(mStatus))
             );
         }
         // OpenTwitter
         if (menuSetting.contains(TWITTER)) {
             adapter.add(
-                    new Menu(twitterIcon, twitterColor, "Twitterで開く", "",
+                    new Menu(twitterIcon, twitterColor, STR_OPEN_TWITTER, "",
                             () -> ClickUseCase.openStatus(mStatus))
             );
         }
@@ -339,7 +340,7 @@ public class TweetDialog extends DialogFragment {
         // When menu item long clicked
         listView.setOnItemLongClickListener((adapterView, view, i, l) -> {
             String label = adapter.getItem(i).getLabel();
-            if (label.equals("リツイート") || label.equals("リツイート解除") || label.startsWith("#")) {
+            if (label.equals(STR_RETWEET) || label.equals(STR_UNRETWEET) || label.startsWith("#")) {
                 runItem(adapter.getItem(i), "REVERSE");
             }
             return true;
@@ -350,11 +351,11 @@ public class TweetDialog extends DialogFragment {
         Runnable runnable;
         String label = menu.getLabel();
 
-        if (label.equals("リツイート")) {
+        if (label.equals(STR_RETWEET)) {
             runnable = PrefClickAction.getClickRetweet().equals(action)
                     ? () -> StatusUseCase.retweet(mStatus)
                     : () -> ClickUseCase.quote(mSource);
-        } else if (label.equals("リツイート解除")) {
+        } else if (label.equals(STR_UNRETWEET)) {
             runnable = PrefClickAction.getClickRetweet().equals(action)
                     ? () -> StatusUseCase.retweet(mStatus)
                     : () -> ClickUseCase.quote(mSource);

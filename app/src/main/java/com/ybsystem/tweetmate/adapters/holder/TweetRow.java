@@ -29,6 +29,7 @@ import butterknife.ButterKnife;
 import static androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT;
 import static com.ybsystem.tweetmate.models.enums.ImageOption.*;
 import static com.ybsystem.tweetmate.resources.ResColor.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class TweetRow extends RecyclerView.ViewHolder {
     // Status
@@ -185,7 +186,9 @@ public class TweetRow extends RecyclerView.ViewHolder {
             return;
         }
         // Set retweeted by
-        mRetweetedBy.setText(mStatus.getUser().getName() + " さんがリツイート");
+        String name = mStatus.getUser().getName();
+        String text = getString(R.string.sentence_retweeted_by, name);
+        mRetweetedBy.setText(text);
         mRetweetedBy.setVisibility(View.VISIBLE);
     }
 
@@ -267,7 +270,7 @@ public class TweetRow extends RecyclerView.ViewHolder {
             return;
         }
         // Set detail rt fav
-        mDetailRtCount.setText(mSource.getRetweetCount() + " リツイート");
+        mDetailRtCount.setText(mSource.getRetweetCount() + " " + STR_RETWEET);
         mDetailFavCount.setText(mSource.getFavoriteCount() + " " + PrefAppearance.getLikeFavText());
         mDetailContainer.setVisibility(View.VISIBLE);
     }

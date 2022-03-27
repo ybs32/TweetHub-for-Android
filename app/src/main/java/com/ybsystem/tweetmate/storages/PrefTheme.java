@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import com.ybsystem.tweetmate.R;
 
 import static com.ybsystem.tweetmate.resources.ResColor.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class PrefTheme extends PrefBase {
 
@@ -44,7 +45,7 @@ public class PrefTheme extends PrefBase {
 
     public static int getBgRetweetColor() {
         int color = getDefaultSharedPreferences().getInt(KEY_RETWEET_COLOR, -1);
-        if (PrefWallpaper.getWallpaperPath().equals("未設定")) {
+        if (PrefWallpaper.getWallpaperPath().equals(STR_NOT_SET)) {
             return color;
         } else {
             return PrefWallpaper.applyTransparency(color);
@@ -53,7 +54,7 @@ public class PrefTheme extends PrefBase {
 
     public static int getBgReplyColor() {
         int color = getDefaultSharedPreferences().getInt(KEY_REPLY_COLOR, -1);
-        if (PrefWallpaper.getWallpaperPath().equals("未設定")) {
+        if (PrefWallpaper.getWallpaperPath().equals(STR_NOT_SET)) {
             return color;
         } else {
             return PrefWallpaper.applyTransparency(color);
@@ -62,7 +63,7 @@ public class PrefTheme extends PrefBase {
 
     public static int getBgMyTweetColor() {
         int color = getDefaultSharedPreferences().getInt(KEY_MYTWEET_COLOR, -1);
-        if (PrefWallpaper.getWallpaperPath().equals("未設定")) {
+        if (PrefWallpaper.getWallpaperPath().equals(STR_NOT_SET)) {
             return color;
         } else {
             return PrefWallpaper.applyTransparency(color);
