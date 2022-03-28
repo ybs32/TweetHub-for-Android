@@ -4,7 +4,7 @@ import android.util.TypedValue;
 
 import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.application.TweetMateApp;
-import com.ybsystem.tweetmate.storages.PrefWallpaper;
+import com.ybsystem.tweetmate.databases.PrefWallpaper;
 
 import static com.ybsystem.tweetmate.resources.ResString.*;
 

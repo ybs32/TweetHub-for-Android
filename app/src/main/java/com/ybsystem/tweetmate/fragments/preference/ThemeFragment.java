@@ -14,7 +14,7 @@ import androidx.preference.SwitchPreference;
 import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.fragments.dialog.PreviewThemeDialog;
 import com.ybsystem.tweetmate.resources.ResColor;
-import com.ybsystem.tweetmate.storages.PrefTheme;
+import com.ybsystem.tweetmate.databases.PrefTheme;
 import com.ybsystem.tweetmate.utils.DialogUtils;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import static androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT;
 import static com.ybsystem.tweetmate.activities.preference.SettingActivity.*;
 import static com.ybsystem.tweetmate.resources.ResColor.*;
 import static com.ybsystem.tweetmate.resources.ResString.*;
-import static com.ybsystem.tweetmate.storages.PrefTheme.*;
+import static com.ybsystem.tweetmate.databases.PrefTheme.*;
 
 public class ThemeFragment extends PreferenceFragmentBase {
 

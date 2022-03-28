@@ -8,7 +8,7 @@ import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
 import com.ybsystem.tweetmate.R;
-import com.ybsystem.tweetmate.storages.PrefWallpaper;
+import com.ybsystem.tweetmate.databases.PrefWallpaper;
 import com.ybsystem.tweetmate.utils.DialogUtils;
 import com.ybsystem.tweetmate.utils.StorageUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
@@ -16,7 +16,7 @@ import com.ybsystem.tweetmate.utils.ToastUtils;
 import static com.ybsystem.tweetmate.activities.preference.SettingActivity.*;
 import static com.ybsystem.tweetmate.activities.preference.WallpaperActivity.*;
 import static com.ybsystem.tweetmate.resources.ResString.*;
-import static com.ybsystem.tweetmate.storages.PrefWallpaper.*;
+import static com.ybsystem.tweetmate.databases.PrefWallpaper.*;
 
 public class WallpaperFragment extends PreferenceFragmentBase {
 

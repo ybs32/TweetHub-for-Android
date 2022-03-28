@@ -18,7 +18,7 @@ import com.ybsystem.tweetmate.activities.UserListActivity;
 import com.ybsystem.tweetmate.activities.preference.SettingActivity;
 import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.models.enums.ColumnType;
-import com.ybsystem.tweetmate.storages.PrefAppearance;
+import com.ybsystem.tweetmate.databases.PrefAppearance;
 import com.ybsystem.tweetmate.utils.CalcUtils;
 import com.ybsystem.tweetmate.utils.DialogUtils;
 

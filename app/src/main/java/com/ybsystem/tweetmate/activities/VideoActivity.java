@@ -7,7 +7,7 @@ import android.widget.VideoView;
 
 import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterMediaEntity;
-import com.ybsystem.tweetmate.storages.PrefSystem;
+import com.ybsystem.tweetmate.databases.PrefSystem;
 
 import static com.ybsystem.tweetmate.resources.ResString.*;
 

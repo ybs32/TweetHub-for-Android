@@ -8,8 +8,8 @@ import androidx.core.text.HtmlCompat;
 
 import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.models.entities.Entity;
-import com.ybsystem.tweetmate.storages.PrefAppearance;
-import com.ybsystem.tweetmate.storages.PrefTheme;
+import com.ybsystem.tweetmate.databases.PrefAppearance;
+import com.ybsystem.tweetmate.databases.PrefTheme;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

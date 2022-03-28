@@ -8,7 +8,7 @@ import com.ybsystem.tweetmate.fragments.timeline.ProfileTimeline;
 import com.ybsystem.tweetmate.models.entities.Column;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweetmate.models.enums.ColumnType;
-import com.ybsystem.tweetmate.storages.PrefAppearance;
+import com.ybsystem.tweetmate.databases.PrefAppearance;
 
 import static com.ybsystem.tweetmate.models.enums.ColumnType.*;
 import static com.ybsystem.tweetmate.resources.ResString.*;

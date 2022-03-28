@@ -14,7 +14,7 @@ import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.models.entities.EntityArray;
 import com.ybsystem.tweetmate.models.entities.UserList;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterStatus;
-import com.ybsystem.tweetmate.storages.PrefSystem;
+import com.ybsystem.tweetmate.databases.PrefSystem;
 import com.ybsystem.tweetmate.utils.CalcUtils;
 import com.ybsystem.tweetmate.utils.ExceptionUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;

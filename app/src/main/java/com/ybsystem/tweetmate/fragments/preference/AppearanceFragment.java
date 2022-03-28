@@ -11,7 +11,7 @@ import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.fragments.dialog.PreviewAppearanceDialog;
 
 import static com.ybsystem.tweetmate.activities.preference.SettingActivity.*;
-import static com.ybsystem.tweetmate.storages.PrefAppearance.*;
+import static com.ybsystem.tweetmate.databases.PrefAppearance.*;
 
 public class AppearanceFragment extends PreferenceFragmentBase {
 

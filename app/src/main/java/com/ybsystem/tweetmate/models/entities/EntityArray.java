@@ -3,7 +3,7 @@ package com.ybsystem.tweetmate.models.entities;
 import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.libs.propertychange.PropertyChangeListener;
 import com.ybsystem.tweetmate.libs.propertychange.PropertyChangeSupport;
-import com.ybsystem.tweetmate.storages.PrefEntity;
+import com.ybsystem.tweetmate.databases.PrefEntity;
 import com.ybsystem.tweetmate.utils.ToastUtils;
 
 import java.io.Serializable;
@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import static com.ybsystem.tweetmate.resources.ResString.STR_FAIL_NO_MORE_MOVE;
-import static com.ybsystem.tweetmate.resources.ResString.STR_TWEET;
 
 public class EntityArray<T> extends ArrayList<T>
         implements PropertyChangeListener, Serializable {

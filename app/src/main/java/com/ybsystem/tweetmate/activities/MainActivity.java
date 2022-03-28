@@ -24,7 +24,7 @@ import com.ybsystem.tweetmate.fragments.fragment.MainFragment;
 import com.ybsystem.tweetmate.libs.glide.GlideApp;
 import com.ybsystem.tweetmate.libs.rfab.CardItem;
 import com.ybsystem.tweetmate.libs.rfab.RapidFloatingActionListView;
-import com.ybsystem.tweetmate.storages.*;
+import com.ybsystem.tweetmate.databases.*;
 import com.ybsystem.tweetmate.utils.*;
 
 import java.io.File;

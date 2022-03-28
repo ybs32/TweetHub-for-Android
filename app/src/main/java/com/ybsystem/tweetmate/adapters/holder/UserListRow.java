@@ -14,8 +14,8 @@ import com.ybsystem.tweetmate.activities.UserListActivity;
 import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUserList;
 import com.ybsystem.tweetmate.models.enums.ImageOption;
-import com.ybsystem.tweetmate.storages.PrefAppearance;
-import com.ybsystem.tweetmate.storages.PrefSystem;
+import com.ybsystem.tweetmate.databases.PrefAppearance;
+import com.ybsystem.tweetmate.databases.PrefSystem;
 import com.ybsystem.tweetmate.utils.GlideUtils;
 
 import butterknife.BindView;

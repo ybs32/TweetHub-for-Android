@@ -3,7 +3,7 @@ package com.ybsystem.tweetmate.usecases;
 import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.libs.eventbus.UserEvent;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUser;
-import com.ybsystem.tweetmate.storages.PrefSystem;
+import com.ybsystem.tweetmate.databases.PrefSystem;
 import com.ybsystem.tweetmate.utils.DialogUtils;
 import com.ybsystem.tweetmate.utils.ExceptionUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;

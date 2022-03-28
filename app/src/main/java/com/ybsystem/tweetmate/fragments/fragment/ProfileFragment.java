@@ -19,7 +19,7 @@ import com.ybsystem.tweetmate.activities.UserListActivity;
 import com.ybsystem.tweetmate.libs.eventbus.UserEvent;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterURLEntity;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUser;
-import com.ybsystem.tweetmate.storages.PrefSystem;
+import com.ybsystem.tweetmate.databases.PrefSystem;
 import com.ybsystem.tweetmate.usecases.UserUseCase;
 import com.ybsystem.tweetmate.utils.GlideUtils;
 

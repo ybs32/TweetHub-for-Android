@@ -16,8 +16,8 @@ import com.ybsystem.tweetmate.adapters.array.DrawerArrayAdapter;
 import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweetmate.models.enums.ImageOption;
-import com.ybsystem.tweetmate.storages.PrefAppearance;
-import com.ybsystem.tweetmate.storages.PrefSystem;
+import com.ybsystem.tweetmate.databases.PrefAppearance;
+import com.ybsystem.tweetmate.databases.PrefSystem;
 import com.ybsystem.tweetmate.usecases.ClickUseCase;
 import com.ybsystem.tweetmate.utils.GlideUtils;
 

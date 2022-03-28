@@ -8,7 +8,7 @@ import androidx.preference.ListPreference;
 import com.ybsystem.tweetmate.R;
 
 import static com.ybsystem.tweetmate.activities.preference.SettingActivity.*;
-import static com.ybsystem.tweetmate.storages.PrefSystem.*;
+import static com.ybsystem.tweetmate.databases.PrefSystem.*;
 
 public class SystemFragment extends PreferenceFragmentBase {
 

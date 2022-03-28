@@ -21,7 +21,7 @@ import com.ybsystem.tweetmate.fragments.fragment.EasyTweetFragment;
 import com.ybsystem.tweetmate.libs.eventbus.ColumnEvent;
 import com.ybsystem.tweetmate.models.entities.Column;
 import com.ybsystem.tweetmate.models.entities.ColumnArray;
-import com.ybsystem.tweetmate.storages.PrefSystem;
+import com.ybsystem.tweetmate.databases.PrefSystem;
 import com.ybsystem.tweetmate.usecases.ClickUseCase;
 import com.ybsystem.tweetmate.usecases.SearchUseCase;
 import com.ybsystem.tweetmate.utils.DialogUtils;

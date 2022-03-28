@@ -9,7 +9,7 @@ import com.ybsystem.tweetmate.R;
 
 import static com.ybsystem.tweetmate.activities.preference.SettingActivity.*;
 import static com.ybsystem.tweetmate.resources.ResString.*;
-import static com.ybsystem.tweetmate.storages.PrefClickAction.*;
+import static com.ybsystem.tweetmate.databases.PrefClickAction.*;
 
 public class ClickActionFragment extends PreferenceFragmentBase {
 

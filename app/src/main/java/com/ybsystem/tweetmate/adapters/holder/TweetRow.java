@@ -18,7 +18,7 @@ import com.ybsystem.tweetmate.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUserMentionEntity;
 import com.ybsystem.tweetmate.models.enums.ClickAction;
 import com.ybsystem.tweetmate.models.enums.ImageOption;
-import com.ybsystem.tweetmate.storages.*;
+import com.ybsystem.tweetmate.databases.*;
 import com.ybsystem.tweetmate.utils.*;
 
 import java.util.ArrayList;

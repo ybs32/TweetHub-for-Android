@@ -7,7 +7,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ybsystem.tweetmate.R;
-import com.ybsystem.tweetmate.storages.PrefTheme;
+import com.ybsystem.tweetmate.databases.PrefTheme;
 import com.ybsystem.tweetmate.usecases.ClickUseCase;
 
 import butterknife.BindView;

@@ -16,7 +16,7 @@ import com.ybsystem.tweetmate.fragments.dialog.ListDialog;
 import com.ybsystem.tweetmate.libs.eventbus.ColumnEvent;
 import com.ybsystem.tweetmate.models.entities.Column;
 import com.ybsystem.tweetmate.models.entities.ColumnArray;
-import com.ybsystem.tweetmate.storages.PrefAppearance;
+import com.ybsystem.tweetmate.databases.PrefAppearance;
 import com.ybsystem.tweetmate.utils.ExceptionUtils;
 import com.ybsystem.tweetmate.utils.DialogUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;

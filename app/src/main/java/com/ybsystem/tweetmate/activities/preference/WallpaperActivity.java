@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.activities.ActivityBase;
 import com.ybsystem.tweetmate.fragments.preference.WallpaperFragment;
-import com.ybsystem.tweetmate.storages.PrefWallpaper;
+import com.ybsystem.tweetmate.databases.PrefWallpaper;
 import com.ybsystem.tweetmate.utils.DialogUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
 
