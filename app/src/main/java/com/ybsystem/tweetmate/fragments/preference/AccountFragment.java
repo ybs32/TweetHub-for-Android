@@ -20,6 +20,7 @@ import com.ybsystem.tweetmate.utils.DialogUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
 
 import static com.ybsystem.tweetmate.activities.preference.SettingActivity.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class AccountFragment extends Fragment {
 
@@ -56,7 +57,7 @@ public class AccountFragment extends Fragment {
     private void setListItemClickListener() {
         mListView.setOnItemClickListener((parent, view, position, id) -> {
             // Create ListDialog
-            String[] items = {"上に移動", "下に移動", "解除する"};
+            String[] items = {STR_MOVE_UP, STR_MOVE_DOWN, STR_RELEASE};
             ListDialog dialog = new ListDialog().newInstance(items);
 
             // Set click listener
@@ -96,16 +97,16 @@ public class AccountFragment extends Fragment {
     private void showConfirmDialog(AccountArray<Account> accounts, int position) {
         // Check
         if (position == accounts.getCurrentAccountNum()) {
-            ToastUtils.showShortToast("使用中のアカウントです。");
+            ToastUtils.showShortToast(STR_FAIL_USING_ACCOUNT);
             return;
         }
         // Show
         DialogUtils.showConfirm(
-                "アカウントを解除しますか？",
+                STR_CONFIRM_RELEASE_ACCOUNT,
                 (dialog, which) -> {
                     accounts.remove(position);
                     refreshListView();
-                    ToastUtils.showShortToast("アカウントを解除しました。");
+                    ToastUtils.showShortToast(STR_SUCCESS_RELEASE_ACCOUNT);
                 }
         );
     }

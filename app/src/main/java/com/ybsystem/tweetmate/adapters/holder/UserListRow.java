@@ -14,12 +14,14 @@ import com.ybsystem.tweetmate.activities.UserListActivity;
 import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUserList;
 import com.ybsystem.tweetmate.models.enums.ImageOption;
-import com.ybsystem.tweetmate.storages.PrefAppearance;
-import com.ybsystem.tweetmate.storages.PrefSystem;
+import com.ybsystem.tweetmate.databases.PrefAppearance;
+import com.ybsystem.tweetmate.databases.PrefSystem;
 import com.ybsystem.tweetmate.utils.GlideUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class UserListRow extends RecyclerView.ViewHolder {
     // UserList
@@ -70,11 +72,15 @@ public class UserListRow extends RecyclerView.ViewHolder {
     }
 
     public void setMemberCount() {
-        mMemberCount.setText(mUserList.getMemberCount() + "人のメンバー");
+        mMemberCount.setText(
+                getString(R.string.sentence_members, mUserList.getMemberCount())
+        );
     }
 
     public void setCreator() {
-        mCreator.setText(mUserList.getUser().getName() + "さんが作成");
+        mCreator.setText(
+                getString(R.string.sentence_created_by, mUserList.getUser().getName())
+        );
     }
 
     public void setMarks() {

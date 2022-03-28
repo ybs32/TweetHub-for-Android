@@ -13,9 +13,10 @@ import com.ybsystem.tweetmate.models.entities.Column;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweetmate.models.enums.ColumnType;
-import com.ybsystem.tweetmate.storages.PrefAppearance;
+import com.ybsystem.tweetmate.databases.PrefAppearance;
 
 import static com.ybsystem.tweetmate.models.enums.ColumnType.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class TimelineActivity extends ActivityBase {
 
@@ -55,13 +56,13 @@ public class TimelineActivity extends ActivityBase {
 
         switch (mColumnType) {
             case HOME:
-                getSupportActionBar().setTitle("ホーム");
+                getSupportActionBar().setTitle(STR_HOME);
                 fragment = new MainTimeline().newInstance(
                         new Column(-1, "", HOME, false)
                 );
                 break;
             case MENTIONS:
-                getSupportActionBar().setTitle("@Mentions");
+                getSupportActionBar().setTitle(STR_MENTIONS);
                 fragment = new MainTimeline().newInstance(
                         new Column(-1, "", MENTIONS, false)
                 );
@@ -73,33 +74,33 @@ public class TimelineActivity extends ActivityBase {
                 );
                 break;
             case TALK:
-                getSupportActionBar().setTitle("会話");
+                getSupportActionBar().setTitle(STR_TALK);
                 fragment = new TalkTimeline().newInstance(mStatus);
                 break;
             case DETAIL:
-                getSupportActionBar().setTitle("詳細");
+                getSupportActionBar().setTitle(STR_DETAIL);
                 fragment = new DetailTimeline().newInstance(mStatus);
                 break;
             case FOLLOW:
-                getSupportActionBar().setTitle("フォロー" + " (@" + mUser.getScreenName() + ")");
+                getSupportActionBar().setTitle(STR_FOLLOW + " (@" + mUser.getScreenName() + ")");
                 fragment = new UserTimeline().newInstance(
                         new Column(mUser.getId(), "", FOLLOW, false)
                 );
                 break;
             case FOLLOWER:
-                getSupportActionBar().setTitle("フォロワー" + " (@" + mUser.getScreenName() + ")");
+                getSupportActionBar().setTitle(STR_FOLLOWER + " (@" + mUser.getScreenName() + ")");
                 fragment = new UserTimeline().newInstance(
                         new Column(mUser.getId(), "", FOLLOWER, false)
                 );
                 break;
             case MUTE:
-                getSupportActionBar().setTitle("ミュートユーザー");
+                getSupportActionBar().setTitle(STR_MUTE);
                 fragment = new UserTimeline().newInstance(
                         new Column(-1, "", MUTE, false)
                 );
                 break;
             case BLOCK:
-                getSupportActionBar().setTitle("ブロックユーザー");
+                getSupportActionBar().setTitle(STR_BLOCK);
                 fragment = new UserTimeline().newInstance(
                         new Column(-1, "", BLOCK, false)
                 );

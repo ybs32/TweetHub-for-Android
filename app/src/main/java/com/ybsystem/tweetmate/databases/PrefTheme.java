@@ -1,9 +1,11 @@
-package com.ybsystem.tweetmate.storages;
+package com.ybsystem.tweetmate.databases;
 
 import android.content.SharedPreferences;
 
 import com.ybsystem.tweetmate.R;
-import com.ybsystem.tweetmate.utils.ResourceUtils;
+
+import static com.ybsystem.tweetmate.resources.ResColor.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class PrefTheme extends PrefBase {
 
@@ -43,7 +45,7 @@ public class PrefTheme extends PrefBase {
 
     public static int getBgRetweetColor() {
         int color = getDefaultSharedPreferences().getInt(KEY_RETWEET_COLOR, -1);
-        if (PrefWallpaper.getWallpaperPath().equals("未設定")) {
+        if (PrefWallpaper.getWallpaperPath().equals(STR_NOT_SET)) {
             return color;
         } else {
             return PrefWallpaper.applyTransparency(color);
@@ -52,7 +54,7 @@ public class PrefTheme extends PrefBase {
 
     public static int getBgReplyColor() {
         int color = getDefaultSharedPreferences().getInt(KEY_REPLY_COLOR, -1);
-        if (PrefWallpaper.getWallpaperPath().equals("未設定")) {
+        if (PrefWallpaper.getWallpaperPath().equals(STR_NOT_SET)) {
             return color;
         } else {
             return PrefWallpaper.applyTransparency(color);
@@ -61,7 +63,7 @@ public class PrefTheme extends PrefBase {
 
     public static int getBgMyTweetColor() {
         int color = getDefaultSharedPreferences().getInt(KEY_MYTWEET_COLOR, -1);
-        if (PrefWallpaper.getWallpaperPath().equals("未設定")) {
+        if (PrefWallpaper.getWallpaperPath().equals(STR_NOT_SET)) {
             return color;
         } else {
             return PrefWallpaper.applyTransparency(color);
@@ -107,17 +109,17 @@ public class PrefTheme extends PrefBase {
     // 初期化用
     public static void initCustomColors() {
         SharedPreferences.Editor editor = getDefaultSharedPreferences().edit();
-        editor.putInt(KEY_RETWEET_COLOR, ResourceUtils.getBgRetweetColor());
-        editor.putInt(KEY_REPLY_COLOR, ResourceUtils.getBgReplyColor());
-        editor.putInt(KEY_MYTWEET_COLOR, ResourceUtils.getBgMyTweetColor());
-        editor.putInt(KEY_USERNAME_COLOR, ResourceUtils.getUserNameColor());
-        editor.putInt(KEY_RELATIVETIME_COLOR, ResourceUtils.getTextColor());
-        editor.putInt(KEY_TWEETTEXT_COLOR, ResourceUtils.getTextColor());
-        editor.putInt(KEY_LINK_COLOR, ResourceUtils.getLinkColor());
-        editor.putInt(KEY_ABSOLUTETIME_COLOR, ResourceUtils.getStrongColor());
-        editor.putInt(KEY_VIA_COLOR, ResourceUtils.getStrongColor());
-        editor.putInt(KEY_RTFAV_COLOR, ResourceUtils.getStrongColor());
-        editor.putInt(KEY_RETWEETEDBY_COLOR, ResourceUtils.getStrongColor());
+        editor.putInt(KEY_RETWEET_COLOR, COLOR_BG_RETWEET);
+        editor.putInt(KEY_REPLY_COLOR, COLOR_BG_REPLY);
+        editor.putInt(KEY_MYTWEET_COLOR, COLOR_BG_MYTWEET);
+        editor.putInt(KEY_USERNAME_COLOR, COLOR_TEXT);
+        editor.putInt(KEY_RELATIVETIME_COLOR, COLOR_TEXT);
+        editor.putInt(KEY_TWEETTEXT_COLOR, COLOR_TEXT);
+        editor.putInt(KEY_LINK_COLOR, COLOR_LINK);
+        editor.putInt(KEY_ABSOLUTETIME_COLOR, COLOR_STRONG);
+        editor.putInt(KEY_VIA_COLOR, COLOR_STRONG);
+        editor.putInt(KEY_RTFAV_COLOR, COLOR_STRONG);
+        editor.putInt(KEY_RETWEETEDBY_COLOR, COLOR_STRONG);
         editor.apply();
     }
 

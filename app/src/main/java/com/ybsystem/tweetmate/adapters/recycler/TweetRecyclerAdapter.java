@@ -11,7 +11,7 @@ import com.ybsystem.tweetmate.libs.eventbus.FooterEvent;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweetmate.adapters.holder.FooterRow;
 import com.ybsystem.tweetmate.adapters.holder.TweetRow;
-import com.ybsystem.tweetmate.storages.PrefAppearance;
+import com.ybsystem.tweetmate.databases.PrefAppearance;
 
 import org.greenrobot.eventbus.EventBus;
 

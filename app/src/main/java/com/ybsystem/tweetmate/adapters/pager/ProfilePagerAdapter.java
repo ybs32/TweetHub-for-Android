@@ -8,9 +8,10 @@ import com.ybsystem.tweetmate.fragments.timeline.ProfileTimeline;
 import com.ybsystem.tweetmate.models.entities.Column;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweetmate.models.enums.ColumnType;
-import com.ybsystem.tweetmate.storages.PrefAppearance;
+import com.ybsystem.tweetmate.databases.PrefAppearance;
 
 import static com.ybsystem.tweetmate.models.enums.ColumnType.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class ProfilePagerAdapter extends FragmentPagerAdapter {
 
@@ -30,9 +31,9 @@ public class ProfilePagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "ツイート\n" + mUser.getStatusesCount();
+                return STR_TWEET + "\n" + mUser.getStatusesCount();
             case 1:
-                return "メディア";
+                return STR_MEDIA;
             case 2:
                 return PrefAppearance.getLikeFavText() + "\n" + mUser.getFavouritesCount();
         }

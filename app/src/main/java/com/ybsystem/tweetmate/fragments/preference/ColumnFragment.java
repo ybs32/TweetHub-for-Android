@@ -16,7 +16,7 @@ import com.ybsystem.tweetmate.fragments.dialog.ListDialog;
 import com.ybsystem.tweetmate.libs.eventbus.ColumnEvent;
 import com.ybsystem.tweetmate.models.entities.Column;
 import com.ybsystem.tweetmate.models.entities.ColumnArray;
-import com.ybsystem.tweetmate.storages.PrefAppearance;
+import com.ybsystem.tweetmate.databases.PrefAppearance;
 import com.ybsystem.tweetmate.utils.ExceptionUtils;
 import com.ybsystem.tweetmate.utils.DialogUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
@@ -33,6 +33,7 @@ import twitter4j.UserList;
 
 import static com.ybsystem.tweetmate.activities.preference.SettingActivity.*;
 import static com.ybsystem.tweetmate.models.enums.ColumnType.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class ColumnFragment extends Fragment {
 
@@ -70,7 +71,7 @@ public class ColumnFragment extends Fragment {
 
         mListView.setOnItemClickListener((parent, view, position, id) -> {
             // Create ListDialog
-            String[] items = {"起動カラムに設定", "上に移動", "下に移動", "削除する"};
+            String[] items = {STR_SET_BOOT_COLUMN, STR_MOVE_UP, STR_MOVE_DOWN, STR_DELETE};
             ListDialog dialog = new ListDialog().newInstance(items);
 
             // Set click listener
@@ -106,11 +107,11 @@ public class ColumnFragment extends Fragment {
         view.findViewById(R.id.button_add).setOnClickListener(v -> {
             //　Unavailable over 8 column
             if (TweetMateApp.getMyAccount().getColumns().size() >= 8) {
-                ToastUtils.showShortToast("これ以上追加できません。");
+                ToastUtils.showShortToast(STR_FAIL_NO_MORE_ADD);
                 return;
             }
             // Create ListDialog
-            String[] items = {"@Mentions", "ホーム", "リスト", "リスト (単体)", PrefAppearance.getLikeFavText(), "検索"};
+            String[] items = {STR_MENTIONS, STR_HOME, STR_LIST, STR_LIST_SINGLE, PrefAppearance.getLikeFavText(), STR_SEARCH};
             ListDialog dialog = new ListDialog().newInstance(items);
 
             // Set click listener
@@ -119,17 +120,17 @@ public class ColumnFragment extends Fragment {
                 switch (which) {
                     case 0:
                         columns.add(
-                                new Column(-1, "@Mentions", MENTIONS, false)
+                                new Column(-1, STR_MENTIONS, MENTIONS, false)
                         );
                         break;
                     case 1:
                         columns.add(
-                                new Column(-2, "ホーム", HOME, false)
+                                new Column(-2, STR_HOME, HOME, false)
                         );
                         break;
                     case 2:
                         columns.add(
-                                new Column(-3, "リスト", LIST, false)
+                                new Column(-3, STR_LIST, LIST, false)
                         );
                         break;
                     case 3:
@@ -142,7 +143,7 @@ public class ColumnFragment extends Fragment {
                         break;
                     case 5:
                         columns.add(
-                                new Column(-5, "検索", SEARCH, false)
+                                new Column(-5, STR_SEARCH, SEARCH, false)
                         );
                         break;
                 }
@@ -158,7 +159,7 @@ public class ColumnFragment extends Fragment {
     }
 
     private void fetchUserList() {
-        DialogUtils.showProgress("読み込み中...", getContext());
+        DialogUtils.showProgress(STR_LOADING, getContext());
 
         Observable<ResponseList<UserList>> observable = Observable.create(e -> {
             // Fetch
@@ -179,7 +180,7 @@ public class ColumnFragment extends Fragment {
             public void onNext(ResponseList<UserList> lists) {
                 // Check size
                 if (lists.isEmpty()) {
-                    ToastUtils.showShortToast("リストが存在しません。");
+                    ToastUtils.showShortToast(STR_FAIL_NO_LIST);
                     return;
                 }
                 // Create ListDialog
@@ -207,7 +208,7 @@ public class ColumnFragment extends Fragment {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                ToastUtils.showShortToast("リストの取得に失敗しました...");
+                ToastUtils.showShortToast(STR_FAIL_GET_LIST);
                 ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 

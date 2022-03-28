@@ -14,7 +14,7 @@ import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.models.entities.EntityArray;
 import com.ybsystem.tweetmate.models.entities.UserList;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterStatus;
-import com.ybsystem.tweetmate.storages.PrefSystem;
+import com.ybsystem.tweetmate.databases.PrefSystem;
 import com.ybsystem.tweetmate.utils.CalcUtils;
 import com.ybsystem.tweetmate.utils.ExceptionUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
@@ -31,6 +31,8 @@ import twitter4j.ResponseList;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
+
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class MainListTimeline extends TimelineBase {
 
@@ -54,7 +56,7 @@ public class MainListTimeline extends TimelineBase {
 
     protected void loadTweet(final boolean isPullLoad, final boolean isClickLoad) {
         // Change footer
-        mFooterText.setText("読み込み中...");
+        mFooterText.setText(STR_LOADING);
         mFooterProgress.setVisibility(View.VISIBLE);
         mFooterView.setVisibility(View.VISIBLE);
 
@@ -83,7 +85,7 @@ public class MainListTimeline extends TimelineBase {
                 if (statusList.isEmpty()) {
                     // No tweet...
                     if (adapter.isEmpty()) {
-                        mFooterText.setText("ツイートなし");
+                        mFooterText.setText(STR_TWEET_NONE);
                         mFooterProgress.setVisibility(View.GONE);
                     } else
                         mFooterView.setVisibility(View.GONE);
@@ -103,7 +105,7 @@ public class MainListTimeline extends TimelineBase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                mFooterText.setText("タップして読み込む");
+                mFooterText.setText(STR_TAP_TO_LOAD);
                 mFooterProgress.setVisibility(View.GONE);
 
                 // Show error message if loaded by user action
@@ -242,7 +244,7 @@ public class MainListTimeline extends TimelineBase {
         setFooterView();
 
         //　Change footer text
-        mFooterText.setText("リストなし");
+        mFooterText.setText(STR_LIST_NONE);
         mFooterProgress.setVisibility(View.GONE);
 
         // Disable footer click

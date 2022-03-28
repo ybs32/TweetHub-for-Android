@@ -21,7 +21,6 @@ import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.fragments.timeline.TimelineBase;
 import com.ybsystem.tweetmate.libs.eventbus.ColumnEvent;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUser;
-import com.ybsystem.tweetmate.storages.PrefTheme;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

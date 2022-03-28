@@ -4,13 +4,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -25,10 +25,14 @@ import com.ybsystem.tweetmate.fragments.dialog.ListDialog;
 import com.ybsystem.tweetmate.fragments.dialog.NoticeDialog;
 import com.ybsystem.tweetmate.models.entities.EntityArray;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterStatus;
+import com.ybsystem.tweetmate.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUserMentionEntity;
+import com.ybsystem.tweetmate.models.enums.ImageOption;
+import com.ybsystem.tweetmate.databases.PrefAppearance;
+import com.ybsystem.tweetmate.databases.PrefSystem;
 import com.ybsystem.tweetmate.usecases.StatusUseCase;
 import com.ybsystem.tweetmate.utils.DialogUtils;
-import com.ybsystem.tweetmate.utils.ResourceUtils;
+import com.ybsystem.tweetmate.utils.GlideUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
 import com.ybsystem.tweetmate.utils.StorageUtils;
 
@@ -39,6 +43,8 @@ import java.util.regex.Pattern;
 import twitter4j.StatusUpdate;
 
 import static com.ybsystem.tweetmate.activities.PostActivity.*;
+import static com.ybsystem.tweetmate.resources.ResColor.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class PostFragment extends Fragment {
     // Edit
@@ -76,9 +82,10 @@ public class PostFragment extends Fragment {
 
         // Set buttons
         setPostButton(view);
+        setUserButton(view);
+        setGalleryButton(view);
         setDraftButton(view);
         setHashtagButton(view);
-        setCameraGalleryButtons(view);
 
         return view;
     }
@@ -124,8 +131,8 @@ public class PostFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 int length = s.toString().length();
-                int color = length > 140
-                        ? Color.RED : ResourceUtils.getTextColor();
+                int color = length > 140 ? Color.RED : COLOR_TEXT;
+
                 // Change count
                 mTextCount.setText(Integer.toString(140 - length));
                 mTextCount.setTextColor(color);
@@ -174,13 +181,13 @@ public class PostFragment extends Fragment {
             // Set text
             mPostEdit.setText(str);
             mPostEdit.setSelection(str.length());
-            mActionBar.setTitle("返信");
+            mActionBar.setTitle(STR_REPLY);
         }
 
         // Check quote
         if (mQuoteStatus != null) {
-            mPostEdit.setHint("コメントを追加");
-            mActionBar.setTitle("引用ツイート");
+            mPostEdit.setHint(STR_ADD_COMMENT);
+            mActionBar.setTitle(STR_QUOTE);
         }
     }
 
@@ -219,6 +226,34 @@ public class PostFragment extends Fragment {
         });
     }
 
+    private void setUserButton(View view) {
+        // Get user
+        TwitterUser user = TweetMateApp.getMyUser();
+        ImageView userButton = view.findViewById(R.id.button_user);
+
+        // Set user image
+        ImageOption option = ImageOption.toEnum(PrefAppearance.getUserIconStyle());
+        GlideUtils.load(PrefSystem.getProfileThumbByQuality(user), userButton, option);
+
+        // User button
+        userButton.findViewById(R.id.button_user).setOnClickListener(v -> {
+            // Coming soon...
+        });
+    }
+
+    private void setGalleryButton(View view) {
+        // Gallery button
+        view.findViewById(R.id.button_gallery).setOnClickListener(v -> {
+            if (!isPicAvailable()) {
+                return;
+            }
+            // Open gallery
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            getActivity().startActivityForResult(intent, REQUEST_GALLERY);
+        });
+    }
+
     private void setDraftButton(View view) {
         // Draft button
         view.findViewById(R.id.button_draft).setOnClickListener(v -> {
@@ -226,7 +261,7 @@ public class PostFragment extends Fragment {
             // Check drafts
             EntityArray<String> drafts = TweetMateApp.getMyAccount().getDrafts();
             if (drafts.isEmpty()) {
-                NoticeDialog dialog = new NoticeDialog().newInstance("下書きはありません。");
+                NoticeDialog dialog = new NoticeDialog().newInstance(STR_FAIL_NO_DRAFT);
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 if (fm.findFragmentByTag("NoticeDialog") == null) {
                     dialog.show(fm, "NoticeDialog");
@@ -249,10 +284,10 @@ public class PostFragment extends Fragment {
             });
             dialog.setOnItemLongClickListener((parent, v1, position, id) -> {
                 DialogUtils.showConfirm(
-                        "下書きを削除しますか？",
+                        STR_CONFIRM_DESTROY_DRAFT,
                         (d, which) -> {
                             drafts.remove(position);
-                            ToastUtils.showShortToast("下書きを削除しました。");
+                            ToastUtils.showShortToast(STR_SUCCESS_DESTROY_DRAFT);
                         }
                 );
                 dialog.dismiss();
@@ -274,7 +309,7 @@ public class PostFragment extends Fragment {
             // Check hashtag
             EntityArray<String> hashtags = TweetMateApp.getMyAccount().getHashtags();
             if (hashtags.isEmpty()) {
-                NoticeDialog dialog = new NoticeDialog().newInstance("ハッシュタグ履歴はありません。");
+                NoticeDialog dialog = new NoticeDialog().newInstance(STR_FAIL_NO_HASHTAG);
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 if (fm.findFragmentByTag("NoticeDialog") == null) {
                     dialog.show(fm, "NoticeDialog");
@@ -297,10 +332,10 @@ public class PostFragment extends Fragment {
             });
             dialog.setOnItemLongClickListener((parent, v1, position, id) -> {
                 DialogUtils.showConfirm(
-                        "ハッシュタグを削除しますか？",
+                        STR_CONFIRM_DESTROY_HASHTAG,
                         (d, which) -> {
                             hashtags.remove(position);
-                            ToastUtils.showShortToast("ハッシュタグを削除しました。");
+                            ToastUtils.showShortToast(STR_SUCCESS_DESTROY_HASHTAG);
                         }
                 );
                 dialog.dismiss();
@@ -315,32 +350,6 @@ public class PostFragment extends Fragment {
         });
     }
 
-    private void setCameraGalleryButtons(View view) {
-        // Camera button
-        view.findViewById(R.id.button_camera).setOnClickListener(v -> {
-            if (!isPicAvailable()) {
-                return;
-            }
-            // Coming soon...
-            DialogUtils.showProgress("読み込み中...", getContext());
-            new Handler().postDelayed(() -> {
-                DialogUtils.dismissProgress();
-                ToastUtils.showShortToast("カメラを起動できません。");
-            }, 1500);
-        });
-
-        // Gallery button
-        view.findViewById(R.id.button_gallery).setOnClickListener(v -> {
-            if (!isPicAvailable()) {
-                return;
-            }
-            // Open gallery
-            Intent intent = new Intent(Intent.ACTION_PICK);
-            intent.setType("image/*");
-            getActivity().startActivityForResult(intent, REQUEST_GALLERY);
-        });
-    }
-
     private boolean isPicAvailable() {
         // Check permission
         if (!StorageUtils.isPermitted(getActivity())) {
@@ -349,7 +358,7 @@ public class PostFragment extends Fragment {
         }
         // Check picture count
         if (mImageUris.size() >= 4) {
-            ToastUtils.showShortToast("これ以上選択できません。");
+            ToastUtils.showShortToast(STR_FAIL_NO_MORE_ADD);
             return false;
         }
         return true;

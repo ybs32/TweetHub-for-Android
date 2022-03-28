@@ -16,6 +16,8 @@ import com.ybsystem.tweetmate.usecases.UserListUseCase;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class UserListActivity extends ActivityBase {
 
     private TwitterUser mUser;
@@ -35,7 +37,7 @@ public class UserListActivity extends ActivityBase {
 
         // Set actionbar title
         if (mUser != null) {
-            getSupportActionBar().setTitle("リスト" + " (@" + mUser.getScreenName()  + ")");
+            getSupportActionBar().setTitle(STR_LIST + " (@" + mUser.getScreenName()  + ")");
         } else {
             getSupportActionBar().setTitle(mUserList.getName());
         }
@@ -112,12 +114,12 @@ public class UserListActivity extends ActivityBase {
             }
             // 購読中のリスト
             if (mUserList.isFollowing()) {
-                subscribe.setTitle("購読を解除");
+                subscribe.setTitle(STR_UNSUBSCRIBE);
                 return;
             }
             // 購読していないリスト
             if (!mUserList.isFollowing()) {
-                subscribe.setTitle("購読する");
+                subscribe.setTitle(STR_SUBSCRIBE);
                 return;
             }
         }

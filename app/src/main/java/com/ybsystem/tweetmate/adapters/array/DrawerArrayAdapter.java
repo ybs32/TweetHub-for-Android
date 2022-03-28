@@ -18,11 +18,12 @@ import com.ybsystem.tweetmate.activities.UserListActivity;
 import com.ybsystem.tweetmate.activities.preference.SettingActivity;
 import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.models.enums.ColumnType;
-import com.ybsystem.tweetmate.storages.PrefAppearance;
+import com.ybsystem.tweetmate.databases.PrefAppearance;
 import com.ybsystem.tweetmate.utils.CalcUtils;
 import com.ybsystem.tweetmate.utils.DialogUtils;
 
 import static com.ybsystem.tweetmate.models.enums.ColumnType.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class DrawerArrayAdapter extends ArrayAdapter<Integer> {
 
@@ -77,12 +78,12 @@ public class DrawerArrayAdapter extends ArrayAdapter<Integer> {
 
         switch (position) {
             case 1:
-                tv.setText("ホーム");
+                tv.setText(STR_HOME);
                 iv.setImageResource(R.drawable.ic_home);
                 cv.setOnClickListener(v -> intentToTimeline(HOME));
                 break;
             case 2:
-                tv.setText("@Mentions");
+                tv.setText(STR_MENTIONS);
                 iv.setImageResource(R.drawable.ic_mention);
                 cv.setOnClickListener(v -> intentToTimeline(MENTIONS));
                 break;
@@ -92,37 +93,37 @@ public class DrawerArrayAdapter extends ArrayAdapter<Integer> {
                 cv.setOnClickListener(v -> intentToTimeline(FAVORITE));
                 break;
             case 4:
-                tv.setText("リスト");
+                tv.setText(STR_LIST);
                 iv.setImageResource(R.drawable.ic_list);
                 cv.setOnClickListener(v -> intentToUserList());
                 break;
             case 5:
-                tv.setText("メッセージ");
+                tv.setText(STR_MESSAGE);
                 iv.setImageResource(R.drawable.ic_mail);
                 cv.setOnClickListener(v -> openOfficialPlayStore());
                 break;
             case 7:
-                tv.setText("検索");
+                tv.setText(STR_SEARCH);
                 iv.setImageResource(R.drawable.ic_search);
                 cv.setOnClickListener(v -> intentToSearch());
                 break;
             case 8:
-                tv.setText("ミュート");
+                tv.setText(STR_MUTE);
                 iv.setImageResource(R.drawable.ic_mute);
                 cv.setOnClickListener(v -> intentToTimeline(MUTE));
                 break;
             case 9:
-                tv.setText("ブロック");
+                tv.setText(STR_BLOCK);
                 iv.setImageResource(R.drawable.ic_block);
                 cv.setOnClickListener(v -> intentToTimeline(BLOCK));
                 break;
             case 11:
-                tv.setText("アカウント");
+                tv.setText(STR_ACCOUNT);
                 iv.setImageResource(R.drawable.ic_user);
                 cv.setOnClickListener(v -> DialogUtils.showAccountChoice());
                 break;
             case 12:
-                tv.setText("設定");
+                tv.setText(STR_SETTINGS);
                 iv.setImageResource(R.drawable.ic_setting);
                 cv.setOnClickListener(v -> intentToSetting());
                 break;
@@ -161,7 +162,7 @@ public class DrawerArrayAdapter extends ArrayAdapter<Integer> {
 
     private void openOfficialPlayStore() {
         DialogUtils.showConfirm(
-                "公式アプリで確認する",
+                STR_CONFIRM_OPEN_OFFICIAL,
                 (dialog, which) -> {
                     Uri uri = Uri.parse("market://details?id=com.twitter.android");
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);

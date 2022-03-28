@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.ybsystem.tweetmate.models.enums.ImageOption.NONE;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class PostActivity extends ActivityBase {
 
@@ -85,13 +86,13 @@ public class PostActivity extends ActivityBase {
                 // Check text
                 EditText edit = findViewById(R.id.edit_post);
                 if (edit.length() == 0) {
-                    ToastUtils.showShortToast("文字が入力されていません。");
+                    ToastUtils.showShortToast(STR_FAIL_NO_TEXT);
                     return true;
                 }
                 // Save draft
                 EntityArray<String> drafts = TweetMateApp.getMyAccount().getDrafts();
                 drafts.add(edit.getText().toString());
-                ToastUtils.showShortToast("下書きを保存しました。");
+                ToastUtils.showShortToast(STR_SUCCESS_SAVE_DRAFT);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -117,7 +118,7 @@ public class PostActivity extends ActivityBase {
             ImageView image = (ImageView) ll.getChildAt(mImageUris.size() - 1);
             image.setOnClickListener(v ->
                     DialogUtils.showConfirm(
-                            "画像をキャンセルしますか？",
+                            STR_CONFIRM_CANCEL_IMAGE,
                             (dialog, which) -> cancelImages()
                     )
             );
@@ -149,7 +150,7 @@ public class PostActivity extends ActivityBase {
         findViewById(R.id.linear_photo).setVisibility(View.GONE);
 
         // Show message
-        ToastUtils.showShortToast("画像をキャンセルしました。");
+        ToastUtils.showShortToast(STR_SUCCESS_CANCEL_IMAGE);
     }
 
 }

@@ -3,7 +3,7 @@ package com.ybsystem.tweetmate.models.entities;
 import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.libs.propertychange.PropertyChangeListener;
 import com.ybsystem.tweetmate.libs.propertychange.PropertyChangeSupport;
-import com.ybsystem.tweetmate.storages.PrefEntity;
+import com.ybsystem.tweetmate.databases.PrefEntity;
 
 import java.io.Serializable;
 

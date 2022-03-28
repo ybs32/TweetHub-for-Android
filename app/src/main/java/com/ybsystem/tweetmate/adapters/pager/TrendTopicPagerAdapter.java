@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.ybsystem.tweetmate.fragments.timeline.TopicTimeline;
 import com.ybsystem.tweetmate.fragments.timeline.TrendTimeline;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class TrendTopicPagerAdapter extends FragmentPagerAdapter {
 
     public TrendTopicPagerAdapter(FragmentManager manager) {
@@ -22,9 +24,9 @@ public class TrendTopicPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "トレンド";
+                return STR_TREND;
             case 1:
-                return "話題のツイート";
+                return STR_TOPIC;
         }
         return null;
     }

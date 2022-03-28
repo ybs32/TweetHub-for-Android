@@ -37,7 +37,7 @@
         <activity
             android:name=".activities.OAuthActivity"
             android:configChanges="orientation|screenSize"
-            android:label="アカウント認証"
+            android:label="@string/account_verification"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -66,56 +66,56 @@
         <activity
             android:name=".activities.PostActivity"
             android:configChanges="orientation|screenSize"
-            android:label="ツイート"
+            android:label="@string/tweet"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.PhotoActivity"
             android:configChanges="orientation|screenSize"
-            android:label="フォト" />
+            android:label="@string/photo" />
         <activity
             android:name=".activities.VideoActivity"
             android:configChanges="orientation|screenSize"
-            android:label="ムービー" />
+            android:label="@string/movie" />
         <activity
             android:name=".activities.preference.SettingActivity"
             android:configChanges="orientation|screenSize"
-            android:label="設定" />
+            android:label="@string/settings" />
         <activity
             android:name=".activities.preference.ThemeActivity"
             android:configChanges="orientation|screenSize"
-            android:label="テーマ設定" />
+            android:label="@string/theme_settings" />
         <activity
             android:name=".activities.preference.AppearanceActivity"
             android:configChanges="orientation|screenSize"
-            android:label="タイムライン表示" />
+            android:label="@string/appearance_settings" />
         <activity
             android:name=".activities.preference.ClickActionActivity"
             android:configChanges="orientation|screenSize"
-            android:label="タップ動作" />
+            android:label="@string/click_action_settings" />
         <activity
             android:name=".activities.preference.SystemActivity"
             android:configChanges="orientation|screenSize"
-            android:label="システム動作" />
+            android:label="@string/system_settings" />
         <activity
             android:name=".activities.preference.WallpaperActivity"
             android:configChanges="orientation|screenSize"
-            android:label="壁紙設定" />
+            android:label="@string/wallpaper_settings" />
         <activity
             android:name=".activities.preference.ColumnActivity"
             android:configChanges="orientation|screenSize"
-            android:label="カラム管理" />
+            android:label="@string/column_settings" />
         <activity
             android:name=".activities.preference.AccountActivity"
             android:configChanges="orientation|screenSize"
-            android:label="アカウント管理" />
+            android:label="@string/account_settings" />
         <activity
             android:name=".activities.preference.BrowserAuthActivity"
             android:configChanges="orientation|screenSize"
-            android:label="Twitter認証" />
+            android:label="@string/account_verification" />
         <activity
             android:name=".activities.preference.VersionActivity"
             android:configChanges="orientation|screenSize"
-            android:label="バージョン" />
+            android:label="@string/version_settings" />
         <activity
             android:name=".activities.preference.AboutActivity"
             android:configChanges="orientation|screenSize"

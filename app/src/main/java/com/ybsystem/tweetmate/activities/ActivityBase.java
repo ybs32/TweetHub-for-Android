@@ -8,7 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.application.TweetMateApp;
-import com.ybsystem.tweetmate.storages.PrefTheme;
+import com.ybsystem.tweetmate.resources.ResColor;
+import com.ybsystem.tweetmate.databases.PrefTheme;
 
 public abstract class ActivityBase extends AppCompatActivity {
 
@@ -16,8 +17,13 @@ public abstract class ActivityBase extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TweetMateApp.setActivity(this);
+
+        // Set
         setTheme();
         setBackButton();
+
+        // Init resource
+        ResColor.init();
     }
 
     @Override

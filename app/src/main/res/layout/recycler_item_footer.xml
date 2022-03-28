@@ -6,19 +6,19 @@
     android:gravity="center"
     android:orientation="horizontal">
 
-    <!-- プログレスバー -->
+    <!-- Spinner -->
     <ProgressBar
         android:id="@+id/progressbar_footer"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginRight="24dp" />
 
-    <!-- 読み込み中... -->
+    <!-- Loading... -->
     <TextView
         android:id="@+id/text_footer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="読み込み中..."
+        android:text="@string/loading"
         android:textSize="16dp"
         android:textStyle="bold" />
 </LinearLayout>

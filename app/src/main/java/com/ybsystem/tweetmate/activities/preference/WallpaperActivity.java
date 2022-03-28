@@ -12,11 +12,12 @@ import androidx.fragment.app.FragmentTransaction;
 import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.activities.ActivityBase;
 import com.ybsystem.tweetmate.fragments.preference.WallpaperFragment;
-import com.ybsystem.tweetmate.storages.PrefWallpaper;
+import com.ybsystem.tweetmate.databases.PrefWallpaper;
 import com.ybsystem.tweetmate.utils.DialogUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
 
 import static com.ybsystem.tweetmate.activities.preference.SettingActivity.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class WallpaperActivity extends ActivityBase {
 
@@ -42,8 +43,7 @@ public class WallpaperActivity extends ActivityBase {
                 setWallpaper(data);
             } catch (Exception e) {
                 // Failed...
-                ToastUtils.showShortToast("エラーが発生しました...");
-                ToastUtils.showShortToast("画像の取得に失敗しました。");
+                ToastUtils.showShortToast(STR_FAIL_LOAD);
             }
         }
     }
@@ -67,7 +67,7 @@ public class WallpaperActivity extends ActivityBase {
         c.close();
 
         // Finish activity
-        DialogUtils.showProgress("設定を適用中...", this);
+        DialogUtils.showProgress(STR_APPLYING, this);
         new Handler().postDelayed(() -> {
             DialogUtils.dismissProgress();
             setResult(REBOOT_IMMEDIATE);

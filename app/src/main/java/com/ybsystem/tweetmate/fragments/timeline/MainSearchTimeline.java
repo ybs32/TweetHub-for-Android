@@ -28,6 +28,8 @@ import twitter4j.Trend;
 import twitter4j.Trends;
 import twitter4j.TwitterException;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class MainSearchTimeline extends TimelineBase {
 
     private EditText mSearchEdit;
@@ -98,7 +100,7 @@ public class MainSearchTimeline extends TimelineBase {
 
     protected void loadTweet(final boolean isPullLoad, final boolean isClickLoad) {
         // Change footer
-        mFooterText.setText("読み込み中...");
+        mFooterText.setText(STR_LOADING);
         mFooterProgress.setVisibility(View.VISIBLE);
         mFooterView.setVisibility(View.VISIBLE);
 
@@ -128,7 +130,7 @@ public class MainSearchTimeline extends TimelineBase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                mFooterText.setText("タップして読み込む");
+                mFooterText.setText(STR_TAP_TO_LOAD);
                 mFooterProgress.setVisibility(View.GONE);
 
                 // Show error message if loaded by user action

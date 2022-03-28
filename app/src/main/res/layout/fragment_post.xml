@@ -87,7 +87,7 @@
             android:background="#00000000"
             android:ems="10"
             android:gravity="left|top"
-            android:hint="いまなにしてる？"
+            android:hint="@string/whats_happen"
             android:importantForAutofill="no"
             android:inputType="textMultiLine"
             android:padding="12dp">
@@ -109,16 +109,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true">
 
-            <!-- 「カメラボタン」 -->
-            <ImageButton
-                android:id="@+id/button_camera"
+            <!-- 「ユーザーボタン」 -->
+            <ImageView
+                android:id="@+id/button_user"
                 android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/bg_rounded_purple"
-                android:padding="10dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_camera"
-                android:tint="#FFFFFF" />
+                android:layout_height="48dp" />
 
             <!-- 「ギャラリーボタン」 -->
             <ImageButton

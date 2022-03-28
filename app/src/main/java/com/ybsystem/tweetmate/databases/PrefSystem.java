@@ -1,4 +1,4 @@
-package com.ybsystem.tweetmate.storages;
+package com.ybsystem.tweetmate.databases;
 
 import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterMediaEntity;

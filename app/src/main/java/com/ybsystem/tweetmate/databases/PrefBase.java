@@ -1,4 +1,4 @@
-package com.ybsystem.tweetmate.storages;
+package com.ybsystem.tweetmate.databases;
 
 import android.content.Context;
 import android.content.SharedPreferences;

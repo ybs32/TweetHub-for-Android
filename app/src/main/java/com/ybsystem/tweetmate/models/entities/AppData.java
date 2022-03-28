@@ -11,6 +11,7 @@ import twitter4j.User;
 import twitter4j.auth.AccessToken;
 
 import static com.ybsystem.tweetmate.models.enums.ColumnType.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -38,7 +39,7 @@ public class AppData extends Entity {
         // Set vias
         ViaArray<Via> vias = new ViaArray<>();
         Via via = new Via();
-        via.setName("TweetMate");
+        via.setName(STR_APP_NAME);
         via.setConsumerKey(BuildConfig.CK);
         via.setConsumerSecret(BuildConfig.CS);
         via.setToken(token.getToken());
@@ -49,11 +50,11 @@ public class AppData extends Entity {
 
         // Set columns
         ColumnArray<Column> columns = new ColumnArray<>();
-        columns.add(new Column(-1, "@Mentions", MENTIONS, false));
-        columns.add(new Column(-2, "ホーム", HOME, true));
-        columns.add(new Column(-3, "リスト", LIST, false));
-        columns.add(new Column(-4, "いいね", FAVORITE, false));
-        columns.add(new Column(-5, "検索", SEARCH, false));
+        columns.add(new Column(-1, STR_MENTIONS, MENTIONS, false));
+        columns.add(new Column(-2, STR_HOME, HOME, true));
+        columns.add(new Column(-3, STR_LIST, LIST, false));
+        columns.add(new Column(-4, STR_LIKE, FAVORITE, false));
+        columns.add(new Column(-5, STR_SEARCH, SEARCH, false));
         account.setColumns(columns);
 
         // Set lists, drafts, hashtags

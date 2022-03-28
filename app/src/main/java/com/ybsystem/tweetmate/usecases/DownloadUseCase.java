@@ -22,6 +22,8 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.observers.DisposableObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class DownloadUseCase {
 
     private DownloadUseCase() {
@@ -36,14 +38,12 @@ public class DownloadUseCase {
             @Override
             public void onNext(String path) {
                 // Success
-                ToastUtils.showShortToast("画像を保存しました。");
-                ToastUtils.showLongToast("保存場所：" + path);
+                ToastUtils.showLongToast(STR_SUCCESS_SAVE_IMAGE + "\n" + path);
             }
 
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                ToastUtils.showShortToast("エラーが発生しました...");
                 ToastUtils.showShortToast(t.getMessage());
             }
 
@@ -53,7 +53,7 @@ public class DownloadUseCase {
         };
 
         // Show progress
-        DialogUtils.showProgress("通信中...", TweetMateApp.getActivity());
+        DialogUtils.showProgress(STR_CONNECTING, TweetMateApp.getActivity());
 
         // Subscribe
         observable.subscribeOn(Schedulers.newThread())

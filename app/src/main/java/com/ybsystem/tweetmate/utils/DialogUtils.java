@@ -15,6 +15,8 @@ import com.ybsystem.tweetmate.models.entities.Account;
 import com.ybsystem.tweetmate.models.entities.AccountArray;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUser;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 /**
  * Utils class for progress dialog creation
  */
@@ -109,7 +111,7 @@ public class DialogUtils {
                     // Change account and reboot
                     accounts.setCurrentAccount(which);
                     TweetMateApp.getInstance().init();
-                    ToastUtils.showShortToast("アカウントを切り替えました。");
+                    ToastUtils.showShortToast(STR_SUCCESS_SWITCH_ACCOUNT);
                     ActivityUtils.rebootActivity(TweetMateApp.getActivity(), 0, 0);
                 }
         );

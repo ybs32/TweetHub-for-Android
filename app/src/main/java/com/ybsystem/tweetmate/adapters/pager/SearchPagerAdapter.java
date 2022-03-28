@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.ybsystem.tweetmate.fragments.timeline.SearchTweetTimeline;
 import com.ybsystem.tweetmate.fragments.timeline.SearchUserTimeline;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 public class SearchPagerAdapter extends FragmentPagerAdapter {
 
     private String mSearchWord;
@@ -25,11 +27,11 @@ public class SearchPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "リアルタイム";
+                return STR_REALTIME;
             case 1:
-                return "人気";
+                return STR_POPULAR;
             case 2:
-                return "ユーザー";
+                return STR_USER;
         }
         return null;
     }

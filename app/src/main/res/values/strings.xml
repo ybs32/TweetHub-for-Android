@@ -1,11 +1,253 @@
 <resources>
     <string name="app_name">TweetMate</string>
-    <string name="app_version">2.0.1</string>
+    <string name="app_version">2.0.2</string>
     <string name="app_update_info">
-        Ver.2.0.1\n
-        ・テーマ設定のプレビュー機能を修正\n
-        ・タイムライン設定にプレビューを追加
+        Ver.2.0.2\n
+        ・ツイート画面のカメラボタンを廃止\n
+        ・ツイート画面に現在のアカウントを表示
     </string>
+
+    <string name="home">ホーム</string>
+    <string name="mentions">\@Mentions</string>
+    <string name="message">メッセージ</string>
+    <string name="like">いいね</string>
+    <string name="unlike">いいね解除</string>
+    <string name="favorite">お気に入り</string>
+    <string name="unfavorite">お気に入り解除</string>
+    <string name="retweet">リツイート</string>
+    <string name="unretweet">リツイート解除</string>
+    <string name="quote">引用ツイート</string>
+    <string name="tweet">ツイート</string>
+    <string name="tweet_none">ツイートなし</string>
+    <string name="reply">返信</string>
+    <string name="talk">会話</string>
+    <string name="detail">ツイート詳細</string>
+    <string name="list">リスト</string>
+    <string name="list_single">リスト(単体)</string>
+    <string name="list_none">リストなし</string>
+    <string name="you">あなた</string>
+    <string name="user">ユーザー</string>
+    <string name="user_name">ユーザー名</string>
+    <string name="user_none">ユーザーなし</string>
+    <string name="member">メンバー</string>
+    <string name="account">アカウント</string>
+    <string name="account_verification">アカウント認証</string>
+    <string name="account_private">非公開アカウント</string>
+    <string name="profile">プロフィール</string>
+    <string name="profile_myself">マイプロフィール</string>
+    <string name="follow">フォロー</string>
+    <string name="followed">フォロー中</string>
+    <string name="follower">フォロワー</string>
+    <string name="mutual">相互フォロー</string>
+    <string name="mute">ミュート</string>
+    <string name="unmute">ミュート解除</string>
+    <string name="block">ブロック</string>
+    <string name="blocked">ブロック中</string>
+    <string name="unblock">ブロック解除</string>
+    <string name="search">検索</string>
+    <string name="trend">トレンド</string>
+    <string name="topic">話題のツイート</string>
+    <string name="realtime">リアルタイム</string>
+    <string name="popular">人気</string>
+    <string name="media">メディア</string>
+    <string name="photo">フォト</string>
+    <string name="movie">ムービー</string>
+    <string name="gif">GIFアニメ</string>
+    <string name="location">場所</string>
+    <string name="destination">保存先</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">キャンセル</string>
+    <string name="login">ログイン</string>
+    <string name="reply_verb">返信する</string>
+    <string name="delete">削除する</string>
+    <string name="release">解除する</string>
+    <string name="move_up">上に移動</string>
+    <string name="move_down">下に移動</string>
+    <string name="copy_mate">本文をコピー</string>
+    <string name="share">共有する</string>
+    <string name="open_twitter">Twitterで開く</string>
+    <string name="tap_to_load">タップして読み込む</string>
+    <string name="set_boot_column">起動カラムに設定</string>
+    <string name="created">作成済み</string>
+    <string name="subscribe">購読する</string>
+    <string name="subscribed">購読中</string>
+    <string name="unsubscribe">購読を解除</string>
+    <string name="add">追加する</string>
+    <string name="added">追加された</string>
+    <string name="tap">タップ</string>
+    <string name="tap_left">左タップ</string>
+    <string name="tap_center">中央タップ</string>
+    <string name="tap_right">右タップ</string>
+    <string name="long_tap">ロングタップ</string>
+    <string name="long_tap_left">左ロングタップ</string>
+    <string name="long_tap_center">中央ロングタップ</string>
+    <string name="long_tap_right">右ロングタップ</string>
+    <string name="normal">通常</string>
+    <string name="reverse">反転</string>
+    <string name="size">サイズ</string>
+    <string name="small">小サイズ</string>
+    <string name="medium">中サイズ</string>
+    <string name="large">大サイズ</string>
+    <string name="orig">オリジナル</string>
+    <string name="sending">送信中…</string>
+    <string name="connecting">通信中…</string>
+    <string name="load">読み込み</string>
+    <string name="loading">読み込み中…</string>
+    <string name="applying">設定を適用中…</string>
+    <string name="whats_happen">いまなにしてる？</string>
+    <string name="show_talk">会話を表示</string>
+    <string name="add_comment">コメントを追加</string>
+    <string name="search_on_twitter">Twitterで検索</string>
+    <string name="search_on_hashtag">ハッシュタグで検索</string>
+    <string name="tweet_on_hashtag">ハッシュタグでツイート</string>
+    <string name="reply_to_you">自分宛の返信</string>
+    <string name="my_tweet">自分のツイート</string>
+    <string name="update_info">アップデート情報</string>
+
+    <string name="settings">設定</string>
+    <string name="not_set_mate">未設定</string>
+    <string name="management">管理</string>
+    <string name="others">その他</string>
+    <string name="theme_settings">テーマ設定</string>
+    <string name="appearance_settings">タイムライン表示</string>
+    <string name="click_action_settings">タップ動作</string>
+    <string name="system_settings">システム動作</string>
+    <string name="wallpaper_settings">壁紙設定</string>
+    <string name="column_settings">カラム管理</string>
+    <string name="account_settings">アカウント管理</string>
+    <string name="version_settings">バージョン</string>
+    <string name="feedback_settings">フィードバック</string>
+    <string name="about_settings">このアプリについて</string>
+    <string name="theme">テーマ</string>
+    <string name="custom">カスタム</string>
+    <string name="timeline_background">タイムライン背景色</string>
+    <string name="timeline_text_1">タイムライン文字色１</string>
+    <string name="timeline_text_2">タイムライン文字色２</string>
+    <string name="relative_time">相対時刻</string>
+    <string name="absolute_time">絶対時刻</string>
+    <string name="tweet_text">ツイート本文</string>
+    <string name="client_name">クライアント名</string>
+    <string name="retweeted_by">Retweeted by</string>
+    <string name="url_hashtag">URL・ハッシュタグ</string>
+    <string name="retweet_like_count">リツイート数・いいね数</string>
+    <string name="preview">プレビュー</string>
+    <string name="check_layout">レイアウトを確認</string>
+    <string name="font_size">フォントサイズ</string>
+    <string name="user_icon_size">ユーザーアイコンサイズ</string>
+    <string name="user_icon_select">ユーザーアイコン（丸 / 四角）</string>
+    <string name="style">スタイル</string>
+    <string name="like_favorite">いいね / お気に入り</string>
+    <string name="display_item">表示項目</string>
+    <string name="thumbnail_image">サムネイル画像</string>
+    <string name="image_quality">画像の品質</string>
+    <string name="video_quality">ビデオの品質</string>
+    <string name="system">システム</string>
+    <string name="confirm_action">確認する動作</string>
+    <string name="confirm_dialog">ダイアログ確認</string>
+    <string name="timeline">タイムライン</string>
+    <string name="get_items_when_boot">起動時の取得件数</string>
+    <string name="get_items_when_scroll">"スクロール時の取得件数</string>
+    <string name="easy_tweet">タイムライン</string>
+    <string name="show_tweetbox_on_timeline">タイムライン上にツイート欄を表示</string>
+    <string name="transparency">透過率</string>
+    <string name="select_wallpaper">壁紙を選択</string>
+    <string name="destroy_wallpaper">壁紙を解除</string>
+    <string name="tweet_menu">ツイートメニュー</string>
+    <string name="display_menu_item">メニュー表示アイテム</string>
+    <string name="tap_when_retweet">リツイートのタップ</string>
+    <string name="tap_when_hashtag">ハッシュタグのタップ</string>
+
+    <!-- Confirmation -->
+    <string name="confirm_auth">認証を開始します。</string>
+    <string name="confirm_like">いいねしますか？</string>
+    <string name="confirm_unlike">いいねを解除しますか？</string>
+    <string name="confirm_favorite">お気に入りに追加しますか？</string>
+    <string name="confirm_unfavorite">お気に入りを解除しますか？</string>
+    <string name="confirm_retweet">リツイートしますか？</string>
+    <string name="confirm_unretweet">リツイートを解除しますか？</string>
+    <string name="confirm_tweet">ツイートしますか？</string>
+    <string name="confirm_destroy_tweet">ツイートを削除しますか？</string>
+    <string name="confirm_subscribe_list">リストを購読しますか？</string>
+    <string name="confirm_unsubscribe">購読を解除しますか？</string>
+    <string name="confirm_follow">フォローしますか？</string>
+    <string name="confirm_unfollow">フォローを解除しますか？</string>
+    <string name="confirm_mute">ミュートしますか？</string>
+    <string name="confirm_unmute">ミュートを解除しますか？</string>
+    <string name="confirm_block">ブロックしますか？</string>
+    <string name="confirm_unblock">ブロックを解除しますか？</string>
+    <string name="confirm_add_column">カラムに追加しますか？</string>
+    <string name="confirm_release_account">アカウントを解除しますか？</string>
+    <string name="confirm_save_search">検索を保存しますか？</string>
+    <string name="confirm_destroy_search">検索を削除しますか？</string>
+    <string name="confirm_destroy_wallpaper">壁紙を解除しますか？</string>
+    <string name="confirm_destroy_draft">下書きを削除しますか？</string>
+    <string name="confirm_destroy_hashtag">ハッシュタグを削除しますか？</string>
+    <string name="confirm_cancel_image">画像をキャンセルしますか？</string>
+    <string name="confirm_finish_app">アプリを終了しますか？</string>
+    <string name="confirm_open_official">公式アプリで確認する</string>
+
+    <!-- Success -->
+    <string name="success_auth">TweetMateへようこそ！</string>
+    <string name="success_like">いいねしました。</string>
+    <string name="success_unlike">いいねを解除しました。</string>
+    <string name="success_favorite">お気に入りに追加しました。</string>
+    <string name="success_unfavorite">お気に入りを解除しました。</string>
+    <string name="success_retweet">リツイートしました。</string>
+    <string name="success_unretweet">リツイートを解除しました。</string>
+    <string name="success_tweet">ツイートしました。</string>
+    <string name="success_destroy_tweet">ツイートを削除しました。</string>
+    <string name="success_subscribe_list">リストを購読しました。</string>
+    <string name="success_unsubscribe">購読を解除しました。</string>
+    <string name="success_follow">フォローしました。</string>
+    <string name="success_unfollow">フォローを解除しました。</string>
+    <string name="success_mute">ミュートしました。</string>
+    <string name="success_unmute">ミュートを解除しました。</string>
+    <string name="success_block">ブロックしました。</string>
+    <string name="success_unblock">ブロックを解除しました。</string>
+    <string name="success_add_column">カラムに追加しました。</string>
+    <string name="success_add_list">リストに追加しました。</string>
+    <string name="success_destroy_list">リストから削除しました。</string>
+    <string name="success_add_account">アカウントを追加しました。</string>
+    <string name="success_switch_account">アカウントを切り替えました。</string>
+    <string name="success_release_account">アカウントを解除しました。</string>
+    <string name="success_save_search">検索を保存しました。</string>
+    <string name="success_destroy_search">検索を削除しました。</string>
+    <string name="success_destroy_wallpaper">壁紙を解除しました。</string>
+    <string name="success_save_draft">下書きを保存しました。</string>
+    <string name="success_destroy_draft">下書きを削除しました。</string>
+    <string name="success_destroy_hashtag">ハッシュタグを削除しました。</string>
+    <string name="success_save_image">画像を保存しました。</string>
+    <string name="success_cancel_image">画像をキャンセルしました。</string>
+    <string name="success_apply">設定を適用しました。</string>
+    <string name="success_copy_tweet">ツイートをコピーしました。</string>
+
+    <!-- Fail -->
+    <string name="fail_auth">認証に失敗しました…</string>
+    <string name="fail_load">読み込みに失敗しました…</string>
+    <string name="fail_get_user">ユーザーの取得に失敗しました…</string>
+    <string name="fail_get_list">リストの取得に失敗しました…</string>
+    <string name="fail_no_set_wallpaper">壁紙は設定されていません。</string>
+    <string name="fail_no_search">保存した検索はありません。</string>
+    <string name="fail_no_draft">下書きはありません。</string>
+    <string name="fail_no_text">文章が入力されていません。</string>
+    <string name="fail_no_hashtag">ハッシュタグ履歴はありません。</string>
+    <string name="fail_no_list">リストが存在しません。</string>
+    <string name="fail_no_more_add">これ以上追加できません。</string>
+    <string name="fail_no_more_move">これ以上移動できません。</string>
+    <string name="fail_using_column">起動カラムに設定されています。</string>
+    <string name="fail_using_account">使用中のアカウントです。</string>
+    <string name="fail_using_via">使用中のキーです。</string>
+    <string name="fail_already_add">既に追加されています。</string>
+    <string name="fail_open_camera">カメラを起動できません。</string>
+    <string name="fail_need_permission">アクセス許可が必要です。</string>
+
+    <!-- Sentence -->
+    <string name="sentence_created_by">%1$sさんが作成</string>
+    <string name="sentence_retweeted_by">%1$sさんがリツイート</string>
+    <string name="sentence_members">%1$d人のメンバー</string>
+    <string name="sentence_notice_auth">アプリを利用するには、\nTwitterアカウントが必要です。\n\n
+        通知機能、ダイレクトメッセージを使用\nする場合は、公式アプリをご利用下さい。</string>
 
     <!-- UltraPullToRefresh -->
     <string name="cube_ptr_pull_down">引っ張って…</string>
@@ -13,73 +255,4 @@
     <string name="cube_ptr_release_to_refresh">指を離して更新</string>
     <string name="cube_ptr_refreshing">読み込み中…</string>
     <string name="cube_ptr_refresh_complete">読み込み中…</string>
-
-    <!-- Entities -->
-    <string name="pref_key_entity">pref_key_entity</string>
-    <string name="pref_key_app_data">pref_key_app_data</string>
-
-    <!-- Settings -->
-    <string name="pref_key_theme">pref_key_theme</string>
-    <string name="pref_key_appearance">pref_key_appearance</string>
-    <string name="pref_key_click_action">pref_key_click_action</string>
-    <string name="pref_key_system">pref_key_system</string>
-    <string name="pref_key_wallpaper">pref_key_wallpaper</string>
-    <string name="pref_key_column">pref_key_column</string>
-    <string name="pref_key_account">pref_key_account</string>
-    <string name="pref_key_version">pref_key_version</string>
-    <string name="pref_key_feedback">pref_key_feedback</string>
-    <string name="pref_key_about">pref_key_about</string>
-
-    <!-- Theme settings -->
-    <string name="pref_key_theme_setting">pref_key_theme_setting</string>
-    <string name="pref_key_theme_custom">pref_key_theme_custom</string>
-    <string name="pref_key_retweet_color">pref_key_retweet_color</string>
-    <string name="pref_key_reply_color">pref_key_reply_color</string>
-    <string name="pref_key_mytweet_color">pref_key_mytweet_color</string>
-    <string name="pref_key_username_color">pref_key_username_color</string>
-    <string name="pref_key_relativetime_color">pref_key_relativetime_color</string>
-    <string name="pref_key_tweettext_color">pref_key_tweettext_color</string>
-    <string name="pref_key_link_color">pref_key_link_color</string>
-    <string name="pref_key_absolutetime_color">pref_key_absolutetime_color</string>
-    <string name="pref_key_via_color">pref_key_via_color</string>
-    <string name="pref_key_rtfav_color">pref_key_rtfav_color</string>
-    <string name="pref_key_retweetedby_color">pref_key_retweetedby_color</string>
-    <string name="pref_key_theme_preview">pref_key_theme_preview</string>
-
-    <!-- Appearance settings -->
-    <string name="pref_key_size_font">pref_key_size_font</string>
-    <string name="pref_key_size_user_icon">pref_key_size_user_icon</string>
-    <string name="pref_key_style_like_fav">pref_key_style_like_fav</string>
-    <string name="pref_key_style_user_icon">pref_key_style_user_icon</string>
-    <string name="pref_key_show_absolute_time">pref_key_show_absolute_time</string>
-    <string name="pref_key_show_via">pref_key_show_via</string>
-    <string name="pref_key_show_rt_fav_count">pref_key_show_rt_fav_count</string>
-    <string name="pref_key_show_retweeted_by">pref_key_show_retweeted_by</string>
-    <string name="pref_key_show_thumbnail">pref_key_show_thumbnail</string>
-    <string name="pref_key_appearance_preview">pref_key_appearance_preview</string>
-
-    <!-- ClickAction settings -->
-    <string name="pref_key_left_click">pref_key_left_click</string>
-    <string name="pref_key_middle_click">pref_key_middle_click</string>
-    <string name="pref_key_right_click">pref_key_right_click</string>
-    <string name="pref_key_left_long_click">pref_key_left_long_click</string>
-    <string name="pref_key_middle_long_click">pref_key_middle_long_click</string>
-    <string name="pref_key_right_long_click">pref_key_right_long_click</string>
-    <string name="pref_key_tweet_menu">pref_key_tweet_menu</string>
-    <string name="pref_key_click_retweet">pref_key_click_retweet</string>
-    <string name="pref_key_click_hashtag">pref_key_click_hashtag</string>
-
-    <!-- System settings -->
-    <string name="pref_key_quality_image">pref_key_quality_image</string>
-    <string name="pref_key_quality_video">pref_key_quality_video</string>
-    <string name="pref_key_confirm_setting">pref_key_confirm_setting</string>
-    <string name="pref_key_count_boot_load">pref_key_count_boot_load</string>
-    <string name="pref_key_count_scroll_load">pref_key_count_scroll_load</string>
-    <string name="pref_key_easy_tweet">pref_key_easy_tweet</string>
-
-    <!-- Wallpaper settings -->
-    <string name="pref_key_add_wallpaper">pref_key_add_wallpaper</string>
-    <string name="pref_key_delete_wallpaper">pref_key_delete_wallpaper</string>
-    <string name="pref_key_wallpaper_path">pref_key_wallpaper_path</string>
-    <string name="pref_key_wallpaper_transparency">pref_key_wallpaper_transparency</string>
 </resources>

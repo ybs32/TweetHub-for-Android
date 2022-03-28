@@ -9,7 +9,7 @@ import com.ybsystem.tweetmate.models.entities.Account;
 import com.ybsystem.tweetmate.models.entities.AppData;
 import com.ybsystem.tweetmate.models.entities.Via;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUser;
-import com.ybsystem.tweetmate.storages.PrefEntity;
+import com.ybsystem.tweetmate.databases.PrefEntity;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;

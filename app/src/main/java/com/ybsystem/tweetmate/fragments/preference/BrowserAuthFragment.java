@@ -30,6 +30,7 @@ import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
 import static com.ybsystem.tweetmate.activities.preference.SettingActivity.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class BrowserAuthFragment extends Fragment {
     // Web client
@@ -122,7 +123,7 @@ public class BrowserAuthFragment extends Fragment {
                 mWebView.loadUrl(authorizationURL);
             } else {
                 // Failed...
-                ToastUtils.showShortToast("認証に失敗しました...");
+                ToastUtils.showShortToast(STR_FAIL_AUTH);
                 ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
                 getActivity().finish();
                 getActivity().overridePendingTransition(R.anim.zoom_in, R.anim.slide_out_to_right);
@@ -167,7 +168,7 @@ public class BrowserAuthFragment extends Fragment {
                 addAccount();
             } else {
                 // Failed...
-                ToastUtils.showShortToast("認証に失敗しました...");
+                ToastUtils.showShortToast(STR_FAIL_AUTH);
                 ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(e));
                 getActivity().finish();
             }
@@ -177,8 +178,7 @@ public class BrowserAuthFragment extends Fragment {
             // Check if already user added
             for (Account account : TweetMateApp.getData().getAccounts()) {
                 if (accessToken.getUserId() == account.getUser().getId()) {
-                    ToastUtils.showShortToast("エラーが発生しました...");
-                    ToastUtils.showShortToast("既に追加済みのユーザです。");
+                    ToastUtils.showShortToast(STR_FAIL_ALREADY_ADD);
                     getActivity().finish();
                     getActivity().overridePendingTransition(R.anim.zoom_in, R.anim.slide_out_to_right);
                     return;
@@ -189,10 +189,10 @@ public class BrowserAuthFragment extends Fragment {
             TweetMateApp.getInstance().init();
 
             // Reboot application
-            DialogUtils.showProgress("読み込み中...", getActivity());
+            DialogUtils.showProgress(STR_LOADING, getActivity());
             new Handler().postDelayed(() -> {
                 DialogUtils.dismissProgress();
-                ToastUtils.showShortToast("アカウントを追加しました。");
+                ToastUtils.showShortToast(STR_SUCCESS_ADD_ACCOUNT);
                 getActivity().setResult(REBOOT_IMMEDIATE);
                 getActivity().finish();
             }, 1500);

@@ -3,7 +3,7 @@ package com.ybsystem.tweetmate.usecases;
 import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.libs.eventbus.UserEvent;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUser;
-import com.ybsystem.tweetmate.storages.PrefSystem;
+import com.ybsystem.tweetmate.databases.PrefSystem;
 import com.ybsystem.tweetmate.utils.DialogUtils;
 import com.ybsystem.tweetmate.utils.ExceptionUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
@@ -17,6 +17,10 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import twitter4j.TwitterException;
 
 import static com.ybsystem.tweetmate.models.enums.ConfirmAction.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
+import static com.ybsystem.tweetmate.resources.ResString.STR_SUCCESS_UNBLOCK;
+import static com.ybsystem.tweetmate.resources.ResString.STR_SUCCESS_UNFOLLOW;
+import static com.ybsystem.tweetmate.resources.ResString.STR_SUCCESS_UNMUTE;
 
 public class UserUseCase {
 
@@ -26,9 +30,8 @@ public class UserUseCase {
     public static void follow(TwitterUser user) {
         // Create text
         boolean isFriend = user.isFriend();
-        String confirm = isFriend ? "フォローを解除しますか？" : "フォローしますか？";
-        String success = isFriend ? "フォローを解除しました。" : "フォローしました。";
-        String fail = isFriend ? "フォロー解除に失敗しました..." : "フォローに失敗しました...";
+        String confirm = isFriend ? STR_CONFIRM_UNFOLLOW : STR_CONFIRM_FOLLOW;
+        String success = isFriend ? STR_SUCCESS_UNFOLLOW : STR_SUCCESS_FOLLOW;
 
         // Async
         Observable<Object> observable = Observable.create(e -> {
@@ -55,7 +58,6 @@ public class UserUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                ToastUtils.showShortToast(fail);
                 ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
@@ -89,9 +91,8 @@ public class UserUseCase {
     public static void mute(TwitterUser user) {
         // Create text
         boolean isMuting = user.isMuting();
-        String confirm = isMuting ? "ミュートを解除しますか？" : "ミュートしますか？";
-        String success = isMuting ? "ミュートを解除しました。" : "ミュートしました。";
-        String fail = isMuting ? "ミュート解除に失敗しました..." : "ミュートに失敗しました...";
+        String confirm = isMuting ? STR_CONFIRM_UNMUTE : STR_CONFIRM_MUTE;
+        String success = isMuting ? STR_SUCCESS_UNMUTE : STR_SUCCESS_MUTE;
 
         // Async
         Observable<Object> observable = Observable.create(e -> {
@@ -118,7 +119,6 @@ public class UserUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                ToastUtils.showShortToast(fail);
                 ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 
@@ -152,9 +152,8 @@ public class UserUseCase {
     public static void block(TwitterUser user) {
         // Create text
         boolean isBlocking = user.isBlocking();
-        String confirm = isBlocking ? "ブロックを解除しますか？" : "ブロックしますか？";
-        String success = isBlocking ? "ブロックを解除しました。" : "ブロックしました。";
-        String fail = isBlocking ? "ブロック解除に失敗しました..." : "ブロックに失敗しました...";
+        String confirm = isBlocking ? STR_CONFIRM_UNBLOCK : STR_CONFIRM_BLOCK;
+        String success = isBlocking ? STR_SUCCESS_UNBLOCK : STR_SUCCESS_BLOCK;
 
         // Async
         Observable<Object> observable = Observable.create(e -> {
@@ -181,7 +180,6 @@ public class UserUseCase {
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                ToastUtils.showShortToast(fail);
                 ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
             }
 

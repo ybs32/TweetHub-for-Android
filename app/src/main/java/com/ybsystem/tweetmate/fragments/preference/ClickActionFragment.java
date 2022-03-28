@@ -8,7 +8,8 @@ import androidx.preference.ListPreference;
 import com.ybsystem.tweetmate.R;
 
 import static com.ybsystem.tweetmate.activities.preference.SettingActivity.*;
-import static com.ybsystem.tweetmate.storages.PrefClickAction.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
+import static com.ybsystem.tweetmate.databases.PrefClickAction.*;
 
 public class ClickActionFragment extends PreferenceFragmentBase {
 
@@ -44,17 +45,17 @@ public class ClickActionFragment extends PreferenceFragmentBase {
 
         // Click retweet
         mRetweetClick = findPreference(KEY_CLICK_RETWEET);
-        if (mRetweetClick.getEntry().equals("通常")) {
-            mRetweetClick.setSummary("タップ：リツイート\n" + "ロングタップ：引用ツイート");
+        if (mRetweetClick.getEntry().equals(STR_NORMAL)) {
+            mRetweetClick.setSummary(STR_TAP + "：" + STR_RETWEET + "\n" + STR_LONG_TAP + "：" + STR_QUOTE);
         } else {
-            mRetweetClick.setSummary("タップ：引用ツイート\n" + "ロングタップ：リツイート");
+            mRetweetClick.setSummary(STR_TAP + "：" + STR_QUOTE + "\n" + STR_LONG_TAP + "：" + STR_RETWEET);
         }
         // Click hashtag
         mHashtagClick = findPreference(KEY_CLICK_HASHTAG);
-        if (mHashtagClick.getEntry().equals("通常")) {
-            mHashtagClick.setSummary("タップ：ハッシュタグで検索\n" + "ロングタップ：ハッシュタグでツイート");
+        if (mHashtagClick.getEntry().equals(STR_NORMAL)) {
+            mHashtagClick.setSummary(STR_TAP + "：" + STR_SEARCH_ON_HASHTAG + "\n" + STR_LONG_TAP + "：" + STR_TWEET_ON_HASHTAG);
         } else {
-            mHashtagClick.setSummary("タップ：ハッシュタグでツイート\n" + "ロングタップ：ハッシュタグで検索");
+            mHashtagClick.setSummary(STR_TAP + "：" + STR_TWEET_ON_HASHTAG + "\n" + STR_LONG_TAP + "：" + STR_SEARCH_ON_HASHTAG);
         }
     }
 
@@ -83,17 +84,17 @@ public class ClickActionFragment extends PreferenceFragmentBase {
             mRightLongClick.setSummary(mRightLongClick.getEntry());
         }
         else if (key.equals(KEY_CLICK_RETWEET)) {
-            if (mRetweetClick.getEntry().equals("通常")) {
-                mRetweetClick.setSummary("タップ：リツイート\n" + "ロングタップ：引用ツイート");
+            if (mRetweetClick.getEntry().equals(STR_NORMAL)) {
+                mRetweetClick.setSummary(STR_TAP + "：" + STR_RETWEET + "\n" + STR_LONG_TAP + "：" + STR_QUOTE);
             } else {
-                mRetweetClick.setSummary("タップ：引用ツイート\n" + "ロングタップ：リツイート");
+                mRetweetClick.setSummary(STR_TAP + "：" + STR_QUOTE + "\n" + STR_LONG_TAP + "：" + STR_RETWEET);
             }
         }
         else if (key.equals(KEY_CLICK_HASHTAG)) {
-            if (mHashtagClick.getEntry().equals("通常")) {
-                mHashtagClick.setSummary("タップ：ハッシュタグで検索\n" + "ロングタップ：ハッシュタグでツイート");
+            if (mHashtagClick.getEntry().equals(STR_NORMAL)) {
+                mHashtagClick.setSummary(STR_TAP + "：" + STR_SEARCH_ON_HASHTAG + "\n" + STR_LONG_TAP + "：" + STR_TWEET_ON_HASHTAG);
             } else {
-                mHashtagClick.setSummary("タップ：ハッシュタグでツイート\n" + "ロングタップ：ハッシュタグで検索");
+                mHashtagClick.setSummary(STR_TAP + "：" + STR_TWEET_ON_HASHTAG + "\n" + STR_LONG_TAP + "：" + STR_SEARCH_ON_HASHTAG);
             }
         }
     }

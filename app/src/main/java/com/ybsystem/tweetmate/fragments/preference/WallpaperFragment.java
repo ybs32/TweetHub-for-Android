@@ -8,14 +8,15 @@ import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
 import com.ybsystem.tweetmate.R;
-import com.ybsystem.tweetmate.storages.PrefWallpaper;
+import com.ybsystem.tweetmate.databases.PrefWallpaper;
 import com.ybsystem.tweetmate.utils.DialogUtils;
 import com.ybsystem.tweetmate.utils.StorageUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
 
 import static com.ybsystem.tweetmate.activities.preference.SettingActivity.*;
 import static com.ybsystem.tweetmate.activities.preference.WallpaperActivity.*;
-import static com.ybsystem.tweetmate.storages.PrefWallpaper.*;
+import static com.ybsystem.tweetmate.resources.ResString.*;
+import static com.ybsystem.tweetmate.databases.PrefWallpaper.*;
 
 public class WallpaperFragment extends PreferenceFragmentBase {
 
@@ -43,8 +44,8 @@ public class WallpaperFragment extends PreferenceFragmentBase {
         mDeleteWallpaper = findPreference(KEY_DELETE_WALLPAPER);
         mDeleteWallpaper.setOnPreferenceClickListener(preference -> {
             // Check wallpaper
-            if (PrefWallpaper.getWallpaperPath().equals("未設定")) {
-                ToastUtils.showShortToast("壁紙は設定されていません。");
+            if (PrefWallpaper.getWallpaperPath().equals(STR_NOT_SET)) {
+                ToastUtils.showShortToast(STR_FAIL_NO_SET_WALLPAPER);
                 return false;
             }
             showConfirmDialog();
@@ -75,12 +76,12 @@ public class WallpaperFragment extends PreferenceFragmentBase {
     private void showConfirmDialog() {
         // Show
         DialogUtils.showConfirm(
-                "壁紙を解除しますか？",
+                STR_CONFIRM_DESTROY_WALLPAPER,
                 (dialog, which) -> {
                     getActivity().setResult(REBOOT_PREPARATION);
-                    PrefWallpaper.saveWallpaperPath("未設定");
+                    PrefWallpaper.saveWallpaperPath(STR_NOT_SET);
                     mAddWallpaper.setSummary(PrefWallpaper.getWallpaperPath());
-                    ToastUtils.showShortToast("壁紙を解除しました。");
+                    ToastUtils.showShortToast(STR_SUCCESS_DESTROY_WALLPAPER);
                 }
         );
     }
