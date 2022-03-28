@@ -23,6 +23,10 @@ public class VersionFragment extends Fragment {
         String newVersion = getString(R.string.app_update_info);
         String oldVersion =
                         "\n" +
+                        "Ver.2.0.1\n" +
+                        "・テーマ設定のプレビュー機能を修正\n" +
+                        "・タイムライン設定にプレビューを追加\n" +
+                        "\n" +
                         "Ver.2.0.0\n" +
                         "・アプリ名とアイコンを刷新\n" +
                         "・ライセンス表記を追加\n" +
