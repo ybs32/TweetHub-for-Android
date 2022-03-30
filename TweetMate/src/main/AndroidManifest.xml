@@ -67,7 +67,13 @@
             android:name=".activities.PostActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/tweet"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/*" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activities.PhotoActivity"
             android:configChanges="orientation|screenSize"
