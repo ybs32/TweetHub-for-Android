@@ -6,10 +6,15 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import androidx.fragment.app.FragmentManager;
 
 import com.ybsystem.tweetmate.BuildConfig;
 import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.application.TweetMateApp;
+import com.ybsystem.tweetmate.fragments.dialog.NoticeDialog;
 import com.ybsystem.tweetmate.utils.DialogUtils;
 import com.ybsystem.tweetmate.utils.ExceptionUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
@@ -58,6 +63,27 @@ public class OAuthActivity extends ActivityBase {
                 startAuthentication();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.oauth, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // If authorization failed
+            case R.id.item_trouble:
+                NoticeDialog dialog = new NoticeDialog().newInstance(STR_SENTENCE_TROUBLE_AUTH);
+                FragmentManager fm = getSupportFragmentManager();
+                if (fm.findFragmentByTag("NoticeDialog") == null) {
+                    dialog.show(fm, "NoticeDialog");
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
