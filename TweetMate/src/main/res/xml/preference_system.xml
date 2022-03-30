@@ -37,7 +37,7 @@
             android:entries="@array/confirm_setting_entries"
             android:entryValues="@array/confirm_setting_values"
             android:key="@string/pref_key_confirm_setting"
-            android:title="ダイアログ確認"
+            android:title="確認メッセージ"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
