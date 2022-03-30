@@ -88,15 +88,15 @@ public class PrefAppearance extends PrefBase {
     }
 
     public static boolean isShowVia() {
-        return getDefaultSharedPreferences().getBoolean(KEY_SHOW_VIA, false);
+        return getDefaultSharedPreferences().getBoolean(KEY_SHOW_VIA, true);
     }
 
     public static boolean isShowRtFavCount() {
-        return getDefaultSharedPreferences().getBoolean(KEY_SHOW_RT_FAV_COUNT, false);
+        return getDefaultSharedPreferences().getBoolean(KEY_SHOW_RT_FAV_COUNT, true);
     }
 
     public static boolean isShowRetweetedBy() {
-        return getDefaultSharedPreferences().getBoolean(KEY_SHOW_RETWEETED_BY, false);
+        return getDefaultSharedPreferences().getBoolean(KEY_SHOW_RETWEETED_BY, true);
     }
 
     public static boolean isShowThumbnail() {

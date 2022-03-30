@@ -12,8 +12,8 @@
         <item>ハッシュタグで検索</item>
         <item>ハッシュタグでツイート</item>
         <item>ユーザーを表示</item>
-        <item>本文をコピー</item>
         <item>ツイート詳細</item>
+        <item>本文をコピー</item>
         <item>共有する</item>
         <item>Twitterで開く</item>
         <item>何もしない</item>
@@ -31,8 +31,8 @@
         <item>HASH_SEARCH</item>
         <item>HASH_TWEET</item>
         <item>USER</item>
-        <item>COPY</item>
         <item>DETAIL</item>
+        <item>COPY</item>
         <item>SHARE</item>
         <item>TWITTER</item>
         <item>NONE</item>

@@ -61,19 +61,19 @@
             app:iconSpaceReserved="false" />
 
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="@string/pref_key_show_via"
             android:title="クライアント名"
             app:iconSpaceReserved="false" />
 
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="@string/pref_key_show_rt_fav_count"
             android:title="リツイート数・いいね数"
             app:iconSpaceReserved="false" />
 
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="@string/pref_key_show_retweeted_by"
             android:title="Retweeted by"
             app:iconSpaceReserved="false" />

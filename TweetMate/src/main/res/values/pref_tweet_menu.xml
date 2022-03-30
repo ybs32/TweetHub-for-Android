@@ -9,8 +9,8 @@
         <item>URLリンク</item>
         <item>ハッシュタグ</item>
         <item>ユーザー</item>
-        <item>本文をコピー</item>
         <item>ツイート詳細</item>
+        <item>本文をコピー</item>
         <item>共有する</item>
         <item>Twitterで開く</item>
     </string-array>
@@ -24,8 +24,8 @@
         <item>URL</item>
         <item>HASH</item>
         <item>USER</item>
-        <item>COPY</item>
         <item>DETAIL</item>
+        <item>COPY</item>
         <item>SHARE</item>
         <item>TWITTER</item>
     </string-array>
