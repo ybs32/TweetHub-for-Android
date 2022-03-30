@@ -21,4 +21,9 @@
         android:key="@string/pref_key_wallpaper_transparency"
         android:title="透過率"
         app:iconSpaceReserved="false" />
+
+    <PreferenceScreen
+        android:title="※注意"
+        android:summary="見づらくなる場合は透過率を下げる\nもしくは、ダークテーマをお試し下さい。"
+        app:iconSpaceReserved="false" />
 </PreferenceScreen>

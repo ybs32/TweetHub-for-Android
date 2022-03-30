@@ -239,13 +239,13 @@
     <string name="fail_using_account">使用中のアカウントです。</string>
     <string name="fail_using_via">使用中のキーです。</string>
     <string name="fail_already_add">既に追加されています。</string>
-    <string name="fail_open_camera">カメラを起動できません。</string>
     <string name="fail_need_permission">アクセス許可が必要です。</string>
 
     <!-- Sentence -->
     <string name="sentence_created_by">%1$sさんが作成</string>
     <string name="sentence_retweeted_by">%1$sさんがリツイート</string>
     <string name="sentence_members">%1$d人のメンバー</string>
+    <string name="sentence_trouble_auth">ユーザ名またはメールアドレスでログインをお試し下さい。</string>
     <string name="sentence_notice_auth">アプリを利用するには、\nTwitterアカウントが必要です。\n\n
         通知機能、ダイレクトメッセージを使用\nする場合は、公式アプリをご利用下さい。</string>
 

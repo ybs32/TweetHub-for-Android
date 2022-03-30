@@ -183,8 +183,10 @@ public class ResString {
     public static final String STR_FAIL_USING_ACCOUNT = getString(R.string.fail_using_account);
     public static final String STR_FAIL_USING_VIA = getString(R.string.fail_using_via);
     public static final String STR_FAIL_ALREADY_ADD = getString(R.string.fail_already_add);
-    public static final String STR_FAIL_OPEN_CAMERA = getString(R.string.fail_open_camera);
     public static final String STR_FAIL_NEED_PERMISSION = getString(R.string.fail_need_permission);
+
+    // Sentence
+    public static final String STR_SENTENCE_TROUBLE_AUTH = getString(R.string.sentence_trouble_auth);
 
     private ResString() {
     }
