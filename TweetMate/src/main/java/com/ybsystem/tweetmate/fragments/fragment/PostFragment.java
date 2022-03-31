@@ -52,6 +52,7 @@ public class PostFragment extends Fragment {
     private TextView mTextCount;
 
     // Intent data
+    private String mExternalText;
     private String mTweetPrefix;
     private String mTweetSuffix;
     private TwitterStatus mReplyStatus;
@@ -68,6 +69,7 @@ public class PostFragment extends Fragment {
 
         // Init
         Intent intent = getActivity().getIntent();
+        mExternalText = intent.getStringExtra(Intent.EXTRA_TEXT);
         mTweetPrefix = intent.getStringExtra("TWEET_PREFIX");
         mTweetSuffix = intent.getStringExtra("TWEET_SUFFIX");
         mReplyStatus = (TwitterStatus) intent.getSerializableExtra("REPLY_STATUS");
@@ -149,6 +151,12 @@ public class PostFragment extends Fragment {
     }
 
     private void setIntentData() {
+        // Check external
+        if (mExternalText != null) {
+            mPostEdit.setText(mExternalText);
+            mPostEdit.setSelection(mExternalText.length());
+        }
+
         // Check prefix
         if (mTweetPrefix != null) {
             mTweetPrefix += " ";

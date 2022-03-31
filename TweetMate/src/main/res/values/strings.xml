@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">TweetMate</string>
-    <string name="app_version">2.0.2</string>
+    <string name="app_version">2.0.3</string>
     <string name="app_update_info">
-        Ver.2.0.2\n
-        ・ツイート画面のカメラボタンを廃止\n
-        ・ツイート画面に現在のアカウントを表示
+        Ver.2.0.3\n
+        ・外部からツイート先の指定に対応\n
+        ・デフォルトの設定値を一部修正
     </string>
 
     <string name="home">ホーム</string>
@@ -144,7 +144,7 @@
     <string name="video_quality">ビデオの品質</string>
     <string name="system">システム</string>
     <string name="confirm_action">確認する動作</string>
-    <string name="confirm_dialog">ダイアログ確認</string>
+    <string name="confirm_message">確認メッセージ</string>
     <string name="timeline">タイムライン</string>
     <string name="get_items_when_boot">起動時の取得件数</string>
     <string name="get_items_when_scroll">"スクロール時の取得件数</string>
@@ -239,13 +239,13 @@
     <string name="fail_using_account">使用中のアカウントです。</string>
     <string name="fail_using_via">使用中のキーです。</string>
     <string name="fail_already_add">既に追加されています。</string>
-    <string name="fail_open_camera">カメラを起動できません。</string>
     <string name="fail_need_permission">アクセス許可が必要です。</string>
 
     <!-- Sentence -->
     <string name="sentence_created_by">%1$sさんが作成</string>
     <string name="sentence_retweeted_by">%1$sさんがリツイート</string>
     <string name="sentence_members">%1$d人のメンバー</string>
+    <string name="sentence_trouble_auth">ユーザ名またはメールアドレスでログインをお試し下さい。</string>
     <string name="sentence_notice_auth">アプリを利用するには、\nTwitterアカウントが必要です。\n\n
         通知機能、ダイレクトメッセージを使用\nする場合は、公式アプリをご利用下さい。</string>
 

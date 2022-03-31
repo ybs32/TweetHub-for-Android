@@ -179,8 +179,8 @@ public class TweetDialog extends DialogFragment {
         int urlIcon = R.drawable.ic_link;
         int hashIcon = R.drawable.ic_hashtag;
         int userIcon = R.drawable.ic_user;
-        int copyIcon = R.drawable.ic_copy;
         int detailIcon = R.drawable.ic_doc;
+        int copyIcon = R.drawable.ic_copy;
         int shareIcon = R.drawable.ic_share;
         int twitterIcon = R.drawable.ic_twitter;
 
@@ -193,8 +193,8 @@ public class TweetDialog extends DialogFragment {
         int urlColor = COLOR_LINK_WEAK;
         int hashColor = COLOR_LINK_WEAK;
         int userColor = COLOR_STRONG;
-        int copyColor = COLOR_STRONG;
         int detailColor = COLOR_STRONG;
+        int copyColor = COLOR_STRONG;
         int shareColor = COLOR_STRONG;
         int twitterColor = COLOR_STRONG;
 
@@ -290,18 +290,18 @@ public class TweetDialog extends DialogFragment {
                 );
             }
         }
-        // Copy
-        if (menuSetting.contains(COPY)) {
-            adapter.add(
-                    new Menu(copyIcon, copyColor, STR_COPY, "",
-                            () -> ClickUseCase.copyText(mSource))
-            );
-        }
         // Detail
         if (menuSetting.contains(DETAIL)) {
             adapter.add(
                     new Menu(detailIcon, detailColor, STR_DETAIL, "",
                             () -> ClickUseCase.showDetail(mSource))
+            );
+        }
+        // Copy
+        if (menuSetting.contains(COPY)) {
+            adapter.add(
+                    new Menu(copyIcon, copyColor, STR_COPY, "",
+                            () -> ClickUseCase.copyText(mSource))
             );
         }
         // Share

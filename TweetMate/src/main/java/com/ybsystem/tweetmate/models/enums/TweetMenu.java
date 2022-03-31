@@ -11,8 +11,8 @@ public enum TweetMenu {
     URL("URL"),
     HASH("HASH"),
     USER("USER"),
-    COPY("COPY"),
     DETAIL("DETAIL"),
+    COPY("COPY"),
     SHARE("SHARE"),
     TWITTER("TWITTER");
 

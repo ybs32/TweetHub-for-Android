@@ -107,6 +107,16 @@ public class ClickUseCase {
         act.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
     }
 
+    public static void showDetail(TwitterStatus status) {
+        // Intent to TimelineActivity
+        Activity act = TweetMateApp.getActivity();
+        Intent intent = new Intent(act, TimelineActivity.class);
+        intent.putExtra("STATUS", status);
+        intent.putExtra("COLUMN_TYPE", DETAIL);
+        act.startActivity(intent);
+        act.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
+    }
+
     public static void copyText(TwitterStatus status) {
         // Get clipboard
         ClipboardManager clipboardManager = (ClipboardManager)
@@ -116,16 +126,6 @@ public class ClickUseCase {
             clipboardManager.setPrimaryClip(ClipData.newPlainText("", status.getText()));
             ToastUtils.showShortToast(STR_SUCCESS_COPY_TWEET);
         }
-    }
-
-    public static void showDetail(TwitterStatus status) {
-        // Intent to TimelineActivity
-        Activity act = TweetMateApp.getActivity();
-        Intent intent = new Intent(act, TimelineActivity.class);
-        intent.putExtra("STATUS", status);
-        intent.putExtra("COLUMN_TYPE", DETAIL);
-        act.startActivity(intent);
-        act.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
     }
 
     public static void share(TwitterStatus status) {
