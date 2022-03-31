@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">TweetMate</string>
-    <string name="app_version">2.0.2</string>
+    <string name="app_version">2.0.3</string>
     <string name="app_update_info">
-        Ver.2.0.2\n
-        ・ツイート画面のカメラボタンを廃止\n
-        ・ツイート画面に現在のアカウントを表示
+        Ver.2.0.3\n
+        ・外部からツイート先の指定に対応\n
+        ・デフォルトの設定値を一部修正
     </string>
 
     <string name="home">ホーム</string>
