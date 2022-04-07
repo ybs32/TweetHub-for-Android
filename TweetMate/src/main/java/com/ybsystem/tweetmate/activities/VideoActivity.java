@@ -8,6 +8,7 @@ import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
+import com.google.android.exoplayer2.ui.PlayerControlView;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource;
 import com.ybsystem.tweetmate.R;
@@ -21,6 +22,7 @@ public class VideoActivity extends ActivityBase {
     // Video player
     private ExoPlayer mExoPlayer;
     private PlayerView mPlayerView;
+    private PlayerControlView mPlayerControlView;
 
     // Media
     private TwitterMediaEntity mMediaEntity;
@@ -35,10 +37,10 @@ public class VideoActivity extends ActivityBase {
                 getIntent().getSerializableExtra("MEDIA_ENTITY");
 
         // Create media
-        String videoURL = PrefSystem.getVideoByQuality(mMediaEntity);
-        mMediaSource = new ProgressiveMediaSource.Factory(
-                new DefaultHttpDataSource.Factory()
-        ).createMediaSource(MediaItem.fromUri(Uri.parse(videoURL)));
+        Uri videoURI = Uri.parse(PrefSystem.getVideoByQuality(mMediaEntity));
+        mMediaSource = new ProgressiveMediaSource
+                .Factory(new DefaultHttpDataSource.Factory())
+                .createMediaSource(MediaItem.fromUri(videoURI));
 
         // Set actionbar title
         switch (mMediaEntity.getType()) {
@@ -53,6 +55,7 @@ public class VideoActivity extends ActivityBase {
         // Set view
         setContentView(R.layout.activity_video);
         setPlayerView();
+        setPlayerListener();
     }
 
     @Override
@@ -78,17 +81,31 @@ public class VideoActivity extends ActivityBase {
         mExoPlayer.setMediaSource(mMediaSource);
         mExoPlayer.prepare();
 
-        // Set player to view
+        // Set to playerView
         mPlayerView = findViewById(R.id.player_view);
         mPlayerView.setPlayer(mExoPlayer);
-        mPlayerView.hideController();
 
-        // Start video
+        // Set to controlView
+        mPlayerControlView = findViewById(R.id.player_control_view);
+        mPlayerControlView.setPlayer(mExoPlayer);
+
+        // Start video and Hide control
         mExoPlayer.setPlayWhenReady(true);
+        mPlayerControlView.hide();
+    }
+
+    private void setPlayerListener() {
+        // When click video, toggle control visibility
+        mPlayerView.getVideoSurfaceView().setOnClickListener(view -> {
+            if (mPlayerControlView.isVisible()) {
+                mPlayerControlView.hide();
+            } else {
+                mPlayerControlView.show();
+            }
+        });
 
         // When completed video
         mExoPlayer.addListener(new ExoPlayer.Listener() {
-
             @Override
             public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
                 switch(playbackState) {
