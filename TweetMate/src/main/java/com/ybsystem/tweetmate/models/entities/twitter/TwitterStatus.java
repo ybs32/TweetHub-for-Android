@@ -12,8 +12,11 @@ import com.ybsystem.tweetmate.databases.PrefAppearance;
 import com.ybsystem.tweetmate.databases.PrefTheme;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -71,11 +74,18 @@ public class TwitterStatus extends Entity {
     private String convertedRelativeTime;
     private String convertedAbsoluteTime;
     private String convertedVia;
+    private ArrayList<String> imageUrls;
     private boolean isMyTweet;
     private boolean isPublic;
     private boolean isTalk;
     private boolean isDetail;
-    private boolean isMediaTweet;
+    private boolean isTwiMedia;
+    private boolean isThirdMedia;
+    private boolean isVideo;
+
+    // Media
+    private static final Pattern PATTERN_YOUTUBE =
+            Pattern.compile("^https?://(?:www\\.youtube\\.com/watch\\?.*v=|youtu\\.be/)([\\w-]+)");
 
     // Not use
     // private Place place;
@@ -147,11 +157,14 @@ public class TwitterStatus extends Entity {
         this.convertedRelativeTime = createRelativeTime(status);
         this.convertedAbsoluteTime = createAbsoluteTime(status);
         this.convertedVia = createVia(status);
+        this.imageUrls = createImageUrls(status);
         this.isMyTweet = status.getUser().getId() == TweetMateApp.getMyUser().getId();
         this.isPublic = isMyTweet || !status.getUser().isProtected();
         this.isTalk = status.getInReplyToStatusId() != -1;
         this.isDetail = false;
-        this.isMediaTweet = !status.isRetweet() && status.getMediaEntities().length != 0;
+        this.isTwiMedia = (imageUrls.size() > 0 && mediaEntities.length > 0);
+        this.isThirdMedia = (imageUrls.size() > 0  && mediaEntities.length == 0);
+        this.isVideo = (isTwiMedia && !mediaEntities[0].getType().equals("photo"));
     }
 
     private static String createTweetText(Status status) {
@@ -252,4 +265,34 @@ public class TwitterStatus extends Entity {
         }
     }
 
+    private static ArrayList<String> createImageUrls(Status status) {
+        // Init
+        ArrayList<String> imageUrls = new ArrayList<>();
+        Status source = status.isRetweet() ? status.getRetweetedStatus() : status;
+
+        // Check media
+        if (source.getMediaEntities().length > 0) {
+            // Twitter media
+            MediaEntity[] medias = source.getMediaEntities();
+            for (int i = 0; i < medias.length; i++) {
+                imageUrls.add(medias[i].getMediaURLHttps());
+            }
+        } else {
+            // Third party media
+            for (URLEntity url : source.getURLEntities()) {
+                // Limit is 4
+                if (imageUrls.size() >= 4) {
+                    break;
+                }
+                // Youtube
+                Matcher matcher = PATTERN_YOUTUBE.matcher(url.getExpandedURL());
+                if (matcher.find()) {
+                    imageUrls.add("http://i.ytimg.com/vi/" + matcher.group(1) + "/0.jpg");
+                    continue;
+                }
+                // Others (Pending...)
+            }
+        }
+        return imageUrls;
+    }
 }

@@ -31,6 +31,7 @@ public class PhotoActivity extends ActivityBase {
     private int mSize; // 0(:small), 1(:medium), 2(:large), 3(:orig)
     private int mPagerPosition;
     private ArrayList<String> mImageURLs;
+    private boolean mIsThirdMedia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class PhotoActivity extends ActivityBase {
         mSize = getIntent().getIntExtra("SIZE", -1);
         mPagerPosition = getIntent().getIntExtra("PAGER_POSITION", -1);
         mImageURLs = (ArrayList<String>) getIntent().getSerializableExtra("IMAGE_URLS");
+        mIsThirdMedia = getIntent().getBooleanExtra("THIRD_MEDIA", false);
 
         // Set pager
         setActionBarTitle();
@@ -54,7 +56,9 @@ public class PhotoActivity extends ActivityBase {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.photo, menu);
+        if (!mIsThirdMedia) {
+            getMenuInflater().inflate(R.menu.photo, menu);
+        }
         return true;
     }
 
