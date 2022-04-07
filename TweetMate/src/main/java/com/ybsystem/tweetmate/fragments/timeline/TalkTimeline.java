@@ -1,6 +1,7 @@
 package com.ybsystem.tweetmate.fragments.timeline;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,12 +29,11 @@ public class TalkTimeline extends TimelineBase {
     private TwitterStatus mStatus;
 
     // For reply to
-    private boolean mToLoaded;
+    private int mLoadCount;
     private ArrayList<TwitterStatus> mToStatusList;
 
     // For reply from
     private Query mQuery;
-    private boolean mFromLoaded;
     private ArrayList<TwitterStatus> mFromStatusList;
 
     public TalkTimeline newInstance(TwitterStatus status) {
@@ -73,9 +73,8 @@ public class TalkTimeline extends TimelineBase {
         mFooterProgress.setVisibility(View.VISIBLE);
         mFooterView.setVisibility(View.VISIBLE);
 
-        // Load reply status
+        // Load reply to
         loadReplyToStatus(mStatus);
-        loadReplyFromStatus(mStatus);
     }
 
     private void loadReplyToStatus(TwitterStatus target) {
@@ -100,20 +99,28 @@ public class TalkTimeline extends TimelineBase {
                 // Success
                 TwitterStatus status = new TwitterStatus(status4j);
                 mToStatusList.add(status);
+                mLoadCount++;
+
+                // Render tweets
+                if (status.getInReplyToStatusId() == -1 || mLoadCount % 10 == 0) {
+                    renderReplyTo();
+                }
+
                 // Load next
                 if (status.getInReplyToStatusId() != -1) {
                     loadReplyToStatus(status);
                     return;
                 }
-                mToLoaded = true;
-                loadCompleted();
+
+                // Load reply from
+                loadReplyFromStatus(mStatus);
             }
 
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                mToLoaded = true;
-                loadCompleted();
+                renderReplyTo();
+                loadReplyFromStatus(mStatus);
             }
 
             @Override
@@ -147,8 +154,10 @@ public class TalkTimeline extends TimelineBase {
         DisposableObserver<QueryResult> disposable = new DisposableObserver<QueryResult>() {
             @Override
             public void onNext(QueryResult result) {
-                // Success
-                if (result.getTweets().size() != 0) {
+                if (result.getTweets().isEmpty()) {
+                    // No tweet...
+                } else {
+                    // Success
                     for (Status status4j : result.getTweets()) {
                         if (status4j.getInReplyToStatusId() == target.getId()) {
                             // Store status
@@ -160,15 +169,13 @@ public class TalkTimeline extends TimelineBase {
                         }
                     }
                 }
-                mFromLoaded = true;
-                loadCompleted();
+                renderReplyFrom();
             }
 
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                mFromLoaded = true;
-                loadCompleted();
+                renderReplyFrom();
             }
 
             @Override
@@ -182,21 +189,27 @@ public class TalkTimeline extends TimelineBase {
                 .subscribe(disposable);
     }
 
-    private void loadCompleted() {
-        if (mToLoaded && mFromLoaded) {
-            // Insert toStatus
-            for (TwitterStatus toStatus : mToStatusList) {
-                mRecyclerAdapter.insert(0, toStatus);
-            }
-            // Add fromStatus
-            for (TwitterStatus fromStatus : mFromStatusList) {
-                mRecyclerAdapter.add(fromStatus);
-            }
-            mRecyclerAdapter.notifyDataSetChanged();
-
-            // Hide footer
-            mFooterView.setVisibility(View.GONE);
+    private void renderReplyTo() {
+        // Render
+        for (TwitterStatus toStatus : mToStatusList) {
+            mRecyclerAdapter.insert(0, toStatus);
+            mRecyclerAdapter.notifyItemInserted(0);
         }
+        mToStatusList.clear();
+    }
+
+    private void renderReplyFrom() {
+        // Render
+        for (TwitterStatus fromStatus : mFromStatusList) {
+            mRecyclerAdapter.add(fromStatus);
+            mRecyclerAdapter.notifyItemInserted(mRecyclerAdapter.getObjCount());
+        }
+        mFromStatusList.clear();
+
+        // Hide footer
+        new Handler().postDelayed(
+            () -> mFooterView.setVisibility(View.GONE)
+        , 200);
     }
 
 }
