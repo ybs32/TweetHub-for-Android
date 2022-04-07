@@ -119,7 +119,7 @@ public class ProfileTimeline extends TimelineBase {
                             adapter.add(status);
                             continue;
                         }
-                        if (status.isMediaTweet()) {
+                        if (!status.isRetweet() && status.isTwiMedia()) {
                             adapter.add(status);
                         }
                     }

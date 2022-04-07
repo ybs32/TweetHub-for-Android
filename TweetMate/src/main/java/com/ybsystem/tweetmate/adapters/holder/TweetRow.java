@@ -13,7 +13,6 @@ import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.listeners.ThumbnailClickListener;
 import com.ybsystem.tweetmate.listeners.TweetClickListener;
-import com.ybsystem.tweetmate.models.entities.twitter.TwitterMediaEntity;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUserMentionEntity;
 import com.ybsystem.tweetmate.models.enums.ClickAction;
@@ -219,10 +218,10 @@ public class TweetRow extends RecyclerView.ViewHolder {
     }
 
     public void setThumbnail() {
-        TwitterMediaEntity[] medias = mSource.getMediaEntities();
+        ArrayList<String> imageUrls = mSource.getImageUrls();
 
         // When media not exist, hide and exit
-        if (medias == null || medias.length == 0) {
+        if (imageUrls.isEmpty()) {
             mThumbnailContainer.setVisibility(View.GONE);
             return;
         }
@@ -233,16 +232,16 @@ public class TweetRow extends RecyclerView.ViewHolder {
         }
 
         // When video exist, show play icon
-        if (medias[0].getVideoVariants().length > 0) {
+        if (mSource.isVideo()) {
             mPlayIcon.setVisibility(View.VISIBLE);
         }
         // Set thumbnails
-        for (int i = 0; i < medias.length; i++) {
-            String imageURL = PrefSystem.getMediaThumbByQuality(medias[i].getMediaURLHttps());
+        for (int i = 0; i < imageUrls.size(); i++) {
+            String imageURL = PrefSystem.getMediaThumbByQuality(imageUrls.get(i), mSource.isThirdMedia());
             ImageView thumbnail = mThumbnails.get(i);
             GlideUtils.load(imageURL, thumbnail, NONE);
             thumbnail.setVisibility(View.VISIBLE);
-            thumbnail.setOnClickListener(new ThumbnailClickListener(i, medias));
+            thumbnail.setOnClickListener(new ThumbnailClickListener(i, mSource));
         }
         mThumbnailContainer.setVisibility(View.VISIBLE);
     }
