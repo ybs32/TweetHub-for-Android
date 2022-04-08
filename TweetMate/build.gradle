@@ -12,8 +12,8 @@ android {
         applicationId "com.ybsystem.tweethub"
         minSdkVersion 26
         targetSdkVersion 31
-        versionCode 20
-        versionName "2.0.3"
+        versionCode 21
+        versionName "2.1.0"
         buildConfigField("String", "CK", prop['ck'])
         buildConfigField("String", "CS", prop['cs'])
         buildConfigField("String", "CB", prop['cb'])

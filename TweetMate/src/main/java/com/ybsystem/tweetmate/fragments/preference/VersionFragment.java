@@ -23,6 +23,10 @@ public class VersionFragment extends Fragment {
         String newVersion = getString(R.string.app_update_info);
         String oldVersion =
                         "\n" +
+                        "Ver.2.0.3\n" +
+                        "・外部からツイート先の指定に対応\n" +
+                        "・デフォルトの設定値を一部修正\n" +
+                        "\n" +
                         "Ver.2.0.2\n" +
                         "・ツイート画面のカメラボタンを廃止\n" +
                         "・ツイート画面に現在のアカウントを表示\n" +
