@@ -115,7 +115,6 @@ public class MainActivity extends ActivityBase
                 ActivityUtils.rebootActivity(this, 0, 0);
                 break;
             case REBOOT_PREPARATION:
-                // Reboot activity
                 DialogUtils.showProgress(STR_APPLYING, this);
                 new Handler().postDelayed(() -> {
                     DialogUtils.dismissProgress();
@@ -177,6 +176,7 @@ public class MainActivity extends ActivityBase
         RapidFloatingActionListView rfaListView = new RapidFloatingActionListView(this);
         rfaListView.setOnRfaListViewListener(this);
 
+        // Set list items
         List<CardItem> cardItems = new ArrayList<>();
         cardItems.add(new CardItem().setName(STR_SEARCH).setResId(R.drawable.ic_search));
         cardItems.add(new CardItem().setName(STR_ACCOUNT).setResId(R.drawable.ic_user));
