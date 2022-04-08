@@ -162,8 +162,8 @@ public class TwitterStatus extends Entity {
         this.isPublic = isMyTweet || !status.getUser().isProtected();
         this.isTalk = status.getInReplyToStatusId() != -1;
         this.isDetail = false;
-        this.isTwiMedia = (imageUrls.size() > 0 && mediaEntities.length > 0);
-        this.isThirdMedia = (imageUrls.size() > 0  && mediaEntities.length == 0);
+        this.isTwiMedia = (!imageUrls.isEmpty() && mediaEntities.length > 0);
+        this.isThirdMedia = (!imageUrls.isEmpty()  && mediaEntities.length == 0);
         this.isVideo = (isTwiMedia && !mediaEntities[0].getType().equals("photo"));
     }
 
