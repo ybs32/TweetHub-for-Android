@@ -40,6 +40,7 @@ public class MainFragment extends Fragment {
     private ViewPager mMainTlPager;
     private MainPagerAdapter mMainPagerAdapter;
 
+    private int mLoadCount;
     private static final int FRIEND = 0;
     private static final int FOLLOWER = 1;
     private static final int MUTE = 2;
@@ -223,7 +224,8 @@ public class MainFragment extends Fragment {
                 TweetMateApp.getMyAccount().setUser(user);
 
                 // Check next
-                if (ids.hasNext()) {
+                mLoadCount++;
+                if (ids.hasNext() && mLoadCount < 15) {
                     fetchUserIDs(type, list, ids.getNextCursor());
                 }
             }

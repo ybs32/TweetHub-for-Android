@@ -170,66 +170,43 @@ public class TweetDialog extends DialogFragment {
         // Menu setting
         Set<TweetMenu> menuSetting = PrefClickAction.getTweetMenu();
 
-        // Menu drawable
-        int replyIcon = R.drawable.ic_reply;
-        int retweetIcon = R.drawable.ic_retweet;
-        int favoriteIcon = PrefAppearance.getLikeFavDrawable();
-        int talkIcon = R.drawable.ic_talk;
-        int deleteIcon = R.drawable.ic_garbage;
-        int urlIcon = R.drawable.ic_link;
-        int hashIcon = R.drawable.ic_hashtag;
-        int userIcon = R.drawable.ic_user;
-        int detailIcon = R.drawable.ic_doc;
-        int copyIcon = R.drawable.ic_copy;
-        int shareIcon = R.drawable.ic_share;
-        int twitterIcon = R.drawable.ic_twitter;
-
-        // Menu color
-        int replyColor = COLOR_STRONG;
-        int retweetColor = COLOR_RETWEET;
-        int favoriteColor = PrefAppearance.getLikeFavColor();
-        int talkColor = COLOR_TALK;
-        int deleteColor = COLOR_DELETE;
-        int urlColor = COLOR_LINK_WEAK;
-        int hashColor = COLOR_LINK_WEAK;
-        int userColor = COLOR_STRONG;
-        int detailColor = COLOR_STRONG;
-        int copyColor = COLOR_STRONG;
-        int shareColor = COLOR_STRONG;
-        int twitterColor = COLOR_STRONG;
-
         // Reply
         if (menuSetting.contains(REPLY)) {
-            adapter.add(
-                    new Menu(replyIcon, replyColor, STR_REPLY_VERB, "",
-                            () -> ClickUseCase.reply(mSource))
-            );
+            adapter.add(new Menu(
+                    R.drawable.ic_reply, COLOR_STRONG, STR_REPLY_VERB, "",
+                    () -> ClickUseCase.reply(mSource)
+            ));
         }
         // Retweet
         if (menuSetting.contains(RETWEET)) {
             if (mStatus.isRetweeted()) {
-                adapter.add(
-                        new Menu(retweetIcon, retweetColor, STR_UNRETWEET, "",
-                                () -> StatusUseCase.retweet(mStatus))
-                );
+                adapter.add(new Menu(
+                        R.drawable.ic_retweet, COLOR_RETWEET, STR_UNRETWEET, "",
+                        () -> StatusUseCase.retweet(mStatus)
+                ));
             } else if (mSource.isPublic()) {
-                adapter.add(
-                        new Menu(retweetIcon, retweetColor, STR_RETWEET, "", null)
-                );
+                adapter.add(new Menu(
+                        R.drawable.ic_retweet, COLOR_RETWEET, STR_RETWEET, "",
+                        null
+                ));
             }
         }
         // Favorite
         if (menuSetting.contains(LIKE)) {
             if (mStatus.isFavorited()) {
-                adapter.add(
-                        new Menu(favoriteIcon, favoriteColor, PrefAppearance.getUnLikeFavText(), "",
-                                () -> StatusUseCase.favorite(mStatus))
-                );
+                adapter.add(new Menu(
+                        PrefAppearance.getLikeFavDrawable(),
+                        PrefAppearance.getLikeFavColor(),
+                        PrefAppearance.getUnLikeFavText(), "",
+                        () -> StatusUseCase.favorite(mStatus)
+                ));
             } else {
-                adapter.add(
-                        new Menu(favoriteIcon, favoriteColor, PrefAppearance.getLikeFavText(), "",
-                                () -> StatusUseCase.favorite(mStatus))
-                );
+                adapter.add(new Menu(
+                        PrefAppearance.getLikeFavDrawable(),
+                        PrefAppearance.getLikeFavColor(),
+                        PrefAppearance.getLikeFavText(), "",
+                        () -> StatusUseCase.favorite(mStatus)
+                ));
             }
         }
         // Talk
@@ -237,86 +214,87 @@ public class TweetDialog extends DialogFragment {
             if (mSource.isTalk()
                     && !TweetMateApp.getActivity().getSupportActionBar().getTitle().equals(STR_TALK)
                     && !TweetMateApp.getActivity().getSupportActionBar().getTitle().equals(STR_DETAIL)) {
-                adapter.add(
-                        new Menu(talkIcon, talkColor, STR_SHOW_TALK, "",
-                                () -> ClickUseCase.showTalk(mSource))
-                );
+                adapter.add(new Menu(
+                        R.drawable.ic_talk, COLOR_TALK, STR_SHOW_TALK, "",
+                        () -> ClickUseCase.showTalk(mSource)
+                ));
             }
         }
         // Delete
         if (menuSetting.contains(DELETE)) {
             if (mSource.isMyTweet() && !mStatus.isRetweet()) {
-                adapter.add(
-                        new Menu(deleteIcon, deleteColor, STR_DELETE, "",
-                                () -> StatusUseCase.delete(mStatus))
-                );
+                adapter.add(new Menu(
+                        R.drawable.ic_garbage, COLOR_DELETE, STR_DELETE, "",
+                        () -> StatusUseCase.delete(mStatus)
+                ));
             }
         }
         // URL
         if (menuSetting.contains(URL)) {
             for (TwitterURLEntity entity : mSource.getUrlEntities()) {
-                adapter.add(
-                        new Menu(urlIcon, urlColor, entity.getDisplayURL(), "",
-                                () -> ClickUseCase.openURL(entity.getUrl()))
-                );
+                adapter.add(new Menu(
+                        R.drawable.ic_link, COLOR_LINK_WEAK, entity.getDisplayURL(), "",
+                        () -> ClickUseCase.openURL(entity.getUrl())
+                ));
             }
         }
         // Hashtag
         if (menuSetting.contains(HASH)) {
             for (TwitterHashtagEntity entity : mSource.getHashtagEntities()) {
-                adapter.add(
-                        new Menu(hashIcon, hashColor, "#" + entity.getText(), "", null)
-                );
+                adapter.add(new Menu(
+                        R.drawable.ic_hashtag, COLOR_LINK_WEAK, "#" + entity.getText(), "",
+                        null
+                ));
             }
         }
         // User
         if (menuSetting.contains(USER)) {
-            adapter.add(
-                    new Menu(userIcon, userColor, "@" + mSource.getUser().getScreenName(),
-                            PrefSystem.getProfileThumbByQuality(mSource.getUser()),
-                            () -> ClickUseCase.showUser(mSource.getUser().getId()))
-            );
+            adapter.add(new Menu(
+                    R.drawable.ic_user, COLOR_STRONG, "@" + mSource.getUser().getScreenName(),
+                    PrefSystem.getProfileThumbByQuality(mSource.getUser()),
+                    () -> ClickUseCase.showUser(mSource.getUser().getId())
+            ));
             if (mStatus.isRetweet()) {
-                adapter.add(
-                        new Menu(userIcon, userColor, "@" + mStatus.getUser().getScreenName(),
-                                PrefSystem.getProfileThumbByQuality(mStatus.getUser()),
-                                () -> ClickUseCase.showUser(mStatus.getUser().getId()))
-                );
+                adapter.add(new Menu(
+                        R.drawable.ic_user, COLOR_STRONG, "@" + mStatus.getUser().getScreenName(),
+                        PrefSystem.getProfileThumbByQuality(mStatus.getUser()),
+                        () -> ClickUseCase.showUser(mStatus.getUser().getId())
+                ));
             }
             for (TwitterUserMentionEntity entity : mSource.getUserMentionEntities()) {
-                adapter.add(
-                        new Menu(userIcon, userColor, "@" + entity.getScreenName(), "",
-                                () -> ClickUseCase.showUser(entity.getId()))
-                );
+                adapter.add(new Menu(
+                        R.drawable.ic_user, COLOR_STRONG, "@" + entity.getScreenName(), "",
+                        () -> ClickUseCase.showUser(entity.getId())
+                ));
             }
         }
         // Detail
         if (menuSetting.contains(DETAIL)) {
-            adapter.add(
-                    new Menu(detailIcon, detailColor, STR_DETAIL, "",
-                            () -> ClickUseCase.showDetail(mSource))
-            );
+            adapter.add(new Menu(
+                    R.drawable.ic_doc, COLOR_STRONG, STR_DETAIL, "",
+                    () -> ClickUseCase.showDetail(mSource)
+            ));
         }
         // Copy
         if (menuSetting.contains(COPY)) {
-            adapter.add(
-                    new Menu(copyIcon, copyColor, STR_COPY, "",
-                            () -> ClickUseCase.copyText(mSource))
-            );
+            adapter.add(new Menu(
+                    R.drawable.ic_copy, COLOR_STRONG, STR_COPY, "",
+                    () -> ClickUseCase.copyText(mSource)
+            ));
         }
         // Share
         if (menuSetting.contains(SHARE)) {
-            adapter.add(
-                    new Menu(shareIcon, shareColor, STR_SHARE, "",
-                            () -> ClickUseCase.share(mStatus))
-            );
+            adapter.add(new Menu(
+                    R.drawable.ic_share, COLOR_STRONG, STR_SHARE, "",
+                    () -> ClickUseCase.share(mStatus)
+            ));
         }
         // OpenTwitter
         if (menuSetting.contains(TWITTER)) {
-            adapter.add(
-                    new Menu(twitterIcon, twitterColor, STR_OPEN_TWITTER, "",
-                            () -> ClickUseCase.openStatus(mStatus))
-            );
+            adapter.add(new Menu(
+                    R.drawable.ic_twitter, COLOR_STRONG, STR_OPEN_TWITTER, "",
+                    () -> ClickUseCase.openStatus(mStatus)
+            ));
         }
         // Remove duplication
         for (int i = 0; i < adapter.getCount(); i++) {

@@ -7,19 +7,19 @@ import android.view.View;
 import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.activities.PhotoActivity;
 import com.ybsystem.tweetmate.activities.VideoActivity;
-import com.ybsystem.tweetmate.models.entities.twitter.TwitterMediaEntity;
 import com.ybsystem.tweetmate.databases.PrefSystem;
+import com.ybsystem.tweetmate.models.entities.twitter.TwitterStatus;
 
 import java.util.ArrayList;
 
 public class ThumbnailClickListener implements View.OnClickListener {
 
     private final int mPosition;
-    private final TwitterMediaEntity[] mMediaEntities;
+    private final TwitterStatus mStatus;
 
-    public ThumbnailClickListener(int position, TwitterMediaEntity[] mediaEntities){
+    public ThumbnailClickListener(int position, TwitterStatus status){
         this.mPosition = position;
-        this.mMediaEntities = mediaEntities;
+        this.mStatus = status;
     }
 
     @Override
@@ -29,22 +29,22 @@ public class ThumbnailClickListener implements View.OnClickListener {
         Activity act = (Activity) view.getContext();
 
         // Check media type
-        String type = mMediaEntities[0].getType();
-        if (type.equals("photo")) {
+        if (!mStatus.isVideo()) {
             // Photo
             ArrayList<String> imageURLs = new ArrayList<>();
-            for (TwitterMediaEntity entity : mMediaEntities) {
-                String url = PrefSystem.getMediaByQuality(entity.getMediaURLHttps());
+            for (String imageUrl : mStatus.getImageUrls()) {
+                String url = PrefSystem.getMediaByQuality(imageUrl, mStatus.isThirdMedia());
                 imageURLs.add(url);
             }
             intent = new Intent(act, PhotoActivity.class);
             intent.putExtra("TYPE", "MEDIA");
             intent.putExtra("PAGER_POSITION", mPosition);
             intent.putExtra("IMAGE_URLS", imageURLs);
+            intent.putExtra("THIRD_MEDIA", mStatus.isThirdMedia());
         } else {
             // Video
             intent = new Intent(act, VideoActivity.class);
-            intent.putExtra("MEDIA_ENTITY", mMediaEntities[0]);
+            intent.putExtra("MEDIA_ENTITY", mStatus.getMediaEntities()[0]);
         }
 
         // Start activity

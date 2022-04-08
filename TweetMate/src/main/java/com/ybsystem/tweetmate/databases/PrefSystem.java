@@ -83,7 +83,10 @@ public class PrefSystem extends PrefBase {
         }
     }
 
-    public static String getMediaByQuality(String imageURL) {
+    public static String getMediaByQuality(String imageURL, boolean isThirdMedia) {
+        if (isThirdMedia) {
+            return imageURL;
+        }
         switch (getImageQuality()) {
             case LOW:
                 return imageURL + ":small"; // small (680x454)
@@ -96,7 +99,10 @@ public class PrefSystem extends PrefBase {
         }
     }
 
-    public static String getMediaThumbByQuality(String imageURL) {
+    public static String getMediaThumbByQuality(String imageURL, boolean isThirdMedia) {
+        if (isThirdMedia) {
+            return imageURL;
+        }
         switch (getImageQuality()) {
             case LOW:
                 return imageURL + ":thumb"; // thumb (150x150)
@@ -120,7 +126,7 @@ public class PrefSystem extends PrefBase {
         mp4List.sort((v1, v2) ->
                 v1.getBitrate() - v2.getBitrate()
         );
-        switch (PrefSystem.getVideoQuality()) {
+        switch (getVideoQuality()) {
             case LOW:
                 return mp4List.get(0).getUrl();
             case MIDDLE:

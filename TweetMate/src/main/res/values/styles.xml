@@ -19,7 +19,7 @@
         <item name="colorLink">#3355EE</item>
         <item name="colorLinkWeak">#5577FF</item>
         <item name="colorBgRetweet">#EDF2FF</item>
-        <item name="colorBgReply">#FFEDF2</item>
+        <item name="colorBgReply">#FFF0F6</item>
         <item name="colorBgMyTweet">#EDFFF2</item>
     </style>
 
