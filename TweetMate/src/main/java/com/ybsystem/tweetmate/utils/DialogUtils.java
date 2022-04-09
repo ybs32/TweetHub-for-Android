@@ -1,5 +1,6 @@
 package com.ybsystem.tweetmate.utils;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
@@ -32,18 +33,45 @@ public class DialogUtils {
      *
      * @param message Message to display in dialog
      */
-    public static void showProgress(String message, Context context) {
+    public static void showProgress(String message) {
+        Activity activity = TweetMateApp.getActivity();
+
         // Increase text size
         SpannableString spanMessage = new SpannableString(message);
         spanMessage.setSpan(new RelativeSizeSpan(1.2f), 0, spanMessage.length(), 0);
 
         // Create
-        sProgressDialog = new ProgressDialog(context);
+        sProgressDialog = new ProgressDialog(activity);
         sProgressDialog.setMessage(spanMessage);
 
-        // Show
         // Prevent accidental closing by screen tap （※Back button is available）
         sProgressDialog.setCanceledOnTouchOutside(false);
+
+        // Show
+        sProgressDialog.show();
+    }
+
+    /**
+     * Show progress dialog with message
+     *
+     * @param message Message to display in dialog
+     */
+    public static void showPersistentProgress(String message) {
+        Activity activity = TweetMateApp.getActivity();
+
+        // Increase text size
+        SpannableString spanMessage = new SpannableString(message);
+        spanMessage.setSpan(new RelativeSizeSpan(1.2f), 0, spanMessage.length(), 0);
+
+        // Create
+        sProgressDialog = new ProgressDialog(activity);
+        sProgressDialog.setMessage(spanMessage);
+
+        // Prevent hide
+        sProgressDialog.setCanceledOnTouchOutside(false);
+        sProgressDialog.setCancelable(false);
+
+        // Show
         sProgressDialog.show();
     }
 

@@ -115,7 +115,7 @@ public class MainActivity extends ActivityBase
                 ActivityUtils.rebootActivity(this, 0, 0);
                 break;
             case REBOOT_PREPARATION:
-                DialogUtils.showProgress(STR_APPLYING, this);
+                DialogUtils.showPersistentProgress(STR_APPLYING);
                 new Handler().postDelayed(() -> {
                     DialogUtils.dismissProgress();
                     ToastUtils.showShortToast(STR_SUCCESS_APPLY);

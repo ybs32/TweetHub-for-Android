@@ -67,7 +67,7 @@ public class WallpaperActivity extends ActivityBase {
         c.close();
 
         // Finish activity
-        DialogUtils.showProgress(STR_APPLYING, this);
+        DialogUtils.showPersistentProgress(STR_APPLYING);
         new Handler().postDelayed(() -> {
             DialogUtils.dismissProgress();
             setResult(REBOOT_IMMEDIATE);

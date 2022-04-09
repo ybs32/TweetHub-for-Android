@@ -159,7 +159,7 @@ public class ColumnFragment extends Fragment {
     }
 
     private void fetchUserList() {
-        DialogUtils.showProgress(STR_LOADING, getContext());
+        DialogUtils.showProgress(STR_LOADING);
 
         Observable<ResponseList<UserList>> observable = Observable.create(e -> {
             // Fetch

@@ -140,9 +140,11 @@ public class SearchUseCase {
             }
         };
 
+        DialogUtils.showProgress(STR_LOADING);
         observable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doFinally(DialogUtils::dismissProgress)
                 .subscribe(disposable);
     }
 

@@ -189,7 +189,7 @@ public class BrowserAuthFragment extends Fragment {
             TweetMateApp.getInstance().init();
 
             // Reboot application
-            DialogUtils.showProgress(STR_LOADING, getActivity());
+            DialogUtils.showPersistentProgress(STR_LOADING);
             new Handler().postDelayed(() -> {
                 DialogUtils.dismissProgress();
                 ToastUtils.showShortToast(STR_SUCCESS_ADD_ACCOUNT);

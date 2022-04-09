@@ -269,12 +269,12 @@ public class StatusUseCase {
             DialogUtils.showConfirm(
                     STR_CONFIRM_TWEET,
                     (dialog, which) -> {
-                        DialogUtils.showProgress(STR_SENDING, TweetMateApp.getActivity());
+                        DialogUtils.showProgress(STR_SENDING);
                         observable.subscribe(disp);
                     }
             );
         } else {
-            DialogUtils.showProgress(STR_SENDING, TweetMateApp.getActivity());
+            DialogUtils.showProgress(STR_SENDING);
             observable.subscribe(disp);
         }
     }

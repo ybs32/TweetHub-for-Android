@@ -98,7 +98,7 @@ public class OAuthActivity extends ActivityBase {
 
             @Override
             protected void onPreExecute() {
-                DialogUtils.showProgress(STR_CONNECTING, OAuthActivity.this);
+                DialogUtils.showProgress(STR_CONNECTING);
             }
 
             @Override
@@ -153,7 +153,7 @@ public class OAuthActivity extends ActivityBase {
 
             @Override
             protected void onPreExecute() {
-                DialogUtils.showProgress(STR_LOADING, OAuthActivity.this);
+                DialogUtils.showProgress(STR_LOADING);
             }
 
             @Override

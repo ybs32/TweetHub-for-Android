@@ -107,7 +107,7 @@ public class ThemeFragment extends PreferenceFragmentBase {
         mCustom.setChecked(false);
 
         // Finish activity
-        DialogUtils.showProgress(STR_APPLYING, getActivity());
+        DialogUtils.showPersistentProgress(STR_APPLYING);
         new Handler().postDelayed(() -> {
             DialogUtils.dismissProgress();
             getActivity().setResult(1);
