@@ -24,7 +24,7 @@ public class PrefAppearance extends PrefBase {
     private PrefAppearance() {
     }
 
-    // ----- サイズ -----
+    // ----- Size -----
 
     public static int getFontSize() {
         return Integer.parseInt(
@@ -38,7 +38,7 @@ public class PrefAppearance extends PrefBase {
         );
     }
 
-    // ----- スタイル -----
+    // ----- Style -----
 
     public static String getLikeFavText() {
         String style = getDefaultSharedPreferences().getString(KEY_STYLE_LIKE_FAV, "LIKE");
@@ -81,7 +81,7 @@ public class PrefAppearance extends PrefBase {
         return getDefaultSharedPreferences().getString(KEY_STYLE_USER_ICON, "CIRCLE");
     }
 
-    // ----- 表示項目 -----
+    // ----- Display items -----
 
     public static boolean isShowAbsoluteTime() {
         return getDefaultSharedPreferences().getBoolean(KEY_SHOW_ABSOLUTE_TIME, false);

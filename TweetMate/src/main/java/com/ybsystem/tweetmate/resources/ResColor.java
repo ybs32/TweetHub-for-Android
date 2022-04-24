@@ -10,9 +10,6 @@ import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class ResColor {
 
-    private ResColor() {
-    }
-
     public static int COLOR_BACKGROUND;
     public static int COLOR_TEXT;
     public static int COLOR_PRIMARY;
@@ -34,6 +31,9 @@ public class ResColor {
     public static int COLOR_BG_RETWEET;
     public static int COLOR_BG_REPLY;
     public static int COLOR_BG_MYTWEET;
+
+    private ResColor() {
+    }
 
     public static void init() {
         COLOR_BACKGROUND = getColor(android.R.attr.colorBackground);

@@ -8,7 +8,7 @@
     android:background="@drawable/bg_colorless"
     android:padding="8dp">
 
-    <!-- 「ユーザーアイコン」 -->
+    <!-- User icon -->
     <ImageView
         android:id="@+id/image_user_icon"
         android:layout_width="48dp"
@@ -26,7 +26,7 @@
         android:orientation="horizontal"
         tools:ignore="UseCompoundDrawables">
 
-        <!-- 「鍵マーク」 -->
+        <!-- Lock mark -->
         <ImageView
             android:id="@+id/image_lock_mark"
             android:layout_width="16dp"
@@ -35,19 +35,19 @@
             android:src="@drawable/ic_lock"
             app:tint="?android:attr/textColor" />
 
-        <!-- 「リスト名」 -->
+        <!-- List name -->
         <TextView
             android:id="@+id/text_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="リスト名"
+            android:text="List name"
             android:textSize="14dp"
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- 「説明」 -->
+    <!-- Description -->
     <TextView
         android:id="@+id/text_description"
         android:layout_width="match_parent"
@@ -56,10 +56,10 @@
         android:layout_alignLeft="@+id/linear_top"
         android:layout_marginTop="4dp"
         android:lineSpacingMultiplier="1.1"
-        android:text="今日も１日、がんばるぞい！"
+        android:text="Okay, I'm gonna do my bestest today!"
         android:textSize="14dp" />
 
-    <!-- 「メンバー数」 -->
+    <!-- Member count -->
     <TextView
         android:id="@+id/text_member_count"
         android:layout_width="match_parent"
@@ -67,18 +67,18 @@
         android:layout_below="@+id/text_description"
         android:layout_alignLeft="@+id/text_description"
         android:layout_marginTop="4dp"
-        android:text="〇人のメンバー"
+        android:text="xxx"
         android:textColor="?attr/colorStrong"
         android:textSize="14dp" />
 
-    <!-- 「作成者」 -->
+    <!-- Creator -->
     <TextView
         android:id="@+id/text_creator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_member_count"
         android:layout_alignLeft="@+id/text_member_count"
-        android:text="〇〇さんが作成"
+        android:text="Created by"
         android:textColor="?attr/colorStrong"
         android:textSize="14dp" />
 </RelativeLayout>

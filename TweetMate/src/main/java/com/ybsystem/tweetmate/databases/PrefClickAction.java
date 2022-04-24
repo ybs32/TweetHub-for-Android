@@ -26,7 +26,7 @@ public class PrefClickAction extends PrefBase {
     private PrefClickAction() {
     }
 
-    // ----- タップ -----
+    // ----- Tap -----
 
     public static ClickAction getLeftClick() {
         return ClickAction.toEnum(
@@ -46,7 +46,7 @@ public class PrefClickAction extends PrefBase {
         );
     }
 
-    // ----- ロングタップ -----
+    // ----- Long tap -----
 
     public static ClickAction getLeftLongClick() {
         return ClickAction.toEnum(
@@ -66,7 +66,7 @@ public class PrefClickAction extends PrefBase {
         );
     }
 
-    // ----- ツイートメニュー -----
+    // ----- Tweet menu -----
 
     public static Set<TweetMenu> getTweetMenu() {
         Set<String> set = getDefaultSharedPreferences().getStringSet(KEY_TWEET_MENU, null);

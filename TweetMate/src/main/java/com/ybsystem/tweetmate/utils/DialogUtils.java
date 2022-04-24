@@ -44,7 +44,7 @@ public class DialogUtils {
         sProgressDialog = new ProgressDialog(activity);
         sProgressDialog.setMessage(spanMessage);
 
-        // Prevent accidental closing by screen tap （※Back button is available）
+        // Prevent accidental closing by screen tap (Back button is available)
         sProgressDialog.setCanceledOnTouchOutside(false);
 
         // Show
@@ -138,9 +138,9 @@ public class DialogUtils {
                 (dialog, which) -> {
                     // Change account and reboot
                     accounts.setCurrentAccount(which);
-                    TweetMateApp.getInstance().init();
+                    TweetMateApp.getInstance().initTwitter();
                     ToastUtils.showShortToast(STR_SUCCESS_SWITCH_ACCOUNT);
-                    ActivityUtils.rebootActivity(TweetMateApp.getActivity(), 0, 0);
+                    ActivityUtils.rebootActivity(TweetMateApp.getActivity());
                 }
         );
     }

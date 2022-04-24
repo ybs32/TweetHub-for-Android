@@ -45,13 +45,13 @@ public class ProfilePagerAdapter extends FragmentPagerAdapter {
 
         ColumnType type = null;
         switch (position) {
-            case 0: // ツイート
+            case 0: // Tweet
                 type = USER_TWEET;
                 break;
-            case 1: // メディア
+            case 1: // Media
                 type = USER_MEDIA;
                 break;
-            case 2: // いいね
+            case 2: // Favorite
                 type = USER_FAVORITE;
                 break;
         }

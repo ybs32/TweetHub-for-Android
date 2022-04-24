@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/item_mute"
-        android:title="ミュート" />
+        android:title="@string/mute" />
     <item
         android:id="@+id/item_block"
-        android:title="ブロック" />
+        android:title="@string/block" />
     <item
         android:id="@+id/item_reply"
-        android:title="返信する" />
+        android:title="@string/reply_verb" />
     <item
         android:id="@+id/item_add_list"
-        android:title="リストに追加" />
+        android:title="@string/list_add" />
     <item
-        android:id="@+id/item_browser"
-        android:title="ブラウザで開く" />
+        android:id="@+id/item_open_twitter"
+        android:title="@string/open_twitter" />
 </menu>

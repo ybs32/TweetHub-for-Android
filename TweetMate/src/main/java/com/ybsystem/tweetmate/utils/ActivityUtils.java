@@ -15,13 +15,11 @@ public class ActivityUtils {
      * Reboot activity with animation
      *
      * @param activity Target activity
-     * @param enterAnim Enter animation
-     * @param exitAnim Exit animation
      */
-    public static void rebootActivity(Activity activity, int enterAnim, int exitAnim) {
+    public static void rebootActivity(Activity activity) {
         Intent intent = activity.getIntent();
         activity.finish();
-        activity.overridePendingTransition(enterAnim, exitAnim);
+        activity.overridePendingTransition(0, 0);
         activity.startActivity(intent);
     }
 

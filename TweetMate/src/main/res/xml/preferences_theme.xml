@@ -5,35 +5,35 @@
     android:layout_height="match_parent">
 
     <PreferenceCategory
-        android:title="テーマ"
+        android:title="@string/theme"
         app:iconSpaceReserved="false">
 
         <ListPreference
             android:defaultValue="LIGHT"
-            android:dialogTitle="テーマ"
+            android:dialogTitle="@string/theme"
             android:entries="@array/theme_setting_entries"
             android:entryValues="@array/theme_setting_values"
             android:key="@string/pref_key_theme_setting"
-            android:title="テーマ"
+            android:title="@string/theme"
             app:iconSpaceReserved="false" />
 
         <SwitchPreference
             android:defaultValue="false"
             android:disableDependentsState="false"
             android:key="@string/pref_key_theme_custom"
-            android:title="カスタム"
+            android:title="@string/custom"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:dependency="@string/pref_key_theme_custom"
-        android:title="タイムライン背景色"
+        android:title="@string/timeline_background"
         app:iconSpaceReserved="false">
 
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
             android:defaultValue="?attr/colorBgRetweet"
             android:key="@string/pref_key_retweet_color"
-            android:title="リツイート"
+            android:title="@string/retweet"
             app:cpv_allowPresets="false"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
@@ -42,7 +42,7 @@
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
             android:defaultValue="?attr/colorBgReply"
             android:key="@string/pref_key_reply_color"
-            android:title="自分宛の返信"
+            android:title="@string/reply_to_me"
             app:cpv_allowPresets="false"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
@@ -51,7 +51,7 @@
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
             android:defaultValue="?attr/colorBgMyTweet"
             android:key="@string/pref_key_mytweet_color"
-            android:title="自分のツイート"
+            android:title="@string/my_tweet"
             app:cpv_allowPresets="false"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
@@ -60,13 +60,13 @@
 
     <PreferenceCategory
         android:dependency="@string/pref_key_theme_custom"
-        android:title="タイムライン文字色１"
+        android:title="@string/timeline_text_1"
         app:iconSpaceReserved="false">
 
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
             android:defaultValue="?android:attr/textColor"
             android:key="@string/pref_key_username_color"
-            android:title="ユーザー名"
+            android:title="@string/user_name"
             app:cpv_allowPresets="false"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
@@ -75,7 +75,7 @@
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
             android:defaultValue="?android:attr/textColor"
             android:key="@string/pref_key_relativetime_color"
-            android:title="相対時刻"
+            android:title="@string/relative_time"
             app:cpv_allowPresets="false"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
@@ -84,7 +84,7 @@
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
             android:defaultValue="?android:attr/textColor"
             android:key="@string/pref_key_tweettext_color"
-            android:title="ツイート本文"
+            android:title="@string/tweet_text"
             app:cpv_allowPresets="false"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
@@ -93,7 +93,7 @@
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
             android:defaultValue="?attr/colorLink"
             android:key="@string/pref_key_link_color"
-            android:title="URL・ハッシュタグ"
+            android:title="@string/url_hashtag"
             app:cpv_allowPresets="false"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
@@ -102,13 +102,13 @@
 
     <PreferenceCategory
         android:dependency="@string/pref_key_theme_custom"
-        android:title="タイムライン文字色２"
+        android:title="@string/timeline_text_2"
         app:iconSpaceReserved="false">
 
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
             android:defaultValue="?attr/colorStrong"
             android:key="@string/pref_key_absolutetime_color"
-            android:title="絶対時刻"
+            android:title="@string/absolute_time"
             app:cpv_allowPresets="false"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
@@ -117,7 +117,7 @@
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
             android:defaultValue="?attr/colorStrong"
             android:key="@string/pref_key_via_color"
-            android:title="クライアント名"
+            android:title="@string/client_name"
             app:cpv_allowPresets="false"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
@@ -126,7 +126,7 @@
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
             android:defaultValue="?attr/colorStrong"
             android:key="@string/pref_key_rtfav_color"
-            android:title="リツイート数・いいね数"
+            android:title="@string/retweet_like_count"
             app:cpv_allowPresets="false"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
@@ -135,7 +135,7 @@
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
             android:defaultValue="?attr/colorStrong"
             android:key="@string/pref_key_retweetedby_color"
-            android:title="Retweeted by"
+            android:title="@string/retweeted_by"
             app:cpv_allowPresets="false"
             app:cpv_dialogType="custom"
             app:cpv_showAlphaSlider="false"
@@ -144,12 +144,12 @@
 
     <PreferenceCategory
         android:dependency="@string/pref_key_theme_custom"
-        android:title="プレビュー"
+        android:title="@string/preview"
         app:iconSpaceReserved="false">
 
         <PreferenceScreen
             android:key="@string/pref_key_theme_preview"
-            android:title="レイアウトを確認"
+            android:title="@string/check_layout"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>

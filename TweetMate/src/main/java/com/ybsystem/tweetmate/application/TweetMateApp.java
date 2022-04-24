@@ -41,10 +41,10 @@ public class TweetMateApp extends Application {
             return;
         }
 
-        this.init();
+        this.initTwitter();
     }
 
-    public void init() {
+    public void initTwitter() {
         // Get current via
         Via via = getMyAccount().getVias().getCurrentVia();
         String ck = via.getConsumerKey();

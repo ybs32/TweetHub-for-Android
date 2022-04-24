@@ -11,18 +11,18 @@
         android:background="@drawable/bg_border_purple"
         android:orientation="vertical">
 
-        <!-- スクロール可能にする -->
+        <!-- Can scroll -->
         <ScrollView
             android:id="@+id/scroll_tweet"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3">
 
-            <!-- ツイート表示 -->
+            <!-- Tweet display -->
             <include layout="@layout/recycler_item_tweet" />
         </ScrollView>
 
-        <!-- 画像４枚 -->
+        <!-- Images -->
         <LinearLayout
             android:id="@+id/linear_photo"
             android:layout_width="match_parent"
@@ -33,7 +33,7 @@
             android:visibility="gone"
             tools:ignore="NestedWeights">
 
-            <!-- 「画像１」 -->
+            <!-- Image 1 -->
             <ImageView
                 android:id="@+id/image_photo_1"
                 android:layout_width="0dp"
@@ -44,7 +44,7 @@
                 android:scaleType="fitCenter"
                 android:visibility="gone" />
 
-            <!-- 「画像２」 -->
+            <!-- Image 2 -->
             <ImageView
                 android:id="@+id/image_photo_2"
                 android:layout_width="0dp"
@@ -55,7 +55,7 @@
                 android:scaleType="fitCenter"
                 android:visibility="gone" />
 
-            <!-- 「画像３」 -->
+            <!-- Image 3 -->
             <ImageView
                 android:id="@+id/image_photo_3"
                 android:layout_width="0dp"
@@ -66,7 +66,7 @@
                 android:scaleType="fitCenter"
                 android:visibility="gone" />
 
-            <!-- 「画像４」-->
+            <!-- Image 4-->
             <ImageView
                 android:id="@+id/image_photo_4"
                 android:layout_width="0dp"
@@ -78,7 +78,7 @@
                 android:visibility="gone" />
         </LinearLayout>
 
-        <!-- 「ツイート欄」 -->
+        <!-- Tweet edit -->
         <EditText
             android:id="@+id/edit_post"
             android:layout_width="match_parent"
@@ -103,19 +103,19 @@
         android:layout_alignParentBottom="true"
         android:padding="8dp">
 
-        <!-- 左側 -->
+        <!-- Left side -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true">
 
-            <!-- 「ユーザーボタン」 -->
+            <!-- User button -->
             <ImageView
                 android:id="@+id/button_user"
                 android:layout_width="48dp"
                 android:layout_height="48dp" />
 
-            <!-- 「ギャラリーボタン」 -->
+            <!-- Gallery button -->
             <ImageButton
                 android:id="@+id/button_gallery"
                 android:layout_width="48dp"
@@ -127,7 +127,7 @@
                 android:src="@drawable/ic_picture"
                 android:tint="#FFFFFF" />
 
-            <!-- 「下書きボタン」 -->
+            <!-- Draft button -->
             <ImageButton
                 android:id="@+id/button_draft"
                 android:layout_width="48dp"
@@ -139,7 +139,7 @@
                 android:src="@drawable/ic_draft"
                 android:tint="#FFFFFF" />
 
-            <!-- 「ハッシュタグボタン」 -->
+            <!-- Hashtag button -->
             <ImageButton
                 android:id="@+id/button_hashtag"
                 android:layout_width="48dp"
@@ -152,13 +152,13 @@
                 android:tint="#FFFFFF" />
         </LinearLayout>
 
-        <!-- 右側 -->
+        <!-- Right side -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true">
 
-            <!-- 「文字数カウンター」 -->
+            <!-- Character counter -->
             <TextView
                 android:id="@+id/text_count"
                 android:layout_width="wrap_content"
@@ -168,7 +168,7 @@
                 android:text="140"
                 android:textSize="20dp" />
 
-            <!-- 「投稿ボタン」 -->
+            <!-- Post button -->
             <ImageButton
                 android:id="@+id/button_post"
                 android:layout_width="48dp"

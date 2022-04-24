@@ -32,6 +32,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import static com.ybsystem.tweetmate.activities.preference.SettingActivity.*;
 import static com.ybsystem.tweetmate.models.enums.ColumnType.*;
+import static com.ybsystem.tweetmate.models.enums.TweetStyle.*;
 import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class SearchActivity extends ActivityBase {
@@ -82,15 +83,15 @@ public class SearchActivity extends ActivityBase {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // 保存した検索
+            // Saved searches
             case R.id.item_saved_search:
                 SearchUseCase.showSavedSearch();
                 return true;
-            // 検索を保存
+            // Save search
             case R.id.item_save_search:
                 SearchUseCase.saveSearch(mSearchWord);
                 return true;
-            // カラム追加
+            // Add column
             case R.id.item_add_column:
                 showAddDialog();
                 return true;
@@ -139,7 +140,7 @@ public class SearchActivity extends ActivityBase {
     }
 
     private void setTweetAction(Bundle savedInstanceState) {
-        if (PrefSystem.isEasyTweetEnabled()) {
+        if (PrefSystem.getTweetStyle() == ON_THE_TIMELINE) {
             // EasyTweet
             if (savedInstanceState == null) {
                 Fragment fragment = new EasyTweetFragment();

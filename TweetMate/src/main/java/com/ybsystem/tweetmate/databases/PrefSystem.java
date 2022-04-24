@@ -1,13 +1,21 @@
 package com.ybsystem.tweetmate.databases;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
+
 import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterMediaEntity;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweetmate.models.enums.ConfirmAction;
 import com.ybsystem.tweetmate.models.enums.MediaQuality;
+import com.ybsystem.tweetmate.models.enums.TweetStyle;
+import com.ybsystem.tweetmate.utils.ToastUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import twitter4j.MediaEntity.Variant;
@@ -16,20 +24,79 @@ import static com.ybsystem.tweetmate.models.enums.ConfirmAction.*;
 
 public class PrefSystem extends PrefBase {
 
+    public static final String KEY_LOCALE = RES.getString(R.string.pref_key_locale);
+    public static final String KEY_TREND = RES.getString(R.string.pref_key_trend);
+
     public static final String KEY_QUALITY_IMAGE = RES.getString(R.string.pref_key_quality_image);
     public static final String KEY_QUALITY_VIDEO = RES.getString(R.string.pref_key_quality_video);
-
-    public static final String KEY_CONFIRM_SETTING = RES.getString(R.string.pref_key_confirm_setting);
 
     public static final String KEY_COUNT_BOOT_LOAD = RES.getString(R.string.pref_key_count_boot_load);
     public static final String KEY_COUNT_SCROLL_LOAD = RES.getString(R.string.pref_key_count_scroll_load);
 
-    public static final String KEY_EASY_TWEET = RES.getString(R.string.pref_key_easy_tweet);
+    public static final String KEY_TWEET_STYLE = RES.getString(R.string.pref_key_tweet_style);
+    public static final String KEY_CONFIRM_SETTING = RES.getString(R.string.pref_key_confirm_setting);
 
     private PrefSystem() {
     }
 
-    // ----- メディア -----
+    // ----- System -----
+
+    public static String getLanguage() {
+        return getDefaultSharedPreferences().getString(KEY_LOCALE, null);
+    }
+
+    public static void saveLanguage(String language) {
+        SharedPreferences.Editor editor = getDefaultSharedPreferences().edit();
+        editor.putString(KEY_LOCALE, language);
+        editor.apply();
+    }
+
+    public static String getTrend() {
+        return getDefaultSharedPreferences().getString(KEY_TREND, null);
+    }
+
+    public static void saveTrend(String trend) {
+        SharedPreferences.Editor editor = getDefaultSharedPreferences().edit();
+        editor.putString(KEY_TREND, trend);
+        editor.apply();
+    }
+
+    public static Locale getLocale(Context c) {
+        // If language not saved
+        if (getLanguage() == null) {
+            // Get device language
+            String systemLanguage = c.getResources()
+                    .getConfiguration().getLocales().get(0).getLanguage();
+
+            // Check if language is supported by app
+            String[] locales = c.getResources().getStringArray(R.array.language_values);
+            if (Arrays.asList(locales).contains(systemLanguage)) {
+                saveLanguage(systemLanguage);
+            } else {
+                saveLanguage("en");
+            }
+        }
+        return new Locale(getLanguage());
+    }
+
+    public static int getTrendWoeId(Context c) {
+        // If trend not saved
+        if (getTrend() == null) {
+            // Get device language
+            String systemLanguage = c.getResources()
+                    .getConfiguration().getLocales().get(0).getLanguage();
+
+            // Check if language is "jp"
+            if ("ja".equals(systemLanguage)) {
+                saveTrend("23424856");
+            } else {
+                saveTrend("23424977");
+            }
+        }
+        return Integer.parseInt(getTrend());
+    }
+
+    // ----- Media -----
     // https://developer.twitter.com/en/docs/accounts-and-users/user-profile-images-and-banners
     // https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/entities-object#media
 
@@ -142,7 +209,27 @@ public class PrefSystem extends PrefBase {
         }
     }
 
-    // ----- システム -----
+    // ----- Timeline -----
+
+    public static int getBootLoadCount() {
+        return Integer.parseInt(
+                getDefaultSharedPreferences().getString(KEY_COUNT_BOOT_LOAD, "20")
+        );
+    }
+
+    public static int getScrollLoadCount() {
+        return Integer.parseInt(
+                getDefaultSharedPreferences().getString(KEY_COUNT_SCROLL_LOAD, "100")
+        );
+    }
+
+    // ----- Operation -----
+
+    public static TweetStyle getTweetStyle() {
+        return TweetStyle.toEnum(
+                getDefaultSharedPreferences().getString(KEY_TWEET_STYLE, TweetStyle.ON_THE_TIMELINE.getVal())
+        );
+    }
 
     public static Set<ConfirmAction> getConfirmSettings() {
         Set<String> set = getDefaultSharedPreferences().getStringSet(KEY_CONFIRM_SETTING, null);
@@ -165,26 +252,6 @@ public class PrefSystem extends PrefBase {
             }
             return enumSet;
         }
-    }
-
-    // ----- タイムライン -----
-
-    public static int getBootLoadCount() {
-        return Integer.parseInt(
-                getDefaultSharedPreferences().getString(KEY_COUNT_BOOT_LOAD, "20")
-        );
-    }
-
-    public static int getScrollLoadCount() {
-        return Integer.parseInt(
-                getDefaultSharedPreferences().getString(KEY_COUNT_SCROLL_LOAD, "100")
-        );
-    }
-
-    // ----- ツイート -----
-
-    public static boolean isEasyTweetEnabled() {
-        return getDefaultSharedPreferences().getBoolean(KEY_EASY_TWEET, true);
     }
 
 }

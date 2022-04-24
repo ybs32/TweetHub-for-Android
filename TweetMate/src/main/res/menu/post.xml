@@ -2,5 +2,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/item_draft"
-        android:title="下書き保存" />
+        android:title="@string/draft_save" />
 </menu>

@@ -65,7 +65,7 @@ public class PhotoActivity extends ActivityBase {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // 保存する
+            // Save
             case R.id.item_save:
                 if (!StorageUtils.isPermitted(this)) {
                     StorageUtils.requestPermission(this);
@@ -73,7 +73,7 @@ public class PhotoActivity extends ActivityBase {
                 }
                 showQualitySelection(true);
                 return true;
-            // 他サイズで表示
+            // View in other sizes
             case R.id.item_resize:
                 showQualitySelection(false);
                 return true;

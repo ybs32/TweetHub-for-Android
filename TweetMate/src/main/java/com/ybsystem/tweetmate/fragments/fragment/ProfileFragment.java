@@ -163,7 +163,7 @@ public class ProfileFragment extends Fragment {
         if (loc.length() == 0) {
             locText.setVisibility(View.GONE);
         } else {
-            locText.setText(STR_LOCATION + "：" + loc);
+            locText.setText(STR_LOCATION + ": " + loc);
         }
 
         // Set url

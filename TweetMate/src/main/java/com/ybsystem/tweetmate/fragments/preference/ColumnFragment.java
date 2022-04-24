@@ -105,7 +105,7 @@ public class ColumnFragment extends Fragment {
     private void setAddButtonClickListener(View view) {
 
         view.findViewById(R.id.button_add).setOnClickListener(v -> {
-            //　Unavailable over 8 column
+            // Unavailable over 8 column
             if (TweetMateApp.getMyAccount().getColumns().size() >= 8) {
                 ToastUtils.showShortToast(STR_FAIL_NO_MORE_ADD);
                 return;
