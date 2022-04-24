@@ -2,7 +2,6 @@ package com.ybsystem.tweetmate.databases;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterMediaEntity;
@@ -10,7 +9,6 @@ import com.ybsystem.tweetmate.models.entities.twitter.TwitterUser;
 import com.ybsystem.tweetmate.models.enums.ConfirmAction;
 import com.ybsystem.tweetmate.models.enums.MediaQuality;
 import com.ybsystem.tweetmate.models.enums.TweetStyle;
-import com.ybsystem.tweetmate.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;

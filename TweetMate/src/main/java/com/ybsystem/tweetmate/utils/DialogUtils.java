@@ -2,7 +2,6 @@ package com.ybsystem.tweetmate.utils;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;

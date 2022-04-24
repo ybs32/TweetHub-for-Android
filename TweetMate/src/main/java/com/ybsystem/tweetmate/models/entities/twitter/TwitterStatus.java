@@ -7,13 +7,10 @@ import android.text.style.ForegroundColorSpan;
 import androidx.core.text.HtmlCompat;
 
 import com.ybsystem.tweetmate.application.TweetMateApp;
-import com.ybsystem.tweetmate.databases.PrefSystem;
 import com.ybsystem.tweetmate.models.entities.Entity;
 import com.ybsystem.tweetmate.databases.PrefAppearance;
 import com.ybsystem.tweetmate.databases.PrefTheme;
-import com.ybsystem.tweetmate.utils.ToastUtils;
 
-import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,7 +26,6 @@ import twitter4j.Status;
 import twitter4j.URLEntity;
 import twitter4j.User;
 import twitter4j.UserMentionEntity;
-import twitter4j.util.TimeSpanConverter;
 
 import static androidx.core.text.HtmlCompat.TO_HTML_PARAGRAPH_LINES_INDIVIDUAL;
 import static com.ybsystem.tweetmate.resources.ResColor.*;
@@ -242,14 +238,7 @@ public class TwitterStatus extends Entity {
     private static String createRelativeTime(Status status) {
         // Convert
         Date date = status.getCreatedAt();
-        String text = new TwitterTimeSpanConverter().toTimeSpanString(date);
-
-        // Change text
-//        text = text.replace("前", ""); //「〜分前」→「〜分」
-//        text = text.replace("月", "/"); //「10月29日」→「10/29」
-//        text = text.replace("日", "");
-
-        return text;
+        return new TwitterTimeSpanConverter().toTimeSpanString(date);
     }
 
     private static String createAbsoluteTime(Status status) {
