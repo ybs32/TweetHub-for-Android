@@ -186,10 +186,10 @@ public class BrowserAuthFragment extends Fragment {
             }
             // Add account
             TweetMateApp.getData().addAccount(accessToken, user);
-            TweetMateApp.getInstance().init();
+            TweetMateApp.getInstance().initTwitter();
 
             // Reboot application
-            DialogUtils.showProgress(STR_LOADING, getActivity());
+            DialogUtils.showPersistentProgress(STR_LOADING);
             new Handler().postDelayed(() -> {
                 DialogUtils.dismissProgress();
                 ToastUtils.showShortToast(STR_SUCCESS_ADD_ACCOUNT);

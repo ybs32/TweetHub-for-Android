@@ -7,7 +7,7 @@
     cube_ptr:ptr_duration_to_close="200"
     cube_ptr:ptr_duration_to_close_header="400">
 
-    <!-- タイムライン -->
+    <!-- Timeline -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_view"
         android:layout_width="match_parent"

@@ -98,7 +98,7 @@ public class OAuthActivity extends ActivityBase {
 
             @Override
             protected void onPreExecute() {
-                DialogUtils.showProgress(STR_CONNECTING, OAuthActivity.this);
+                DialogUtils.showProgress(STR_CONNECTING);
             }
 
             @Override
@@ -153,7 +153,7 @@ public class OAuthActivity extends ActivityBase {
 
             @Override
             protected void onPreExecute() {
-                DialogUtils.showProgress(STR_LOADING, OAuthActivity.this);
+                DialogUtils.showProgress(STR_LOADING);
             }
 
             @Override
@@ -176,7 +176,7 @@ public class OAuthActivity extends ActivityBase {
                 if (e == null && accessToken != null && user != null) {
                     // Add account
                     TweetMateApp.getData().addAccount(accessToken, user);
-                    TweetMateApp.getInstance().init();
+                    TweetMateApp.getInstance().initTwitter();
 
                     // Intent to MainActivity
                     ToastUtils.showLongToast(STR_SUCCESS_AUTH);

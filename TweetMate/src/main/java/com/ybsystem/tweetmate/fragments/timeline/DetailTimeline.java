@@ -100,15 +100,15 @@ public class DetailTimeline extends TimelineBase {
                         mLoadCount++;
                         mQuery = result.nextQuery();
 
-                        // 読み込み過ぎを防止
+                        // Prevent overloading
                         if (mLoadCount > 10) {
                             mFooterView.setVisibility(View.GONE);
                         }
-                        // 10件より少なければ再び読み込む
+                        // If fewer than 10 cases, load again.
                         else if (mRecyclerAdapter.getObjCount() < 10) {
                             loadTweet(false, false);
                         }
-                        // 10件を超えた場合はScrollで読み込み可能
+                        // If more than 10 cases, Enable scroll load.
                         else {
                             mScrollLoad = true;
                         }

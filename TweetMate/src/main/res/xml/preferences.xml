@@ -5,64 +5,64 @@
     android:layout_height="match_parent">
 
     <PreferenceCategory
-        android:title="設定"
+        android:title="@string/settings"
         app:iconSpaceReserved="false">
 
         <PreferenceScreen
             android:key="@string/pref_key_theme"
-            android:title="テーマ設定"
+            android:title="@string/theme_settings"
             app:iconSpaceReserved="false" />
 
         <PreferenceScreen
             android:key="@string/pref_key_appearance"
-            android:title="タイムライン表示"
+            android:title="@string/appearance_settings"
             app:iconSpaceReserved="false" />
 
         <PreferenceScreen
             android:key="@string/pref_key_click_action"
-            android:title="タップ動作"
+            android:title="@string/click_action_settings"
             app:iconSpaceReserved="false" />
 
         <PreferenceScreen
             android:key="@string/pref_key_system"
-            android:title="システム動作"
+            android:title="@string/system_settings"
             app:iconSpaceReserved="false" />
 
         <PreferenceScreen
             android:key="@string/pref_key_wallpaper"
-            android:title="壁紙設定"
+            android:title="@string/wallpaper_settings"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="管理"
+        android:title="@string/management"
         app:iconSpaceReserved="false">
 
         <PreferenceScreen
             android:key="@string/pref_key_column"
-            android:title="カラム管理"
+            android:title="@string/column_settings"
             app:iconSpaceReserved="false" />
 
         <PreferenceScreen
             android:key="@string/pref_key_account"
-            android:title="アカウント管理"
+            android:title="@string/account_settings"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="その他"
+        android:title="@string/others"
         app:iconSpaceReserved="false">
 
         <PreferenceScreen
             android:key="@string/pref_key_version"
             android:summary="@string/app_version"
-            android:title="バージョン"
+            android:title="@string/version_settings"
             app:iconSpaceReserved="false" />
 
         <PreferenceScreen
             android:key="@string/pref_key_about"
-            android:summary="このアプリについて"
-            android:title="About"
+            android:summary="@string/about_settings"
+            android:title="@string/about"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>

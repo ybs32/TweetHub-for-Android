@@ -46,16 +46,16 @@ public class ClickActionFragment extends PreferenceFragmentBase {
         // Click retweet
         mRetweetClick = findPreference(KEY_CLICK_RETWEET);
         if (mRetweetClick.getEntry().equals(STR_NORMAL)) {
-            mRetweetClick.setSummary(STR_TAP + "：" + STR_RETWEET + "\n" + STR_LONG_TAP + "：" + STR_QUOTE);
+            mRetweetClick.setSummary(STR_TAP + ": " + STR_RETWEET + "\n" + STR_LONG_TAP + ": " + STR_QUOTE);
         } else {
-            mRetweetClick.setSummary(STR_TAP + "：" + STR_QUOTE + "\n" + STR_LONG_TAP + "：" + STR_RETWEET);
+            mRetweetClick.setSummary(STR_TAP + ": " + STR_QUOTE + "\n" + STR_LONG_TAP + ": " + STR_RETWEET);
         }
         // Click hashtag
         mHashtagClick = findPreference(KEY_CLICK_HASHTAG);
         if (mHashtagClick.getEntry().equals(STR_NORMAL)) {
-            mHashtagClick.setSummary(STR_TAP + "：" + STR_SEARCH_ON_HASHTAG + "\n" + STR_LONG_TAP + "：" + STR_TWEET_ON_HASHTAG);
+            mHashtagClick.setSummary(STR_TAP + ": " + STR_SEARCH_ON_HASHTAG + "\n" + STR_LONG_TAP + ": " + STR_TWEET_ON_HASHTAG);
         } else {
-            mHashtagClick.setSummary(STR_TAP + "：" + STR_TWEET_ON_HASHTAG + "\n" + STR_LONG_TAP + "：" + STR_SEARCH_ON_HASHTAG);
+            mHashtagClick.setSummary(STR_TAP + ": " + STR_TWEET_ON_HASHTAG + "\n" + STR_LONG_TAP + ": " + STR_SEARCH_ON_HASHTAG);
         }
     }
 
@@ -85,16 +85,16 @@ public class ClickActionFragment extends PreferenceFragmentBase {
         }
         else if (key.equals(KEY_CLICK_RETWEET)) {
             if (mRetweetClick.getEntry().equals(STR_NORMAL)) {
-                mRetweetClick.setSummary(STR_TAP + "：" + STR_RETWEET + "\n" + STR_LONG_TAP + "：" + STR_QUOTE);
+                mRetweetClick.setSummary(STR_TAP + ": " + STR_RETWEET + "\n" + STR_LONG_TAP + ": " + STR_QUOTE);
             } else {
-                mRetweetClick.setSummary(STR_TAP + "：" + STR_QUOTE + "\n" + STR_LONG_TAP + "：" + STR_RETWEET);
+                mRetweetClick.setSummary(STR_TAP + ": " + STR_QUOTE + "\n" + STR_LONG_TAP + ": " + STR_RETWEET);
             }
         }
         else if (key.equals(KEY_CLICK_HASHTAG)) {
             if (mHashtagClick.getEntry().equals(STR_NORMAL)) {
-                mHashtagClick.setSummary(STR_TAP + "：" + STR_SEARCH_ON_HASHTAG + "\n" + STR_LONG_TAP + "：" + STR_TWEET_ON_HASHTAG);
+                mHashtagClick.setSummary(STR_TAP + ": " + STR_SEARCH_ON_HASHTAG + "\n" + STR_LONG_TAP + ": " + STR_TWEET_ON_HASHTAG);
             } else {
-                mHashtagClick.setSummary(STR_TAP + "：" + STR_TWEET_ON_HASHTAG + "\n" + STR_LONG_TAP + "：" + STR_SEARCH_ON_HASHTAG);
+                mHashtagClick.setSummary(STR_TAP + ": " + STR_TWEET_ON_HASHTAG + "\n" + STR_LONG_TAP + ": " + STR_SEARCH_ON_HASHTAG);
             }
         }
     }

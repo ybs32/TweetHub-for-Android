@@ -81,7 +81,7 @@ public class PostActivity extends ActivityBase {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // 下書き保存
+            // Save draft
             case R.id.item_draft:
                 // Check text
                 EditText edit = findViewById(R.id.edit_post);

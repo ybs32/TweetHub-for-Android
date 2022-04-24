@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.adapters.recycler.TweetRecyclerAdapter;
 import com.ybsystem.tweetmate.application.TweetMateApp;
+import com.ybsystem.tweetmate.databases.PrefSystem;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweetmate.utils.ExceptionUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
@@ -53,7 +54,9 @@ public class TopicTimeline extends TimelineBase {
         Observable<QueryResult> observable = Observable.create(e -> {
             try {
                 if (isPullLoad || adapter.isEmpty()) {
-                    mQuery = new Query("lang:ja min_retweets:1000");
+                    mQuery = PrefSystem.getLanguage().equals("en")
+                                ? new Query("lang:en min_retweets:1000")
+                                : new Query("lang:ja min_retweets:1000");
                 }
                 mQuery.setCount(200);
                 e.onNext(TweetMateApp.getTwitter().search(mQuery));

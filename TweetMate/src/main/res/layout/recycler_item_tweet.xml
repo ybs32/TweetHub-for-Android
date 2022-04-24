@@ -4,21 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!-- タップ領域とツイートを重ねる-->
+    <!-- Overlay click area and tweet-->
     <FrameLayout
         android:id="@+id/frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:descendantFocusability="blocksDescendants">
 
-        <!-- タップ領域 -->
+        <!-- Click area -->
         <LinearLayout
             android:id="@+id/linear_click"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <!-- 「左タップ」 -->
+            <!-- Left click -->
             <View
                 android:id="@+id/view_left_click"
                 android:layout_width="0dp"
@@ -26,7 +26,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/bg_colorless" />
 
-            <!-- 「中央タップ」 -->
+            <!-- Middle click -->
             <View
                 android:id="@+id/view_middle_click"
                 android:layout_width="0dp"
@@ -34,7 +34,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/bg_colorless" />
 
-            <!-- 「右タップ」 -->
+            <!-- Right click -->
             <View
                 android:id="@+id/view_right_click"
                 android:layout_width="0dp"
@@ -43,20 +43,20 @@
                 android:background="@drawable/bg_colorless" />
         </LinearLayout>
 
-        <!-- ツイート -->
+        <!-- Tweet -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp">
 
-            <!-- 「ユーザーアイコン」 -->
+            <!-- User icon -->
             <ImageView
                 android:id="@+id/image_user_icon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="2dp" />
 
-            <!-- 「RTユーザーアイコン」 -->
+            <!-- RT User icon -->
             <ImageView
                 android:id="@+id/image_rt_user_icon"
                 android:layout_width="24dp"
@@ -66,7 +66,7 @@
                 android:layout_marginLeft="2dp"
                 android:layout_marginTop="4dp" />
 
-            <!-- 「RT矢印アイコン」 -->
+            <!-- RT Arrow icon -->
             <ImageView
                 android:id="@+id/image_rt_arrow"
                 android:layout_width="16dp"
@@ -78,7 +78,7 @@
                 android:src="@drawable/ic_retweet"
                 app:tint="?attr/colorStrong" />
 
-            <!-- 左側 -->
+            <!-- Left side -->
             <LinearLayout
                 android:id="@+id/linear_left"
                 android:layout_width="match_parent"
@@ -89,7 +89,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <!-- 「認証済マーク」 -->
+                <!-- Verify mark -->
                 <ImageView
                     android:id="@+id/image_verify_mark"
                     android:layout_width="16dp"
@@ -97,7 +97,7 @@
                     android:layout_marginRight="2dp"
                     android:src="@drawable/ic_verify" />
 
-                <!-- 「鍵マーク」 -->
+                <!-- Lock mark -->
                 <ImageView
                     android:id="@+id/image_lock_mark"
                     android:layout_width="16dp"
@@ -106,19 +106,19 @@
                     android:src="@drawable/ic_lock"
                     app:tint="?android:attr/textColor" />
 
-                <!-- 「ユーザー名」 -->
+                <!-- User name -->
                 <TextView
                     android:id="@+id/text_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:text="ユーザー名"
+                    android:text="Username"
                     android:textSize="14dp"
                     android:textColor="?attr/colorUserName"
                     android:textStyle="bold" />
 
-                <!-- 「＠ScreenName」 -->
+                <!-- @ScreenName -->
                 <TextView
                     android:id="@+id/text_screen_name"
                     android:layout_width="wrap_content"
@@ -131,7 +131,7 @@
                     android:textSize="14dp" />
             </LinearLayout>
 
-            <!-- 右側 -->
+            <!-- Right side -->
             <LinearLayout
                 android:id="@+id/linear_right"
                 android:layout_width="wrap_content"
@@ -140,7 +140,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <!--「RTマーク」-->
+                <!-- RT mark -->
                 <ImageView
                     android:id="@+id/image_rt_mark"
                     android:layout_width="16dp"
@@ -149,7 +149,7 @@
                     android:src="@drawable/ic_retweet"
                     app:tint="?attr/colorRetweet" />
 
-                <!-- 「Favマーク」 -->
+                <!-- Fav mark -->
                 <ImageView
                     android:id="@+id/image_favorite_mark"
                     android:layout_width="16dp"
@@ -158,18 +158,18 @@
                     android:src="@drawable/ic_like"
                     app:tint="?attr/colorLike" />
 
-                <!-- 「相対時間」 -->
+                <!-- Relative time -->
                 <TextView
                     android:id="@+id/text_relative_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:singleLine="true"
-                    android:text="0分前"
+                    android:text="xxx"
                     android:textSize="14dp" />
             </LinearLayout>
 
-            <!-- 「ツイート本文」 -->
+            <!-- Tweet text -->
             <TextView
                 android:id="@+id/text_tweet"
                 android:layout_width="match_parent"
@@ -178,10 +178,10 @@
                 android:layout_alignLeft="@+id/linear_left"
                 android:layout_marginTop="4dp"
                 android:lineSpacingMultiplier="1.1"
-                android:text="今日も１日、がんばるぞい！"
+                android:text="Okay, I'm gonna do my bestest today!"
                 android:textSize="14dp" />
 
-            <!-- サムネイル画像４枚 -->
+            <!-- Thumbnails -->
             <RelativeLayout
                 android:id="@+id/relative_thumbnail"
                 android:layout_width="match_parent"
@@ -191,14 +191,14 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="20dp">
 
-                <!-- 真ん中に空のビュー -->
+                <!-- Empty view in the middle -->
                 <View
                     android:id="@+id/dummy"
                     android:layout_width="6dp"
                     android:layout_height="0dp"
                     android:layout_centerInParent="true" />
 
-                <!-- 「サムネイル画像１」 -->
+                <!-- Thumbnail 1 -->
                 <RelativeLayout
                     android:id="@+id/relative_thumbnail_1"
                     android:layout_width="match_parent"
@@ -213,6 +213,7 @@
                         android:layout_marginBottom="4dp"
                         android:scaleType="centerCrop" />
 
+                    <!-- Play icon -->
                     <ImageView
                         android:id="@+id/image_play"
                         android:layout_width="50dp"
@@ -221,7 +222,7 @@
                         android:src="@drawable/ic_play" />
                 </RelativeLayout>
 
-                <!-- 「サムネイル画像２」 -->
+                <!-- Thumbnail 2 -->
                 <ImageView
                     android:id="@+id/image_thumbnail_2"
                     android:layout_width="match_parent"
@@ -231,7 +232,7 @@
                     android:layout_toRightOf="@id/dummy"
                     android:scaleType="centerCrop" />
 
-                <!-- 「サムネイル画像３」 -->
+                <!-- Thumbnail 3 -->
                 <ImageView
                     android:id="@+id/image_thumbnail_3"
                     android:layout_width="match_parent"
@@ -242,7 +243,7 @@
                     android:layout_toLeftOf="@id/dummy"
                     android:scaleType="centerCrop" />
 
-                <!-- 「サムネイル画像４」 -->
+                <!-- Thumbnail 4 -->
                 <ImageView
                     android:id="@+id/image_thumbnail_4"
                     android:layout_width="match_parent"
@@ -254,7 +255,7 @@
                     android:scaleType="centerCrop" />
             </RelativeLayout>
 
-            <!-- （引用）ツイート -->
+            <!-- (Quote) Tweet -->
             <RelativeLayout
                 android:id="@+id/relative_quote"
                 android:layout_width="match_parent"
@@ -267,7 +268,7 @@
                 android:background="@drawable/bg_border_gray"
                 android:padding="8dp">
 
-                <!-- （引用）左側 -->
+                <!-- (Quote) Left side -->
                 <LinearLayout
                     android:id="@+id/linear_left_quote"
                     android:layout_width="match_parent"
@@ -276,19 +277,19 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <!-- （引用）「ユーザー名」 -->
+                    <!-- (Quote) User name -->
                     <TextView
                         android:id="@+id/text_user_name_quote"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:singleLine="true"
-                        android:text="ユーザー名"
+                        android:text="Username"
                         android:textSize="14dp"
                         android:textColor="?attr/colorUserName"
                         android:textStyle="bold" />
 
-                    <!-- （引用）「＠ScreenName」 -->
+                    <!-- (Quote) @ScreenName -->
                     <TextView
                         android:id="@+id/text_screen_name_quote"
                         android:layout_width="wrap_content"
@@ -301,7 +302,7 @@
                         android:textSize="14dp" />
                 </LinearLayout>
 
-                <!-- （引用）「相対時間」 -->
+                <!-- (Quote) Relative time -->
                 <TextView
                     android:id="@+id/text_relative_time_quote"
                     android:layout_width="wrap_content"
@@ -309,10 +310,10 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="4dp"
                     android:singleLine="true"
-                    android:text="0分前"
+                    android:text="xxx"
                     android:textSize="14dp" />
 
-                <!-- （引用）「ツイート本文」 -->
+                <!-- (Quote) Tweet text -->
                 <TextView
                     android:id="@+id/text_tweet_quote"
                     android:layout_width="match_parent"
@@ -321,11 +322,11 @@
                     android:layout_alignLeft="@+id/linear_left_quote"
                     android:layout_marginTop="4dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:text="今日も１日、がんばるぞい！"
+                    android:text="Okay, I'm gonna do my bestest today!"
                     android:textSize="14dp" />
             </RelativeLayout>
 
-            <!-- 表示項目 -->
+            <!-- Under side -->
             <LinearLayout
                 android:id="@+id/linear_optional"
                 android:layout_width="wrap_content"
@@ -336,7 +337,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <!-- 「絶対時間」 -->
+                <!-- Absolute time -->
                 <TextView
                     android:id="@+id/text_absolute_time"
                     android:layout_width="wrap_content"
@@ -348,7 +349,7 @@
                     android:textColor="?attr/colorStrong"
                     android:textSize="13dp" />
 
-                <!-- 「via」 -->
+                <!-- Via -->
                 <TextView
                     android:id="@+id/text_via"
                     android:layout_width="0dp"
@@ -361,7 +362,7 @@
                     android:textColor="?attr/colorStrong"
                     android:textSize="13dp" />
 
-                <!-- 「RT数アイコン」 -->
+                <!-- RT count icon -->
                 <ImageView
                     android:id="@+id/image_rt_count"
                     android:layout_width="14dp"
@@ -370,7 +371,7 @@
                     android:src="@drawable/ic_retweet"
                     app:tint="?attr/colorStrong" />
 
-                <!-- 「RT数」 -->
+                <!-- RT count -->
                 <TextView
                     android:id="@+id/text_rt_count"
                     android:layout_width="wrap_content"
@@ -381,7 +382,7 @@
                     android:textColor="?attr/colorStrong"
                     android:textSize="13dp" />
 
-                <!-- 「Fav数アイコン」 -->
+                <!-- Fav count icon -->
                 <ImageView
                     android:id="@+id/image_fav_count"
                     android:layout_width="14dp"
@@ -390,7 +391,7 @@
                     android:src="@drawable/ic_like"
                     app:tint="?attr/colorStrong" />
 
-                <!-- 「Fav数」 -->
+                <!-- Fav count -->
                 <TextView
                     android:id="@+id/text_fav_count"
                     android:layout_width="wrap_content"
@@ -401,7 +402,7 @@
                     android:textSize="13dp" />
             </LinearLayout>
 
-            <!-- 「Retweeted by」 -->
+            <!-- Retweeted by -->
             <TextView
                 android:id="@+id/text_retweeted_by"
                 android:layout_width="wrap_content"
@@ -411,27 +412,27 @@
                 android:layout_marginTop="2dp"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:text="〇〇さんがリツイート"
+                android:text="Retweeted by"
                 android:textColor="?attr/colorStrong"
                 android:textSize="13dp" />
         </RelativeLayout>
     </FrameLayout>
 
-    <!-- (詳細) -->
+    <!-- (Detail) -->
     <RelativeLayout
         android:id="@+id/relative_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/frame">
 
-        <!-- （詳細）区切り線 -->
+        <!-- (Detail) Divider -->
         <View
             android:id="@+id/divider_detail"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="?attr/colorWeak" />
 
-        <!-- （詳細）「リツイート数」 -->
+        <!-- (Detail) RT count -->
         <TextView
             android:id="@+id/text_rt_count_detail"
             android:layout_width="wrap_content"
@@ -441,11 +442,10 @@
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:singleLine="true"
-            android:text="0 リツイート"
             android:textSize="13dp"
             android:textStyle="bold" />
 
-        <!-- （詳細）「いいね数」 -->
+        <!-- (Detail) Fav count -->
         <TextView
             android:id="@+id/text_fav_count_detail"
             android:layout_width="wrap_content"
@@ -454,11 +454,10 @@
             android:layout_toRightOf="@+id/text_rt_count_detail"
             android:padding="15dp"
             android:singleLine="true"
-            android:text="0 いいね"
             android:textSize="13dp"
             android:textStyle="bold" />
 
-        <!-- （詳細）区切り線 -->
+        <!-- (Detail) Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"

@@ -121,7 +121,8 @@ public class MainFragment extends Fragment {
                 // If current tab clicked, move top of the timeline
                 int currentPage = mMainTlPager.getCurrentItem();
                 if (currentPage == TAB_NUM) {
-                    TimelineBase timeline = (TimelineBase) mMainPagerAdapter.instantiateItem(mMainTlPager, currentPage);
+                    TimelineBase timeline = (TimelineBase)
+                            mMainPagerAdapter.instantiateItem(mMainTlPager, currentPage);
                     timeline.getRecyclerView().scrollToPosition(0);
                 }
             });

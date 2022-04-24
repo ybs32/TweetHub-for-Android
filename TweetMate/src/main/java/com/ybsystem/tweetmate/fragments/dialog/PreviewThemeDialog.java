@@ -78,8 +78,8 @@ public class PreviewThemeDialog extends DialogFragment {
         Observable<Object> observable = Observable.create(e -> {
             try {
                 Twitter twitter = TweetMateApp.getTwitter();
-                Query tweetQuery = new Query("from:MomentsJapan exclude:retweets exclude:nativeretweets");
-                Query retweetQuery = new Query("from:MomentsJapan filter:nativeretweets");
+                Query tweetQuery = new Query("from:GooglePlay exclude:retweets exclude:nativeretweets");
+                Query retweetQuery = new Query("from:GooglePlay filter:nativeretweets");
 
                 // Fetch data
                 mTweetResult = twitter.search(tweetQuery);

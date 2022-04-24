@@ -12,10 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ybsystem.tweetmate.R;
-import com.ybsystem.tweetmate.fragments.timeline.ProfileTimeline;
-import com.ybsystem.tweetmate.models.entities.Column;
-
-import static com.ybsystem.tweetmate.models.enums.ColumnType.USER_TWEET;
+import com.ybsystem.tweetmate.fragments.timeline.SearchTweetTimeline;
 
 public class PreviewAppearanceDialog extends DialogFragment {
 
@@ -36,17 +33,10 @@ public class PreviewAppearanceDialog extends DialogFragment {
         // Inflate
         View view = inflater.inflate(R.layout.dialog_preview_appearance, null);
 
-        // Declare
-        final long TWITTER_JP_USER_ID = 7080152L;
-        boolean isPrivate = false;
-
-        // Create timeline
-        Fragment fragment = new ProfileTimeline().newInstance(
-                new Column(TWITTER_JP_USER_ID, "", USER_TWEET, false),
-                isPrivate
-        );
-
         // Set timeline
+        Fragment fragment =  new SearchTweetTimeline().newInstance(
+                "from:GooglePlay exclude:replies"
+        );
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         ft.add(R.id.frame_container, fragment);
         ft.commit();

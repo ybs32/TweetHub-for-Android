@@ -12,8 +12,8 @@ android {
         applicationId "com.ybsystem.tweethub"
         minSdkVersion 26
         targetSdkVersion 31
-        versionCode 21
-        versionName "2.1.0"
+        versionCode 22
+        versionName "2.2.0"
         buildConfigField("String", "CK", prop['ck'])
         buildConfigField("String", "CS", prop['cs'])
         buildConfigField("String", "CB", prop['cb'])
@@ -43,6 +43,7 @@ android {
         disable 'IconLocation'
         disable 'HardcodedText'
         disable 'UnusedResources'
+        disable 'MissingTranslation'
         disable 'ContentDescription'
         disable 'NonConstantResourceId'
         disable 'AnnotationProcessorOnCompilePath'

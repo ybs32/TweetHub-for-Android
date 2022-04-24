@@ -5,25 +5,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- プロフィール部分 -->
+    <!-- Profile -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="160dp">
 
-        <!-- バナー画像 -->
+        <!-- Banner image -->
         <ImageView
             android:id="@+id/image_banner"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
 
-        <!-- 透過背景 -->
+        <!-- Transparent background -->
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#66000000"/>
 
-        <!-- ユーザーアイコン -->
+        <!-- User icon -->
         <ImageView
             android:id="@+id/image_user_icon"
             android:layout_width="50dp"
@@ -42,7 +42,7 @@
             android:layout_toRightOf="@+id/image_user_icon"
             android:gravity="center_vertical">
 
-            <!-- 認証マーク -->
+            <!-- Verify mark -->
             <ImageView
                 android:id="@+id/image_verify_mark"
                 android:layout_width="20dp"
@@ -50,7 +50,7 @@
                 android:layout_marginRight="2dp"
                 android:src="@drawable/ic_verify" />
 
-            <!-- 鍵マーク -->
+            <!-- Lock mark -->
             <ImageView
                 android:id="@+id/image_lock_mark"
                 android:layout_width="20dp"
@@ -59,7 +59,7 @@
                 android:src="@drawable/ic_lock"
                 app:tint="#FFFFFF" />
 
-            <!-- ユーザ名 -->
+            <!-- User name -->
             <TextView
                 android:id="@+id/text_user_name"
                 android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
                 android:textSize="18dp" />
         </LinearLayout>
 
-        <!-- ＠ScreenName -->
+        <!-- @ScreenName -->
         <TextView
             android:id="@+id/text_screen_name"
             android:layout_width="wrap_content"
@@ -85,18 +85,17 @@
             android:textSize="18dp" />
     </RelativeLayout>
 
-    <!-- リスト部分 -->
+    <!-- Lists -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- 背景 -->
+        <!-- Background -->
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?android:attr/colorBackground" />
 
-        <!-- リスト -->
         <ListView
             android:id="@+id/list_drawer"
             android:layout_width="match_parent"

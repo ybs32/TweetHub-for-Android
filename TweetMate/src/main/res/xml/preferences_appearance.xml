@@ -5,93 +5,93 @@
     android:layout_height="match_parent">
 
     <PreferenceCategory
-        android:title="サイズ"
+        android:title="@string/size"
         app:iconSpaceReserved="false">
 
         <ListPreference
             android:defaultValue="14"
-            android:dialogTitle="サイズの選択"
+            android:dialogTitle="@string/font_size"
             android:entries="@array/size_font_entries"
             android:entryValues="@array/size_font_values"
             android:key="@string/pref_key_size_font"
-            android:title="フォントサイズ"
+            android:title="@string/font_size"
             app:iconSpaceReserved="false" />
 
         <ListPreference
             android:defaultValue="48"
-            android:dialogTitle="サイズの選択"
+            android:dialogTitle="@string/user_icon_size"
             android:entries="@array/size_user_icon_entries"
             android:entryValues="@array/size_user_icon_values"
             android:key="@string/pref_key_size_user_icon"
-            android:title="ユーザーアイコンサイズ"
+            android:title="@string/user_icon_size"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="スタイル"
+        android:title="@string/style"
         app:iconSpaceReserved="false">
 
         <ListPreference
             android:defaultValue="LIKE"
-            android:dialogTitle="スタイルの選択"
+            android:dialogTitle="@string/like_favorite"
             android:entries="@array/style_like_fav_entries"
             android:entryValues="@array/style_like_fav_values"
             android:key="@string/pref_key_style_like_fav"
-            android:title="いいね / お気に入り"
+            android:title="@string/like_favorite"
             app:iconSpaceReserved="false" />
 
         <ListPreference
             android:defaultValue="CIRCLE"
-            android:dialogTitle="スタイルの選択"
+            android:dialogTitle="@string/user_icon_select"
             android:entries="@array/style_user_icon_entries"
             android:entryValues="@array/style_user_icon_values"
             android:key="@string/pref_key_style_user_icon"
-            android:title="ユーザーアイコン（丸 / 四角）"
+            android:title="@string/user_icon_select"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="表示項目"
+        android:title="@string/display_item"
         app:iconSpaceReserved="false">
 
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_key_show_absolute_time"
-            android:title="絶対時刻"
+            android:title="@string/absolute_time"
             app:iconSpaceReserved="false" />
 
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key_show_via"
-            android:title="クライアント名"
+            android:title="@string/client_name"
             app:iconSpaceReserved="false" />
 
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key_show_rt_fav_count"
-            android:title="リツイート数・いいね数"
+            android:title="@string/retweet_like_count"
             app:iconSpaceReserved="false" />
 
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key_show_retweeted_by"
-            android:title="Retweeted by"
+            android:title="@string/retweeted_by"
             app:iconSpaceReserved="false" />
 
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key_show_thumbnail"
-            android:title="サムネイル画像"
+            android:title="@string/thumbnail_image"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="プレビュー"
+        android:title="@string/preview"
         app:iconSpaceReserved="false">
 
         <PreferenceScreen
             android:key="@string/pref_key_appearance_preview"
-            android:title="レイアウトを確認"
+            android:title="@string/check_layout"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>

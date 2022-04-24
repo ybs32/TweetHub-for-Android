@@ -53,7 +53,7 @@ public class DownloadUseCase {
         };
 
         // Show progress
-        DialogUtils.showProgress(STR_CONNECTING, TweetMateApp.getActivity());
+        DialogUtils.showProgress(STR_CONNECTING);
 
         // Subscribe
         observable.subscribeOn(Schedulers.newThread())

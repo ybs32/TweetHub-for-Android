@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- 引っ張って更新 -->
+    <!-- Pull to refresh -->
     <in.srain.cube.views.ptr.PtrClassicFrameLayout
         android:id="@+id/ptr_classic_frame_layout"
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         cube_ptr:ptr_duration_to_close="200"
         cube_ptr:ptr_duration_to_close_header="400">
 
-        <!-- タイムライン -->
+        <!-- Timeline -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_view"
             android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:scrollbars="vertical" />
     </in.srain.cube.views.ptr.PtrClassicFrameLayout>
 
-    <!-- プルダウンメニュー -->
+    <!-- Pull down menu -->
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"

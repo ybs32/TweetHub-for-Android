@@ -56,12 +56,14 @@
     <string name="pref_key_click_hashtag">pref_key_click_hashtag</string>
 
     <!-- System settings -->
+    <string name="pref_key_locale">pref_key_locale</string>
+    <string name="pref_key_trend">pref_key_trend</string>
     <string name="pref_key_quality_image">pref_key_quality_image</string>
     <string name="pref_key_quality_video">pref_key_quality_video</string>
     <string name="pref_key_confirm_setting">pref_key_confirm_setting</string>
     <string name="pref_key_count_boot_load">pref_key_count_boot_load</string>
     <string name="pref_key_count_scroll_load">pref_key_count_scroll_load</string>
-    <string name="pref_key_easy_tweet">pref_key_easy_tweet</string>
+    <string name="pref_key_tweet_style">pref_key_tweet_style</string>
 
     <!-- Wallpaper settings -->
     <string name="pref_key_add_wallpaper">pref_key_add_wallpaper</string>

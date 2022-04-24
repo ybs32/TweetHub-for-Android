@@ -75,7 +75,7 @@ public class UserListActivity extends ActivityBase {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // 購読する
+            // Subscribe
             case R.id.item_subscribe:
                 UserListUseCase.subscribeList(mUserList);
                 return true;
@@ -94,12 +94,12 @@ public class UserListActivity extends ActivityBase {
         MenuItem subscribe = mMenu.findItem(R.id.item_subscribe);
 
         if (mUser != null) {
-            // 自分のリスト画面
+            // My list screen
             if (mUser.isMyself()) {
                 subscribe.setVisible(false);
                 return;
             }
-            // 他人のリスト画面
+            // Not my list screen
             if (!mUser.isMyself()) {
                 mMenu.clear();
                 return;
@@ -107,17 +107,17 @@ public class UserListActivity extends ActivityBase {
         }
 
         if (mUserList != null) {
-            // 自分のリスト
+            // My List
             if (mUserList.isOwner()) {
                 mMenu.clear();
                 return;
             }
-            // 購読中のリスト
+            // Subscribed list
             if (mUserList.isFollowing()) {
                 subscribe.setTitle(STR_UNSUBSCRIBE);
                 return;
             }
-            // 購読していないリスト
+            // Not subscribed list
             if (!mUserList.isFollowing()) {
                 subscribe.setTitle(STR_SUBSCRIBE);
                 return;
