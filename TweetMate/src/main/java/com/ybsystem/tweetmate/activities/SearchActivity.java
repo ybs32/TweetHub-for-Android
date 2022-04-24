@@ -13,11 +13,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.tabs.TabLayout;
 import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.adapters.pager.SearchPagerAdapter;
 import com.ybsystem.tweetmate.adapters.pager.TrendTopicPagerAdapter;
 import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.fragments.fragment.EasyTweetFragment;
+import com.ybsystem.tweetmate.fragments.timeline.TimelineBase;
 import com.ybsystem.tweetmate.libs.eventbus.ColumnEvent;
 import com.ybsystem.tweetmate.models.entities.Column;
 import com.ybsystem.tweetmate.models.entities.ColumnArray;
@@ -129,6 +131,25 @@ public class SearchActivity extends ActivityBase {
         mTrendTopicPager.setOffscreenPageLimit(2);
         mTrendTopicPagerAdapter = new TrendTopicPagerAdapter(getSupportFragmentManager());
         mTrendTopicPager.setAdapter(mTrendTopicPagerAdapter);
+
+        // Set tab
+        TabLayout tabLayout = findViewById(R.id.tab_common);
+        tabLayout.setupWithViewPager(mTrendTopicPager);
+        ViewGroup vg = (ViewGroup) tabLayout.getChildAt(0);
+
+        // When tab clicked
+        for (int i = 0; i < 2; i++) {
+            final int TAB_NUM = i;
+            vg.getChildAt(i).setOnClickListener(v -> {
+                // If current tab clicked, move top of the timeline
+                int currentPage = mTrendTopicPager.getCurrentItem();
+                if (currentPage == TAB_NUM) {
+                    TimelineBase timeline = (TimelineBase)
+                            mTrendTopicPagerAdapter.instantiateItem(mTrendTopicPager, currentPage);
+                    timeline.getRecyclerView().scrollToPosition(0);
+                }
+            });
+        }
     }
 
     private void setSearchPager() {
@@ -137,6 +158,25 @@ public class SearchActivity extends ActivityBase {
         mSearchPager.setOffscreenPageLimit(3);
         mSearchPagerAdapter = new SearchPagerAdapter(getSupportFragmentManager(), mSearchWord);
         mSearchPager.setAdapter(mSearchPagerAdapter);
+
+        // Set tab
+        TabLayout tabLayout = findViewById(R.id.tab_common);
+        tabLayout.setupWithViewPager(mSearchPager);
+        ViewGroup vg = (ViewGroup) tabLayout.getChildAt(0);
+
+        // When tab clicked
+        for (int i = 0; i < 3; i++) {
+            final int TAB_NUM = i;
+            vg.getChildAt(i).setOnClickListener(v -> {
+                // If current tab clicked, move top of the timeline
+                int currentPage = mSearchPager.getCurrentItem();
+                if (currentPage == TAB_NUM) {
+                    TimelineBase timeline = (TimelineBase)
+                            mSearchPagerAdapter.instantiateItem(mSearchPager, currentPage);
+                    timeline.getRecyclerView().scrollToPosition(0);
+                }
+            });
+        }
     }
 
     private void setTweetAction(Bundle savedInstanceState) {
