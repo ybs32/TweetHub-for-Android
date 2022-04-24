@@ -21,7 +21,7 @@ public class AppData extends Entity {
     private AccountArray<Account> accounts;
 
     public AppData() {
-        this.version = TweetMateApp.getInstance().getString(R.string.app_version);
+        this.version = "";
         this.accounts = new AccountArray<>();
     }
 

@@ -34,6 +34,12 @@ public class VersionFragment extends Fragment {
         } else {
             oldVersion =
                     "\n" +
+                    "Ver.2.1.0\n" +
+                    "・動画プレーヤーを刷新\n" +
+                    "・GIFを再生できない不具合を修正\n" +
+                    "・YouTubeのサムネイル表示に対応\n" +
+                    "・会話を表示する動作を改良\n" +
+                    "\n" +
                     "Ver.2.0.3\n" +
                     "・外部からツイート先の指定に対応\n" +
                     "・デフォルトの設定値を一部修正\n" +
