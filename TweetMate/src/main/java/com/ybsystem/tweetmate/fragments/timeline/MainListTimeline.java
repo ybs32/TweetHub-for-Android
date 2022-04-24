@@ -206,7 +206,7 @@ public class MainListTimeline extends TimelineBase {
         // Set to spinner
         Spinner dropDown = view.findViewById(R.id.spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                getActivity(), android.R.layout.simple_spinner_dropdown_item, items
+                getContext(), android.R.layout.simple_spinner_dropdown_item, items
         );
         dropDown.setAdapter(adapter);
 
