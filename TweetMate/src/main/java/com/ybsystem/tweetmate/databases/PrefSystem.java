@@ -183,7 +183,7 @@ public class PrefSystem extends PrefBase {
         // Filter mp4
         ArrayList<Variant> mp4List = new ArrayList<>();
         for (Variant v : mediaEntity.getVideoVariants()) {
-            if (v.getUrl().lastIndexOf("mp4") != -1) {
+            if (v.getUrl().lastIndexOf(".mp4") != -1) {
                 mp4List.add(v);
             }
         }
