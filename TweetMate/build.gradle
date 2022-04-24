@@ -43,6 +43,7 @@ android {
         disable 'IconLocation'
         disable 'HardcodedText'
         disable 'UnusedResources'
+        disable 'MissingTranslation'
         disable 'ContentDescription'
         disable 'NonConstantResourceId'
         disable 'AnnotationProcessorOnCompilePath'
