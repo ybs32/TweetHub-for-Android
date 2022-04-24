@@ -107,7 +107,7 @@ public class ProfileActivity extends ActivityBase {
                 }
                 return true;
             // Open browser
-            case R.id.item_browser:
+            case R.id.item_open_twitter:
                 ClickUseCase.openUser(mUser);
                 return true;
         }

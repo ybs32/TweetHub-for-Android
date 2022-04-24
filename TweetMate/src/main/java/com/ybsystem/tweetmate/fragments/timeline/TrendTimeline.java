@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.adapters.recycler.TrendRecyclerAdapter;
 import com.ybsystem.tweetmate.application.TweetMateApp;
+import com.ybsystem.tweetmate.databases.PrefSystem;
 import com.ybsystem.tweetmate.utils.ExceptionUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
 
@@ -49,7 +50,7 @@ public class TrendTimeline extends TimelineBase {
         TrendRecyclerAdapter adapter = (TrendRecyclerAdapter) mRecyclerAdapter;
         Observable<Trends> observable = Observable.create(e -> {
             try {
-                int woeIdJp = 23424856;
+                int woeIdJp = PrefSystem.getTrendWoeId(getContext());
                 e.onNext(TweetMateApp.getTwitter().getPlaceTrends(woeIdJp));
                 e.onComplete();
             } catch (TwitterException ex) {

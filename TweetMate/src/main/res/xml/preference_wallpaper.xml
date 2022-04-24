@@ -6,12 +6,12 @@
 
     <PreferenceScreen
         android:key="@string/pref_key_add_wallpaper"
-        android:title="壁紙を選択"
+        android:title="@string/select_wallpaper"
         app:iconSpaceReserved="false" />
 
     <PreferenceScreen
         android:key="@string/pref_key_delete_wallpaper"
-        android:title="壁紙を解除"
+        android:title="@string/destroy_wallpaper"
         app:iconSpaceReserved="false" />
 
     <ListPreference
@@ -19,11 +19,11 @@
         android:entries="@array/wallpaper_transparency_entries"
         android:entryValues="@array/wallpaper_transparency_values"
         android:key="@string/pref_key_wallpaper_transparency"
-        android:title="透過率"
+        android:title="@string/transparency"
         app:iconSpaceReserved="false" />
 
     <PreferenceScreen
-        android:title="※注意"
-        android:summary="見づらくなる場合は透過率を下げる\nもしくは、ダークテーマをお試し下さい。"
+        android:title="@string/notice"
+        android:summary="@string/notice_wallpaper"
         app:iconSpaceReserved="false" />
 </PreferenceScreen>

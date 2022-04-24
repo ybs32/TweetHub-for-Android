@@ -26,7 +26,6 @@ import twitter4j.Status;
 import twitter4j.URLEntity;
 import twitter4j.User;
 import twitter4j.UserMentionEntity;
-import twitter4j.util.TimeSpanConverter;
 
 import static androidx.core.text.HtmlCompat.TO_HTML_PARAGRAPH_LINES_INDIVIDUAL;
 import static com.ybsystem.tweetmate.resources.ResColor.*;
@@ -239,14 +238,7 @@ public class TwitterStatus extends Entity {
     private static String createRelativeTime(Status status) {
         // Convert
         Date date = status.getCreatedAt();
-        String text = new TimeSpanConverter().toTimeSpanString(date);
-
-        // Change text
-        text = text.replace("前", ""); //「〜分前」→「〜分」
-        text = text.replace("月", "/"); //「10月29日」→「10/29」
-        text = text.replace("日", "");
-
-        return text;
+        return new TwitterTimeSpanConverter().toTimeSpanString(date);
     }
 
     private static String createAbsoluteTime(Status status) {
@@ -295,4 +287,5 @@ public class TwitterStatus extends Entity {
         }
         return imageUrls;
     }
+
 }

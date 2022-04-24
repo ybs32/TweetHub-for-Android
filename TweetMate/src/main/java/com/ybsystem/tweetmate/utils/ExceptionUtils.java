@@ -1,5 +1,7 @@
 package com.ybsystem.tweetmate.utils;
 
+import com.ybsystem.tweetmate.databases.PrefSystem;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,19 +27,38 @@ public class ExceptionUtils {
     public static String getErrorMessage(Throwable t) {
 
         if (!(t instanceof TwitterException)) {
-            return "読み込みエラー";
+            if (PrefSystem.getLanguage().equals("en")) {
+                return "Failed to load…";
+            } else {
+                return "読み込みエラー";
+            }
         }
 
         TwitterException e = (TwitterException) t;
 
         if (e.isCausedByNetworkIssue()) {
-            return "ネットワーク接続エラー";
+            if (PrefSystem.getLanguage().equals("en")) {
+                return "Network error…";
+            } else {
+                return "ネットワーク接続エラー";
+            }
         }
 
         if (e.exceededRateLimitation() || e.getErrorCode() == 88) {
-            return "API制限に到達しました。\n"
-                    + e.getRateLimitStatus().getSecondsUntilReset() / 60 + "分"
-                    + e.getRateLimitStatus().getSecondsUntilReset() % 60 + "秒後に解除されます。";
+            if (PrefSystem.getLanguage().equals("en")) {
+                return "API limit reached.\n"
+                        + "It will be lifted after "
+                        + e.getRateLimitStatus().getSecondsUntilReset() / 60 + "m"
+                        + e.getRateLimitStatus().getSecondsUntilReset() % 60 + "s.";
+            } else {
+                return "API制限に到達しました。\n"
+                        + e.getRateLimitStatus().getSecondsUntilReset() / 60 + "分"
+                        + e.getRateLimitStatus().getSecondsUntilReset() % 60 + "秒後に解除されます。";
+            }
+        }
+
+        if (PrefSystem.getLanguage().equals("en")) {
+            return "Failed to load…";
         }
 
         String errorMessage = ERROR_MESSAGE_MAP.get(e.getErrorCode());

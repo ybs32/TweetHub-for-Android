@@ -33,6 +33,7 @@ import java.util.List;
 
 import static com.ybsystem.tweetmate.activities.preference.SettingActivity.*;
 import static com.ybsystem.tweetmate.models.enums.ConfirmAction.*;
+import static com.ybsystem.tweetmate.models.enums.TweetStyle.*;
 import static com.ybsystem.tweetmate.resources.ResColor.*;
 import static com.ybsystem.tweetmate.resources.ResString.*;
 
@@ -112,14 +113,14 @@ public class MainActivity extends ActivityBase
 
         switch (resultCode) {
             case REBOOT_IMMEDIATE:
-                ActivityUtils.rebootActivity(this, 0, 0);
+                ActivityUtils.rebootActivity(this);
                 break;
             case REBOOT_PREPARATION:
                 DialogUtils.showPersistentProgress(STR_APPLYING);
                 new Handler().postDelayed(() -> {
                     DialogUtils.dismissProgress();
                     ToastUtils.showShortToast(STR_SUCCESS_APPLY);
-                    ActivityUtils.rebootActivity(MainActivity.this, 0, 0);
+                    ActivityUtils.rebootActivity(this);
                 }, 1500);
                 break;
         }
@@ -144,7 +145,7 @@ public class MainActivity extends ActivityBase
     }
 
     private void setTweetAction(Bundle savedInstanceState) {
-        if (PrefSystem.isEasyTweetEnabled()) {
+        if (PrefSystem.getTweetStyle() == ON_THE_TIMELINE) {
             // EasyTweet
             if (savedInstanceState == null) {
                 Fragment fragment = new EasyTweetFragment();

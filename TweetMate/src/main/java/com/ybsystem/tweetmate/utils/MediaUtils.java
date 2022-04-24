@@ -5,7 +5,7 @@ public class MediaUtils {
     private MediaUtils() {
     }
 
-    // ----- 参考 -----
+    // ----- Ref -----
     // https://developer.twitter.com/en/docs/accounts-and-users/user-profile-images-and-banners
     // https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/entities-object#media
 

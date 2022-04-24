@@ -1,6 +1,8 @@
 package com.ybsystem.tweetmate.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -8,10 +10,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.application.TweetMateApp;
+import com.ybsystem.tweetmate.databases.PrefSystem;
 import com.ybsystem.tweetmate.resources.ResColor;
 import com.ybsystem.tweetmate.databases.PrefTheme;
+import com.ybsystem.tweetmate.resources.ResString;
 
 public abstract class ActivityBase extends AppCompatActivity {
+
+    @Override
+    protected void attachBaseContext(Context c){
+        // Set locale from setting
+        Configuration config = c.getResources().getConfiguration();
+        config.setLocale(PrefSystem.getLocale(c));
+        super.attachBaseContext(c.createConfigurationContext(config));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +34,8 @@ public abstract class ActivityBase extends AppCompatActivity {
         setTheme();
         setBackButton();
 
-        // Init resource
+        // Init resources
+        ResString.init();
         ResColor.init();
     }
 

@@ -13,18 +13,18 @@ public class SettingFragment extends PreferenceFragmentBase {
 
     private static final Resources res = TweetMateApp.getInstance().getResources();
 
-    // 設定
+    // Settings
     private static final String THEME = res.getString(R.string.pref_key_theme);
     private static final String APPEARANCE = res.getString(R.string.pref_key_appearance);
     private static final String CLICK_ACTION = res.getString(R.string.pref_key_click_action);
     private static final String SYSTEM = res.getString(R.string.pref_key_system);
     private static final String WALLPAPER = res.getString(R.string.pref_key_wallpaper);
 
-    // 管理
+    // Managements
     private static final String COLUMN = res.getString(R.string.pref_key_column);
     private static final String ACCOUNT = res.getString(R.string.pref_key_account);
 
-    // その他
+    // Others
     private static final String VERSION = res.getString(R.string.pref_key_version);
     private static final String FEEDBACK = res.getString(R.string.pref_key_feedback);
     private static final String ABOUT = res.getString(R.string.pref_key_about);
@@ -34,7 +34,7 @@ public class SettingFragment extends PreferenceFragmentBase {
 
         setPreferencesFromResource(R.xml.preferences, rootKey);
 
-        // テーマ設定
+        // Theme settings
         findPreference(THEME).setOnPreferenceClickListener(
                 preference -> {
                     intentTo(ThemeActivity.class);
@@ -42,7 +42,7 @@ public class SettingFragment extends PreferenceFragmentBase {
                 }
         );
 
-        // タイムライン表示
+        // Appearance settings
         findPreference(APPEARANCE).setOnPreferenceClickListener(
                 preference -> {
                     intentTo(AppearanceActivity.class);
@@ -50,7 +50,7 @@ public class SettingFragment extends PreferenceFragmentBase {
                 }
         );
 
-        // タップ動作
+        // Tap action settings
         findPreference(CLICK_ACTION).setOnPreferenceClickListener(
                 preference -> {
                     intentTo(ClickActionActivity.class);
@@ -58,7 +58,7 @@ public class SettingFragment extends PreferenceFragmentBase {
                 }
         );
 
-        // システム動作
+        // System settings
         findPreference(SYSTEM).setOnPreferenceClickListener(
                 preference -> {
                     intentTo(SystemActivity.class);
@@ -66,7 +66,7 @@ public class SettingFragment extends PreferenceFragmentBase {
                 }
         );
 
-        // 壁紙設定
+        // Wallpaper settings
         findPreference(WALLPAPER).setOnPreferenceClickListener(
                 preference -> {
                     intentTo(WallpaperActivity.class);
@@ -74,7 +74,7 @@ public class SettingFragment extends PreferenceFragmentBase {
                 }
         );
 
-        // カラム管理
+        // Column management
         findPreference(COLUMN).setOnPreferenceClickListener(
                 preference -> {
                     intentTo(ColumnActivity.class);
@@ -82,7 +82,7 @@ public class SettingFragment extends PreferenceFragmentBase {
                 }
         );
 
-        // アカウント管理
+        // Account management
         findPreference(ACCOUNT).setOnPreferenceClickListener(
                 preference -> {
                     intentTo(AccountActivity.class);
@@ -90,7 +90,7 @@ public class SettingFragment extends PreferenceFragmentBase {
                 }
         );
 
-        // バージョン
+        // Version
         findPreference(VERSION).setOnPreferenceClickListener(
                 preference -> {
                     intentTo(VersionActivity.class);

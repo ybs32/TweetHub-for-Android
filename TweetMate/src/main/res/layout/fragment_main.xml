@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- 上部バー -->
+    <!-- Top bar -->
     <LinearLayout
         android:id="@+id/linear_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- アプリアイコン -->
+        <!-- App icon -->
         <ImageView
             android:id="@+id/image_app_icon"
             android:layout_width="40dp"
@@ -21,7 +21,7 @@
             android:padding="6dp"
             android:src="@mipmap/ic_launcher" />
 
-        <!-- スライディングタブ -->
+        <!-- Sliding tab -->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_main"
             android:layout_width="match_parent"
@@ -32,7 +32,7 @@
             app:tabTextAppearance="@style/TabTheme16dpText" />
     </LinearLayout>
 
-    <!-- ドロワー領域 -->
+    <!-- Drawer -->
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
@@ -49,7 +49,7 @@
                 android:layout_height="match_parent"
                 android:layout_above="@+id/frame_easy_tweet" />
 
-            <!-- かんたんツイート -->
+            <!-- Easy tweet -->
             <FrameLayout
                 android:id="@+id/frame_easy_tweet"
                 android:layout_width="match_parent"
@@ -57,7 +57,6 @@
                 android:layout_alignParentBottom="true" />
         </RelativeLayout>
 
-        <!-- ドロワー -->
         <FrameLayout
             android:id="@+id/frame_drawer"
             android:layout_width="280dp"

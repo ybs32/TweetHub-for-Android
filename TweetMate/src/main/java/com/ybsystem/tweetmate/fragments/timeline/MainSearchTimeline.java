@@ -14,6 +14,7 @@ import androidx.appcompat.widget.PopupMenu;
 import com.ybsystem.tweetmate.R;
 import com.ybsystem.tweetmate.adapters.recycler.TrendRecyclerAdapter;
 import com.ybsystem.tweetmate.application.TweetMateApp;
+import com.ybsystem.tweetmate.databases.PrefSystem;
 import com.ybsystem.tweetmate.usecases.ClickUseCase;
 import com.ybsystem.tweetmate.usecases.SearchUseCase;
 import com.ybsystem.tweetmate.utils.ExceptionUtils;
@@ -89,7 +90,7 @@ public class MainSearchTimeline extends TimelineBase {
         // When popup item clicked
         popup.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
-                // 保存した検索
+                // Saved searches
                 case R.id.item_saved_search:
                     SearchUseCase.showSavedSearch();
                     break;
@@ -107,7 +108,7 @@ public class MainSearchTimeline extends TimelineBase {
         TrendRecyclerAdapter adapter = (TrendRecyclerAdapter) mRecyclerAdapter;
         Observable<Trends> observable = Observable.create(e -> {
             try {
-                int woeIdJp = 23424856;
+                int woeIdJp = PrefSystem.getTrendWoeId(getContext());
                 e.onNext(TweetMateApp.getTwitter().getPlaceTrends(woeIdJp));
                 e.onComplete();
             } catch (TwitterException ex) {

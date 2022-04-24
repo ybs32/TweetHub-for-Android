@@ -32,6 +32,7 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
+import static com.ybsystem.tweetmate.models.enums.TweetStyle.*;
 import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class MainListTimeline extends TimelineBase {
@@ -210,7 +211,7 @@ public class MainListTimeline extends TimelineBase {
         dropDown.setAdapter(adapter);
 
         // Adjust layout
-        if (PrefSystem.isEasyTweetEnabled()) {
+        if (PrefSystem.getTweetStyle() == ON_THE_TIMELINE) {
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) dropDown.getLayoutParams();
             params.setMargins(0, 0, 0, 0);
             params.height = CalcUtils.convertDp2Px(40);
@@ -243,7 +244,7 @@ public class MainListTimeline extends TimelineBase {
         // Set footer
         setFooterView();
 
-        //　Change footer text
+        // Change footer text
         mFooterText.setText(STR_LIST_NONE);
         mFooterProgress.setVisibility(View.GONE);
 
