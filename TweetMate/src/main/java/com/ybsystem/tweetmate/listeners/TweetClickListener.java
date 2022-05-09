@@ -86,6 +86,9 @@ public class TweetClickListener implements View.OnClickListener, View.OnLongClic
             case USER:
                 ClickUseCase.showUser(mSource.getUser().getId());
                 break;
+            case PREV_NEXT:
+                ClickUseCase.showPrevNext(mSource);
+                break;
             case DETAIL:
                 ClickUseCase.showDetail(mSource);
                 break;

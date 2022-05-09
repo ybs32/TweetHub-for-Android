@@ -22,6 +22,7 @@
     <string name="tweet_none">ツイートなし</string>
     <string name="reply">返信</string>
     <string name="talk">会話</string>
+    <string name="prev_next">前後のツイート</string>
     <string name="detail">ツイート詳細</string>
     <string name="list">リスト</string>
     <string name="list_single">リスト(単体)</string>

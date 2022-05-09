@@ -72,6 +72,7 @@
         <item>@string/search_on_hashtag</item>
         <item>@string/tweet_on_hashtag</item>
         <item>@string/show_user</item>
+        <item>@string/prev_next</item>
         <item>@string/detail</item>
         <item>@string/copy_mate</item>
         <item>@string/share</item>
@@ -90,6 +91,7 @@
         <item>HASH_SEARCH</item>
         <item>HASH_TWEET</item>
         <item>USER</item>
+        <item>PREV_NEXT</item>
         <item>DETAIL</item>
         <item>COPY</item>
         <item>SHARE</item>
@@ -106,6 +108,7 @@
         <item>@string/url</item>
         <item>@string/hashtag</item>
         <item>@string/user</item>
+        <item>@string/prev_next</item>
         <item>@string/detail</item>
         <item>@string/copy_mate</item>
         <item>@string/share</item>
@@ -120,6 +123,7 @@
         <item>URL</item>
         <item>HASH</item>
         <item>USER</item>
+        <item>PREV_NEXT</item>
         <item>DETAIL</item>
         <item>COPY</item>
         <item>SHARE</item>
@@ -134,6 +138,7 @@
         <item>URL</item>
         <item>HASH</item>
         <item>USER</item>
+        <item>PREV_NEXT</item>
         <item>DETAIL</item>
     </string-array>
 

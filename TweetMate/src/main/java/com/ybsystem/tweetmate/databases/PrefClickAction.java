@@ -80,6 +80,7 @@ public class PrefClickAction extends PrefBase {
             defaultSet.add(URL);
             defaultSet.add(HASH);
             defaultSet.add(USER);
+            defaultSet.add(PREV_NEXT);
             defaultSet.add(DETAIL);
             return defaultSet;
         } else {
