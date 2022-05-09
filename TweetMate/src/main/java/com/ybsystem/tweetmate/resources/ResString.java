@@ -22,6 +22,7 @@ public class ResString {
     public static String STR_TWEET_NONE;
     public static String STR_REPLY;
     public static String STR_TALK;
+    public static String STR_PREV_NEXT;
     public static String STR_DETAIL;
     public static String STR_LIST;
     public static String STR_LIST_SINGLE;
@@ -209,6 +210,7 @@ public class ResString {
         STR_TWEET_NONE = getString(R.string.tweet_none);
         STR_REPLY = getString(R.string.reply);
         STR_TALK = getString(R.string.talk);
+        STR_PREV_NEXT = getString(R.string.prev_next);
         STR_DETAIL = getString(R.string.detail);
         STR_LIST = getString(R.string.list);
         STR_LIST_SINGLE = getString(R.string.list_single);

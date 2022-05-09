@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.ybsystem.tweetmate.fragments.timeline.DetailTimeline;
 import com.ybsystem.tweetmate.fragments.timeline.MainTimeline;
+import com.ybsystem.tweetmate.fragments.timeline.PrevNextTimeline;
 import com.ybsystem.tweetmate.fragments.timeline.TalkTimeline;
 import com.ybsystem.tweetmate.fragments.timeline.UserTimeline;
 import com.ybsystem.tweetmate.models.entities.Column;
@@ -76,6 +77,10 @@ public class TimelineActivity extends ActivityBase {
             case TALK:
                 getSupportActionBar().setTitle(STR_TALK);
                 fragment = new TalkTimeline().newInstance(mStatus);
+                break;
+            case PREV_NEXT:
+                getSupportActionBar().setTitle(STR_PREV_NEXT);
+                fragment = new PrevNextTimeline().newInstance(mStatus);
                 break;
             case DETAIL:
                 getSupportActionBar().setTitle(STR_DETAIL);

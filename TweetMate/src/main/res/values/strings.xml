@@ -22,6 +22,7 @@
     <string name="tweet_none">No Tweets</string>
     <string name="reply">Reply</string>
     <string name="talk">Conversation</string>
+    <string name="prev_next">Prev/Next</string>
     <string name="detail">Detail</string>
     <string name="list">List</string>
     <string name="list_single">List(Single)</string>
