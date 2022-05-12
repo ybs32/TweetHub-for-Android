@@ -18,6 +18,7 @@ import com.ybsystem.tweetmate.models.entities.twitter.TwitterUserMentionEntity;
 import com.ybsystem.tweetmate.models.enums.ClickAction;
 import com.ybsystem.tweetmate.models.enums.ImageOption;
 import com.ybsystem.tweetmate.databases.*;
+import com.ybsystem.tweetmate.usecases.ClickUseCase;
 import com.ybsystem.tweetmate.utils.*;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT;
+import static com.ybsystem.tweetmate.models.enums.ColumnType.*;
 import static com.ybsystem.tweetmate.models.enums.ImageOption.*;
 import static com.ybsystem.tweetmate.resources.ResColor.*;
 import static com.ybsystem.tweetmate.resources.ResString.*;
@@ -268,10 +270,22 @@ public class TweetRow extends RecyclerView.ViewHolder {
             mDetailContainer.setVisibility(View.GONE);
             return;
         }
-        // Set detail rt fav
-        mDetailRtCount.setText(mSource.getRetweetCount() + " " + STR_RETWEET);
-        mDetailFavCount.setText(mSource.getFavoriteCount() + " " + PrefAppearance.getLikeFavText());
+        // Set detail rt fav count
+        int rtCount = mSource.getRetweetCount();
+        int favCount = mSource.getFavoriteCount();
+        mDetailRtCount.setText(rtCount + " " + STR_RETWEET);
+        mDetailFavCount.setText(favCount + " " + PrefAppearance.getLikeFavText());
         mDetailContainer.setVisibility(View.VISIBLE);
+
+        // When clicked rt fav count
+        if (rtCount > 0)
+            mDetailRtCount.setOnClickListener(view ->
+                ClickUseCase.showRtFavUser(mSource, RT_USER)
+            );
+        if (favCount > 0)
+            mDetailFavCount.setOnClickListener(view ->
+                ClickUseCase.showRtFavUser(mSource, FAV_USER)
+            );
     }
 
     public void setBackgroundColor() {

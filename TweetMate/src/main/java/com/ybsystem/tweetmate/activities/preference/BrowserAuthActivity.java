@@ -4,7 +4,7 @@ import android.os.Bundle;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ybsystem.tweetmate.activities.ActivityBase;
-import com.ybsystem.tweetmate.fragments.preference.BrowserAuthFragment;
+import com.ybsystem.tweetmate.libs.webview.BrowserAuthFragment;
 
 public class BrowserAuthActivity extends ActivityBase {
 

@@ -1,4 +1,4 @@
-package com.ybsystem.tweetmate.fragments.preference;
+package com.ybsystem.tweetmate.libs.webview;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
@@ -58,22 +58,20 @@ public class BrowserAuthFragment extends Fragment {
     private View createWebView() {
         // Create web view
         mWebView = new WebView(getActivity());
-
-        // Create web view client
-        WebViewClient webViewClient = new WebViewClient() {
+        mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 boolean result = true;
                 if (url != null && url.contains("oauth_verifier=")) {
-                    String verifier = Uri.parse(url).getQueryParameter("oauth_verifier");
-                    PostTask postTask = new PostTask();
-                    postTask.execute(verifier);
+                    new PostTask().execute(
+                        Uri.parse(url).getQueryParameter("oauth_verifier")
+                    );
                 } else {
                     result = super.shouldOverrideUrlLoading(view, url);
                 }
                 return result;
             }
-        };
+        });
 
         // Remove cookie
         CookieManager cookieManager = CookieManager.getInstance();
@@ -85,8 +83,6 @@ public class BrowserAuthFragment extends Fragment {
         mWebView.clearCache(true);
         mWebView.clearHistory();
 
-        // Set web view
-        mWebView.setWebViewClient(webViewClient);
         return mWebView;
     }
 

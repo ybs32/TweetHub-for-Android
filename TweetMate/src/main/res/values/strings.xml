@@ -13,10 +13,12 @@
     <string name="message">Message</string>
     <string name="like">Like</string>
     <string name="unlike">Unlike</string>
+    <string name="liked_users">Liked users</string>
     <string name="favorite">Favorite</string>
     <string name="unfavorite">Unfavorite</string>
     <string name="retweet">Retweet</string>
     <string name="unretweet">Unretweet</string>
+    <string name="retweeted_users">Retweeted users</string>
     <string name="quote">Quote</string>
     <string name="tweet">Tweet</string>
     <string name="tweet_none">No Tweets</string>
@@ -290,6 +292,8 @@
     <string name="sentence_created_by">Created by %1$s</string>
     <string name="sentence_retweeted_by">Retweeted by %1$s</string>
     <string name="sentence_members">%1$d members</string>
+    <string name="sentence_authenticate_to_view">Authentication is required to view.</string>
+    <string name="sentence_authenticate_success">Authentication succeeded.\nPlease display again.</string>
     <string name="sentence_trouble_auth">Please try logging in with username or email address.</string>
     <string name="sentence_notice_auth">Twitter account is required to use the application.\n\n
         Please use the official application if you wish to use the notification function or direct messages.</string>
