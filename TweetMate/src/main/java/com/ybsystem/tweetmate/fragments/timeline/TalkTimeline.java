@@ -102,7 +102,7 @@ public class TalkTimeline extends TimelineBase {
                 mLoadCount++;
 
                 // Render tweets
-                if (status.getInReplyToStatusId() == -1 || mLoadCount % 10 == 0) {
+                if (status.getInReplyToStatusId() == -1 || mLoadCount % 6 == 0) {
                     renderReplyTo();
                 }
 
