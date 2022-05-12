@@ -9,6 +9,7 @@ import com.ybsystem.tweetmate.fragments.timeline.DetailTimeline;
 import com.ybsystem.tweetmate.fragments.timeline.MainTimeline;
 import com.ybsystem.tweetmate.fragments.timeline.PrevNextTimeline;
 import com.ybsystem.tweetmate.fragments.timeline.TalkTimeline;
+import com.ybsystem.tweetmate.fragments.timeline.UserRtFavTimeline;
 import com.ybsystem.tweetmate.fragments.timeline.UserTimeline;
 import com.ybsystem.tweetmate.models.entities.Column;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterStatus;
@@ -85,6 +86,14 @@ public class TimelineActivity extends ActivityBase {
             case DETAIL:
                 getSupportActionBar().setTitle(STR_DETAIL);
                 fragment = new DetailTimeline().newInstance(mStatus);
+                break;
+            case RT_USER:
+                getSupportActionBar().setTitle(STR_RETWEETED_USERS);
+                fragment = new UserRtFavTimeline().newInstance(mStatus, RT_USER);
+                break;
+            case FAV_USER:
+                getSupportActionBar().setTitle(STR_LIKED_USERS);
+                fragment = new UserRtFavTimeline().newInstance(mStatus, FAV_USER);
                 break;
             case FOLLOW:
                 getSupportActionBar().setTitle(STR_FOLLOW + " (@" + mUser.getScreenName() + ")");

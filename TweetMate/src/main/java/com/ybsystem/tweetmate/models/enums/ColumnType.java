@@ -16,6 +16,9 @@ public enum ColumnType {
     PREV_NEXT("PREV_NEXT"),
     DETAIL("DETAIL"),
 
+    RT_USER("RT_USER"),
+    FAV_USER("FAV_USER"),
+
     FOLLOW("FOLLOW"),
     FOLLOWER("FOLLOWER"),
     MUTE("MUTE"),
