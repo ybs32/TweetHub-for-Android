@@ -20,14 +20,15 @@ import com.ybsystem.tweetmate.utils.ExceptionUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.observers.DisposableObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import twitter4j.Query;
-import twitter4j.QueryResult;
+import twitter4j.Paging;
+import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
@@ -36,8 +37,7 @@ import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class PreviewThemeDialog extends DialogFragment {
 
-    private QueryResult mTweetResult;
-    private QueryResult mRetweetResult;
+    private List<twitter4j.Status> mTweetRetweetStatuses;
     private List<twitter4j.Status> mReplyStatuses;
     private List<twitter4j.Status> mMyTweetStatuses;
 
@@ -78,12 +78,12 @@ public class PreviewThemeDialog extends DialogFragment {
         Observable<Object> observable = Observable.create(e -> {
             try {
                 Twitter twitter = TweetMateApp.getTwitter();
-                Query tweetQuery = new Query("from:GooglePlay exclude:retweets exclude:nativeretweets");
-                Query retweetQuery = new Query("from:GooglePlay filter:nativeretweets");
+                Paging paging = new Paging();
+                paging.setPage(1);
+                paging.setCount(200);
 
                 // Fetch data
-                mTweetResult = twitter.search(tweetQuery);
-                mRetweetResult = twitter.search(retweetQuery);
+                mTweetRetweetStatuses = twitter.getUserTimeline(783214, paging);
                 mReplyStatuses = twitter.getMentionsTimeline();
                 mMyTweetStatuses = twitter.getUserTimeline();
 
@@ -110,17 +110,19 @@ public class PreviewThemeDialog extends DialogFragment {
             @Override
             public void onComplete() {
                 // Tweet
-                List<twitter4j.Status> tweets = mTweetResult.getTweets();
-                if (!tweets.isEmpty()) {
+                Optional<Status> status4j = mTweetRetweetStatuses
+                        .stream().filter(e -> !e.isRetweet()).findFirst();
+                if (status4j.isPresent()) {
                     View v = view.findViewById(R.id.include_tweet);
-                    renderTweet(v, new TwitterStatus(tweets.get(0)));
+                    renderTweet(v, new TwitterStatus(status4j.get()));
                     v.setVisibility(View.VISIBLE);
                 }
                 // Retweet
-                List<twitter4j.Status> retweets = mRetweetResult.getTweets();
-                if (!retweets.isEmpty()) {
+                Optional<Status> rtStatus4j = mTweetRetweetStatuses
+                        .stream().filter(e -> e.isRetweet()).findFirst();
+                if (rtStatus4j.isPresent()) {
                     View v = view.findViewById(R.id.include_retweet);
-                    renderTweet(v, new TwitterStatus(retweets.get(0)));
+                    renderTweet(v, new TwitterStatus(rtStatus4j.get()));
                     v.setVisibility(View.VISIBLE);
                 }
                 // Reply
