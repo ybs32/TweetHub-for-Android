@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">TweetMate</string>
-    <string name="app_version">2.2.0</string>
+    <string name="app_version">2.3.0</string>
     <string name="app_update_info">
-        Ver.2.2.0\n
-        ・言語設定を追加\n
-        ・トレンド地域の設定を追加\n
-        ・英語圏にアプリを公開
+        Ver.2.3.0\n
+        ・前後のツイート表示機能を追加\n
+        ・いいね/RTユーザの表示機能を追加\n
+        ・メディアツイート取得の不具合修正
     </string>
 
     <string name="home">ホーム</string>

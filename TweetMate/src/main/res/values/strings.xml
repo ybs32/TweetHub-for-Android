@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">TweetMate</string>
-    <string name="app_version">2.2.0</string>
+    <string name="app_version">2.3.0</string>
     <string name="app_update_info">
-        Ver.2.2.0\n
-        ・Added language setting\n
-        ・Added trend region setting\n
-        ・Released app to english-speaking countries
+        Ver.2.3.0\n
+        ・Add the function of displaying previous/next tweets\n
+        ・Added the function of displaying Like/RT users\n
+        ・Fixed a bug in acquiring media tweets
     </string>
 
     <string name="home">Home</string>
