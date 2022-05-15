@@ -268,6 +268,13 @@ public class TweetDialog extends DialogFragment {
                 ));
             }
         }
+        // PrevNext
+        if (menuSetting.contains(PREV_NEXT)) {
+            adapter.add(new Menu(
+                    R.drawable.ic_prev_next, COLOR_STRONG, STR_PREV_NEXT, "",
+                    () -> ClickUseCase.showPrevNext(mSource)
+            ));
+        }
         // Detail
         if (menuSetting.contains(DETAIL)) {
             adapter.add(new Menu(

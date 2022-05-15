@@ -14,6 +14,7 @@ public enum ClickAction {
     HASH_SEARCH("HASH_SEARCH"),
     HASH_TWEET("HASH_TWEET"),
     USER("USER"),
+    PREV_NEXT("PREV_NEXT"),
     DETAIL("DETAIL"),
     COPY("COPY"),
     SHARE("SHARE"),

@@ -26,7 +26,6 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
-import static com.ybsystem.tweetmate.models.enums.ColumnType.*;
 import static com.ybsystem.tweetmate.resources.ResString.*;
 
 public class ProfileTimeline extends TimelineBase {
@@ -34,6 +33,9 @@ public class ProfileTimeline extends TimelineBase {
     // Bundle
     private Column mColumn;
     private boolean mIsPrivate;
+
+    // For user media
+    private long mLastTweetId;
 
     public Fragment newInstance(Column column, boolean isPrivate) {
         Bundle bundle = new Bundle();
@@ -75,6 +77,20 @@ public class ProfileTimeline extends TimelineBase {
         mFooterProgress.setVisibility(View.VISIBLE);
         mFooterView.setVisibility(View.VISIBLE);
 
+        // Load timeline
+        switch (mColumn.getType()) {
+            case USER_TWEET:
+            case USER_FAVORITE:
+                loadUserTweetFavorite(isClickLoad);
+                break;
+            case USER_MEDIA:
+                loadUserMedia(isClickLoad, 1);
+                break;
+        }
+    }
+
+    private void loadUserTweetFavorite(boolean isClickLoad) {
+        // Create request
         TweetRecyclerAdapter adapter = (TweetRecyclerAdapter) mRecyclerAdapter;
         Observable<List<Status>> observable = Observable.create(e -> {
             try {
@@ -88,7 +104,6 @@ public class ProfileTimeline extends TimelineBase {
                 Twitter twitter = TweetMateApp.getTwitter();
                 switch (mColumn.getType()) {
                     case USER_TWEET:
-                    case USER_MEDIA:
                         e.onNext(twitter.getUserTimeline(mColumn.getId(), paging));
                         break;
                     case USER_FAVORITE:
@@ -114,17 +129,92 @@ public class ProfileTimeline extends TimelineBase {
                 } else {
                     // Success
                     for (Status status4j : statusList) {
-                        TwitterStatus status = new TwitterStatus(status4j);
-                        if (!mColumn.getType().equals(USER_MEDIA)) {
-                            adapter.add(status);
-                            continue;
-                        }
-                        if (!status.isRetweet() && status.isTwiMedia()) {
-                            adapter.add(status);
-                        }
+                        adapter.add(new TwitterStatus(status4j));
                     }
                     adapter.notifyDataSetChanged();
                     mScrollLoad = true;
+                }
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                // Failed...
+                mFooterText.setText(STR_TAP_TO_LOAD);
+                mFooterProgress.setVisibility(View.GONE);
+
+                // Show error message if loaded by user action
+                if (isClickLoad) {
+                    ToastUtils.showShortToast(ExceptionUtils.getErrorMessage(t));
+                }
+                mFooterClick = true;
+            }
+
+            @Override
+            public void onComplete() {
+            }
+        };
+
+        observable
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(disposable);
+    }
+
+    private void loadUserMedia(boolean isClickLoad, int count) {
+        // Create request
+        TweetRecyclerAdapter adapter = (TweetRecyclerAdapter) mRecyclerAdapter;
+        Observable<List<Status>> observable = Observable.create(e -> {
+            try {
+                Paging paging;
+                if (mLastTweetId == 0) {
+                    paging = mFirstPaging;
+                    paging.setCount(200);
+                } else {
+                    paging = mNextPaging;
+                    paging.setCount(200);
+                    paging.setMaxId(mLastTweetId - 1);
+                }
+                Twitter twitter = TweetMateApp.getTwitter();
+                e.onNext(twitter.getUserTimeline(mColumn.getId(), paging));
+                e.onComplete();
+            } catch (TwitterException ex) {
+                e.onError(ex);
+            }
+        });
+
+        DisposableObserver<List<Status>> disposable = new DisposableObserver<List<Status>>() {
+            @Override
+            public void onNext(List<Status> statusList) {
+                if (statusList.isEmpty()) {
+                    // No tweet...
+                    if (adapter.isEmpty()) {
+                        mFooterText.setText(STR_TWEET_NONE);
+                        mFooterProgress.setVisibility(View.GONE);
+                    } else
+                        mFooterView.setVisibility(View.GONE);
+                } else {
+                    // Success
+                    boolean exist = false;
+                    for (Status status4j : statusList) {
+                        TwitterStatus status = new TwitterStatus(status4j);
+                        if (!status.isRetweet() && status.isTwiMedia()) {
+                            adapter.add(status);
+                            exist = true;
+                        }
+                    }
+                    mLastTweetId = statusList.get(statusList.size() - 1).getId();
+                    if (exist) {
+                        adapter.notifyDataSetChanged();
+                        mScrollLoad = true;
+                    } else {
+                        if (count >= 4) {
+                            mFooterText.setText(STR_TAP_TO_LOAD);
+                            mFooterProgress.setVisibility(View.GONE);
+                            mFooterClick = true;
+                        } else {
+                            loadUserMedia(isClickLoad, count + 1);
+                        }
+                    }
                 }
             }
 

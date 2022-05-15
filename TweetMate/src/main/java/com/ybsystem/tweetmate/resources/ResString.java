@@ -13,15 +13,18 @@ public class ResString {
     public static String STR_MESSAGE;
     public static String STR_LIKE;
     public static String STR_UNLIKE;
+    public static String STR_LIKED_USERS;
     public static String STR_FAVORITE;
     public static String STR_UNFAVORITE;
     public static String STR_RETWEET;
     public static String STR_UNRETWEET;
+    public static String STR_RETWEETED_USERS;
     public static String STR_QUOTE;
     public static String STR_TWEET;
     public static String STR_TWEET_NONE;
     public static String STR_REPLY;
     public static String STR_TALK;
+    public static String STR_PREV_NEXT;
     public static String STR_DETAIL;
     public static String STR_LIST;
     public static String STR_LIST_SINGLE;
@@ -186,6 +189,8 @@ public class ResString {
     public static String STR_FAIL_NEED_PERMISSION;
 
     // Sentence
+    public static String STR_SENTENCE_AUTHENTICATE_TO_VIEW;
+    public static String STR_SENTENCE_AUTHENTICATE_SUCCESS;
     public static String STR_SENTENCE_TROUBLE_AUTH;
 
     private ResString() {
@@ -200,15 +205,18 @@ public class ResString {
         STR_MESSAGE = getString(R.string.message);
         STR_LIKE = getString(R.string.like);
         STR_UNLIKE = getString(R.string.unlike);
+        STR_LIKED_USERS = getString(R.string.liked_users);
         STR_FAVORITE = getString(R.string.favorite);
         STR_UNFAVORITE = getString(R.string.unfavorite);
         STR_RETWEET = getString(R.string.retweet);
         STR_UNRETWEET = getString(R.string.unretweet);
+        STR_RETWEETED_USERS = getString(R.string.retweeted_users);
         STR_QUOTE = getString(R.string.quote);
         STR_TWEET = getString(R.string.tweet);
         STR_TWEET_NONE = getString(R.string.tweet_none);
         STR_REPLY = getString(R.string.reply);
         STR_TALK = getString(R.string.talk);
+        STR_PREV_NEXT = getString(R.string.prev_next);
         STR_DETAIL = getString(R.string.detail);
         STR_LIST = getString(R.string.list);
         STR_LIST_SINGLE = getString(R.string.list_single);
@@ -373,6 +381,8 @@ public class ResString {
         STR_FAIL_NEED_PERMISSION = getString(R.string.fail_need_permission);
 
         // Sentence
+        STR_SENTENCE_AUTHENTICATE_TO_VIEW = getString(R.string.sentence_authenticate_to_view);
+        STR_SENTENCE_AUTHENTICATE_SUCCESS = getString(R.string.sentence_authenticate_success);
         STR_SENTENCE_TROUBLE_AUTH = getString(R.string.sentence_trouble_auth);
     }
 

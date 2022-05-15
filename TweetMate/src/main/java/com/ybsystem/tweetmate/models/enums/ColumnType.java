@@ -13,7 +13,11 @@ public enum ColumnType {
     SEARCH_SINGLE("SEARCH_SINGLE"),
 
     TALK("TALK"),
+    PREV_NEXT("PREV_NEXT"),
     DETAIL("DETAIL"),
+
+    RT_USER("RT_USER"),
+    FAV_USER("FAV_USER"),
 
     FOLLOW("FOLLOW"),
     FOLLOWER("FOLLOWER"),

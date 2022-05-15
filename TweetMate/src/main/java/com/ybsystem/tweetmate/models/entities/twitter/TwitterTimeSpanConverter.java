@@ -26,11 +26,11 @@ public class TwitterTimeSpanConverter {
     public TwitterTimeSpanConverter() {
         if (PrefSystem.getLanguage().equals("en")) {
             formats[NOW] = new MessageFormat("now");
-            formats[N_SECONDS_AGO] = new MessageFormat("{0} seconds");
-            formats[A_MINUTE_AGO] = new MessageFormat("1 minute");
-            formats[N_MINUTES_AGO] = new MessageFormat("{0} minutes");
-            formats[AN_HOUR_AGO] = new MessageFormat("1 hour");
-            formats[N_HOURS_AGO] = new MessageFormat("{0} hours");
+            formats[N_SECONDS_AGO] = new MessageFormat("{0}s");
+            formats[A_MINUTE_AGO] = new MessageFormat("1m");
+            formats[N_MINUTES_AGO] = new MessageFormat("{0}m");
+            formats[AN_HOUR_AGO] = new MessageFormat("1h");
+            formats[N_HOURS_AGO] = new MessageFormat("{0}h");
             dateMonth = new SimpleDateFormat("MMM d", Locale.ENGLISH);
             dateMonthYear = new SimpleDateFormat("MMM d, yy", Locale.ENGLISH);
         } else {

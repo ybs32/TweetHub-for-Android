@@ -18,6 +18,7 @@ import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.fragments.dialog.TweetDialog;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterStatus;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterUser;
+import com.ybsystem.tweetmate.models.enums.ColumnType;
 import com.ybsystem.tweetmate.utils.ToastUtils;
 
 import static com.ybsystem.tweetmate.models.enums.ColumnType.*;
@@ -107,12 +108,32 @@ public class ClickUseCase {
         act.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
     }
 
+    public static void showPrevNext(TwitterStatus status) {
+        // Intent to TimelineActivity
+        Activity act = TweetMateApp.getActivity();
+        Intent intent = new Intent(act, TimelineActivity.class);
+        intent.putExtra("STATUS", status);
+        intent.putExtra("COLUMN_TYPE", PREV_NEXT);
+        act.startActivity(intent);
+        act.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
+    }
+
     public static void showDetail(TwitterStatus status) {
         // Intent to TimelineActivity
         Activity act = TweetMateApp.getActivity();
         Intent intent = new Intent(act, TimelineActivity.class);
         intent.putExtra("STATUS", status);
         intent.putExtra("COLUMN_TYPE", DETAIL);
+        act.startActivity(intent);
+        act.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
+    }
+
+    public static void showRtFavUser(TwitterStatus status, ColumnType type) {
+        // Intent to TimelineActivity
+        Activity act = TweetMateApp.getActivity();
+        Intent intent = new Intent(act, TimelineActivity.class);
+        intent.putExtra("STATUS", status);
+        intent.putExtra("COLUMN_TYPE", type);
         act.startActivity(intent);
         act.overridePendingTransition(R.anim.slide_in_from_right, R.anim.zoom_out);
     }

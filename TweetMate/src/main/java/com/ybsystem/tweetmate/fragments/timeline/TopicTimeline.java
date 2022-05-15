@@ -54,9 +54,9 @@ public class TopicTimeline extends TimelineBase {
         Observable<QueryResult> observable = Observable.create(e -> {
             try {
                 if (isPullLoad || adapter.isEmpty()) {
-                    mQuery = PrefSystem.getLanguage().equals("en")
-                                ? new Query("lang:en min_retweets:1000")
-                                : new Query("lang:ja min_retweets:1000");
+                    mQuery = PrefSystem.getTrend().equals("23424856")
+                                ? new Query("lang:ja min_retweets:1000")
+                                : new Query("lang:en min_retweets:1000");
                 }
                 mQuery.setCount(200);
                 e.onNext(TweetMateApp.getTwitter().search(mQuery));
@@ -82,7 +82,9 @@ public class TopicTimeline extends TimelineBase {
                         adapter.clear();
                     }
                     for (twitter4j.Status status : result.getTweets()) {
-                        adapter.add(new TwitterStatus(status));
+                        if (!status.getText().contains("$")) {
+                            adapter.add(new TwitterStatus(status));
+                        }
                     }
                     adapter.notifyDataSetChanged();
 

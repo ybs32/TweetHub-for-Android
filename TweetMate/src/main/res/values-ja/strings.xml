@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">TweetMate</string>
-    <string name="app_version">2.2.0</string>
+    <string name="app_version">2.3.0</string>
     <string name="app_update_info">
-        Ver.2.2.0\n
-        ・言語設定を追加\n
-        ・トレンド地域の設定を追加\n
-        ・英語圏にアプリを公開
+        Ver.2.3.0\n
+        ・前後のツイート表示機能を追加\n
+        ・いいね/RTユーザの表示機能を追加\n
+        ・メディアツイート取得の不具合修正
     </string>
 
     <string name="home">ホーム</string>
@@ -13,15 +13,18 @@
     <string name="message">メッセージ</string>
     <string name="like">いいね</string>
     <string name="unlike">いいね解除</string>
+    <string name="liked_users">いいねしたユーザー</string>
     <string name="favorite">お気に入り</string>
     <string name="unfavorite">お気に入り解除</string>
     <string name="retweet">リツイート</string>
     <string name="unretweet">リツイート解除</string>
+    <string name="retweeted_users">リツイートしたユーザー</string>
     <string name="quote">引用ツイート</string>
     <string name="tweet">ツイート</string>
     <string name="tweet_none">ツイートなし</string>
     <string name="reply">返信</string>
     <string name="talk">会話</string>
+    <string name="prev_next">前後のツイート</string>
     <string name="detail">ツイート詳細</string>
     <string name="list">リスト</string>
     <string name="list_single">リスト(単体)</string>
@@ -289,6 +292,8 @@
     <string name="sentence_created_by">%1$sさんが作成</string>
     <string name="sentence_retweeted_by">%1$sさんがリツイート</string>
     <string name="sentence_members">%1$d人のメンバー</string>
+    <string name="sentence_authenticate_to_view">表示するには認証が必要です。</string>
+    <string name="sentence_authenticate_success">認証に成功しました。\n再度表示してください。</string>
     <string name="sentence_trouble_auth">ユーザ名またはメールアドレスでログインをお試し下さい。</string>
     <string name="sentence_notice_auth">アプリを利用するには、\nTwitterアカウントが必要です。\n\n
         通知機能、ダイレクトメッセージを使用\nする場合は、公式アプリをご利用下さい。</string>

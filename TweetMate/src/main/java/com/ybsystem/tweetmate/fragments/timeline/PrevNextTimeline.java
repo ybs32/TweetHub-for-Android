@@ -12,31 +12,30 @@ import com.ybsystem.tweetmate.application.TweetMateApp;
 import com.ybsystem.tweetmate.models.entities.twitter.TwitterStatus;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.observers.DisposableObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import twitter4j.Query;
-import twitter4j.QueryResult;
+import twitter4j.Paging;
 import twitter4j.Status;
 import twitter4j.TwitterException;
 
-import static com.ybsystem.tweetmate.resources.ResString.*;
+import static com.ybsystem.tweetmate.resources.ResString.STR_LOADING;
 
-public class TalkTimeline extends TimelineBase {
+public class PrevNextTimeline extends TimelineBase {
     // Status
     private TwitterStatus mStatus;
 
-    // For reply to
-    private int mLoadCount;
-    private ArrayList<TwitterStatus> mToStatusList;
+    // For prev
+    private ArrayList<TwitterStatus> mPrevStatusList;
 
-    // For reply from
-    private Query mQuery;
-    private ArrayList<TwitterStatus> mFromStatusList;
+    // For next
+    private ArrayList<TwitterStatus> mNextStatusList;
 
-    public TalkTimeline newInstance(TwitterStatus status) {
+    public PrevNextTimeline newInstance(TwitterStatus status) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("STATUS", status);
         setArguments(bundle);
@@ -50,8 +49,8 @@ public class TalkTimeline extends TimelineBase {
 
         // Init
         mStatus = (TwitterStatus) getArguments().getSerializable("STATUS");
-        mToStatusList = new ArrayList<>();
-        mFromStatusList = new ArrayList<>();
+        mPrevStatusList = new ArrayList<>();
+        mNextStatusList = new ArrayList<>();
         mScrollLoad = true;
 
         // Set view
@@ -73,54 +72,43 @@ public class TalkTimeline extends TimelineBase {
         mFooterProgress.setVisibility(View.VISIBLE);
         mFooterView.setVisibility(View.VISIBLE);
 
-        // Load reply to
-        loadReplyToStatus(mStatus);
+        // Load prev
+        loadPrevStatus();
     }
 
-    private void loadReplyToStatus(TwitterStatus target) {
+    private void loadPrevStatus() {
         // Create request
-        Observable<Status> observable = Observable.create(e -> {
+        Observable<List<Status>> observable = Observable.create(e -> {
             try {
-                Status status = TweetMateApp.getTwitter()
-                        .showStatus(target.getInReplyToStatusId());
-                // Check
-                if (status != null) {
-                    e.onNext(status);
-                }
+                Paging paging = new Paging();
+                paging.setCount(5);
+                paging.setMaxId(mStatus.getId() - 1);
+
+                List<Status> statusList = TweetMateApp.getTwitter()
+                        .getUserTimeline(mStatus.getUser().getScreenName(), paging);
+                e.onNext(statusList);
                 e.onComplete();
             } catch (TwitterException ex) {
                 e.onError(ex);
             }
         });
 
-        DisposableObserver<Status> disposable = new DisposableObserver<Status>() {
+        DisposableObserver<List<Status>> disposable = new DisposableObserver<List<Status>>() {
             @Override
-            public void onNext(Status status4j) {
+            public void onNext(List<Status> statusList) {
                 // Success
-                TwitterStatus status = new TwitterStatus(status4j);
-                mToStatusList.add(status);
-                mLoadCount++;
-
-                // Render tweets
-                if (status.getInReplyToStatusId() == -1 || mLoadCount % 6 == 0) {
-                    renderReplyTo();
+                for (Status status4j : statusList) {
+                    mPrevStatusList.add(new TwitterStatus(status4j));
                 }
-
-                // Load next
-                if (status.getInReplyToStatusId() != -1) {
-                    loadReplyToStatus(status);
-                    return;
-                }
-
-                // Load reply from
-                loadReplyFromStatus(mStatus);
+                renderPrev();
+                loadNextStatus(1);
             }
 
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                renderReplyTo();
-                loadReplyFromStatus(mStatus);
+                renderPrev();
+                loadNextStatus(1);
             }
 
             @Override
@@ -134,48 +122,51 @@ public class TalkTimeline extends TimelineBase {
                 .subscribe(disposable);
     }
 
-    private void loadReplyFromStatus(TwitterStatus target) {
+    private void loadNextStatus(int page) {
         // Create request
-        Observable<QueryResult> observable = Observable.create(e -> {
+        Observable<List<Status>> observable = Observable.create(e -> {
             try {
-                mQuery = new Query("to:@" + target.getUser().getScreenName() + " since_id:" + target.getId());
-                mQuery.setCount(200);
-                QueryResult result = TweetMateApp.getTwitter().search(mQuery);
-                // Check
-                if (result != null) {
-                    e.onNext(result);
-                }
+                Paging paging = new Paging();
+                paging.setPage(page);
+                paging.setCount(200);
+
+                List<Status> statusList = TweetMateApp.getTwitter()
+                        .getUserTimeline(mStatus.getUser().getScreenName(), paging);
+                e.onNext(statusList);
                 e.onComplete();
             } catch (TwitterException ex) {
                 e.onError(ex);
             }
         });
 
-        DisposableObserver<QueryResult> disposable = new DisposableObserver<QueryResult>() {
+        DisposableObserver<List<Status>> disposable = new DisposableObserver<List<Status>>() {
             @Override
-            public void onNext(QueryResult result) {
-                if (result.getTweets().isEmpty()) {
+            public void onNext(List<Status> statusList) {
+                if (statusList.isEmpty()) {
                     // No tweet...
                 } else {
                     // Success
-                    for (Status status4j : result.getTweets()) {
-                        if (status4j.getInReplyToStatusId() == target.getId()) {
-                            // Store status
-                            TwitterStatus status = new TwitterStatus(status4j);
-                            mFromStatusList.add(status);
-                            // Load next
-                            loadReplyFromStatus(status);
+                    for (int i = 0; i < statusList.size(); i++) {
+                        if (statusList.get(i).getId() == mStatus.getId()) {
+                            for (Status status4j : statusList.subList(Math.max(0, i - 5), i)) {
+                                mNextStatusList.add(new TwitterStatus(status4j));
+                            }
+                            renderNext();
                             return;
                         }
                     }
+                    if (page >= 8) {
+                        renderNext();
+                    } else {
+                        loadNextStatus(page + 1);
+                    }
                 }
-                renderReplyFrom();
             }
 
             @Override
             public void onError(Throwable t) {
                 // Failed...
-                renderReplyFrom();
+                renderNext();
             }
 
             @Override
@@ -189,22 +180,23 @@ public class TalkTimeline extends TimelineBase {
                 .subscribe(disposable);
     }
 
-    private void renderReplyTo() {
+    private void renderPrev() {
         // Render
-        for (TwitterStatus toStatus : mToStatusList) {
-            mRecyclerAdapter.insert(0, toStatus);
-            mRecyclerAdapter.notifyItemInserted(0);
-        }
-        mToStatusList.clear();
-    }
-
-    private void renderReplyFrom() {
-        // Render
-        for (TwitterStatus fromStatus : mFromStatusList) {
-            mRecyclerAdapter.add(fromStatus);
+        for (TwitterStatus prevStatus : mPrevStatusList) {
+            mRecyclerAdapter.add(prevStatus);
             mRecyclerAdapter.notifyItemInserted(mRecyclerAdapter.getObjCount());
         }
-        mFromStatusList.clear();
+        mPrevStatusList.clear();
+    }
+
+    private void renderNext() {
+        // Render
+        Collections.reverse(mNextStatusList);
+        for (TwitterStatus nextStatus : mNextStatusList) {
+            mRecyclerAdapter.insert(0, nextStatus);
+            mRecyclerAdapter.notifyItemInserted(0);
+        }
+        mNextStatusList.clear();
 
         // Hide footer
         new Handler().postDelayed(

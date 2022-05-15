@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">TweetMate</string>
-    <string name="app_version">2.2.0</string>
+    <string name="app_version">2.3.0</string>
     <string name="app_update_info">
-        Ver.2.2.0\n
-        ・Added language setting\n
-        ・Added trend region setting\n
-        ・Released app to english-speaking countries
+        Ver.2.3.0\n
+        ・Add the function of displaying previous/next tweets\n
+        ・Added the function of displaying Like/RT users\n
+        ・Fixed a bug in acquiring media tweets
     </string>
 
     <string name="home">Home</string>
@@ -13,15 +13,18 @@
     <string name="message">Message</string>
     <string name="like">Like</string>
     <string name="unlike">Unlike</string>
+    <string name="liked_users">Liked users</string>
     <string name="favorite">Favorite</string>
     <string name="unfavorite">Unfavorite</string>
     <string name="retweet">Retweet</string>
     <string name="unretweet">Unretweet</string>
+    <string name="retweeted_users">Retweeted users</string>
     <string name="quote">Quote</string>
     <string name="tweet">Tweet</string>
     <string name="tweet_none">No Tweets</string>
     <string name="reply">Reply</string>
     <string name="talk">Conversation</string>
+    <string name="prev_next">Prev/Next</string>
     <string name="detail">Detail</string>
     <string name="list">List</string>
     <string name="list_single">List(Single)</string>
@@ -289,6 +292,8 @@
     <string name="sentence_created_by">Created by %1$s</string>
     <string name="sentence_retweeted_by">Retweeted by %1$s</string>
     <string name="sentence_members">%1$d members</string>
+    <string name="sentence_authenticate_to_view">Authentication is required to view.</string>
+    <string name="sentence_authenticate_success">Authentication succeeded.\nPlease display again.</string>
     <string name="sentence_trouble_auth">Please try logging in with username or email address.</string>
     <string name="sentence_notice_auth">Twitter account is required to use the application.\n\n
         Please use the official application if you wish to use the notification function or direct messages.</string>

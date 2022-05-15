@@ -27,12 +27,22 @@ public class VersionFragment extends Fragment {
         if (PrefSystem.getLanguage().equals("en")) {
             oldVersion =
                     "\n" +
+                    "Ver.2.2.0 (Apr 24, 2022)\n" +
+                    "・Added language setting\n" +
+                    "・Added trend region setting\n" +
+                    "・Released app to english-speaking countries\n" +
+                    "\n" +
                     "...\n" +
                     "\n" +
                     "Ver.1.0.0 (Jun 24, 2020)\n" +
-                    "・Relocated to Google Play Store.\n";
+                    "・Relocated to Google Play Store\n";
         } else {
             oldVersion =
+                    "\n" +
+                    "Ver.2.2.0\n" +
+                    "・言語設定を追加\n" +
+                    "・トレンド地域の設定を追加\n" +
+                    "・英語圏にアプリを公開\n" +
                     "\n" +
                     "Ver.2.1.0\n" +
                     "・動画プレーヤーを刷新\n" +
