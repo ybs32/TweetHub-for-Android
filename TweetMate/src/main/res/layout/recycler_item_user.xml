@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relative_click"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_colorless"
+    android:padding="8dp">
+
+    <!-- User icon -->
+    <ImageView
+        android:id="@+id/image_user_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="2dp" />
+
+    <LinearLayout
+        android:id="@+id/linear_top"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="100dp"
+        android:layout_toRightOf="@+id/image_user_icon"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- Verify mark -->
+        <ImageView
+            android:id="@+id/image_verify_mark"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginRight="2dp"
+            android:src="@drawable/ic_verify" />
+
+        <!-- Lock mark -->
+        <ImageView
+            android:id="@+id/image_lock_mark"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginRight="2dp"
+            android:src="@drawable/ic_lock"
+            app:tint="?android:attr/textColor" />
+
+        <!-- User name -->
+        <TextView
+            android:id="@+id/text_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="Username"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- @ScreenName -->
+    <TextView
+        android:id="@+id/text_screen_name"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@+id/linear_top"
+        android:layout_alignLeft="@+id/linear_top"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="100dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="\@ScreenName"
+        android:textColor="?attr/colorStrong"
+        android:textSize="14dp" />
+
+    <!-- Follow button -->
+    <Button
+        android:id="@+id/button_follow"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="2dp"
+        android:text="Follow"
+        android:textColor="#FFFFFF"
+        android:textSize="12dp"
+        android:textStyle="bold" />
+
+    <!-- Profile text -->
+    <TextView
+        android:id="@+id/text_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_screen_name"
+        android:layout_alignLeft="@+id/text_screen_name"
+        android:layout_marginTop="10dp"
+        android:lineSpacingMultiplier="1.1"
+        android:text="Okay, I'm gonna do my bestest today!"
+        android:textSize="14dp" />
+</RelativeLayout>

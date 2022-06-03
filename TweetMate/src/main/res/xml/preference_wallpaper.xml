@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <PreferenceScreen
+        android:key="@string/pref_key_add_wallpaper"
+        android:title="@string/select_wallpaper"
+        app:iconSpaceReserved="false" />
+
+    <PreferenceScreen
+        android:key="@string/pref_key_delete_wallpaper"
+        android:title="@string/destroy_wallpaper"
+        app:iconSpaceReserved="false" />
+
+    <ListPreference
+        android:defaultValue="#CC"
+        android:entries="@array/wallpaper_transparency_entries"
+        android:entryValues="@array/wallpaper_transparency_values"
+        android:key="@string/pref_key_wallpaper_transparency"
+        android:title="@string/transparency"
+        app:iconSpaceReserved="false" />
+
+    <PreferenceScreen
+        android:title="@string/notice"
+        android:summary="@string/notice_wallpaper"
+        app:iconSpaceReserved="false" />
+</PreferenceScreen>

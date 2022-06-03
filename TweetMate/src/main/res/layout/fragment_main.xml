@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Top bar -->
+    <LinearLayout
+        android:id="@+id/linear_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- App icon -->
+        <ImageView
+            android:id="@+id/image_app_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:padding="6dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <!-- Sliding tab -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_main"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            app:tabIndicatorColor="?android:attr/colorAccent"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="?android:attr/colorAccent"
+            app:tabTextAppearance="@style/TabTheme16dpText" />
+    </LinearLayout>
+
+    <!-- Drawer -->
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- ViewPager -->
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/pager_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/frame_easy_tweet" />
+
+            <!-- Easy tweet -->
+            <FrameLayout
+                android:id="@+id/frame_easy_tweet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/frame_drawer"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left" />
+    </androidx.drawerlayout.widget.DrawerLayout>
+</LinearLayout>

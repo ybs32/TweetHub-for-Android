@@ -1,0 +1,59 @@
+<resources>
+    <style name="LightTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowBackground">@color/lightBackground</item>
+        <item name="android:colorBackground">@color/lightBackground</item>
+        <item name="android:textColor">@color/lightText</item>
+        <item name="colorPrimary">#7777BB</item>
+        <item name="colorPrimaryDark">#7777BB</item>
+        <item name="colorAccent">#555599</item>
+        <item name="colorControlHighlight">#D7D9DB</item>
+        <item name="colorWeak">#BBBDBF</item>
+        <item name="colorMiddle">#888A8C</item>
+        <item name="colorStrong">#555759</item>
+        <item name="colorUserName">#111111</item>
+        <item name="colorRetweet">#44BB55</item>
+        <item name="colorFavorite">#EEAA22</item>
+        <item name="colorLike">#EE4477</item>
+        <item name="colorTalk">#8888CC</item>
+        <item name="colorDelete">#FF4444</item>
+        <item name="colorLink">#3355EE</item>
+        <item name="colorLinkWeak">#5577FF</item>
+        <item name="colorBgRetweet">#EDF2FF</item>
+        <item name="colorBgReply">#FFF0F6</item>
+        <item name="colorBgMyTweet">#EDFFF2</item>
+    </style>
+
+    <style name="DarkTheme" parent="Theme.AppCompat">
+        <item name="android:windowBackground">@color/darkBackground</item>
+        <item name="android:colorBackground">@color/darkBackground</item>
+        <item name="android:textColor">@color/darkText</item>
+        <item name="colorPrimary">#666699</item>
+        <item name="colorPrimaryDark">#666699</item>
+        <item name="colorAccent">#CCCCFF</item>
+        <item name="colorControlHighlight">#444648</item>
+        <item name="colorWeak">#66686A</item>
+        <item name="colorMiddle">#999B9D</item>
+        <item name="colorStrong">#AAAEB0</item>
+        <item name="colorUserName">#AAAAAA</item>
+        <item name="colorRetweet">#66DD88</item>
+        <item name="colorFavorite">#FFBB33</item>
+        <item name="colorLike">#EE6699</item>
+        <item name="colorTalk">#AAAAEE</item>
+        <item name="colorDelete">#FF5555</item>
+        <item name="colorLink">#AACCFF</item>
+        <item name="colorLinkWeak">#AACCFF</item>
+        <item name="colorBgRetweet">#383B48</item>
+        <item name="colorBgReply">#48383B</item>
+        <item name="colorBgMyTweet">#38483B</item>
+    </style>
+
+    <style name="TabTheme16dpText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TabTheme14dpText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

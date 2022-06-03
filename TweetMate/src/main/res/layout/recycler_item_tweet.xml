@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- Overlay click area and tweet-->
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants">
+
+        <!-- Click area -->
+        <LinearLayout
+            android:id="@+id/linear_click"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <!-- Left click -->
+            <View
+                android:id="@+id/view_left_click"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_colorless" />
+
+            <!-- Middle click -->
+            <View
+                android:id="@+id/view_middle_click"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_colorless" />
+
+            <!-- Right click -->
+            <View
+                android:id="@+id/view_right_click"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_colorless" />
+        </LinearLayout>
+
+        <!-- Tweet -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <!-- User icon -->
+            <ImageView
+                android:id="@+id/image_user_icon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="2dp" />
+
+            <!-- RT User icon -->
+            <ImageView
+                android:id="@+id/image_rt_user_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_below="@+id/image_user_icon"
+                android:layout_alignLeft="@+id/image_user_icon"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="4dp" />
+
+            <!-- RT Arrow icon -->
+            <ImageView
+                android:id="@+id/image_rt_arrow"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_below="@+id/image_user_icon"
+                android:layout_alignRight="@+id/image_user_icon"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="2dp"
+                android:src="@drawable/ic_retweet"
+                app:tint="?attr/colorStrong" />
+
+            <!-- Left side -->
+            <LinearLayout
+                android:id="@+id/linear_left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_toLeftOf="@+id/linear_right"
+                android:layout_toRightOf="@+id/image_user_icon"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!-- Verify mark -->
+                <ImageView
+                    android:id="@+id/image_verify_mark"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginRight="2dp"
+                    android:src="@drawable/ic_verify" />
+
+                <!-- Lock mark -->
+                <ImageView
+                    android:id="@+id/image_lock_mark"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginRight="2dp"
+                    android:src="@drawable/ic_lock"
+                    app:tint="?android:attr/textColor" />
+
+                <!-- User name -->
+                <TextView
+                    android:id="@+id/text_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="Username"
+                    android:textSize="14dp"
+                    android:textColor="?attr/colorUserName"
+                    android:textStyle="bold" />
+
+                <!-- @ScreenName -->
+                <TextView
+                    android:id="@+id/text_screen_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="\@ScreenName"
+                    android:textColor="?attr/colorUserName"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
+            <!-- Right side -->
+            <LinearLayout
+                android:id="@+id/linear_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!-- RT mark -->
+                <ImageView
+                    android:id="@+id/image_rt_mark"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginLeft="2dp"
+                    android:src="@drawable/ic_retweet"
+                    app:tint="?attr/colorRetweet" />
+
+                <!-- Fav mark -->
+                <ImageView
+                    android:id="@+id/image_favorite_mark"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginLeft="2dp"
+                    android:src="@drawable/ic_like"
+                    app:tint="?attr/colorLike" />
+
+                <!-- Relative time -->
+                <TextView
+                    android:id="@+id/text_relative_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:singleLine="true"
+                    android:text="xxx"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
+            <!-- Tweet text -->
+            <TextView
+                android:id="@+id/text_tweet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linear_left"
+                android:layout_alignLeft="@+id/linear_left"
+                android:layout_marginTop="4dp"
+                android:lineSpacingMultiplier="1.1"
+                android:text="Okay, I'm gonna do my bestest today!"
+                android:textSize="14dp" />
+
+            <!-- Thumbnails -->
+            <RelativeLayout
+                android:id="@+id/relative_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_tweet"
+                android:layout_alignLeft="@+id/text_tweet"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="20dp">
+
+                <!-- Empty view in the middle -->
+                <View
+                    android:id="@+id/dummy"
+                    android:layout_width="6dp"
+                    android:layout_height="0dp"
+                    android:layout_centerInParent="true" />
+
+                <!-- Thumbnail 1 -->
+                <RelativeLayout
+                    android:id="@+id/relative_thumbnail_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/dummy">
+
+                    <ImageView
+                        android:id="@+id/image_thumbnail_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="4dp"
+                        android:scaleType="centerCrop" />
+
+                    <!-- Play icon -->
+                    <ImageView
+                        android:id="@+id/image_play"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_play" />
+                </RelativeLayout>
+
+                <!-- Thumbnail 2 -->
+                <ImageView
+                    android:id="@+id/image_thumbnail_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_toRightOf="@id/dummy"
+                    android:scaleType="centerCrop" />
+
+                <!-- Thumbnail 3 -->
+                <ImageView
+                    android:id="@+id/image_thumbnail_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_below="@id/relative_thumbnail_1"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_toLeftOf="@id/dummy"
+                    android:scaleType="centerCrop" />
+
+                <!-- Thumbnail 4 -->
+                <ImageView
+                    android:id="@+id/image_thumbnail_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_below="@id/relative_thumbnail_1"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_toRightOf="@id/dummy"
+                    android:scaleType="centerCrop" />
+            </RelativeLayout>
+
+            <!-- (Quote) Tweet -->
+            <RelativeLayout
+                android:id="@+id/relative_quote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative_thumbnail"
+                android:layout_alignLeft="@+id/relative_thumbnail"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/bg_border_gray"
+                android:padding="8dp">
+
+                <!-- (Quote) Left side -->
+                <LinearLayout
+                    android:id="@+id/linear_left_quote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/text_relative_time_quote"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!-- (Quote) User name -->
+                    <TextView
+                        android:id="@+id/text_user_name_quote"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="Username"
+                        android:textSize="14dp"
+                        android:textColor="?attr/colorUserName"
+                        android:textStyle="bold" />
+
+                    <!-- (Quote) @ScreenName -->
+                    <TextView
+                        android:id="@+id/text_screen_name_quote"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="\@ScreenName"
+                        android:textColor="?attr/colorUserName"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <!-- (Quote) Relative time -->
+                <TextView
+                    android:id="@+id/text_relative_time_quote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="4dp"
+                    android:singleLine="true"
+                    android:text="xxx"
+                    android:textSize="14dp" />
+
+                <!-- (Quote) Tweet text -->
+                <TextView
+                    android:id="@+id/text_tweet_quote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linear_left_quote"
+                    android:layout_alignLeft="@+id/linear_left_quote"
+                    android:layout_marginTop="4dp"
+                    android:lineSpacingMultiplier="1.1"
+                    android:text="Okay, I'm gonna do my bestest today!"
+                    android:textSize="14dp" />
+            </RelativeLayout>
+
+            <!-- Under side -->
+            <LinearLayout
+                android:id="@+id/linear_optional"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative_quote"
+                android:layout_alignLeft="@+id/relative_quote"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!-- Absolute time -->
+                <TextView
+                    android:id="@+id/text_absolute_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="2020/10/29 00:00"
+                    android:textColor="?attr/colorStrong"
+                    android:textSize="13dp" />
+
+                <!-- Via -->
+                <TextView
+                    android:id="@+id/text_via"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="via TweetMate for Android"
+                    android:textColor="?attr/colorStrong"
+                    android:textSize="13dp" />
+
+                <!-- RT count icon -->
+                <ImageView
+                    android:id="@+id/image_rt_count"
+                    android:layout_width="14dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="2dp"
+                    android:src="@drawable/ic_retweet"
+                    app:tint="?attr/colorStrong" />
+
+                <!-- RT count -->
+                <TextView
+                    android:id="@+id/text_rt_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:singleLine="true"
+                    android:text="0"
+                    android:textColor="?attr/colorStrong"
+                    android:textSize="13dp" />
+
+                <!-- Fav count icon -->
+                <ImageView
+                    android:id="@+id/image_fav_count"
+                    android:layout_width="14dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="2dp"
+                    android:src="@drawable/ic_like"
+                    app:tint="?attr/colorStrong" />
+
+                <!-- Fav count -->
+                <TextView
+                    android:id="@+id/text_fav_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="0"
+                    android:textColor="?attr/colorStrong"
+                    android:textSize="13dp" />
+            </LinearLayout>
+
+            <!-- Retweeted by -->
+            <TextView
+                android:id="@+id/text_retweeted_by"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linear_optional"
+                android:layout_alignLeft="@+id/linear_optional"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Retweeted by"
+                android:textColor="?attr/colorStrong"
+                android:textSize="13dp" />
+        </RelativeLayout>
+    </FrameLayout>
+
+    <!-- (Detail) -->
+    <RelativeLayout
+        android:id="@+id/relative_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/frame">
+
+        <!-- (Detail) Divider -->
+        <View
+            android:id="@+id/divider_detail"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="?attr/colorWeak" />
+
+        <!-- (Detail) RT count -->
+        <TextView
+            android:id="@+id/text_rt_count_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider_detail"
+            android:layout_marginLeft="64dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:singleLine="true"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+
+        <!-- (Detail) Fav count -->
+        <TextView
+            android:id="@+id/text_fav_count_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider_detail"
+            android:layout_toRightOf="@+id/text_rt_count_detail"
+            android:padding="15dp"
+            android:singleLine="true"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+
+        <!-- (Detail) Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/text_fav_count_detail"
+            android:background="?attr/colorWeak" />
+    </RelativeLayout>
+</RelativeLayout>

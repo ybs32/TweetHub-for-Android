@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/relative_bottom"
+        android:background="@drawable/bg_border_purple"
+        android:orientation="vertical">
+
+        <!-- Can scroll -->
+        <ScrollView
+            android:id="@+id/scroll_tweet"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+
+            <!-- Tweet display -->
+            <include layout="@layout/recycler_item_tweet" />
+        </ScrollView>
+
+        <!-- Images -->
+        <LinearLayout
+            android:id="@+id/linear_photo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="3"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            tools:ignore="NestedWeights">
+
+            <!-- Image 1 -->
+            <ImageView
+                android:id="@+id/image_photo_1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:visibility="gone" />
+
+            <!-- Image 2 -->
+            <ImageView
+                android:id="@+id/image_photo_2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:visibility="gone" />
+
+            <!-- Image 3 -->
+            <ImageView
+                android:id="@+id/image_photo_3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:visibility="gone" />
+
+            <!-- Image 4-->
+            <ImageView
+                android:id="@+id/image_photo_4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- Tweet edit -->
+        <EditText
+            android:id="@+id/edit_post"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:background="#00000000"
+            android:ems="10"
+            android:gravity="left|top"
+            android:hint="@string/whats_happen"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:padding="12dp">
+
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="8dp">
+
+        <!-- Left side -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true">
+
+            <!-- User button -->
+            <ImageView
+                android:id="@+id/button_user"
+                android:layout_width="48dp"
+                android:layout_height="48dp" />
+
+            <!-- Gallery button -->
+            <ImageButton
+                android:id="@+id/button_gallery"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="6dp"
+                android:background="@drawable/bg_rounded_purple"
+                android:padding="10dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_picture"
+                android:tint="#FFFFFF" />
+
+            <!-- Draft button -->
+            <ImageButton
+                android:id="@+id/button_draft"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="6dp"
+                android:background="@drawable/bg_rounded_purple"
+                android:padding="10dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_draft"
+                android:tint="#FFFFFF" />
+
+            <!-- Hashtag button -->
+            <ImageButton
+                android:id="@+id/button_hashtag"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="6dp"
+                android:background="@drawable/bg_rounded_purple"
+                android:padding="10dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_hashtag"
+                android:tint="#FFFFFF" />
+        </LinearLayout>
+
+        <!-- Right side -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+
+            <!-- Character counter -->
+            <TextView
+                android:id="@+id/text_count"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:text="140"
+                android:textSize="20dp" />
+
+            <!-- Post button -->
+            <ImageButton
+                android:id="@+id/button_post"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_rounded_purple"
+                android:padding="10dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_tweet"
+                android:tint="#FFFFFF" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

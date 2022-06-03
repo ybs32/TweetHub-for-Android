@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <PreferenceCategory
+        android:title="@string/size"
+        app:iconSpaceReserved="false">
+
+        <ListPreference
+            android:defaultValue="14"
+            android:dialogTitle="@string/font_size"
+            android:entries="@array/size_font_entries"
+            android:entryValues="@array/size_font_values"
+            android:key="@string/pref_key_size_font"
+            android:title="@string/font_size"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:defaultValue="48"
+            android:dialogTitle="@string/user_icon_size"
+            android:entries="@array/size_user_icon_entries"
+            android:entryValues="@array/size_user_icon_values"
+            android:key="@string/pref_key_size_user_icon"
+            android:title="@string/user_icon_size"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/style"
+        app:iconSpaceReserved="false">
+
+        <ListPreference
+            android:defaultValue="LIKE"
+            android:dialogTitle="@string/like_favorite"
+            android:entries="@array/style_like_fav_entries"
+            android:entryValues="@array/style_like_fav_values"
+            android:key="@string/pref_key_style_like_fav"
+            android:title="@string/like_favorite"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:defaultValue="CIRCLE"
+            android:dialogTitle="@string/user_icon_select"
+            android:entries="@array/style_user_icon_entries"
+            android:entryValues="@array/style_user_icon_values"
+            android:key="@string/pref_key_style_user_icon"
+            android:title="@string/user_icon_select"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/display_item"
+        app:iconSpaceReserved="false">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_key_show_absolute_time"
+            android:title="@string/absolute_time"
+            app:iconSpaceReserved="false" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key_show_via"
+            android:title="@string/client_name"
+            app:iconSpaceReserved="false" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key_show_rt_fav_count"
+            android:title="@string/retweet_like_count"
+            app:iconSpaceReserved="false" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key_show_retweeted_by"
+            android:title="@string/retweeted_by"
+            app:iconSpaceReserved="false" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key_show_thumbnail"
+            android:title="@string/thumbnail_image"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/preview"
+        app:iconSpaceReserved="false">
+
+        <PreferenceScreen
+            android:key="@string/pref_key_appearance_preview"
+            android:title="@string/check_layout"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

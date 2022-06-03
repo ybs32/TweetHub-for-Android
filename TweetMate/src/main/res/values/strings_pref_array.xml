@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Theme settings -->
+    <string-array name="theme_setting_entries">
+        <item>@string/light</item>
+        <item>@string/dark</item>
+    </string-array>
+    <string-array name="theme_setting_values">
+        <item>LIGHT</item>
+        <item>DARK</item>
+    </string-array>
+
+    <!-- Appearance settings -->
+    <string-array name="size_font_entries">
+        <item>@string/x_small</item>
+        <item>@string/small</item>
+        <item>@string/medium</item>
+        <item>@string/large</item>
+        <item>@string/x_large</item>
+    </string-array>
+    <string-array name="size_font_values">
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+    </string-array>
+
+    <string-array name="size_user_icon_entries">
+        <item>@string/x_small</item>
+        <item>@string/small</item>
+        <item>@string/medium</item>
+        <item>@string/large</item>
+        <item>@string/x_large</item>
+    </string-array>
+    <string-array name="size_user_icon_values">
+        <item>44</item>
+        <item>46</item>
+        <item>48</item>
+        <item>50</item>
+        <item>52</item>
+    </string-array>
+
+    <string-array name="style_like_fav_entries">
+        <item>@string/like</item>
+        <item>@string/favorite</item>
+    </string-array>
+    <string-array name="style_like_fav_values">
+        <item>LIKE</item>
+        <item>FAVORITE</item>
+    </string-array>
+
+    <string-array name="style_user_icon_entries">
+        <item>@string/circle</item>
+        <item>@string/square</item>
+    </string-array>
+    <string-array name="style_user_icon_values">
+        <item>CIRCLE</item>
+        <item>SQUARE</item>
+    </string-array>
+
+    <!-- ClickAction settings -->
+    <string-array name="click_action_entries">
+        <item>@string/show_menu</item>
+        <item>@string/reply_verb</item>
+        <item>@string/retweet</item>
+        <item>@string/quote</item>
+        <item>@string/like</item>
+        <item>@string/show_talk</item>
+        <item>@string/delete</item>
+        <item>@string/open_url</item>
+        <item>@string/search_on_hashtag</item>
+        <item>@string/tweet_on_hashtag</item>
+        <item>@string/show_user</item>
+        <item>@string/prev_next</item>
+        <item>@string/detail</item>
+        <item>@string/copy_mate</item>
+        <item>@string/share</item>
+        <item>@string/open_twitter</item>
+        <item>@string/none</item>
+    </string-array>
+    <string-array name="click_action_values">
+        <item>MENU</item>
+        <item>REPLY</item>
+        <item>RETWEET</item>
+        <item>QUOTE</item>
+        <item>LIKE</item>
+        <item>TALK</item>
+        <item>DELETE</item>
+        <item>URL</item>
+        <item>HASH_SEARCH</item>
+        <item>HASH_TWEET</item>
+        <item>USER</item>
+        <item>PREV_NEXT</item>
+        <item>DETAIL</item>
+        <item>COPY</item>
+        <item>SHARE</item>
+        <item>TWITTER</item>
+        <item>NONE</item>
+    </string-array>
+
+    <string-array name="tweet_menu_entries">
+        <item>@string/reply_verb</item>
+        <item>@string/retweet</item>
+        <item>@string/like</item>
+        <item>@string/show_talk</item>
+        <item>@string/delete</item>
+        <item>@string/url</item>
+        <item>@string/hashtag</item>
+        <item>@string/user</item>
+        <item>@string/prev_next</item>
+        <item>@string/detail</item>
+        <item>@string/copy_mate</item>
+        <item>@string/share</item>
+        <item>@string/open_twitter</item>
+    </string-array>
+    <string-array name="tweet_menu_values">
+        <item>REPLY</item>
+        <item>RETWEET</item>
+        <item>LIKE</item>
+        <item>TALK</item>
+        <item>DELETE</item>
+        <item>URL</item>
+        <item>HASH</item>
+        <item>USER</item>
+        <item>PREV_NEXT</item>
+        <item>DETAIL</item>
+        <item>COPY</item>
+        <item>SHARE</item>
+        <item>TWITTER</item>
+    </string-array>
+    <string-array name="tweet_menu_defaults">
+        <item>REPLY</item>
+        <item>RETWEET</item>
+        <item>LIKE</item>
+        <item>TALK</item>
+        <item>DELETE</item>
+        <item>URL</item>
+        <item>HASH</item>
+        <item>USER</item>
+        <item>PREV_NEXT</item>
+        <item>DETAIL</item>
+    </string-array>
+
+    <string-array name="click_behavior_entries">
+        <item>@string/normal</item>
+        <item>@string/reverse</item>
+    </string-array>
+    <string-array name="click_behavior_values">
+        <item>NORMAL</item>
+        <item>REVERSE</item>
+    </string-array>
+
+    <!-- System settings -->
+    <string-array name="language_entries">
+        <item>@string/english</item>
+        <item>@string/japanese</item>
+    </string-array>
+    <string-array name="language_values">
+        <item>en</item>
+        <item>ja</item>
+    </string-array>
+
+    <string-array name="trend_entries">
+        <item>@string/united_states</item>
+        <item>@string/united_kingdom</item>
+        <item>@string/canada</item>
+        <item>@string/australia</item>
+        <item>@string/japan</item>
+    </string-array>
+    <string-array name="trend_values">
+        <item>23424977</item>
+        <item>23424975</item>
+        <item>23424775</item>
+        <item>23424748</item>
+        <item>23424856</item>
+    </string-array>
+
+    <string-array name="quality_entries">
+        <item>@string/low</item>
+        <item>@string/middle</item>
+        <item>@string/high</item>
+    </string-array>
+    <string-array name="quality_values">
+        <item>LOW</item>
+        <item>MIDDLE</item>
+        <item>HIGH</item>
+    </string-array>
+
+    <string-array name="count_boot_load_entries">
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+    </string-array>
+    <string-array name="count_boot_load_values">
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+    </string-array>
+
+    <string-array name="count_scroll_load_entries">
+        <item>50</item>
+        <item>100</item>
+        <item>150</item>
+        <item>200</item>
+    </string-array>
+    <string-array name="count_scroll_load_values">
+        <item>50</item>
+        <item>100</item>
+        <item>150</item>
+        <item>200</item>
+    </string-array>
+
+    <string-array name="tweet_style_entries">
+        <item>@string/on_the_timeline</item>
+        <item>@string/floating_button</item>
+    </string-array>
+    <string-array name="tweet_style_values">
+        <item>ON_THE_TIMELINE</item>
+        <item>FLOATING_BUTTON</item>
+    </string-array>
+
+    <string-array name="confirm_setting_entries">
+        <item>@string/tweet</item>
+        <item>@string/retweet</item>
+        <item>@string/like</item>
+        <item>@string/delete</item>
+        <item>@string/follow</item>
+        <item>@string/mute</item>
+        <item>@string/block</item>
+        <item>@string/subscribe</item>
+        <item>@string/finish_app</item>
+    </string-array>
+    <string-array name="confirm_setting_values">
+        <item>TWEET</item>
+        <item>RETWEET</item>
+        <item>LIKE</item>
+        <item>DELETE</item>
+        <item>FOLLOW</item>
+        <item>MUTE</item>
+        <item>BLOCK</item>
+        <item>SUBSCRIBE</item>
+        <item>FINISH</item>
+    </string-array>
+    <string-array name="confirm_setting_defaults">
+        <item>TWEET</item>
+        <item>RETWEET</item>
+        <item>LIKE</item>
+        <item>DELETE</item>
+        <item>FOLLOW</item>
+        <item>MUTE</item>
+        <item>BLOCK</item>
+        <item>SUBSCRIBE</item>
+        <item>FINISH</item>
+    </string-array>
+
+    <!-- Wallpaper settings -->
+    <string-array name="wallpaper_transparency_entries">
+        <item>10\uFF05</item>
+        <item>20\uFF05</item>
+        <item>30\uFF05</item>
+        <item>40\uFF05</item>
+        <item>50\uFF05</item>
+    </string-array>
+    <string-array name="wallpaper_transparency_values">
+        <item>#E6</item>
+        <item>#CC</item>
+        <item>#B3</item>
+        <item>#99</item>
+        <item>#80</item>
+    </string-array>
+</resources>

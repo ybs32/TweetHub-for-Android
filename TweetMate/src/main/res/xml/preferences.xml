@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <PreferenceCategory
+        android:title="@string/settings"
+        app:iconSpaceReserved="false">
+
+        <PreferenceScreen
+            android:key="@string/pref_key_theme"
+            android:title="@string/theme_settings"
+            app:iconSpaceReserved="false" />
+
+        <PreferenceScreen
+            android:key="@string/pref_key_appearance"
+            android:title="@string/appearance_settings"
+            app:iconSpaceReserved="false" />
+
+        <PreferenceScreen
+            android:key="@string/pref_key_click_action"
+            android:title="@string/click_action_settings"
+            app:iconSpaceReserved="false" />
+
+        <PreferenceScreen
+            android:key="@string/pref_key_system"
+            android:title="@string/system_settings"
+            app:iconSpaceReserved="false" />
+
+        <PreferenceScreen
+            android:key="@string/pref_key_wallpaper"
+            android:title="@string/wallpaper_settings"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/management"
+        app:iconSpaceReserved="false">
+
+        <PreferenceScreen
+            android:key="@string/pref_key_column"
+            android:title="@string/column_settings"
+            app:iconSpaceReserved="false" />
+
+        <PreferenceScreen
+            android:key="@string/pref_key_account"
+            android:title="@string/account_settings"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/others"
+        app:iconSpaceReserved="false">
+
+        <PreferenceScreen
+            android:key="@string/pref_key_version"
+            android:summary="@string/app_version"
+            android:title="@string/version_settings"
+            app:iconSpaceReserved="false" />
+
+        <PreferenceScreen
+            android:key="@string/pref_key_about"
+            android:summary="@string/about_settings"
+            android:title="@string/about"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

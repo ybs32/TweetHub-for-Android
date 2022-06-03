@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ybsystem.tweetmate">
+
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- Support only smartphone -->
+    <supports-screens
+        android:largeScreens="false"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="false" />
+
+    <application
+        android:name=".application.TweetMateApp"
+        android:allowBackup="false"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="false"
+        android:theme="@style/LightTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activities.MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.OAuthActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true"
+            android:label="@string/account_verification"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="ybsystem" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="" />
+        <activity
+            android:name=".activities.TimelineActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="" />
+        <activity
+            android:name=".activities.UserListActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="" />
+        <activity
+            android:name=".activities.SearchActivity"
+            android:configChanges="orientation|screenSize"
+            android:label=""
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.PostActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true"
+            android:label="@string/tweet"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/*" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.PhotoActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/photo" />
+        <activity
+            android:name=".activities.VideoActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/movie" />
+        <activity
+            android:name=".activities.preference.SettingActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/settings" />
+        <activity
+            android:name=".activities.preference.ThemeActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/theme_settings" />
+        <activity
+            android:name=".activities.preference.AppearanceActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/appearance_settings" />
+        <activity
+            android:name=".activities.preference.ClickActionActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/click_action_settings" />
+        <activity
+            android:name=".activities.preference.SystemActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/system_settings" />
+        <activity
+            android:name=".activities.preference.WallpaperActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/wallpaper_settings" />
+        <activity
+            android:name=".activities.preference.ColumnActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/column_settings" />
+        <activity
+            android:name=".activities.preference.AccountActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/account_settings" />
+        <activity
+            android:name=".activities.preference.BrowserAuthActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/account_verification" />
+        <activity
+            android:name=".activities.preference.VersionActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/version_settings" />
+        <activity
+            android:name=".activities.preference.AboutActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="About" />
+    </application>
+</manifest>

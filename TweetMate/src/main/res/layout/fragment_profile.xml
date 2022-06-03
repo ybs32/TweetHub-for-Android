@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- Banner image -->
+    <ImageView
+        android:id="@+id/image_banner"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop" />
+
+    <!-- Profile image -->
+    <ImageView
+        android:id="@+id/image_user_icon"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="120dp" />
+
+    <LinearLayout
+        android:id="@+id/linear_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image_banner"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toRightOf="@+id/image_user_icon"
+        android:orientation="horizontal">
+
+        <!-- Username, etc -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!-- Verify mark -->
+                <ImageView
+                    android:id="@+id/image_verify_mark"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="2dp"
+                    android:src="@drawable/ic_verify" />
+
+                <!-- Lock mark -->
+                <ImageView
+                    android:id="@+id/image_lock_mark"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="2dp"
+                    android:src="@drawable/ic_lock"
+                    app:tint="?android:attr/textColor" />
+
+                <!-- Username -->
+                <TextView
+                    android:id="@+id/text_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UserName"
+                    android:textColor="?android:attr/textColor"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- @ScreenName -->
+            <TextView
+                android:id="@+id/text_screen_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@ScreenName"
+                android:textColor="?android:attr/textColor"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <!-- Follow button -->
+        <Button
+            android:id="@+id/button_follow"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/follow"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Vertical -->
+    <LinearLayout
+        android:id="@+id/linear_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_user"
+        android:orientation="vertical">
+
+        <!-- Description -->
+        <TextView
+            android:id="@+id/text_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:autoLink="all"
+            android:text="Description"
+            android:textColor="?android:attr/textColor"
+            android:textSize="14dp" />
+
+        <!-- Location -->
+        <TextView
+            android:id="@+id/text_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:autoLink="all"
+            android:text="Location"
+            android:textColor="?android:attr/textColor"
+            android:textSize="14dp" />
+
+        <!-- URL -->
+        <TextView
+            android:id="@+id/text_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:autoLink="all"
+            android:text="URL"
+            android:textColor="?android:attr/textColor"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <!-- Horizontal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_below="@+id/linear_description"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <!-- Follow -->
+        <TextView
+            android:id="@+id/text_follow"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_normal"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Follow\n100"
+            android:textColor="?android:attr/textColor"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <!-- Follower -->
+        <TextView
+            android:id="@+id/text_follower"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_normal"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Follower\n100"
+            android:textColor="?android:attr/textColor"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <!-- List -->
+        <TextView
+            android:id="@+id/text_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_normal"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="List\n100"
+            android:textColor="?android:attr/textColor"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</RelativeLayout>
