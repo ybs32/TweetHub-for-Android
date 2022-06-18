@@ -19,10 +19,8 @@ This information will be transmitted in a form that does not allow for personal 
 If you have any questions,  
 please contact the developer's contact information listed in the app store.  
 (https://play.google.com/store/apps/details?id=com.ybsystem.tweethub)
-<br><br>
 
 ---
-<br>
 
 ### 日本語
 
