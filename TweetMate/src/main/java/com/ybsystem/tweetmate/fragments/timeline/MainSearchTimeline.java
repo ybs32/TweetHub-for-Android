@@ -84,9 +84,6 @@ public class MainSearchTimeline extends TimelineBase {
         Menu menu = popup.getMenu();
         menu.findItem(R.id.item_save_search).setVisible(false);
         menu.findItem(R.id.item_add_column).setVisible(false);
-        if (PrefSystem.getLanguage().equals("en")) {
-            menu.findItem(R.id.item_conditional_search).setVisible(false);
-        }
 
         // When more button clicked
         moreButton.setOnClickListener(v -> popup.show());

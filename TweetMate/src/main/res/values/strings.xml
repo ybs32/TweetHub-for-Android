@@ -84,6 +84,7 @@
     <string name="unsubscribe">Unsubscribe</string>
     <string name="save_search">Save search</string>
     <string name="saved_search">Saved search</string>
+    <string name="conditional_search">Conditional search</string>
     <string name="add_column">Add to column</string>
     <string name="add">Add</string>
     <string name="added">Added</string>
@@ -111,6 +112,26 @@
     <string name="search_on_hashtag">Search by hashtag</string>
     <string name="tweet_on_hashtag">Tweet by hashtag</string>
     <string name="update_info">Update information</string>
+
+    <string name="exclude_word">ExcludeWord</string>
+    <string name="only_images">Only images</string>
+    <string name="only_videos">Only videos</string>
+    <string name="only_gif_animes">Only gif animes</string>
+    <string name="contains_media">Contains media</string>
+    <string name="contains_hashtag">Contains hashtag</string>
+    <string name="more_than_x_likes">More than ~ likes</string>
+    <string name="less_than_x_likes">Less than ~ likes</string>
+    <string name="more_than_x_retweets">More than ~ retweets</string>
+    <string name="less_than_x_retweets">Less than ~ retweets</string>
+    <string name="only_english_tweets">Only english tweets</string>
+    <string name="only_japanese_tweets">Only japanese tweets</string>
+    <string name="not_contain_specific_word">Not contain specific word</string>
+    <string name="relates_to_specific_user">Relates to specific user</string>
+    <string name="tweets_from_specific_user">Tweets from specific user</string>
+    <string name="tweets_to_specific_user">Tweets to specific user</string>
+    <string name="tweets_from_verified_user">Tweets from verified user</string>
+    <string name="positive_tweets">Positive tweets</string>
+    <string name="negative_tweets">Negative tweets</string>
 
     <string name="settings">Settings</string>
     <string name="not_set_mate">Not set</string>
@@ -259,6 +280,7 @@
     <string name="success_switch_account">Account switched.</string>
     <string name="success_release_account">Account released.</string>
     <string name="success_save_search">Search result saved.</string>
+    <string name="success_conditional_search">Condition entered.</string>
     <string name="success_destroy_search">Search result deleted.</string>
     <string name="success_destroy_wallpaper">Wallpaper released.</string>
     <string name="success_save_draft">Draft saved.</string>
@@ -269,6 +291,7 @@
     <string name="success_apply">Settings applied.</string>
     <string name="success_copy_tweet">Tweet copied.</string>
 
+
     <!-- Fail -->
     <string name="fail_auth">Failed to authorization…</string>
     <string name="fail_load">Failed to load…</string>
@@ -276,6 +299,7 @@
     <string name="fail_get_list">Failed to get list…</string>
     <string name="fail_no_set_wallpaper">No wallpaper is set.</string>
     <string name="fail_no_search">No saved searches.</string>
+    <string name="fail_conditional_search">Please enter search word first.</string>
     <string name="fail_no_draft">No drafts.</string>
     <string name="fail_no_text">No text entered.</string>
     <string name="fail_no_hashtag">No hashtag history.</string>

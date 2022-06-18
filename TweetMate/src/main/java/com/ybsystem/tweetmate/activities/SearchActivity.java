@@ -127,10 +127,8 @@ public class SearchActivity extends ActivityBase {
             saveSearch.setVisible(false);
             addColumn.setVisible(false);
         } else {
-            savedSearch.setVisible(false);
-        }
-        if (PrefSystem.getLanguage().equals("en")) {
             conditionalSearch.setVisible(false);
+            savedSearch.setVisible(false);
         }
     }
 

@@ -84,6 +84,7 @@
     <string name="unsubscribe">購読を解除</string>
     <string name="save_search">検索を保存</string>
     <string name="saved_search">保存した検索</string>
+    <string name="conditional_search">条件検索</string>
     <string name="add_column">カラムに追加</string>
     <string name="add">追加する</string>
     <string name="added">追加された</string>
@@ -111,6 +112,26 @@
     <string name="search_on_hashtag">ハッシュタグで検索</string>
     <string name="tweet_on_hashtag">ハッシュタグでツイート</string>
     <string name="update_info">アップデート情報</string>
+
+    <string name="exclude_word">除外ワード</string>
+    <string name="only_images">画像のみ</string>
+    <string name="only_videos">動画のみ</string>
+    <string name="only_gif_animes">GIFアニメのみ</string>
+    <string name="contains_media">メディアを含む</string>
+    <string name="contains_hashtag">ハッシュタグを含む</string>
+    <string name="more_than_x_likes">いいね数が～以上</string>
+    <string name="less_than_x_likes">いいね数が～以下</string>
+    <string name="more_than_x_retweets">リツイート数が～以上</string>
+    <string name="less_than_x_retweets">リツイート数が～以下</string>
+    <string name="only_english_tweets">英語のツイートのみ</string>
+    <string name="only_japanese_tweets">日本語のツイートのみ</string>
+    <string name="not_contain_specific_word">特定の文字を含まない</string>
+    <string name="relates_to_specific_user">特定のユーザーに関連する</string>
+    <string name="tweets_from_specific_user">特定のユーザーがしたツイート</string>
+    <string name="tweets_to_specific_user">特定のユーザー宛てのツイート</string>
+    <string name="tweets_from_verified_user">認証済みのユーザーのツイート</string>
+    <string name="positive_tweets">ポジティブなツイート</string>
+    <string name="negative_tweets">ネガティブなツイート</string>
 
     <string name="settings">設定</string>
     <string name="not_set_mate">未設定</string>
@@ -259,6 +280,7 @@
     <string name="success_switch_account">アカウントを切り替えました。</string>
     <string name="success_release_account">アカウントを解除しました。</string>
     <string name="success_save_search">検索を保存しました。</string>
+    <string name="success_conditional_search">条件を入力しました。</string>
     <string name="success_destroy_search">検索を削除しました。</string>
     <string name="success_destroy_wallpaper">壁紙を解除しました。</string>
     <string name="success_save_draft">下書きを保存しました。</string>
@@ -276,6 +298,7 @@
     <string name="fail_get_list">リストの取得に失敗しました…</string>
     <string name="fail_no_set_wallpaper">壁紙は設定されていません。</string>
     <string name="fail_no_search">保存した検索はありません。</string>
+    <string name="fail_conditional_search">先に検索ワードを入力して下さい。</string>
     <string name="fail_no_draft">下書きはありません。</string>
     <string name="fail_no_text">文章が入力されていません。</string>
     <string name="fail_no_hashtag">ハッシュタグ履歴はありません。</string>

@@ -102,6 +102,26 @@ public class ResString {
     public static String STR_MY_TWEET;
     public static String STR_UPDATE_INFO;
 
+    public static String STR_EXCLUDE_WORD;
+    public static String STR_ONLY_IMAGES;
+    public static String STR_ONLY_VIDEOS;
+    public static String STR_ONLY_GIF_ANIMES;
+    public static String STR_CONTAINS_MEDIA;
+    public static String STR_CONTAINS_HASHTAG;
+    public static String STR_MORE_THAN_X_LIKES;
+    public static String STR_LESS_THAN_X_LIKES;
+    public static String STR_MORE_THAN_X_RETWEETS;
+    public static String STR_LESS_THAN_X_RETWEETS;
+    public static String STR_ONLY_ENGLISH_TWEETS;
+    public static String STR_ONLY_JAPANESE_TWEETS;
+    public static String STR_NOT_CONTAIN_SPECIFIC_WORD;
+    public static String STR_RELATES_TO_SPECIFIC_USER;
+    public static String STR_TWEETS_FROM_SPECIFIC_USER;
+    public static String STR_TWEETS_TO_SPECIFIC_USER;
+    public static String STR_TWEETS_FROM_VERIFIED_USER;
+    public static String STR_POSITIVE_TWEETS;
+    public static String STR_NEGATIVE_TWEETS;
+
     public static String STR_SETTINGS;
     public static String STR_NOT_SET;
 
@@ -159,6 +179,7 @@ public class ResString {
     public static String STR_SUCCESS_SWITCH_ACCOUNT;
     public static String STR_SUCCESS_RELEASE_ACCOUNT;
     public static String STR_SUCCESS_SAVE_SEARCH;
+    public static String STR_SUCCESS_CONDITIONAL_SEARCH;
     public static String STR_SUCCESS_DESTROY_SEARCH;
     public static String STR_SUCCESS_DESTROY_WALLPAPER;
     public static String STR_SUCCESS_SAVE_DRAFT;
@@ -176,6 +197,7 @@ public class ResString {
     public static String STR_FAIL_GET_LIST;
     public static String STR_FAIL_NO_SET_WALLPAPER;
     public static String STR_FAIL_NO_SEARCH;
+    public static String STR_FAIL_CONDITIONAL_SEARCH;
     public static String STR_FAIL_NO_DRAFT;
     public static String STR_FAIL_NO_TEXT;
     public static String STR_FAIL_NO_HASHTAG;
@@ -294,6 +316,26 @@ public class ResString {
         STR_MY_TWEET = getString(R.string.my_tweet);
         STR_UPDATE_INFO = getString(R.string.update_info);
 
+        STR_EXCLUDE_WORD = getString(R.string.exclude_word);
+        STR_ONLY_IMAGES = getString(R.string.only_images);
+        STR_ONLY_VIDEOS = getString(R.string.only_videos);
+        STR_ONLY_GIF_ANIMES = getString(R.string.only_gif_animes);
+        STR_CONTAINS_MEDIA = getString(R.string.contains_media);
+        STR_CONTAINS_HASHTAG = getString(R.string.contains_hashtag);
+        STR_MORE_THAN_X_LIKES = getString(R.string.more_than_x_likes);
+        STR_LESS_THAN_X_LIKES = getString(R.string.less_than_x_likes);
+        STR_MORE_THAN_X_RETWEETS = getString(R.string.more_than_x_retweets);
+        STR_LESS_THAN_X_RETWEETS = getString(R.string.less_than_x_retweets);
+        STR_ONLY_ENGLISH_TWEETS = getString(R.string.only_english_tweets);
+        STR_ONLY_JAPANESE_TWEETS = getString(R.string.only_japanese_tweets);
+        STR_NOT_CONTAIN_SPECIFIC_WORD = getString(R.string.not_contain_specific_word);
+        STR_RELATES_TO_SPECIFIC_USER = getString(R.string.relates_to_specific_user);
+        STR_TWEETS_FROM_SPECIFIC_USER = getString(R.string.tweets_from_specific_user);
+        STR_TWEETS_TO_SPECIFIC_USER = getString(R.string.tweets_to_specific_user);
+        STR_TWEETS_FROM_VERIFIED_USER = getString(R.string.tweets_from_verified_user);
+        STR_POSITIVE_TWEETS = getString(R.string.positive_tweets);
+        STR_NEGATIVE_TWEETS = getString(R.string.negative_tweets);
+
         STR_SETTINGS = getString(R.string.settings);
         STR_NOT_SET = getString(R.string.not_set_mate);
 
@@ -351,6 +393,7 @@ public class ResString {
         STR_SUCCESS_SWITCH_ACCOUNT = getString(R.string.success_switch_account);
         STR_SUCCESS_RELEASE_ACCOUNT = getString(R.string.success_release_account);
         STR_SUCCESS_SAVE_SEARCH = getString(R.string.success_save_search);
+        STR_SUCCESS_CONDITIONAL_SEARCH = getString(R.string.success_conditional_search);
         STR_SUCCESS_DESTROY_SEARCH = getString(R.string.success_destroy_search);
         STR_SUCCESS_DESTROY_WALLPAPER = getString(R.string.success_destroy_wallpaper);
         STR_SUCCESS_SAVE_DRAFT = getString(R.string.success_save_draft);
@@ -368,6 +411,7 @@ public class ResString {
         STR_FAIL_GET_LIST = getString(R.string.fail_get_list);
         STR_FAIL_NO_SET_WALLPAPER = getString(R.string.fail_no_set_wallpaper);
         STR_FAIL_NO_SEARCH = getString(R.string.fail_no_search);
+        STR_FAIL_CONDITIONAL_SEARCH = getString(R.string.fail_conditional_search);
         STR_FAIL_NO_DRAFT = getString(R.string.fail_no_draft);
         STR_FAIL_NO_TEXT = getString(R.string.fail_no_text);
         STR_FAIL_NO_HASHTAG = getString(R.string.fail_no_hashtag);

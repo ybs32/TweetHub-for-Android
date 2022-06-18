@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import static com.ybsystem.tweetmate.resources.ResString.*;
+
 /**
  * Utils class for searching
  */
@@ -24,22 +26,24 @@ public class SearchUtils {
 
     static {
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
-        map.put("画像のみ", "filter:images");
-        map.put("動画のみ", "filter:videos");
-        map.put("GIFアニメのみ", "card_name:animated_gif");
-        map.put("メディアを含む", "filter:media");
-        map.put("ハッシュタグを含む", "filter:hashtags");
-        map.put("いいね数が～以上", "min_faves:100");
-        map.put("いいね数が～以下", "-min_faves:100");
-        map.put("リツイート数が～以上", "min_retweets:100");
-        map.put("リツイート数が～以下", "-min_retweets:100");
-        map.put("特定の文字を含まない", "-:除外ワード");
-        map.put("特定のユーザーに関連する", "@" + TweetMateApp.getMyUser().getScreenName());
-        map.put("特定のユーザーがしたツイート", "from:@" + TweetMateApp.getMyUser().getScreenName());
-        map.put("特定のユーザー宛てのツイート", "to:@" + TweetMateApp.getMyUser().getScreenName());
-        map.put("認証済みのユーザーのツイート", "filter:verified");
-        map.put("ポジティブなツイート", ":)");
-        map.put("ネガティブなツイート", ":(");
+        map.put(STR_ONLY_IMAGES, "filter:images");
+        map.put(STR_ONLY_VIDEOS, "filter:videos");
+        map.put(STR_ONLY_GIF_ANIMES, "card_name:animated_gif");
+        map.put(STR_CONTAINS_MEDIA, "filter:media");
+        map.put(STR_CONTAINS_HASHTAG, "filter:hashtags");
+        map.put(STR_MORE_THAN_X_LIKES, "min_faves:100");
+        map.put(STR_LESS_THAN_X_LIKES, "-min_faves:100");
+        map.put(STR_MORE_THAN_X_RETWEETS, "min_retweets:100");
+        map.put(STR_LESS_THAN_X_RETWEETS, "-min_retweets:100");
+        map.put(STR_ONLY_ENGLISH_TWEETS, "lang:en");
+        map.put(STR_ONLY_JAPANESE_TWEETS, "lang:ja");
+        map.put(STR_NOT_CONTAIN_SPECIFIC_WORD, "-:" + STR_EXCLUDE_WORD);
+        map.put(STR_RELATES_TO_SPECIFIC_USER, "@" + TweetMateApp.getMyUser().getScreenName());
+        map.put(STR_TWEETS_FROM_SPECIFIC_USER, "from:@" + TweetMateApp.getMyUser().getScreenName());
+        map.put(STR_TWEETS_TO_SPECIFIC_USER, "to:@" + TweetMateApp.getMyUser().getScreenName());
+        map.put(STR_TWEETS_FROM_VERIFIED_USER, "filter:verified");
+        map.put(STR_POSITIVE_TWEETS, ":)");
+        map.put(STR_NEGATIVE_TWEETS, ":(");
         CONDITION_KEYS = new ArrayList<>(map.keySet());
         CONDITION_VALUES = new ArrayList<>(map.values());
     }
@@ -54,11 +58,11 @@ public class SearchUtils {
         dialog.setOnItemClickListener((parent, v, position, id) -> {
             // Require input search word first
             if (edit.getText().length() == 0) {
-                ToastUtils.showLongToast("先に検索ワードを入力して下さい。");
+                ToastUtils.showLongToast(STR_FAIL_CONDITIONAL_SEARCH);
                 dialog.dismiss();
                 return;
             }
-            ToastUtils.showLongToast("条件を入力しました。");
+            ToastUtils.showLongToast(STR_SUCCESS_CONDITIONAL_SEARCH);
             edit.setText(edit.getText() + " " + CONDITION_VALUES.get(position));
             edit.setSelection(edit.getText().length());
             dialog.dismiss();
