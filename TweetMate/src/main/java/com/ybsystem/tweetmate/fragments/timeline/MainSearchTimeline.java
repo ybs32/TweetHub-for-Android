@@ -19,6 +19,7 @@ import com.ybsystem.tweetmate.usecases.ClickUseCase;
 import com.ybsystem.tweetmate.usecases.SearchUseCase;
 import com.ybsystem.tweetmate.utils.ExceptionUtils;
 import com.ybsystem.tweetmate.utils.KeyboardUtils;
+import com.ybsystem.tweetmate.utils.SearchUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -83,6 +84,9 @@ public class MainSearchTimeline extends TimelineBase {
         Menu menu = popup.getMenu();
         menu.findItem(R.id.item_save_search).setVisible(false);
         menu.findItem(R.id.item_add_column).setVisible(false);
+        if (PrefSystem.getLanguage().equals("en")) {
+            menu.findItem(R.id.item_conditional_search).setVisible(false);
+        }
 
         // When more button clicked
         moreButton.setOnClickListener(v -> popup.show());
@@ -90,7 +94,11 @@ public class MainSearchTimeline extends TimelineBase {
         // When popup item clicked
         popup.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
-                // Saved searches
+                // Conditional search
+                case R.id.item_conditional_search:
+                    SearchUtils.showConditionalSearch(mSearchEdit);
+                    break;
+                // Saved search
                 case R.id.item_saved_search:
                     SearchUseCase.showSavedSearch();
                     break;

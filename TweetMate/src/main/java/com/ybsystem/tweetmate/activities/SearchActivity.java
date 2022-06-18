@@ -28,6 +28,7 @@ import com.ybsystem.tweetmate.usecases.ClickUseCase;
 import com.ybsystem.tweetmate.usecases.SearchUseCase;
 import com.ybsystem.tweetmate.utils.DialogUtils;
 import com.ybsystem.tweetmate.utils.KeyboardUtils;
+import com.ybsystem.tweetmate.utils.SearchUtils;
 import com.ybsystem.tweetmate.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -85,6 +86,10 @@ public class SearchActivity extends ActivityBase {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            // Conditional search
+            case R.id.item_conditional_search:
+                SearchUtils.showConditionalSearch(mSearchEdit);
+                break;
             // Saved searches
             case R.id.item_saved_search:
                 SearchUseCase.showSavedSearch();
@@ -113,6 +118,7 @@ public class SearchActivity extends ActivityBase {
     }
 
     private void updateMenu() {
+        MenuItem conditionalSearch = mMenu.findItem(R.id.item_conditional_search);
         MenuItem savedSearch = mMenu.findItem(R.id.item_saved_search);
         MenuItem saveSearch = mMenu.findItem(R.id.item_save_search);
         MenuItem addColumn = mMenu.findItem(R.id.item_add_column);
@@ -122,6 +128,9 @@ public class SearchActivity extends ActivityBase {
             addColumn.setVisible(false);
         } else {
             savedSearch.setVisible(false);
+        }
+        if (PrefSystem.getLanguage().equals("en")) {
+            conditionalSearch.setVisible(false);
         }
     }
 
