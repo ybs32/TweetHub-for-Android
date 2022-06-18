@@ -1,5 +1,4 @@
 ### English
-<br>
 
 ## Privacy Policy
 
@@ -26,7 +25,6 @@ please contact the developer's contact information listed in the app store.
 <br>
 
 ### 日本語
-<br>
 
 ## プライバシーポリシー
 
